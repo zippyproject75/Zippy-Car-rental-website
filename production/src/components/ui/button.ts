@@ -24,5 +24,6 @@ export function buttonClass(
   size: ButtonSize = "md",
   extra?: string,
 ): string {
-  return cn(base, variants[variant], sizes[size], extra);
+  const baseClasses = extra?.includes("hidden") ? base.replace("inline-flex ", "") : base;
+  return cn(baseClasses, variants[variant], sizes[size], extra);
 }
