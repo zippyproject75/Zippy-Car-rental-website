@@ -1,0 +1,10 @@
+{
+  "description": "Discover and book self-drive cars in Pune with a user-friendly interface, showcasing a premium fleet and seamless enquiry options for effortless rentals.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}

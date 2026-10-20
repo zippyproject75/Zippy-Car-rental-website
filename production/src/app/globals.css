@@ -1,0 +1,216 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *, .scheme-dark, .scheme-dark *));
+
+/* ------------------------------------------------------------------ */
+/* Semantic theme tokens. Components use these, never literal colours. */
+/* ------------------------------------------------------------------ */
+
+:root {
+  color-scheme: light;
+  --canvas: #f6f3ed;
+  --raised: #fffdf9;
+  --muted: #ece7dd;
+  --sunken: #e6e0d4;
+  --ink: #18160f;
+  --ink-2: #48443b;
+  --ink-3: #635d51;
+  --line: #ddd6c8;
+  --line-strong: #c6bca9;
+  --accent: #c9a660;
+  --accent-hover: #b89350;
+  --on-accent: #15130e;
+  --accent-ink: #77571b;
+  --focus: #6e5016;
+  --danger: #a3271b;
+  --danger-surface: #f8e6e2;
+  --success: #2e6a3a;
+  --success-surface: #e3efe4;
+  --warning: #7f5400;
+  --warning-surface: #f6ecd6;
+  --shadow-raised: 0 1px 2px rgb(24 22 15 / 0.05), 0 12px 32px -18px rgb(24 22 15 / 0.28);
+}
+
+[data-theme="dark"],
+.scheme-dark {
+  color-scheme: dark;
+  --canvas: #0a0a0b;
+  --raised: #141416;
+  --muted: #1c1c1f;
+  --sunken: #101012;
+  --ink: #f3eee4;
+  --ink-2: #c4bdaf;
+  --ink-3: #9a9384;
+  --line: #29292d;
+  --line-strong: #3b3b40;
+  --accent: #d4b373;
+  --accent-hover: #e2c48a;
+  --on-accent: #14120d;
+  --accent-ink: #dcc08a;
+  --focus: #e8cf9a;
+  --danger: #f2998d;
+  --danger-surface: #2c1513;
+  --success: #93cf9c;
+  --success-surface: #13241a;
+  --warning: #e9c06d;
+  --warning-surface: #2a2111;
+  --shadow-raised: 0 1px 2px rgb(0 0 0 / 0.4), 0 18px 40px -22px rgb(0 0 0 / 0.85);
+}
+
+/* Without JavaScript, follow the operating-system preference. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    color-scheme: dark;
+    --canvas: #0a0a0b;
+    --raised: #141416;
+    --muted: #1c1c1f;
+    --sunken: #101012;
+    --ink: #f3eee4;
+    --ink-2: #c4bdaf;
+    --ink-3: #9a9384;
+    --line: #29292d;
+    --line-strong: #3b3b40;
+    --accent: #d4b373;
+    --accent-hover: #e2c48a;
+    --on-accent: #14120d;
+    --accent-ink: #dcc08a;
+    --focus: #e8cf9a;
+    --danger: #f2998d;
+    --danger-surface: #2c1513;
+    --success: #93cf9c;
+    --success-surface: #13241a;
+    --warning: #e9c06d;
+    --warning-surface: #2a2111;
+  }
+}
+
+@theme inline {
+  --color-canvas: var(--canvas);
+  --color-raised: var(--raised);
+  --color-muted: var(--muted);
+  --color-sunken: var(--sunken);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-on-accent: var(--on-accent);
+  --color-accent-ink: var(--accent-ink);
+  --color-focus: var(--focus);
+  --color-danger: var(--danger);
+  --color-danger-surface: var(--danger-surface);
+  --color-success: var(--success);
+  --color-success-surface: var(--success-surface);
+  --color-warning: var(--warning);
+  --color-warning-surface: var(--warning-surface);
+  --shadow-raised: var(--shadow-raised);
+  --font-sans: var(--font-inter), var(--font-devanagari), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-manrope), var(--font-devanagari), ui-sans-serif, system-ui, sans-serif;
+}
+
+@theme {
+  --radius-control: 0.5rem;
+  --radius-card: 0.875rem;
+  --container-site: 75rem;
+  --animate-rise: rise 520ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-padding-top: 5.5rem;
+  }
+  body {
+    background: var(--canvas);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    text-rendering: optimizeLegibility;
+  }
+  :where(h1, h2, h3, h4) {
+    font-family: var(--font-display);
+    text-wrap: balance;
+  }
+  :where(html[lang="hi-IN"], html[lang="mr-IN"]) :where(h1, h2, h3, h4) {
+    letter-spacing: 0;
+    line-height: 1.25;
+  }
+  :where(p) {
+    text-wrap: pretty;
+  }
+  :focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+  ::selection {
+    background: color-mix(in oklab, var(--accent) 40%, transparent);
+  }
+  dialog::backdrop {
+    background: rgb(5 5 6 / 0.72);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ---------------------- Signature details ---------------------- */
+
+@utility eyebrow {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent-ink);
+}
+
+@utility container-site {
+  width: 100%;
+  max-width: var(--container-site);
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+  @media (width >= 40rem) {
+    padding-inline: 1.5rem;
+  }
+  @media (width >= 64rem) {
+    padding-inline: 2rem;
+  }
+}
+
+/* CSS-only vehicle placeholder: technical hairlines, no image request. */
+@utility media-placeholder {
+  background-color: var(--sunken);
+  background-image:
+    linear-gradient(to right, color-mix(in oklab, var(--ink) 7%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in oklab, var(--ink) 7%, transparent) 1px, transparent 1px);
+  background-size: 32px 32px;
+  background-position: -1px -1px;
+}
+
+/* The cinematic hero composition: a lit road receding into the frame. */
+@utility cinema-stage {
+  background:
+    radial-gradient(120% 80% at 75% 10%, rgb(212 179 115 / 0.16), transparent 60%),
+    linear-gradient(180deg, #121214 0%, #0a0a0b 100%);
+}

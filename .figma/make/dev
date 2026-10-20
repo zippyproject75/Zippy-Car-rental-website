@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+cd production
+exec pnpm exec next dev --port "$PORT" --hostname 0.0.0.0

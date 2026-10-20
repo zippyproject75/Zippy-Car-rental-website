@@ -1,0 +1,15 @@
+import { serializeJsonLd } from "@/lib/jsonld";
+
+export function JsonLd({
+  data,
+}: {
+  data: Record<string, unknown> | Record<string, unknown>[] | null;
+}) {
+  if (!data || (Array.isArray(data) && data.length === 0)) return null;
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: serializeJsonLd(data) }}
+    />
+  );
+}
