@@ -19,7 +19,7 @@ import { isLocale, locales, type Locale } from "@/i18n/routing";
 import { getCarBySlug, getCars, getRelatedCars } from "@/lib/catalog";
 import { visibleFact } from "@/lib/content";
 import { env } from "@/lib/env";
-import { breadcrumbJsonLd } from "@/lib/jsonld";
+import { breadcrumbJsonLd, carProductJsonLd } from "@/lib/jsonld";
 import { localizedPath } from "@/lib/routes";
 import { absoluteUrl, buildMetadata } from "@/lib/seo";
 
@@ -197,6 +197,7 @@ export default async function CarPage({ params }: Params) {
           },
         ])}
       />
+      {car ? <JsonLd data={carProductJsonLd(car)} /> : null}
     </>
   );
 }

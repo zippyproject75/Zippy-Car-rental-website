@@ -15,6 +15,13 @@ export function organizationJsonLd(): JsonLd | null {
     "@type": "Organization",
     name: site.name,
     url: env.siteUrl,
+    description: "Self-drive car rental in Pune, Maharashtra, India.",
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: site.city,
+      addressRegion: site.region,
+      addressCountry: site.country,
+    },
   };
   const phone = site.contacts.primaryPhone;
   if (phone.status === "confirmed") {
@@ -22,6 +29,7 @@ export function organizationJsonLd(): JsonLd | null {
       "@type": "ContactPoint",
       telephone: phone.value.e164,
       contactType: "customer service",
+      areaServed: site.city,
     };
   }
   return data;
@@ -45,6 +53,10 @@ export function autoRentalJsonLd(): JsonLd[] {
         addressRegion: site.region,
         addressCountry: site.country,
       },
+      areaServed: {
+        "@type": "City",
+        name: site.city,
+      },
     };
     if (phone.status === "confirmed") data.telephone = phone.value.e164;
     return [data];
@@ -62,6 +74,31 @@ export function breadcrumbJsonLd(items: { name: string; url: string }[]): JsonLd
       name: item.name,
       item: item.url,
     })),
+  };
+}
+
+export function carProductJsonLd(car: { displayName: string; make: string; model: string; slug: string; unitNumber?: number }): JsonLd | null {
+  if (!env.isProduction || !env.siteUrl) return null;
+  const carUrl = `${env.siteUrl}/cars/${car.slug}`;
+  const name = car.unitNumber ? `${car.displayName} — Vehicle ${car.unitNumber}` : car.displayName;
+  return {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name,
+    description: `Self-drive rental of ${car.displayName} in Pune from Zippy Car Rental.`,
+    brand: {
+      "@type": "Brand",
+      name: car.make,
+    },
+    category: "Car Rental",
+    url: carUrl,
+    offers: {
+      "@type": "Offer",
+      availability: "https://schema.org/InStock",
+      priceCurrency: "INR",
+      url: carUrl,
+      description: "Price on request - contact Zippy Car Rental for current rates.",
+    },
   };
 }
 
