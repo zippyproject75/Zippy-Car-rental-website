@@ -1,9 +1,8 @@
 import { getTranslations } from "next-intl/server";
-import { buttonClass } from "@/components/ui/button";
-import { ENQUIRY_PATH } from "@/data/navigation";
 import { Link } from "@/i18n/navigation";
 import { getVisibleContacts } from "@/lib/contacts";
 import { env } from "@/lib/env";
+import { HeaderCta } from "./HeaderCta";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import { MobileMenu } from "./MobileMenu";
 import { NavLinks } from "./NavLinks";
@@ -15,29 +14,46 @@ export async function SiteHeader() {
   const tc = await getTranslations("Common");
   const tb = await getTranslations("Booking");
   const phone = getVisibleContacts(env.showPendingContent).phones[0];
+
   return (
-    <header className="sticky top-0 z-40 border-b border-line bg-canvas">
-      <div className="container-site flex h-[4.25rem] items-center gap-4">
-        <Link href="/" className="mr-auto rounded-control lg:mr-6" aria-label={tc("homeLink")}>
+    <header className="sticky top-0 z-40 border-b border-line bg-canvas/90 backdrop-blur-md transition-colors">
+      <div className="container-site flex h-[4.25rem] items-center justify-between gap-2 sm:gap-4">
+        {/* Left: Brand Logo */}
+        <Link
+          href="/"
+          className="rounded-control shrink-0 py-1 focus-visible:outline-2 focus-visible:outline-focus"
+          aria-label={tc("homeLink")}
+        >
           <Wordmark tagline={tc("brandTagline")} />
         </Link>
-        <nav aria-label={t("primary")} className="hidden lg:block lg:mr-auto">
-          <NavLinks />
+
+        {/* Center: Primary Navigation (Desktop) */}
+        <nav aria-label={t("primary")} className="hidden lg:flex items-center justify-center">
+          <NavLinks orientation="horizontal" />
         </nav>
-        <div className="hidden lg:block">
-          <LanguageSwitcher />
+
+        {/* Right: Controls & Primary CTA */}
+        <div className="flex items-center gap-2 sm:gap-2.5 shrink-0">
+          <div className="hidden sm:block">
+            <LanguageSwitcher />
+          </div>
+          <div className="hidden sm:block">
+            <ThemeToggle />
+          </div>
+
+          {/* Primary CTA: "Plan My Rental" (desktop) / "Plan Rental" (mobile) */}
+          <HeaderCta variant="desktop" className="hidden sm:inline-flex" />
+          <HeaderCta variant="mobile" className="sm:hidden" />
+
+          {/* Mobile Navigation Drawer Trigger */}
+          <MobileMenu
+            contact={
+              phone
+                ? { href: `tel:${phone.e164}`, label: tb("call", { number: phone.display }) }
+                : null
+            }
+          />
         </div>
-        <ThemeToggle />
-        <Link href={ENQUIRY_PATH} className={buttonClass("primary", "md", "hidden sm:inline-flex")}>
-          {t("enquire")}
-        </Link>
-        <MobileMenu
-          contact={
-            phone
-              ? { href: `tel:${phone.e164}`, label: tb("call", { number: phone.display }) }
-              : null
-          }
-        />
       </div>
     </header>
   );

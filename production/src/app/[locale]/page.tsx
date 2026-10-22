@@ -88,8 +88,9 @@ export default async function HomePage({ params }: LocaleParams) {
       </section>
 
       <section
+        id="how-it-works"
         aria-label={t("howTitle")}
-        className="border-y border-line bg-muted/60 py-20 lg:py-24"
+        className="scroll-mt-20 border-y border-line bg-muted/60 py-20 lg:py-24"
       >
         <div className="container-site">
           <HowItWorks />

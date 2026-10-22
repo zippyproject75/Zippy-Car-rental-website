@@ -1,12 +1,18 @@
 "use client";
 
-import { Check, ChevronDown, Languages } from "lucide-react";
+import { Check, ChevronDown } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { useEffect, useId, useRef, useState, type MouseEvent } from "react";
 import { cars } from "@/data/cars";
 import { Link, usePathname, useRouter } from "@/i18n/navigation";
 import { localeNames, localeTags, locales, type Locale } from "@/i18n/routing";
 import { cn } from "@/lib/cn";
+
+const shortLocaleLabels: Record<Locale, string> = {
+  en: "EN",
+  hi: "HI",
+  mr: "MR",
+};
 
 /** Keeps a valid ?car= preselection when switching language; nothing else is carried. */
 function preservedQuery(): Record<string, string> | undefined {
@@ -50,10 +56,10 @@ export function LanguageList({ onNavigate }: { onNavigate?: () => void }) {
                 onNavigate?.();
               }}
               className={cn(
-                "flex min-h-11 items-center justify-center rounded-control border px-3 text-sm font-semibold",
+                "flex min-h-11 items-center justify-center rounded-control border px-3 text-sm font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-focus",
                 l === current
-                  ? "border-accent bg-accent text-on-accent"
-                  : "border-line text-ink hover:border-line-strong hover:bg-muted",
+                  ? "border-accent bg-accent text-on-accent shadow-xs"
+                  : "border-line bg-canvas text-ink hover:border-line-strong hover:bg-muted",
               )}
             >
               {localeNames[l]}
@@ -65,7 +71,7 @@ export function LanguageList({ onNavigate }: { onNavigate?: () => void }) {
   );
 }
 
-/** Compact disclosure (desktop header). */
+/** Compact disclosure (desktop header: EN ▾). */
 export function LanguageSwitcher() {
   const t = useTranslations("Language");
   const current = useLocale() as Locale;
@@ -100,40 +106,47 @@ export function LanguageSwitcher() {
         ref={buttonRef}
         type="button"
         aria-expanded={open}
+        aria-haspopup="listbox"
         aria-controls={listId}
+        aria-label={`${t("label")}: ${localeNames[current]}`}
+        title={`${t("label")}: ${localeNames[current]}`}
         onClick={() => setOpen((v) => !v)}
         data-testid="language-button"
-        className="inline-flex min-h-11 items-center gap-2 rounded-control border border-line px-3 text-sm font-medium text-ink hover:border-line-strong hover:bg-muted"
+        className="inline-flex h-10 items-center gap-1.5 rounded-control border border-line bg-canvas px-2.5 text-xs font-semibold text-ink transition-colors hover:border-line-strong hover:bg-muted/70 focus-visible:outline-2 focus-visible:outline-focus"
       >
-        <Languages aria-hidden className="size-4 text-ink-3" />
-        <span className="sr-only">{t("label")}: </span>
-        <span lang={localeTags[current]}>{localeNames[current]}</span>
+        <span className="tracking-wider">{shortLocaleLabels[current]}</span>
         <ChevronDown
           aria-hidden
-          className={cn("size-4 text-ink-3 transition-transform", open && "rotate-180")}
+          className={cn("size-3.5 text-ink-3 transition-transform duration-200", open && "rotate-180")}
         />
       </button>
       <ul
         id={listId}
         hidden={!open}
-        className="absolute right-0 z-50 mt-2 min-w-44 overflow-hidden rounded-card border border-line bg-raised p-1.5 shadow-raised"
+        role="listbox"
+        aria-label={t("label")}
+        className="absolute right-0 z-50 mt-2 min-w-40 overflow-hidden rounded-card border border-line bg-raised p-1.5 shadow-raised animate-in fade-in zoom-in-95 duration-100"
       >
         {locales.map((l) => (
-          <li key={l}>
+          <li key={l} role="option" aria-selected={l === current}>
             <Link
               href={pathname}
               locale={l}
               lang={localeTags[l]}
               hrefLang={localeTags[l]}
-              aria-current={l === current ? "true" : undefined}
               onClick={(e) => {
                 onSelect(e, l);
                 setOpen(false);
               }}
-              className="flex min-h-11 items-center justify-between gap-4 rounded-[0.375rem] px-3 text-sm font-medium text-ink hover:bg-muted"
+              className={cn(
+                "flex min-h-10 items-center justify-between gap-3 rounded-control px-3 text-sm font-medium transition-colors focus-visible:outline-2 focus-visible:outline-focus",
+                l === current
+                  ? "bg-muted text-ink font-semibold"
+                  : "text-ink-2 hover:bg-muted/70 hover:text-ink",
+              )}
             >
-              {localeNames[l]}
-              {l === current ? <Check aria-hidden className="size-4 text-accent-ink" /> : null}
+              <span>{localeNames[l]}</span>
+              {l === current ? <Check aria-hidden className="size-4 text-accent-ink shrink-0" /> : null}
             </Link>
           </li>
         ))}

@@ -27,14 +27,13 @@ export function ThemeToggle({
       title={label}
       data-testid="theme-toggle"
       className={cn(
-        "inline-flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-control border border-line text-ink transition-colors hover:border-line-strong hover:bg-muted",
-        withLabel && "px-4",
+        "inline-flex h-10 items-center justify-center gap-2 rounded-control border border-line bg-canvas text-ink transition-colors hover:border-line-strong hover:bg-muted/70 focus-visible:outline-2 focus-visible:outline-focus",
+        withLabel ? "w-full justify-start px-4 text-sm font-medium" : "w-10 min-w-10 shrink-0",
         className,
       )}
     >
-      {/* Icons follow the applied theme attribute, so they are correct before hydration. */}
-      <Moon aria-hidden className="size-[1.125rem] dark:hidden" />
-      <Sun aria-hidden className="hidden size-[1.125rem] dark:block" />
+      <Moon aria-hidden className="size-4 text-ink dark:hidden" />
+      <Sun aria-hidden className="hidden size-4 text-ink dark:block" />
       {withLabel ? <span className="text-sm font-medium">{label}</span> : null}
     </button>
   );

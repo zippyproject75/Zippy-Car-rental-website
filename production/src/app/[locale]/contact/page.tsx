@@ -106,7 +106,7 @@ export default async function ContactPage({ params }: LocaleParams) {
           )}
         </section>
 
-        <section aria-labelledby="branches-title">
+        <section id="branches" aria-labelledby="branches-title" className="scroll-mt-24">
           <h2 id="branches-title" className="font-display text-2xl font-bold text-ink">
             {t("Contact.branchesTitle")}
           </h2>
