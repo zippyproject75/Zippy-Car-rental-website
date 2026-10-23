@@ -32,7 +32,7 @@ async function runAudit() {
       "--window-size=1440,900",
       "about:blank",
     ],
-    { stdio: "ignore" }
+    { stdio: "ignore" },
   );
 
   // Wait for Chrome to be ready
@@ -94,11 +94,9 @@ async function runAudit() {
       const titleRes = await send("Runtime.evaluate", {
         expression: "document.title",
       });
-      const errors = consoleMessages.filter(
-        (m) => m.type === "error" || m.type === "exception"
-      );
+      const errors = consoleMessages.filter((m) => m.type === "error" || m.type === "exception");
       console.log(
-        `Route ${route.padEnd(32)} -> Title: "${titleRes?.result?.value}" | Console Errors: ${errors.length}`
+        `Route ${route.padEnd(32)} -> Title: "${titleRes?.result?.value}" | Console Errors: ${errors.length}`,
       );
       if (errors.length) {
         console.log("  Errors:", JSON.stringify(errors));
@@ -143,7 +141,7 @@ async function runAudit() {
         const overflowData = JSON.parse(overflowRes?.result?.value || "{}");
         const hasOverflow = overflowData.scrollWidth > overflowData.innerWidth + 1;
         console.log(
-          `  ${w}px: innerWidth=${overflowData.innerWidth}, scrollWidth=${overflowData.scrollWidth} -> ${hasOverflow ? "OVERFLOW DETECTED!" : "OK"}`
+          `  ${w}px: innerWidth=${overflowData.innerWidth}, scrollWidth=${overflowData.scrollWidth} -> ${hasOverflow ? "OVERFLOW DETECTED!" : "OK"}`,
         );
         if (hasOverflow && overflowData.offenders?.length) {
           console.log("    Offenders:", overflowData.offenders);

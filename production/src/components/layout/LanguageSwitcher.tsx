@@ -117,7 +117,10 @@ export function LanguageSwitcher() {
         <span className="tracking-wider">{shortLocaleLabels[current]}</span>
         <ChevronDown
           aria-hidden
-          className={cn("size-3.5 text-ink-3 transition-transform duration-200", open && "rotate-180")}
+          className={cn(
+            "size-3.5 text-ink-3 transition-transform duration-200",
+            open && "rotate-180",
+          )}
         />
       </button>
       <ul
@@ -146,7 +149,9 @@ export function LanguageSwitcher() {
               )}
             >
               <span>{localeNames[l]}</span>
-              {l === current ? <Check aria-hidden className="size-4 text-accent-ink shrink-0" /> : null}
+              {l === current ? (
+                <Check aria-hidden className="size-4 text-accent-ink shrink-0" />
+              ) : null}
             </Link>
           </li>
         ))}

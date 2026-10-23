@@ -2,7 +2,7 @@ import { cars } from "@/data/cars";
 import { getApprovedFaqs } from "@/data/faqs";
 import { isLegalApproved, legalDocuments } from "@/data/legal";
 import { site } from "@/data/site";
-import { locales, type Locale } from "@/i18n/routing";
+import { locales, localeTags, type Locale } from "@/i18n/routing";
 import type { SiteConfig } from "@/types/site";
 
 /** Every public English path. Localized paths add a /hi or /mr prefix. */
@@ -61,15 +61,20 @@ export function sitemapEntries(options: {
   const entries: SitemapEntry[] = [];
   for (const path of allPublicPaths()) {
     const indexableLocales = locales.filter((l) => isPathContentIndexable(path, l, config));
+    const languages: Record<string, string> = Object.fromEntries(
+      indexableLocales.map((l) => [
+        localeTags[l],
+        `${siteUrl}${localizedPath(l, path) === "/" ? "" : localizedPath(l, path)}`,
+      ]),
+    );
+    if (indexableLocales.includes("en")) {
+      languages["x-default"] =
+        `${siteUrl}${localizedPath("en", path) === "/" ? "" : localizedPath("en", path)}`;
+    }
     for (const locale of indexableLocales) {
       entries.push({
         url: `${siteUrl}${localizedPath(locale, path) === "/" ? "" : localizedPath(locale, path)}`,
-        languages: Object.fromEntries(
-          indexableLocales.map((l) => [
-            l,
-            `${siteUrl}${localizedPath(l, path) === "/" ? "" : localizedPath(l, path)}`,
-          ]),
-        ),
+        languages,
       });
     }
   }

@@ -41,10 +41,57 @@ describe("indexing", () => {
     expect(sitemapEntries({ isProduction: false, siteUrl: "https://example.test" })).toEqual([]);
     expect(sitemapEntries({ isProduction: true, siteUrl: undefined })).toEqual([]);
   });
-  it("indexes nothing until the copy for a language is approved", () => {
+  it("indexes nothing when the copy for a language is pending-review", () => {
+    const unapprovedConfig: SiteConfig = {
+      ...site,
+      copyReview: { en: "pending-review", hi: "pending-review", mr: "pending-review" },
+    };
     for (const path of allPublicPaths()) {
-      if (site.copyReview.en !== "approved") expect(isPathContentIndexable(path, "en")).toBe(false);
+      expect(isPathContentIndexable(path, "en", unapprovedConfig)).toBe(false);
     }
+  });
+  it("indexes eligible pages and excludes unconfirmed/duplicate pages with approved copy", () => {
+    expect(isPathContentIndexable("/", "en")).toBe(true);
+    expect(isPathContentIndexable("/cars", "en")).toBe(true);
+    expect(isPathContentIndexable("/cars/fronx", "en")).toBe(true);
+    expect(isPathContentIndexable("/cars/brezza", "en")).toBe(true);
+    expect(isPathContentIndexable("/cars/baleno", "en")).toBe(true);
+    expect(isPathContentIndexable("/cars/ertiga-1", "en")).toBe(true);
+    expect(isPathContentIndexable("/faq", "en")).toBe(true);
+
+    // Excluded pages
+    expect(isPathContentIndexable("/cars/ertiga-2", "en")).toBe(false);
+    expect(isPathContentIndexable("/book", "en")).toBe(false);
+    expect(isPathContentIndexable("/about", "en")).toBe(false);
+    expect(isPathContentIndexable("/contact", "en")).toBe(false);
+    expect(isPathContentIndexable("/terms-and-conditions", "en")).toBe(false);
+    expect(isPathContentIndexable("/privacy-policy", "en")).toBe(false);
+  });
+  it("populates sitemap entries with canonical URLs and locale alternates", () => {
+    const entries = sitemapEntries({
+      isProduction: true,
+      siteUrl: "https://www.zippycarrental.in",
+    });
+    const urls = entries.map((e) => e.url);
+
+    // Exactly 7 pages * 3 locales = 21 URLs
+    expect(urls).toHaveLength(21);
+    expect(urls).toContain("https://www.zippycarrental.in");
+    expect(urls).toContain("https://www.zippycarrental.in/hi");
+    expect(urls).toContain("https://www.zippycarrental.in/mr");
+    expect(urls).toContain("https://www.zippycarrental.in/cars/ertiga-1");
+    expect(urls).not.toContain("https://www.zippycarrental.in/cars/ertiga-2");
+    expect(urls.some((u) => u.includes("/book"))).toBe(false);
+    expect(urls.some((u) => u.includes("/about"))).toBe(false);
+
+    // Check language alternates format
+    const homeEntry = entries.find((e) => e.url === "https://www.zippycarrental.in");
+    expect(homeEntry?.languages).toEqual({
+      "en-IN": "https://www.zippycarrental.in",
+      "hi-IN": "https://www.zippycarrental.in/hi",
+      "mr-IN": "https://www.zippycarrental.in/mr",
+      "x-default": "https://www.zippycarrental.in",
+    });
   });
   it("never indexes /book and only approved languages appear in the sitemap", () => {
     const config: SiteConfig = {

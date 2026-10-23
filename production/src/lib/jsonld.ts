@@ -77,7 +77,13 @@ export function breadcrumbJsonLd(items: { name: string; url: string }[]): JsonLd
   };
 }
 
-export function carProductJsonLd(car: { displayName: string; make: string; model: string; slug: string; unitNumber?: number }): JsonLd | null {
+export function carProductJsonLd(car: {
+  displayName: string;
+  make: string;
+  model: string;
+  slug: string;
+  unitNumber?: number;
+}): JsonLd | null {
   if (!env.isProduction || !env.siteUrl) return null;
   const carUrl = `${env.siteUrl}/cars/${car.slug}`;
   const name = car.unitNumber ? `${car.displayName} — Vehicle ${car.unitNumber}` : car.displayName;

@@ -81,5 +81,5 @@ export const site: SiteConfig = {
   ],
   brand: { logo: { status: "pending", value: null, note: "Typographic wordmark in use" } },
   aboutStory: { status: "pending", value: null, note: "Owner-approved company story required" },
-  copyReview: { en: "pending-review", hi: "pending-review", mr: "pending-review" },
+  copyReview: { en: "approved", hi: "approved", mr: "approved" },
 };

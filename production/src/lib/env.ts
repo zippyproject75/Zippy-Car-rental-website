@@ -1,6 +1,8 @@
 import { z } from "zod";
 import { resolveSiteEnv, type SiteEnv } from "./security";
 
+export const CANONICAL_PRODUCTION_ORIGIN = "https://www.zippycarrental.in";
+
 const optionalString = z
   .string()
   .trim()
@@ -10,23 +12,34 @@ const optionalString = z
 const schema = z
   .object({
     siteEnv: z.enum(["development", "preview", "production"]),
-    siteUrl: optionalString.pipe(
-      z
-        .url({ protocol: /^https?$/ })
-        .refine((v) => !v.endsWith("/"), "NEXT_PUBLIC_SITE_URL must not end with a slash")
-        .optional(),
-    ),
+    siteUrl: optionalString
+      .transform((v) => {
+        if (!v) return v;
+        const normalized = v.replace(/\/+$/, "");
+        // The apex domain https://zippycarrental.in permanently redirects (308) to https://www.zippycarrental.in
+        if (
+          normalized === "https://zippycarrental.in" ||
+          normalized === "http://zippycarrental.in"
+        ) {
+          return CANONICAL_PRODUCTION_ORIGIN;
+        }
+        return normalized;
+      })
+      .pipe(
+        z
+          .url({ protocol: /^https?$/ })
+          .refine((v) => !v.endsWith("/"), "NEXT_PUBLIC_SITE_URL must not end with a slash")
+          .optional(),
+      ),
     mapsEmbedKey: optionalString,
   })
-  .superRefine((env, ctx) => {
-    if (env.siteEnv === "production" && !env.siteUrl) {
-      ctx.addIssue({
-        code: "custom",
-        path: ["siteUrl"],
-        message:
-          "NEXT_PUBLIC_SITE_URL (the owner-confirmed production domain) is required when NEXT_PUBLIC_SITE_ENV=production.",
-      });
+  .transform((data) => {
+    if (data.siteEnv === "production" && !data.siteUrl) {
+      return { ...data, siteUrl: CANONICAL_PRODUCTION_ORIGIN };
     }
+    return data;
+  })
+  .superRefine((env, ctx) => {
     if (env.siteEnv === "production" && env.siteUrl && !env.siteUrl.startsWith("https://")) {
       ctx.addIssue({ code: "custom", path: ["siteUrl"], message: "Production must use HTTPS." });
     }
