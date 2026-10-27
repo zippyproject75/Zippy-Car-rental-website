@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 
 const FLEET = [
-  { id: 'fronx', name: 'Maruti Suzuki Fronx', category: 'Compact SUV', seats: 5, trans: 'Manual / Automatic' },
-  { id: 'brezza', name: 'Maruti Suzuki Brezza', category: 'Compact SUV', seats: 5, trans: 'Manual / Automatic' },
-  { id: 'baleno', name: 'Maruti Suzuki Baleno', category: 'Hatchback', seats: 5, trans: 'Manual / Automatic' },
-  { id: 'ertiga-1', name: 'Maruti Suzuki Ertiga (Vehicle 1)', category: 'MPV', seats: 7, trans: 'Manual / Automatic' },
-  { id: 'ertiga-2', name: 'Maruti Suzuki Ertiga (Vehicle 2)', category: 'MPV', seats: 7, trans: 'Manual / Automatic' },
+  { id: 'fronx', name: 'Maruti Suzuki Fronx', category: 'Compact SUV', seats: 5, trans: 'Manual / Automatic', image: '/images/cars/fronx.jpeg' },
+  { id: 'brezza', name: 'Maruti Suzuki Brezza', category: 'Compact SUV', seats: 5, trans: 'Manual / Automatic', image: '/images/cars/brezza.jpeg' },
+  { id: 'baleno', name: 'Maruti Suzuki Baleno', category: 'Hatchback', seats: 5, trans: 'Manual / Automatic', image: '/images/cars/baleno.jpeg' },
+  { id: 'ertiga-1', name: 'Maruti Suzuki Ertiga (Vehicle 1)', category: 'MPV', seats: 7, trans: 'Manual / Automatic', image: '/images/cars/ertiga.jpeg' },
+  { id: 'ertiga-2', name: 'Maruti Suzuki Ertiga (Vehicle 2)', category: 'MPV', seats: 7, trans: 'Manual / Automatic', image: '/images/cars/ertiga.jpeg' },
 ]
 
 export default function App() {
@@ -78,14 +78,18 @@ export default function App() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {FLEET.map((car, idx) => (
+          {FLEET.map((car) => (
             <div
               key={car.id}
               className="rounded-xl border border-[#29292d] bg-[#141416] p-5 flex flex-col justify-between hover:border-[#3b3b40] transition-colors"
             >
               <div>
-                <div className="aspect-[16/10] rounded-lg bg-[#1c1c1f] border border-[#29292d] flex items-center justify-center text-[#9a9384] text-sm font-medium mb-4">
-                  Photo coming soon &middot; Unit {idx + 1}
+                <div className="aspect-[16/10] rounded-lg bg-[#1c1c1f] border border-[#29292d] overflow-hidden mb-4 relative">
+                  <img
+                    src={car.image}
+                    alt={car.name}
+                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                  />
                 </div>
                 <span className="text-xs uppercase tracking-wider text-[#d4b373] font-medium">{car.category}</span>
                 <h3 className="text-xl font-bold mt-1 text-[#f3eee4]">{car.name}</h3>

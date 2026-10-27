@@ -32,7 +32,19 @@ export const cars: readonly Car[] = [
     description: pendingDescription(),
     distinguishingDetails: pending("Not required for a single unit"),
     specs: pendingSpecs(),
-    images: { primary: null, gallery: [] },
+    images: {
+      primary: {
+        src: "/images/cars/fronx.jpeg",
+        width: 1600,
+        height: 728,
+        alt: {
+          en: "Maruti Suzuki Fronx in Pune",
+          hi: "पुणे में मारुति सुजुकी फ्रोंक्स",
+          mr: "पुण्यातील मारुती सुझुकी फ्रॉन्क्स",
+        },
+      },
+      gallery: [],
+    },
     faqTags: ["enquiry"],
     indexable: true,
     sortOrder: 1,
@@ -47,7 +59,19 @@ export const cars: readonly Car[] = [
     description: pendingDescription(),
     distinguishingDetails: pending("Not required for a single unit"),
     specs: pendingSpecs(),
-    images: { primary: null, gallery: [] },
+    images: {
+      primary: {
+        src: "/images/cars/brezza.jpeg",
+        width: 1086,
+        height: 1448,
+        alt: {
+          en: "Maruti Suzuki Brezza in Pune",
+          hi: "पुणे में मारुति सुजुकी ब्रेज़ा",
+          mr: "पुण्यातील मारुती सुझुकी ब्रेझा",
+        },
+      },
+      gallery: [],
+    },
     faqTags: ["enquiry"],
     indexable: true,
     sortOrder: 2,
@@ -61,7 +85,19 @@ export const cars: readonly Car[] = [
     description: pendingDescription(),
     distinguishingDetails: pending("Not required for a single unit"),
     specs: pendingSpecs(),
-    images: { primary: null, gallery: [] },
+    images: {
+      primary: {
+        src: "/images/cars/baleno.jpeg",
+        width: 1280,
+        height: 960,
+        alt: {
+          en: "Maruti Suzuki Baleno in Pune",
+          hi: "पुणे में मारुति सुजुकी बलेनो",
+          mr: "पुण्यातील मारुती सुझुकी बलेनो",
+        },
+      },
+      gallery: [],
+    },
     faqTags: ["enquiry"],
     indexable: true,
     sortOrder: 3,
@@ -76,7 +112,19 @@ export const cars: readonly Car[] = [
     description: pendingDescription(),
     distinguishingDetails: pending("Owner to confirm what distinguishes Ertiga Vehicle 1"),
     specs: pendingSpecs(),
-    images: { primary: null, gallery: [] },
+    images: {
+      primary: {
+        src: "/images/cars/ertiga.jpeg",
+        width: 1280,
+        height: 960,
+        alt: {
+          en: "Maruti Suzuki Ertiga (Vehicle 1) in Pune",
+          hi: "पुणे में मारुति सुजुकी अर्टिगा (वाहन 1)",
+          mr: "पुण्यातील मारुती सुझुकी एर्टिगा (वाहन 1)",
+        },
+      },
+      gallery: [],
+    },
     faqTags: ["enquiry", "ertiga"],
     indexable: true,
     sortOrder: 4,
@@ -91,7 +139,19 @@ export const cars: readonly Car[] = [
     description: pendingDescription(),
     distinguishingDetails: pending("Owner to confirm what distinguishes Ertiga Vehicle 2"),
     specs: pendingSpecs(),
-    images: { primary: null, gallery: [] },
+    images: {
+      primary: {
+        src: "/images/cars/ertiga.jpeg",
+        width: 1280,
+        height: 960,
+        alt: {
+          en: "Maruti Suzuki Ertiga (Vehicle 2) in Pune",
+          hi: "पुणे में मारुति सुजुकी अर्टिगा (वाहन 2)",
+          mr: "पुण्यातील मारुती सुझुकी एर्टिगा (वाहन 2)",
+        },
+      },
+      gallery: [],
+    },
     faqTags: ["enquiry", "ertiga"],
     // Planning V2: noindex + excluded from sitemap until approved distinguishing details
     // and unique factual copy exist.

@@ -6,5 +6,8 @@
   "accessibility": {
     "addBypassLinks": false,
     "ignoreReducedMotion": false
+  },
+  "icons": {
+    "icon": "/zippy_main_logo.png"
   }
 }

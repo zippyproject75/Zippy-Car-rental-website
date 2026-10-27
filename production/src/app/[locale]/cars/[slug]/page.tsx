@@ -48,6 +48,14 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
     path: `/cars/${car.slug}`,
     title: t(car.unitNumber ? "carTitleUnit" : "carTitle", values),
     description: t(car.unitNumber ? "carDescriptionUnit" : "carDescription", values),
+    image: car.images.primary
+      ? {
+          url: car.images.primary.src,
+          width: car.images.primary.width,
+          height: car.images.primary.height,
+          alt: car.images.primary.alt[locale],
+        }
+      : undefined,
   });
 }
 

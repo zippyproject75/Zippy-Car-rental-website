@@ -50,6 +50,11 @@ export async function generateMetadata(): Promise<Metadata> {
     metadataBase: new URL(metadataOrigin()),
     title: { default: "Zippy Car Rental", template: "%s | Zippy Car Rental" },
     applicationName: "Zippy Car Rental",
+    icons: {
+      icon: "/zippy_main_logo.png",
+      shortcut: "/zippy_main_logo.png",
+      apple: "/zippy_main_logo.png",
+    },
     formatDetection: { telephone: false, email: false, address: false },
   };
 }

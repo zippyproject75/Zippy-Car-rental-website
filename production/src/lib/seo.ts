@@ -23,14 +23,42 @@ export function buildMetadata(options: {
   description: string;
   absoluteTitle?: boolean;
   forceNoindex?: boolean;
+  image?: {
+    url: string;
+    width?: number;
+    height?: number;
+    alt?: string;
+  };
 }): Metadata {
-  const { locale, path, title, description } = options;
+  const { locale, path, title, description, image } = options;
   const canonical = absoluteUrl(localizedPath(locale, path));
   const indexable = !options.forceNoindex && isIndexable(path, locale);
   const languages: Record<string, string> = Object.fromEntries(
     locales.map((l) => [localeTags[l], absoluteUrl(localizedPath(l, path))]),
   );
   languages["x-default"] = absoluteUrl(localizedPath("en", path));
+
+  const ogImages = image
+    ? [
+        {
+          url: image.url.startsWith("http") ? image.url : absoluteUrl(image.url),
+          width: image.width ?? 1200,
+          height: image.height ?? 630,
+          alt: image.alt ?? title,
+        },
+      ]
+    : [
+        {
+          url: absoluteUrl("/opengraph-image"),
+          width: 1200,
+          height: 630,
+          alt: title,
+        },
+      ];
+
+  const twitterImages = image
+    ? [image.url.startsWith("http") ? image.url : absoluteUrl(image.url)]
+    : [absoluteUrl("/opengraph-image")];
 
   return {
     title: options.absoluteTitle ? { absolute: title } : title,
@@ -47,20 +75,13 @@ export function buildMetadata(options: {
       url: canonical,
       locale: ogLocale[locale],
       alternateLocale: locales.filter((l) => l !== locale).map((l) => ogLocale[l]),
-      images: [
-        {
-          url: "/opengraph-image",
-          width: 1200,
-          height: 630,
-          alt: title,
-        },
-      ],
+      images: ogImages,
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
-      images: ["/opengraph-image"],
+      images: twitterImages,
     },
   };
 }

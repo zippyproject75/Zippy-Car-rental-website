@@ -12,9 +12,9 @@ export default function manifest(): MetadataRoute.Manifest {
     theme_color: "#d4b373",
     icons: [
       {
-        src: "/icon.svg",
+        src: "/zippy_main_logo.png",
         sizes: "any",
-        type: "image/svg+xml",
+        type: "image/png",
         purpose: "maskable",
       },
     ],

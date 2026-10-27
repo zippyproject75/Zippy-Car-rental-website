@@ -83,14 +83,19 @@ export function carProductJsonLd(car: {
   model: string;
   slug: string;
   unitNumber?: number;
+  images?: { primary?: { src: string } | null };
 }): JsonLd | null {
   if (!env.isProduction || !env.siteUrl) return null;
   const carUrl = `${env.siteUrl}/cars/${car.slug}`;
   const name = car.unitNumber ? `${car.displayName} — Vehicle ${car.unitNumber}` : car.displayName;
+  const imageUrl = car.images?.primary?.src
+    ? `${env.siteUrl}${car.images.primary.src}`
+    : `${env.siteUrl}/opengraph-image`;
   return {
     "@context": "https://schema.org",
     "@type": "Product",
     name,
+    image: imageUrl,
     description: `Self-drive rental of ${car.displayName} in Pune from Zippy Car Rental.`,
     brand: {
       "@type": "Brand",
