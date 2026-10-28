@@ -6,7 +6,7 @@ import { ENQUIRY_PATH } from "@/data/navigation";
 export async function CtaBand() {
   const t = await getTranslations("Home");
   return (
-    <section aria-labelledby="cta-title" className="scheme-dark bg-canvas text-ink">
+    <section aria-labelledby="cta-title" className="bg-canvas text-ink">
       <div className="container-site relative overflow-hidden py-20 lg:py-24">
         <div
           aria-hidden

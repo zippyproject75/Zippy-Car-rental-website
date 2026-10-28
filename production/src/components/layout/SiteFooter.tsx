@@ -21,7 +21,7 @@ export async function SiteFooter() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="scheme-dark border-t border-line bg-canvas text-ink">
+    <footer className="border-t border-line bg-canvas text-ink">
       <div className="container-site grid gap-12 py-16 md:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr_1.3fr]">
         <div className="max-w-xs space-y-4">
           <Wordmark tagline={tc("brandTagline")} />

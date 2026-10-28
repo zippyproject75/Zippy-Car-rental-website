@@ -59,11 +59,14 @@ function buildWhatsAppUrl(carId: string, branchId: string, pickupDate: string, r
 }
 
 export default function App() {
+  const [theme, setTheme] = useState<'dark' | 'light'>('dark')
   const [selectedCar, setSelectedCar] = useState('fronx')
   const [selectedBranch, setSelectedBranch] = useState('kondhwa')
   const [pickupDate, setPickupDate] = useState('')
   const [returnDate, setReturnDate] = useState('')
   const [activeMapBranch, setActiveMapBranch] = useState('kondhwa')
+
+  const isDark = theme === 'dark'
 
   const handleSendEnquiry = () => {
     const url = buildWhatsAppUrl(selectedCar, selectedBranch, pickupDate, returnDate)
@@ -71,9 +74,13 @@ export default function App() {
   }
 
   return (
-    <div className="min-h-screen bg-[#0a0a0b] text-[#f3eee4] font-sans antialiased selection:bg-[#d4b373]/30">
+    <div className={`min-h-screen font-sans antialiased selection:bg-[#d4b373]/30 transition-colors duration-300 ${
+      isDark ? 'bg-[#0a0a0b] text-[#f3eee4]' : 'bg-[#f6f3ed] text-[#18160f]'
+    }`}>
       {/* Top Bar */}
-      <header className="sticky top-0 z-30 border-b border-[#29292d] bg-[#0a0a0b]/90 backdrop-blur-md">
+      <header className={`sticky top-0 z-30 border-b backdrop-blur-md transition-colors duration-300 ${
+        isDark ? 'border-[#29292d] bg-[#0a0a0b]/90' : 'border-[#ddd6c8] bg-[#f6f3ed]/90'
+      }`}>
         <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <img
@@ -82,20 +89,51 @@ export default function App() {
               className="h-9 w-auto object-contain shrink-0"
             />
             <div>
-              <span className="font-extrabold tracking-widest text-[#f3eee4] text-base block leading-none">ZIPPY</span>
-              <span className="text-[10px] tracking-[0.2em] text-[#9a9384] uppercase">Car Rental Pune</span>
+              <span className={`font-extrabold tracking-widest text-base block leading-none ${
+                isDark ? 'text-[#f3eee4]' : 'text-[#18160f]'
+              }`}>ZIPPY</span>
+              <span className={`text-[10px] tracking-[0.2em] uppercase ${
+                isDark ? 'text-[#9a9384]' : 'text-[#77571b]'
+              }`}>Car Rental Pune</span>
             </div>
           </div>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3 sm:gap-4">
             <a
               href="#branches"
-              className="text-xs font-semibold text-[#c4bdaf] hover:text-[#facc15] transition-colors hidden sm:inline"
+              className={`text-xs font-semibold transition-colors hidden sm:inline ${
+                isDark ? 'text-[#c4bdaf] hover:text-[#facc15]' : 'text-[#48443b] hover:text-[#77571b]'
+              }`}
             >
               Our Branches
             </a>
+
+            {/* Theme Toggle Button */}
+            <button
+              type="button"
+              onClick={() => setTheme(isDark ? 'light' : 'dark')}
+              aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+              title={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+              className={`size-9 rounded-lg border flex items-center justify-center transition-colors ${
+                isDark
+                  ? 'border-[#29292d] bg-[#141416] text-[#d4b373] hover:border-[#3b3b40]'
+                  : 'border-[#ddd6c8] bg-white text-[#77571b] hover:border-[#c6bca9]'
+              }`}
+            >
+              {isDark ? (
+                <svg className="size-4 fill-none stroke-current stroke-2" viewBox="0 0 24 24" aria-hidden>
+                  <circle cx="12" cy="12" r="4"/>
+                  <path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>
+                </svg>
+              ) : (
+                <svg className="size-4 fill-none stroke-current stroke-2" viewBox="0 0 24 24" aria-hidden>
+                  <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
+                </svg>
+              )}
+            </button>
+
             <a
               href="#enquiry"
-              className="px-4 py-2 rounded-lg bg-[#d4b373] text-[#0a0a0b] font-semibold text-sm hover:bg-[#e2c48a] transition-colors"
+              className="px-4 py-2 rounded-lg bg-[#d4b373] text-[#0a0a0b] font-semibold text-sm hover:bg-[#e2c48a] transition-colors shadow-sm"
             >
               Book Now &rarr;
             </a>
@@ -104,15 +142,23 @@ export default function App() {
       </header>
 
       {/* Hero Section */}
-      <section className="py-16 px-4 border-b border-[#29292d] bg-[radial-gradient(ellipse_80%_50%_at_50%_0%,rgba(212,179,115,0.15),transparent)]">
+      <section className={`py-16 px-4 border-b transition-colors duration-300 ${
+        isDark
+          ? 'border-[#29292d] bg-[radial-gradient(ellipse_80%_50%_at_50%_0%,rgba(212,179,115,0.15),transparent)]'
+          : 'border-[#ddd6c8] bg-[radial-gradient(ellipse_80%_50%_at_50%_0%,rgba(201,166,96,0.22),transparent)]'
+      }`}>
         <div className="max-w-4xl mx-auto text-center space-y-6">
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#d4b373]">
             Self-Drive &middot; Pune, Maharashtra
           </p>
-          <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight text-[#f3eee4]">
+          <h1 className={`text-4xl sm:text-6xl font-extrabold tracking-tight ${
+            isDark ? 'text-[#f3eee4]' : 'text-[#18160f]'
+          }`}>
             Self-drive car rental <span className="text-[#d4b373]">in Pune.</span>
           </h1>
-          <p className="text-lg text-[#c4bdaf] max-w-2xl mx-auto leading-relaxed">
+          <p className={`text-lg max-w-2xl mx-auto leading-relaxed ${
+            isDark ? 'text-[#c4bdaf]' : 'text-[#48443b]'
+          }`}>
             Five Maruti Suzuki cars available across 3 Pune branches: Kondhwa, Gangadham, and Undri. Choose your car, select your pickup location and dates, and send your enquiry directly via WhatsApp.
           </p>
           <div className="pt-2 flex flex-wrap items-center justify-center gap-4">
@@ -129,25 +175,26 @@ export default function App() {
               View Branches & Map
             </a>
           </div>
-        </div>
-      </section>
-
-      {/* Fleet Catalogue */}
+        </div>      {/* Fleet Catalogue */}
       <section id="fleet" className="py-16 px-4 max-w-6xl mx-auto">
         <div className="mb-10 text-center">
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#d4b373]">Authorized Fleet</p>
-          <h2 className="text-3xl font-bold mt-2 text-[#f3eee4]">Five Maruti Suzuki Units</h2>
-          <p className="text-[#9a9384] text-sm mt-1">Each car is an individual verified fleet record</p>
+          <h2 className={`text-3xl font-bold mt-2 ${isDark ? 'text-[#f3eee4]' : 'text-[#18160f]'}`}>Five Maruti Suzuki Units</h2>
+          <p className={`text-sm mt-1 ${isDark ? 'text-[#9a9384]' : 'text-[#635d51]'}`}>Each car is an individual verified fleet record</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {FLEET.map((car) => (
             <div
               key={car.id}
-              className="rounded-xl border border-[#29292d] bg-[#141416] p-5 flex flex-col justify-between hover:border-[#3b3b40] transition-colors"
+              className={`rounded-xl border p-5 flex flex-col justify-between transition-colors ${
+                isDark ? 'border-[#29292d] bg-[#141416] hover:border-[#3b3b40]' : 'border-[#ddd6c8] bg-white shadow-sm hover:border-[#c6bca9]'
+              }`}
             >
               <div>
-                <div className="aspect-[16/10] rounded-lg bg-[#1c1c1f] border border-[#29292d] overflow-hidden mb-4 relative">
+                <div className={`aspect-[16/10] rounded-lg border overflow-hidden mb-4 relative ${
+                  isDark ? 'bg-[#1c1c1f] border-[#29292d]' : 'bg-[#ece7dd] border-[#ddd6c8]'
+                }`}>
                   <img
                     src={car.image}
                     alt={car.name}
@@ -155,23 +202,31 @@ export default function App() {
                   />
                 </div>
                 <span className="text-xs uppercase tracking-wider text-[#d4b373] font-medium">{car.category}</span>
-                <h3 className="text-xl font-bold mt-1 text-[#f3eee4]">{car.name}</h3>
-                <p className="text-xs text-[#9a9384] mt-2">
+                <h3 className={`text-xl font-bold mt-1 ${isDark ? 'text-[#f3eee4]' : 'text-[#18160f]'}`}>{car.name}</h3>
+                <p className={`text-xs mt-2 ${isDark ? 'text-[#9a9384]' : 'text-[#635d51]'}`}>
                   Seating: {car.seats} seats &bull; Transmission: {car.trans}
                 </p>
               </div>
 
-              <div className="mt-6 pt-4 border-t border-[#29292d] flex items-center justify-between">
+              <div className={`mt-6 pt-4 border-t flex items-center justify-between ${
+                isDark ? 'border-[#29292d]' : 'border-[#ddd6c8]'
+              }`}>
                 <div>
-                  <span className="text-[11px] uppercase tracking-wider text-[#9a9384] block">Rental Rate</span>
-                  <span className="text-sm font-semibold text-[#f3eee4]">Price on request</span>
+                  <span className={`text-[11px] uppercase tracking-wider block ${
+                    isDark ? 'text-[#9a9384]' : 'text-[#635d51]'
+                  }`}>Rental Rate</span>
+                  <span className={`text-sm font-semibold ${isDark ? 'text-[#f3eee4]' : 'text-[#18160f]'}`}>Price on request</span>
                 </div>
                 <button
                   onClick={() => {
                     setSelectedCar(car.id)
                     document.getElementById('enquiry')?.scrollIntoView({ behavior: 'smooth' })
                   }}
-                  className="px-3.5 py-2 rounded-lg bg-[#1c1c1f] hover:bg-[#29292d] text-xs font-semibold text-[#d4b373] border border-[#3b3b40] transition-colors"
+                  className={`px-3.5 py-2 rounded-lg text-xs font-semibold border transition-colors ${
+                    isDark
+                      ? 'bg-[#1c1c1f] hover:bg-[#29292d] text-[#d4b373] border-[#3b3b40]'
+                      : 'bg-[#f6f3ed] hover:bg-[#ece7dd] text-[#77571b] border-[#ddd6c8]'
+                  }`}
                 >
                   Enquire Now &rarr;
                 </button>
@@ -181,15 +236,21 @@ export default function App() {
         </div>
       </section>
 
-      {/* Our Branches Section (Exact design from user screenshot) */}
-      <section id="branches" className="py-20 px-4 border-t border-[#232a3e] bg-[#07090e]">
+      {/* Our Branches Section */}
+      <section id="branches" className={`py-20 px-4 border-t transition-colors duration-300 ${
+        isDark ? 'border-[#232a3e] bg-[#07090e]' : 'border-[#ddd6c8] bg-[#ece7dd]'
+      }`}>
         <div className="max-w-6xl mx-auto">
           {/* Section Header */}
           <div className="mb-10">
-            <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#facc15] mb-2">
+            <p className={`text-xs font-bold uppercase tracking-[0.2em] mb-2 ${
+              isDark ? 'text-[#facc15]' : 'text-[#77571b]'
+            }`}>
               OUR BRANCHES
             </p>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+            <h2 className={`text-3xl sm:text-4xl font-extrabold tracking-tight ${
+              isDark ? 'text-white' : 'text-[#18160f]'
+            }`}>
               Find Zippy Car Rental near you in Pune
             </h2>
           </div>
@@ -199,22 +260,34 @@ export default function App() {
             {BRANCHES.map((b) => (
               <div
                 key={b.id}
-                className="bg-[#10141f] border border-[#232a3e] rounded-2xl p-6 flex flex-col justify-between shadow-xl transition-all duration-200 hover:border-[#3d4968]"
+                className={`rounded-2xl p-6 flex flex-col justify-between border transition-all duration-200 ${
+                  isDark
+                    ? 'bg-[#10141f] border-[#232a3e] shadow-xl hover:border-[#3d4968]'
+                    : 'bg-white border-[#ddd6c8] shadow-md hover:border-[#c6bca9]'
+                }`}
               >
                 <div>
                   <div className="flex items-center gap-3 mb-4">
-                    <div className="size-11 rounded-xl bg-[#26251b] border border-[#4d441e] flex items-center justify-center shrink-0">
-                      <svg className="size-5 text-[#facc15]" fill="none" stroke="currentColor" strokeWidth="2.2" viewBox="0 0 24 24" aria-hidden>
+                    <div className={`size-11 rounded-xl border flex items-center justify-center shrink-0 ${
+                      isDark
+                        ? 'bg-[#26251b] border-[#4d441e] text-[#facc15]'
+                        : 'bg-[#f6ecd6] border-[#e9c06d] text-[#77571b]'
+                    }`}>
+                      <svg className="size-5" fill="none" stroke="currentColor" strokeWidth="2.2" viewBox="0 0 24 24" aria-hidden>
                         <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
                         <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
                       </svg>
                     </div>
-                    <h3 className="text-xl font-bold text-white tracking-tight">
+                    <h3 className={`text-xl font-bold tracking-tight ${
+                      isDark ? 'text-white' : 'text-[#18160f]'
+                    }`}>
                       {b.name}
                     </h3>
                   </div>
 
-                  <p className="text-sm leading-relaxed text-[#9ca3af] mb-6 min-h-[4rem]">
+                  <p className={`text-sm leading-relaxed mb-6 min-h-[4rem] ${
+                    isDark ? 'text-[#9ca3af]' : 'text-[#48443b]'
+                  }`}>
                     {b.address}
                   </p>
                 </div>
@@ -238,7 +311,9 @@ export default function App() {
                       setActiveMapBranch(b.id)
                       document.getElementById('enquiry')?.scrollIntoView({ behavior: 'smooth' })
                     }}
-                    className="text-xs font-semibold text-[#facc15] hover:underline px-2 py-2"
+                    className={`text-xs font-semibold px-2 py-2 hover:underline ${
+                      isDark ? 'text-[#facc15]' : 'text-[#77571b]'
+                    }`}
                   >
                     Select this branch &darr;
                   </button>
@@ -248,22 +323,26 @@ export default function App() {
           </div>
 
           {/* Static Google Map Container */}
-          <div className="mt-12 rounded-2xl border border-[#232a3e] bg-[#10141f] p-5 sm:p-7 shadow-xl">
+          <div className={`mt-12 rounded-2xl border p-5 sm:p-7 transition-colors duration-300 ${
+            isDark ? 'border-[#232a3e] bg-[#10141f] shadow-xl' : 'border-[#ddd6c8] bg-white shadow-md'
+          }`}>
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-5">
               <div>
                 <div className="flex items-center gap-2.5">
                   <span className="size-2.5 rounded-full bg-[#facc15] animate-pulse"></span>
-                  <h3 className="text-lg font-bold text-white">
+                  <h3 className={`text-lg font-bold ${isDark ? 'text-white' : 'text-[#18160f]'}`}>
                     Google Maps View &middot; {BRANCHES.find((b) => b.id === activeMapBranch)?.name} Branch
                   </h3>
                 </div>
-                <p className="text-xs text-[#9ca3af] mt-1">
+                <p className={`text-xs mt-1 ${isDark ? 'text-[#9ca3af]' : 'text-[#635d51]'}`}>
                   Static Google Map embed &bull; No dynamic API key required &bull; Click tabs to switch branch
                 </p>
               </div>
 
               {/* Branch Map Switcher Tabs */}
-              <div className="flex items-center gap-1.5 bg-[#07090e] p-1.5 rounded-xl border border-[#232a3e] self-start sm:self-auto">
+              <div className={`flex items-center gap-1.5 p-1.5 rounded-xl border self-start sm:self-auto ${
+                isDark ? 'bg-[#07090e] border-[#232a3e]' : 'bg-[#f6f3ed] border-[#ddd6c8]'
+              }`}>
                 {BRANCHES.map((b) => (
                   <button
                     key={b.id}
@@ -271,7 +350,7 @@ export default function App() {
                     className={`px-3.5 py-1.5 rounded-lg text-xs font-bold transition-colors ${
                       activeMapBranch === b.id
                         ? 'bg-[#facc15] text-[#0a0a0b] shadow-sm'
-                        : 'text-[#9ca3af] hover:text-white'
+                        : isDark ? 'text-[#9ca3af] hover:text-white' : 'text-[#635d51] hover:text-[#18160f]'
                     }`}
                   >
                     {b.name}
@@ -280,7 +359,9 @@ export default function App() {
               </div>
             </div>
 
-            <div className="w-full h-80 sm:h-96 rounded-xl overflow-hidden border border-[#232a3e] relative bg-[#07090e]">
+            <div className={`w-full h-80 sm:h-96 rounded-xl overflow-hidden border relative ${
+              isDark ? 'border-[#232a3e] bg-[#07090e]' : 'border-[#ddd6c8] bg-[#ece7dd]'
+            }`}>
               <iframe
                 title="Zippy Car Rental Pune Static Map"
                 src={`https://maps.google.com/maps?q=${encodeURIComponent(
@@ -296,24 +377,32 @@ export default function App() {
       </section>
 
       {/* Enquiry Calculator Preview */}
-      <section id="enquiry" className="py-16 px-4 border-t border-[#29292d] bg-[#141416]">
+      <section id="enquiry" className={`py-16 px-4 border-t transition-colors duration-300 ${
+        isDark ? 'border-[#29292d] bg-[#141416]' : 'border-[#ddd6c8] bg-[#f6f3ed]'
+      }`}>
         <div className="max-w-2xl mx-auto">
           <div className="text-center mb-8">
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#d4b373]">Interactive Flow</p>
-            <h2 className="text-2xl font-bold text-[#f3eee4] mt-1">Rental Enquiry</h2>
-            <p className="text-xs text-[#9a9384] mt-1">
+            <h2 className={`text-2xl font-bold mt-1 ${isDark ? 'text-[#f3eee4]' : 'text-[#18160f]'}`}>Rental Enquiry</h2>
+            <p className={`text-xs mt-1 ${isDark ? 'text-[#9a9384]' : 'text-[#635d51]'}`}>
               Your enquiry is sent directly to Zippy&apos;s WhatsApp &bull; No automatic charges
             </p>
           </div>
 
-          <div className="rounded-xl border border-[#29292d] bg-[#0a0a0b] p-6 space-y-4">
+          <div className={`rounded-xl border p-6 space-y-4 transition-colors duration-300 ${
+            isDark ? 'border-[#29292d] bg-[#0a0a0b]' : 'border-[#ddd6c8] bg-white shadow-md'
+          }`}>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-xs font-semibold text-[#c4bdaf] uppercase tracking-wider mb-2">Select Vehicle</label>
+                <label className={`block text-xs font-semibold uppercase tracking-wider mb-2 ${
+                  isDark ? 'text-[#c4bdaf]' : 'text-[#48443b]'
+                }`}>Select Vehicle</label>
                 <select
                   value={selectedCar}
                   onChange={(e) => setSelectedCar(e.target.value)}
-                  className="w-full bg-[#141416] border border-[#29292d] rounded-lg px-3.5 py-2.5 text-sm text-[#f3eee4] focus:outline-none focus:border-[#d4b373]"
+                  className={`w-full border rounded-lg px-3.5 py-2.5 text-sm focus:outline-none focus:border-[#d4b373] ${
+                    isDark ? 'bg-[#141416] border-[#29292d] text-[#f3eee4]' : 'bg-[#f6f3ed] border-[#ddd6c8] text-[#18160f]'
+                  }`}
                 >
                   {FLEET.map((c) => (
                     <option key={c.id} value={c.id}>{c.name}</option>
@@ -322,7 +411,9 @@ export default function App() {
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-[#c4bdaf] uppercase tracking-wider mb-2">
+                <label className={`block text-xs font-semibold uppercase tracking-wider mb-2 ${
+                  isDark ? 'text-[#c4bdaf]' : 'text-[#48443b]'
+                }`}>
                   Pickup Branch (Pune)
                 </label>
                 <select
@@ -331,7 +422,9 @@ export default function App() {
                     setSelectedBranch(e.target.value)
                     setActiveMapBranch(e.target.value)
                   }}
-                  className="w-full bg-[#141416] border border-[#29292d] rounded-lg px-3.5 py-2.5 text-sm text-[#f3eee4] focus:outline-none focus:border-[#d4b373]"
+                  className={`w-full border rounded-lg px-3.5 py-2.5 text-sm focus:outline-none focus:border-[#d4b373] ${
+                    isDark ? 'bg-[#141416] border-[#29292d] text-[#f3eee4]' : 'bg-[#f6f3ed] border-[#ddd6c8] text-[#18160f]'
+                  }`}
                 >
                   {BRANCHES.map((b, i) => (
                     <option key={b.id} value={b.id}>
@@ -344,35 +437,47 @@ export default function App() {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-xs font-semibold text-[#c4bdaf] uppercase tracking-wider mb-2">Pickup Date</label>
+                <label className={`block text-xs font-semibold uppercase tracking-wider mb-2 ${
+                  isDark ? 'text-[#c4bdaf]' : 'text-[#48443b]'
+                }`}>Pickup Date</label>
                 <input
                   type="date"
                   value={pickupDate}
                   onChange={(e) => setPickupDate(e.target.value)}
-                  className="w-full bg-[#141416] border border-[#29292d] rounded-lg px-3.5 py-2.5 text-sm text-[#f3eee4] focus:outline-none focus:border-[#d4b373]"
+                  className={`w-full border rounded-lg px-3.5 py-2.5 text-sm focus:outline-none focus:border-[#d4b373] ${
+                    isDark ? 'bg-[#141416] border-[#29292d] text-[#f3eee4]' : 'bg-[#f6f3ed] border-[#ddd6c8] text-[#18160f]'
+                  }`}
                 />
               </div>
               <div>
-                <label className="block text-xs font-semibold text-[#c4bdaf] uppercase tracking-wider mb-2">Return Date</label>
+                <label className={`block text-xs font-semibold uppercase tracking-wider mb-2 ${
+                  isDark ? 'text-[#c4bdaf]' : 'text-[#48443b]'
+                }`}>Return Date</label>
                 <input
                   type="date"
                   value={returnDate}
                   onChange={(e) => setReturnDate(e.target.value)}
-                  className="w-full bg-[#141416] border border-[#29292d] rounded-lg px-3.5 py-2.5 text-sm text-[#f3eee4] focus:outline-none focus:border-[#d4b373]"
+                  className={`w-full border rounded-lg px-3.5 py-2.5 text-sm focus:outline-none focus:border-[#d4b373] ${
+                    isDark ? 'bg-[#141416] border-[#29292d] text-[#f3eee4]' : 'bg-[#f6f3ed] border-[#ddd6c8] text-[#18160f]'
+                  }`}
                 />
               </div>
             </div>
 
-            <div className="pt-4 border-t border-[#29292d] flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div className={`pt-4 border-t flex flex-col sm:flex-row sm:items-center justify-between gap-4 ${
+              isDark ? 'border-[#29292d]' : 'border-[#ddd6c8]'
+            }`}>
               <div>
-                <span className="text-xs text-[#9a9384] block">Selected: {BRANCHES.find(b => b.id === selectedBranch)?.name} Branch</span>
-                <span className="text-sm font-medium text-[#f3eee4]">
+                <span className={`text-xs block ${isDark ? 'text-[#9a9384]' : 'text-[#635d51]'}`}>
+                  Selected: {BRANCHES.find(b => b.id === selectedBranch)?.name} Branch
+                </span>
+                <span className={`text-sm font-medium ${isDark ? 'text-[#f3eee4]' : 'text-[#18160f]'}`}>
                   {pickupDate && returnDate ? 'Custom Duration' : 'Choose dates'} &bull; Price on request
                 </span>
               </div>
               <button
                 onClick={handleSendEnquiry}
-                className="px-4 py-2.5 rounded-lg bg-[#25D366] text-white font-bold text-xs hover:bg-[#20bd5a] transition-colors flex items-center justify-center gap-2"
+                className="px-4 py-2.5 rounded-lg bg-[#25D366] text-white font-bold text-xs hover:bg-[#20bd5a] transition-colors flex items-center justify-center gap-2 shadow-sm"
               >
                 <svg viewBox="0 0 24 24" className="size-4 fill-current" aria-hidden>
                   <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
@@ -385,7 +490,9 @@ export default function App() {
       </section>
 
       {/* Footer */}
-      <footer className="py-8 px-4 border-t border-[#29292d] text-center text-xs text-[#9a9384] flex flex-col items-center gap-2">
+      <footer className={`py-8 px-4 border-t text-center text-xs flex flex-col items-center gap-2 transition-colors duration-300 ${
+        isDark ? 'border-[#29292d] bg-[#0a0a0b] text-[#9a9384]' : 'border-[#ddd6c8] bg-[#ece7dd] text-[#635d51]'
+      }`}>
         <img
           src="/zippy_main_logo.png"
           alt="Zippy Car Rental"

@@ -70,7 +70,7 @@ export async function Hero() {
   return (
     <section
       aria-labelledby="hero-title"
-      className="scheme-dark relative overflow-hidden bg-canvas text-ink"
+      className="relative overflow-hidden bg-canvas text-ink"
     >
       <div aria-hidden className="cinema-stage absolute inset-0" />
       <div className="container-site relative grid gap-12 pt-12 pb-32 sm:pt-16 lg:grid-cols-[1.05fr_1fr] lg:items-center lg:gap-16 lg:pt-20 lg:pb-40">

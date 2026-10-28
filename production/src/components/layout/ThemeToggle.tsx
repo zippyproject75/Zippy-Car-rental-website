@@ -2,7 +2,7 @@
 
 import { Moon, Sun } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { useTheme } from "next-themes";
+import { useTheme } from "./ThemeProvider";
 import { cn } from "@/lib/cn";
 import { useMounted } from "./useMounted";
 
@@ -32,8 +32,15 @@ export function ThemeToggle({
         className,
       )}
     >
-      <Moon aria-hidden className="size-4 text-ink dark:hidden" />
-      <Sun aria-hidden className="hidden size-4 text-ink dark:block" />
+      {mounted ? (
+        isDark ? (
+          <Sun aria-hidden className="size-4 text-accent transition-transform duration-300 rotate-0" />
+        ) : (
+          <Moon aria-hidden className="size-4 text-ink transition-transform duration-300 -rotate-12" />
+        )
+      ) : (
+        <span className="size-4" />
+      )}
       {withLabel ? <span className="text-sm font-medium">{label}</span> : null}
     </button>
   );

@@ -1,6 +1,7 @@
 @import "tailwindcss";
 
-@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *, .scheme-dark, .scheme-dark *));
+@variant dark (&:where([data-theme="dark"], [data-theme="dark"] *, .dark, .dark *, .scheme-dark, .scheme-dark *));
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *, .dark, .dark *, .scheme-dark, .scheme-dark *));
 
 /* ------------------------------------------------------------------ */
 /* Semantic theme tokens. Components use these, never literal colours. */
@@ -32,6 +33,8 @@
 }
 
 [data-theme="dark"],
+.dark,
+html.dark,
 .scheme-dark {
   color-scheme: dark;
   --canvas: #0a0a0b;
@@ -139,6 +142,33 @@
     font-family: var(--font-sans);
     text-rendering: optimizeLegibility;
   }
+  body,
+  header,
+  footer,
+  section,
+  article,
+  main,
+  nav,
+  aside,
+  form,
+  dialog,
+  div,
+  p,
+  span,
+  h1, h2, h3, h4, h5, h6,
+  li,
+  button,
+  a,
+  input,
+  select,
+  textarea,
+  .rounded-card,
+  .rounded-control,
+  [data-testid="branch-card"] {
+    transition-property: background-color, border-color, color, fill, stroke, box-shadow;
+    transition-duration: 250ms;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  }
   :where(h1, h2, h3, h4) {
     font-family: var(--font-display);
     text-wrap: balance;
@@ -208,8 +238,16 @@
   background-position: -1px -1px;
 }
 
-/* The cinematic hero composition: a lit road receding into the frame. */
+/* The cinematic hero composition: adapts beautifully to light and dark modes */
 @utility cinema-stage {
+  background:
+    radial-gradient(120% 80% at 75% 10%, color-mix(in oklab, var(--accent) 18%, transparent), transparent 60%),
+    linear-gradient(180deg, var(--muted) 0%, var(--canvas) 100%);
+}
+
+[data-theme="dark"] .cinema-stage,
+.dark .cinema-stage,
+.scheme-dark .cinema-stage {
   background:
     radial-gradient(120% 80% at 75% 10%, rgb(212 179 115 / 0.16), transparent 60%),
     linear-gradient(180deg, #121214 0%, #0a0a0b 100%);
