@@ -23,37 +23,50 @@ export function CarCard({ car, headingLevel = "h3" }: { car: Car; headingLevel?:
   return (
     <article
       data-testid="car-card"
-      className="group flex flex-col overflow-hidden rounded-card border border-line bg-raised transition-[border-color,transform] duration-200 hover:-translate-y-0.5 hover:border-line-strong focus-within:border-line-strong"
+      className="group flex flex-col overflow-hidden rounded-2xl border border-line bg-raised shadow-raised transition-all duration-300 hover:-translate-y-1 hover:border-line-strong hover:shadow-xl focus-within:border-line-strong w-full"
     >
-      <Link href={`/cars/${car.slug}`} tabIndex={-1} aria-hidden className="block">
+      <Link href={`/cars/${car.slug}`} tabIndex={-1} aria-hidden className="block overflow-hidden">
         <CarMedia car={car} />
       </Link>
-      <div className="flex flex-1 flex-col gap-4 p-5">
+      <div className="flex flex-1 flex-col gap-4 p-5 sm:p-6">
         <div>
-          <p className="text-xs font-semibold tracking-[0.14em] text-ink-3 uppercase">{car.make}</p>
+          <p className="text-[0.6875rem] font-bold tracking-[0.16em] text-accent-ink uppercase">
+            {car.make}
+          </p>
           <Heading className="mt-1 font-display text-xl font-bold tracking-[-0.01em] text-ink">
             {car.model}
             {car.unitNumber ? (
-              <span className="ml-2 align-middle text-sm font-semibold text-accent-ink">
+              <span className="ml-2 align-middle text-xs font-semibold text-accent-ink bg-accent/15 px-2 py-0.5 rounded-full">
                 {t("Common.vehicleUnit", { unit: car.unitNumber })}
               </span>
             ) : null}
           </Heading>
         </div>
+
         {specs.length ? (
-          <ul className="flex flex-wrap gap-x-4 gap-y-1 text-sm text-ink-2">
+          <ul className="flex flex-wrap gap-1.5 text-xs">
             {specs.map((s) => (
-              <li key={s.key}>{format(s)}</li>
+              <li
+                key={s.key}
+                className="inline-flex items-center rounded-md border border-line bg-muted/50 px-2.5 py-1 font-medium text-ink-2"
+              >
+                {format(s)}
+              </li>
             ))}
           </ul>
         ) : null}
-        <PriceLine carId={car.id} className="mt-auto" />
-        <div className="grid grid-cols-2 gap-2 border-t border-line pt-4">
+
+        <div className="mt-auto pt-2">
+          <PriceLine carId={car.id} />
+        </div>
+
+        <div className="grid grid-cols-2 gap-2.5 border-t border-line/70 pt-4">
           <ButtonLink
             href={`/cars/${car.slug}`}
             variant="secondary"
             size="sm"
             aria-label={t("Fleet.viewDetailsFor", { car: fullName })}
+            className="w-full justify-center text-xs font-semibold"
           >
             {t("Fleet.viewDetails")}
           </ButtonLink>
@@ -61,9 +74,10 @@ export function CarCard({ car, headingLevel = "h3" }: { car: Car; headingLevel?:
             href={{ pathname: "/book", query: { car: car.slug } }}
             size="sm"
             aria-label={t("Fleet.enquireFor", { car: fullName })}
+            className="w-full justify-center text-xs font-bold bg-accent text-on-accent hover:bg-accent-hover"
           >
             {t("Fleet.enquire")}
-            <ArrowRight aria-hidden className="size-4" />
+            <ArrowRight aria-hidden className="size-3.5" />
           </ButtonLink>
         </div>
       </div>

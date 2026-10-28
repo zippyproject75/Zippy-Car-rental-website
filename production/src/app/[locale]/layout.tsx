@@ -34,6 +34,8 @@ const CLIENT_NAMESPACES = [
   "Theme",
   "Language",
   "Common",
+  "Fleet",
+  "Specs",
 ];
 
 export const dynamicParams = false;
