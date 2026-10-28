@@ -8,13 +8,12 @@ import type { Car } from "@/types/car";
 type Variant = "card" | "detail";
 
 const ratio: Record<Variant, string> = {
-  card: "aspect-[3/2]",
+  card: "aspect-[16/10]",
   detail: "aspect-[4/5] md:aspect-video",
 };
 
 /**
- * Owner-supplied photo when present; otherwise a CSS-only placeholder in the same box,
- * so adding real photography never changes the layout and can never break an image.
+ * Owner-supplied photo when present; otherwise a CSS-only placeholder in the same box.
  */
 export function CarMedia({
   car,
@@ -41,8 +40,13 @@ export function CarMedia({
           fill
           priority={priority}
           sizes={sizes ?? "(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"}
-          className="object-cover"
+          className="object-cover object-center transition-transform duration-500 ease-out group-hover:scale-105"
         />
+        {car.unitNumber ? (
+          <div className="absolute top-3 right-3 rounded-md bg-black/75 backdrop-blur-md px-2.5 py-1 text-[0.6875rem] font-bold tracking-wider text-accent uppercase">
+            Unit {car.unitNumber}
+          </div>
+        ) : null}
       </div>
     );
   }
@@ -51,32 +55,23 @@ export function CarMedia({
     <div
       role="img"
       aria-label={t("Placeholder.alt", {
-        car: unit ? `${car.displayName} ${unit}` : car.displayName,
+        car: unit ? `${car.displayName} — ${unit}` : car.displayName,
       })}
-      className={cn("media-placeholder relative isolate overflow-hidden", ratio[variant])}
+      className={cn(
+        "media-placeholder relative flex flex-col items-center justify-center p-6 text-center text-ink-3",
+        ratio[variant],
+      )}
     >
-      <div aria-hidden className="absolute inset-x-0 bottom-[38%] h-px bg-accent/50" />
       <div
         aria-hidden
-        className="absolute inset-x-[12%] bottom-[30%] h-[18%] rounded-[50%] bg-ink/[0.04] blur-xl"
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/10 to-transparent"
       />
-      <div aria-hidden className="absolute inset-0 flex flex-col justify-between p-5 sm:p-6">
-        <span className="eyebrow text-[0.6875rem]! text-ink-3!">{car.make}</span>
-        <div>
-          <p
-            className={cn(
-              "font-display leading-none font-extrabold tracking-[-0.03em] text-ink/[0.13]",
-              variant === "detail" ? "text-7xl sm:text-8xl lg:text-9xl" : "text-5xl sm:text-6xl",
-            )}
-          >
-            {car.model}
-          </p>
-          <div className="mt-3 flex items-center justify-between gap-3 text-xs font-medium text-ink-3">
-            <span>{unit}</span>
-            {env.showPendingContent ? <span>{t("Common.photoComingSoon")}</span> : null}
-          </div>
-        </div>
-      </div>
+      <p className="font-display text-sm font-semibold tracking-wide text-ink uppercase">
+        {car.displayName}
+      </p>
+      {env.showPendingContent ? (
+        <p className="mt-1 text-xs text-ink-3">{t("Common.photoComingSoon")}</p>
+      ) : null}
     </div>
   );
 }
