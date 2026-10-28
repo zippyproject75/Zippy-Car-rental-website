@@ -6,14 +6,11 @@ import { ENQUIRY_PATH } from "@/data/navigation";
 import { Link, usePathname } from "@/i18n/navigation";
 import { cn } from "@/lib/cn";
 
-export function HeaderCta({ className }: { className?: string }) {
+export function HeaderCta({ variant = "desktop", className }: { variant?: "desktop" | "mobile"; className?: string }) {
   const t = useTranslations("Nav");
   const pathname = usePathname();
 
-  // On the /book page itself, hide redundant CTA linking back to the same form
-  if (pathname === "/book") {
-    return null;
-  }
+  if (pathname === "/book") return null;
 
   return (
     <Link
