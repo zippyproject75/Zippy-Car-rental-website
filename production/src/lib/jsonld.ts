@@ -32,6 +32,9 @@ export function organizationJsonLd(): JsonLd | null {
       areaServed: site.city,
     };
   }
+  if (site.brand.logo.status === "confirmed") {
+    data.logo = `${env.siteUrl}${site.brand.logo.value.src}`;
+  }
   return data;
 }
 

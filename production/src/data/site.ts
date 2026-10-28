@@ -24,8 +24,7 @@ export const site: SiteConfig = {
       note: LEGACY,
     },
     email: { status: "pending", value: "zippycarrental.official@gmail.com", note: LEGACY },
-    // Not invented: the owner must confirm which number receives WhatsApp enquiries.
-    whatsapp: { status: "pending", value: null, note: "WhatsApp destination number required" },
+    whatsapp: { status: "confirmed", value: { display: "+91 99212 08410", e164: "+919921208410" }, note: "Owner-confirmed WhatsApp business number" },
     grievanceContact: {
       status: "pending",
       value: null,
@@ -79,7 +78,13 @@ export const site: SiteConfig = {
       phone: { status: "pending", value: null, note: "No branch-specific number confirmed" },
     },
   ],
-  brand: { logo: { status: "pending", value: null, note: "Typographic wordmark in use" } },
+  brand: {
+    logo: {
+      status: "confirmed",
+      value: { src: "/zippy_main_logo.png", width: 120, height: 80 },
+      note: "Official Zippy logo",
+    },
+  },
   aboutStory: { status: "pending", value: null, note: "Owner-approved company story required" },
   copyReview: { en: "approved", hi: "approved", mr: "approved" },
 };
