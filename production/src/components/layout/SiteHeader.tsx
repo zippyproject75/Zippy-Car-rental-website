@@ -16,7 +16,7 @@ export async function SiteHeader() {
   const phone = getVisibleContacts(env.showPendingContent).phones[0];
 
   return (
-    <header className="sticky top-0 z-40 border-b border-line bg-canvas/90 backdrop-blur-md transition-colors">
+    <header className="sticky top-0 z-40 border-b border-line bg-canvas/90 backdrop-blur-md transition-colors w-full">
       <div className="container-site flex h-[4.25rem] items-center justify-between gap-2 sm:gap-4">
         {/* Left: Brand Logo */}
         <Link
@@ -32,8 +32,8 @@ export async function SiteHeader() {
           <NavLinks orientation="horizontal" />
         </nav>
 
-        {/* Right: Controls & Primary CTA */}
-        <div className="flex items-center gap-2 sm:gap-2.5 shrink-0">
+        {/* Right: Controls & Single Primary CTA */}
+        <div className="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
           <div className="hidden sm:block">
             <LanguageSwitcher />
           </div>
@@ -41,9 +41,8 @@ export async function SiteHeader() {
             <ThemeToggle />
           </div>
 
-          {/* Primary CTA: "Plan My Rental" (desktop) / "Plan Rental" (mobile) */}
-          <HeaderCta variant="desktop" className="hidden sm:inline-flex" />
-          <HeaderCta variant="mobile" className="sm:hidden" />
+          {/* Primary CTA: Only one single button */}
+          <HeaderCta />
 
           {/* Mobile Navigation Drawer Trigger */}
           <MobileMenu
