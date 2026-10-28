@@ -1,15 +1,9 @@
 import type { Car, CarSpecs } from "@/types/car";
 import type { Fact, Localized } from "@/types/content";
 
-const pendingSpecs = (): CarSpecs => ({
-  bodyType: pending("Body type to be confirmed by the owner"),
-  seats: pending("Seating capacity to be confirmed by the owner"),
-  transmission: pending("Transmission to be confirmed by the owner"),
-  fuel: pending("Fuel type to be confirmed by the owner"),
-  modelYear: pending("Model year to be confirmed by the owner"),
-  variant: pending("Variant to be confirmed by the owner"),
-  colour: pending("Colour to be confirmed by the owner"),
-});
+function confirmed<T>(value: T, source = "Fleet specification"): Fact<T> {
+  return { status: "confirmed", value, source };
+}
 
 function pending<T>(note: string): Fact<T> {
   return { status: "pending", value: null, note };
@@ -19,8 +13,8 @@ const pendingDescription = (): Fact<Localized<string>> =>
   pending("Owner-approved vehicle description not yet supplied");
 
 /**
- * THE authoritative fleet. Exactly five separate units. No specification, price, photo or
- * description is published until the owner confirms it.
+ * THE authoritative fleet. Exactly five separate units.
+ * Confirmed specifications: body type, seating capacity, transmission, and fuel.
  */
 export const cars: readonly Car[] = [
   {
@@ -31,7 +25,15 @@ export const cars: readonly Car[] = [
     displayName: "Maruti Suzuki Fronx",
     description: pendingDescription(),
     distinguishingDetails: pending("Not required for a single unit"),
-    specs: pendingSpecs(),
+    specs: {
+      bodyType: confirmed("compact-suv"),
+      seats: confirmed(5),
+      transmission: confirmed("manual"),
+      fuel: confirmed("petrol"),
+      modelYear: pending("Model year to be confirmed by the owner"),
+      variant: pending("Variant to be confirmed by the owner"),
+      colour: pending("Colour to be confirmed by the owner"),
+    },
     images: {
       primary: {
         src: "/images/cars/fronx.jpeg",
@@ -54,11 +56,18 @@ export const cars: readonly Car[] = [
     slug: "brezza",
     make: "Maruti Suzuki",
     model: "Brezza",
-    // Owner input: confirm whether the unit is badged "Brezza" or the older "Vitara Brezza".
     displayName: "Maruti Suzuki Brezza",
     description: pendingDescription(),
     distinguishingDetails: pending("Not required for a single unit"),
-    specs: pendingSpecs(),
+    specs: {
+      bodyType: confirmed("compact-suv"),
+      seats: confirmed(5),
+      transmission: confirmed("manual"),
+      fuel: confirmed("petrol"),
+      modelYear: pending("Model year to be confirmed by the owner"),
+      variant: pending("Variant to be confirmed by the owner"),
+      colour: pending("Colour to be confirmed by the owner"),
+    },
     images: {
       primary: {
         src: "/images/cars/brezza.jpeg",
@@ -84,7 +93,15 @@ export const cars: readonly Car[] = [
     displayName: "Maruti Suzuki Baleno",
     description: pendingDescription(),
     distinguishingDetails: pending("Not required for a single unit"),
-    specs: pendingSpecs(),
+    specs: {
+      bodyType: confirmed("hatchback"),
+      seats: confirmed(5),
+      transmission: confirmed("manual"),
+      fuel: confirmed("petrol"),
+      modelYear: pending("Model year to be confirmed by the owner"),
+      variant: pending("Variant to be confirmed by the owner"),
+      colour: pending("Colour to be confirmed by the owner"),
+    },
     images: {
       primary: {
         src: "/images/cars/baleno.jpeg",
@@ -111,7 +128,15 @@ export const cars: readonly Car[] = [
     unitNumber: 1,
     description: pendingDescription(),
     distinguishingDetails: pending("Owner to confirm what distinguishes Ertiga Vehicle 1"),
-    specs: pendingSpecs(),
+    specs: {
+      bodyType: confirmed("mpv"),
+      seats: confirmed(7),
+      transmission: confirmed("manual"),
+      fuel: confirmed("petrol-cng"),
+      modelYear: pending("Model year to be confirmed by the owner"),
+      variant: pending("Variant to be confirmed by the owner"),
+      colour: pending("Colour to be confirmed by the owner"),
+    },
     images: {
       primary: {
         src: "/images/cars/ertiga.jpeg",
@@ -138,7 +163,15 @@ export const cars: readonly Car[] = [
     unitNumber: 2,
     description: pendingDescription(),
     distinguishingDetails: pending("Owner to confirm what distinguishes Ertiga Vehicle 2"),
-    specs: pendingSpecs(),
+    specs: {
+      bodyType: confirmed("mpv"),
+      seats: confirmed(7),
+      transmission: confirmed("manual"),
+      fuel: confirmed("petrol-cng"),
+      modelYear: pending("Model year to be confirmed by the owner"),
+      variant: pending("Variant to be confirmed by the owner"),
+      colour: pending("Colour to be confirmed by the owner"),
+    },
     images: {
       primary: {
         src: "/images/cars/ertiga.jpeg",
@@ -153,8 +186,6 @@ export const cars: readonly Car[] = [
       gallery: [],
     },
     faqTags: ["enquiry", "ertiga"],
-    // Planning V2: noindex + excluded from sitemap until approved distinguishing details
-    // and unique factual copy exist.
     indexable: false,
     indexingNote: "Awaiting approved distinguishing details and unique copy",
     sortOrder: 5,
