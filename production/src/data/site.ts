@@ -14,9 +14,9 @@ export const site: SiteConfig = {
   country: "IN",
   contacts: {
     primaryPhone: {
-      status: "pending",
+      status: "confirmed",
       value: { display: "+91 99212 08410", e164: "+919921208410" },
-      note: LEGACY,
+      source: "Owner-confirmed phone number",
     },
     alternatePhone: {
       status: "pending",

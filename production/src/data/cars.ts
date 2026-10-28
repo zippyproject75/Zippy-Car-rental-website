@@ -11,6 +11,10 @@ const pendingSpecs = (): CarSpecs => ({
   colour: pending("Colour to be confirmed by the owner"),
 });
 
+function confirmed<T>(value: T, source = "Fleet specification"): Fact<T> {
+  return { status: "confirmed", value, source };
+}
+
 function pending<T>(note: string): Fact<T> {
   return { status: "pending", value: null, note };
 }

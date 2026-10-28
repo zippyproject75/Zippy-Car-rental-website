@@ -4,9 +4,13 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview",
+    "dev": "pnpm --dir production dev",
+    "build": "pnpm --dir production build",
+    "start": "pnpm --dir production start",
+    "test": "pnpm --dir production test",
+    "lint": "pnpm --dir production lint",
+    "typecheck": "pnpm --dir production typecheck",
+    "preview": "pnpm --dir production start",
     "format": "oxfmt"
   },
   "dependencies": {
