@@ -36,13 +36,13 @@ export const site: SiteConfig = {
       id: "kondhwa",
       name: { en: "Kondhwa", hi: "कोंढवा", mr: "कोंढवा" },
       address: {
-        status: "pending",
+        status: "confirmed",
         value: {
           lines: ["Khadi Machine Chowk", "Kondhwa Saswad Road"],
           locality: "Pune",
           postalCode: "411048",
         },
-        note: LEGACY,
+        note: "Owner-confirmed branch location",
       },
       hours: { status: "pending", value: null, note: "Branch hours not confirmed" },
       phone: { status: "pending", value: null, note: "No branch-specific number confirmed" },
@@ -51,13 +51,13 @@ export const site: SiteConfig = {
       id: "gangadham",
       name: { en: "Gangadham", hi: "गंगाधाम", mr: "गंगाधाम" },
       address: {
-        status: "pending",
+        status: "confirmed",
         value: {
           lines: ["Gangadham Chowk", "Beside Solitaire Premier", "Ganga Dham Road, Phase 1"],
           locality: "Pune",
           postalCode: "411037",
         },
-        note: LEGACY,
+        note: "Owner-confirmed branch location",
       },
       hours: { status: "pending", value: null, note: "Branch hours not confirmed" },
       phone: { status: "pending", value: null, note: "No branch-specific number confirmed" },
@@ -66,13 +66,13 @@ export const site: SiteConfig = {
       id: "undri",
       name: { en: "Undri", hi: "उंड्री", mr: "उंड्री" },
       address: {
-        status: "pending",
+        status: "confirmed",
         value: {
           lines: ["Opposite Euro School", "Undri Marg", "Near My Toy Trolly"],
-          locality: "Undri",
+          locality: "Undri, Pune",
           postalCode: "411060",
         },
-        note: LEGACY,
+        note: "Owner-confirmed branch location",
       },
       hours: { status: "pending", value: null, note: "Branch hours not confirmed" },
       phone: { status: "pending", value: null, note: "No branch-specific number confirmed" },

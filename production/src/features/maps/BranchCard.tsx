@@ -1,6 +1,5 @@
-import { ArrowUpRight, Clock, MapPin, Phone } from "lucide-react";
+import { Clock, MapPin, Navigation, Phone } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
-import { buttonClass } from "@/components/ui/button";
 import { PendingBadge } from "@/components/ui/PendingBadge";
 import type { Locale } from "@/i18n/routing";
 import type { PublishedBranch } from "@/lib/catalog";
@@ -26,55 +25,59 @@ export function BranchCard({
 
   return (
     <article
-      className="flex flex-col gap-4 rounded-card border border-line bg-raised p-4 sm:p-5"
+      className="flex flex-col justify-between gap-5 rounded-2xl border border-[#232a3e] bg-[#10141f] p-6 shadow-lg transition-colors hover:border-[#3a4460]"
       data-testid="branch-card"
     >
-      <MapEmbed apiKey={env.mapsEmbedKey} address={a} branchName={name} />
-      <div className="flex flex-wrap items-center gap-2">
-        <Heading className="font-display text-xl font-bold text-ink">{name}</Heading>
-        {branch.pending ? <PendingBadge /> : null}
+      <div className="space-y-4">
+        <div className="flex items-center gap-3">
+          <div className="size-11 rounded-xl bg-[#26251b] border border-[#4d441e] flex items-center justify-center shrink-0">
+            <MapPin aria-hidden className="size-5 text-[#facc15]" />
+          </div>
+          <div className="flex items-center gap-2">
+            <Heading className="font-display text-xl font-bold text-white">{name}</Heading>
+            {branch.pending ? <PendingBadge /> : null}
+          </div>
+        </div>
+
+        <address className="text-sm leading-relaxed text-[#9ca3af] not-italic">
+          {a.lines.join(", ")}, {a.locality} – {a.postalCode}, Maharashtra
+        </address>
+
+        {hours ? (
+          <p className="flex items-center gap-2 text-xs text-[#9ca3af]">
+            <Clock aria-hidden className="size-3.5 text-[#facc15]" />
+            {hours.value[locale]}
+          </p>
+        ) : null}
+
+        {phone ? (
+          <a
+            href={`tel:${phone.value.e164}`}
+            className="flex items-center gap-2 text-xs text-[#9ca3af] hover:text-white"
+          >
+            <Phone aria-hidden className="size-3.5 text-[#facc15]" />
+            {phone.value.display}
+          </a>
+        ) : null}
       </div>
-      <address className="flex gap-2.5 text-[0.9375rem] leading-relaxed text-ink-2 not-italic">
-        <MapPin aria-hidden className="mt-1 size-4 shrink-0 text-accent-ink" />
-        <span>
-          {a.lines.map((line) => (
-            <span key={line} className="block">
-              {line}
-            </span>
-          ))}
-          <span className="block tabular-nums">
-            {a.locality} {a.postalCode}
-          </span>
-        </span>
-      </address>
-      {hours ? (
-        <p className="flex items-center gap-2.5 text-sm text-ink-2">
-          <Clock aria-hidden className="size-4 text-accent-ink" />
-          <span className="sr-only">{t("Contact.hours")}: </span>
-          {hours.value[locale]}
-        </p>
-      ) : null}
-      {phone ? (
-        <a
-          href={`tel:${phone.value.e164}`}
-          className="flex items-center gap-2.5 text-sm text-ink-2 hover:text-ink"
-        >
-          <Phone aria-hidden className="size-4 text-accent-ink" />
-          <span className="sr-only">{t("Contact.branchPhone")}: </span>
-          {phone.value.display}
-        </a>
-      ) : null}
-      <a
-        href={directionsUrl(a)}
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label={`${t("Maps.directionsFor", { branch: name })} ${t("Common.opensInNewTab")}`}
-        className={buttonClass("secondary", "md", "mt-auto w-full")}
-        data-testid="directions-link"
-      >
-        {t("Maps.directions")}
-        <ArrowUpRight aria-hidden className="size-4" />
-      </a>
+
+      <div className="space-y-4 pt-2">
+        <MapEmbed apiKey={env.mapsEmbedKey} address={a} branchName={name} />
+
+        <div>
+          <a
+            href={directionsUrl(a)}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`${t("Maps.directionsFor", { branch: name })} ${t("Common.opensInNewTab")}`}
+            className="inline-flex items-center gap-2 rounded-lg bg-[#facc15] hover:bg-[#eab308] text-[#0a0a0b] font-bold text-sm px-4 py-2.5 transition-colors shadow-sm"
+            data-testid="directions-link"
+          >
+            <Navigation aria-hidden className="size-4 fill-current shrink-0" />
+            {t("Maps.directions")}
+          </a>
+        </div>
+      </div>
     </article>
   );
 }

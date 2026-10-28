@@ -21,3 +21,9 @@ export function embedUrl(apiKey: string, address: PostalAddress, locale: Locale)
   });
   return `https://www.google.com/maps/embed/v1/place?${params.toString()}`;
 }
+
+/** Static Google Maps embed URL that works directly without requiring an API key. */
+export function staticEmbedUrl(address: PostalAddress): string {
+  return `https://maps.google.com/maps?q=${encodeURIComponent(addressQuery(address))}&t=&z=14&ie=UTF8&iwloc=&output=embed`;
+}
+
