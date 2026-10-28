@@ -7,8 +7,8 @@ import type { Locale } from "@/i18n/routing";
 export type ContentStatus = "confirmed" | "pending";
 
 export type Fact<T> =
-  | { status: "confirmed"; value: T; source: string }
-  | { status: "pending"; value: T | null; note: string };
+  | { status: "confirmed"; value: T; source: string; note?: string }
+  | { status: "pending"; value: T | null; note: string; source?: string };
 
 export type Localized<T> = Record<Locale, T>;
 
