@@ -1,0 +1,88 @@
+import { ArrowRight } from "lucide-react";
+import Image from "next/image";
+import { buttonClass } from "@/components/ui/button";
+
+export function CinematicCta() {
+  return (
+    <section
+      aria-labelledby="cinematic-cta-title"
+      className="relative overflow-hidden bg-[#090a0d] text-white"
+    >
+      {/* Background with real Brezza vehicle imagery (different from hero's Fronx) */}
+      <div className="absolute inset-0">
+        <Image
+          src="/images/cars/brezza.jpeg"
+          alt="Maruti Suzuki Brezza on Maharashtra roads"
+          aria-hidden
+          fill
+          className="object-cover object-center opacity-25"
+          sizes="100vw"
+        />
+        <div
+          aria-hidden
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(105deg, #090a0d 35%, rgba(9,10,13,0.85) 65%, rgba(9,10,13,0.6) 100%)",
+          }}
+        />
+      </div>
+
+      {/* Warm ambient lighting */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute right-0 top-0 h-full w-1/2 opacity-25"
+        style={{
+          background:
+            "radial-gradient(ellipse 80% 60% at 80% 50%, rgb(201 166 96 / 0.55), transparent 70%)",
+        }}
+      />
+
+      <div className="container-site relative z-10 py-20 sm:py-24 lg:py-32">
+        <div className="max-w-2xl">
+          {/* Eyebrow */}
+          <p className="eyebrow mb-4 text-accent">Ready when you are</p>
+
+          <h2
+            id="cinematic-cta-title"
+            className="font-display text-3xl font-extrabold tracking-[-0.03em] text-white sm:text-5xl lg:text-6xl"
+          >
+            Your next drive
+            <br />
+            <span className="text-accent">starts here.</span>
+          </h2>
+
+          <p className="mt-5 max-w-lg text-[0.9375rem] leading-relaxed text-white/70 sm:text-lg">
+            Prepare your self-drive rental enquiry in under a minute. Zippy confirms the price and
+            availability personally on WhatsApp — no middleman.
+          </p>
+
+          <div className="mt-8 sm:mt-10 flex flex-col gap-3 sm:flex-row sm:gap-4">
+            <a
+              href="#enquiry"
+              className={buttonClass(
+                "primary",
+                "lg",
+                "w-full justify-center sm:w-auto bg-accent text-[#090a0d] font-bold hover:bg-accent-hover gap-2.5 shadow-lg shadow-accent/25",
+              )}
+            >
+              <span>Plan My Rental</span>
+              <ArrowRight aria-hidden className="size-5" />
+            </a>
+            <a
+              href="#fleet"
+              className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-control border border-white/20 bg-white/5 px-6 text-base font-semibold text-white backdrop-blur-sm transition-colors hover:border-white/40 hover:bg-white/10 sm:w-auto"
+            >
+              Explore Fleet
+            </a>
+          </div>
+
+          {/* Truthful reminder */}
+          <p className="mt-6 text-xs text-white/40">
+            Enquiries are requests only — no vehicle is reserved until confirmed directly by Zippy Car Rental.
+          </p>
+        </div>
+      </div>
+    </section>
+  );
+}

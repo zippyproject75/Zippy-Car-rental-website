@@ -58,12 +58,12 @@ describe("indexing", () => {
     expect(isPathContentIndexable("/cars/baleno", "en")).toBe(true);
     expect(isPathContentIndexable("/cars/ertiga-1", "en")).toBe(true);
     expect(isPathContentIndexable("/faq", "en")).toBe(true);
+    expect(isPathContentIndexable("/contact", "en")).toBe(true);
 
     // Excluded pages
     expect(isPathContentIndexable("/cars/ertiga-2", "en")).toBe(false);
     expect(isPathContentIndexable("/book", "en")).toBe(false);
     expect(isPathContentIndexable("/about", "en")).toBe(false);
-    expect(isPathContentIndexable("/contact", "en")).toBe(false);
     expect(isPathContentIndexable("/terms-and-conditions", "en")).toBe(false);
     expect(isPathContentIndexable("/privacy-policy", "en")).toBe(false);
   });
@@ -74,8 +74,8 @@ describe("indexing", () => {
     });
     const urls = entries.map((e) => e.url);
 
-    // Exactly 7 pages * 3 locales = 21 URLs
-    expect(urls).toHaveLength(21);
+    // Exactly 8 pages * 3 locales = 24 URLs
+    expect(urls).toHaveLength(24);
     expect(urls).toContain("https://www.zippycarrental.in");
     expect(urls).toContain("https://www.zippycarrental.in/hi");
     expect(urls).toContain("https://www.zippycarrental.in/mr");
