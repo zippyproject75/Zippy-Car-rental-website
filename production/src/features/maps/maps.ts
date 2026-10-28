@@ -7,7 +7,25 @@ export function addressQuery(address: PostalAddress, region = "Maharashtra", cou
   return `${address.lines.join(", ")}, ${address.locality} ${address.postalCode}, ${region}, ${country}`;
 }
 
-export function directionsUrl(address: PostalAddress): string {
+/** Branch redirect links for Google Maps */
+export const BRANCH_MAP_REDIRECTS: Record<string, string> = {
+  kondhwa: "https://maps.app.goo.gl/NgJLjwf5Gz8Kayow9?g_st=awb",
+  gangadham: "https://maps.app.goo.gl/HhaVdxAMNHdPfZti7?g_st=awb",
+  undri: "https://maps.app.goo.gl/GgxcQBUnbwYiDJw87?g_st=awb",
+  "411048": "https://maps.app.goo.gl/NgJLjwf5Gz8Kayow9?g_st=awb",
+  "411037": "https://maps.app.goo.gl/HhaVdxAMNHdPfZti7?g_st=awb",
+  "411060": "https://maps.app.goo.gl/GgxcQBUnbwYiDJw87?g_st=awb",
+};
+
+export function directionsUrl(address: PostalAddress, branchId?: string): string {
+  const branchRedirect = branchId ? BRANCH_MAP_REDIRECTS[branchId] : undefined;
+  if (branchRedirect) {
+    return branchRedirect;
+  }
+  const postalRedirect = address.postalCode ? BRANCH_MAP_REDIRECTS[address.postalCode] : undefined;
+  if (postalRedirect) {
+    return postalRedirect;
+  }
   return `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(addressQuery(address))}`;
 }
 
@@ -26,4 +44,3 @@ export function embedUrl(apiKey: string, address: PostalAddress, locale: Locale)
 export function staticEmbedUrl(address: PostalAddress): string {
   return `https://maps.google.com/maps?q=${encodeURIComponent(addressQuery(address))}&t=&z=14&ie=UTF8&iwloc=&output=embed`;
 }
-

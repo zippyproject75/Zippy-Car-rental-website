@@ -66,7 +66,7 @@ export function BranchCard({
 
         <div>
           <a
-            href={directionsUrl(a)}
+            href={directionsUrl(a, branch.id)}
             target="_blank"
             rel="noopener noreferrer"
             aria-label={`${t("Maps.directionsFor", { branch: name })} ${t("Common.opensInNewTab")}`}

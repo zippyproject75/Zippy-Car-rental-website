@@ -14,18 +14,21 @@ const BRANCHES = [
     name: 'Kondhwa',
     address: 'Khadi Machine Chowk, Kondhwa Saswad Road, Pune – 411048, Maharashtra',
     mapQuery: 'Khadi Machine Chowk, Kondhwa Saswad Road, Pune 411048, Maharashtra',
+    mapUrl: 'https://maps.app.goo.gl/NgJLjwf5Gz8Kayow9?g_st=awb',
   },
   {
     id: 'gangadham',
     name: 'Gangadham',
     address: 'Gangadham Chowk, Beside Solitaire Premier, Ganga Dham Road, Phase 1, Pune – 411037, Maharashtra',
     mapQuery: 'Gangadham Chowk, Beside Solitaire Premier, Ganga Dham Road, Phase 1, Pune 411037, Maharashtra',
+    mapUrl: 'https://maps.app.goo.gl/HhaVdxAMNHdPfZti7?g_st=awb',
   },
   {
     id: 'undri',
     name: 'Undri',
     address: 'Opposite Euro School, Undri Marg, Near My Toy Trolly, Undri, Pune – 411060, Maharashtra',
     mapQuery: 'Opposite Euro School, Undri Marg, Undri, Pune 411060, Maharashtra',
+    mapUrl: 'https://maps.app.goo.gl/GgxcQBUnbwYiDJw87?g_st=awb',
   },
 ]
 
@@ -175,7 +178,10 @@ export default function App() {
               View Branches & Map
             </a>
           </div>
-        </div>      {/* Fleet Catalogue */}
+        </div>
+      </section>
+
+      {/* Fleet Catalogue */}
       <section id="fleet" className="py-16 px-4 max-w-6xl mx-auto">
         <div className="mb-10 text-center">
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#d4b373]">Authorized Fleet</p>
@@ -294,7 +300,7 @@ export default function App() {
 
                 <div className="flex flex-wrap items-center gap-3 pt-2">
                   <a
-                    href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(b.mapQuery)}`}
+                    href={b.mapUrl || `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(b.mapQuery)}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 rounded-lg bg-[#facc15] hover:bg-[#eab308] text-[#0a0a0b] font-bold text-sm px-4 py-2.5 transition-colors shadow-sm"
