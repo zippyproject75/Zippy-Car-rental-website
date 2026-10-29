@@ -23,6 +23,8 @@ const benefits = [
   },
 ];
 
+const staggerClasses = ["stagger-1", "stagger-2", "stagger-3", "stagger-4"] as const;
+
 export function TrustStrip() {
   return (
     <section
@@ -31,9 +33,12 @@ export function TrustStrip() {
     >
       <div className="container-site py-12 sm:py-16">
         <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {benefits.map(({ icon: Icon, title, body }) => (
-            <li key={title} className="flex gap-4">
-              <div className="mt-0.5 flex size-10 shrink-0 items-center justify-center rounded-xl border border-line bg-muted">
+          {benefits.map(({ icon: Icon, title, body }, i) => (
+            <li
+              key={title}
+              className={`flex gap-4 scroll-reveal ${staggerClasses[i]}`}
+            >
+              <div className="mt-0.5 flex size-10 shrink-0 items-center justify-center rounded-xl border border-line bg-muted transition-[border-color,background-color] duration-300 group-hover:border-accent/30">
                 <Icon aria-hidden className="size-5 text-accent-ink" />
               </div>
               <div>
@@ -49,4 +54,3 @@ export function TrustStrip() {
     </section>
   );
 }
-
