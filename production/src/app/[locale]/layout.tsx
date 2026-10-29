@@ -8,6 +8,7 @@ import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { ThemeProvider } from "@/components/layout/ThemeProvider";
 import { JsonLd } from "@/components/ui/JsonLd";
+import { FloatingContactDock } from "@/components/ui/FloatingContactDock";
 import { localeTags } from "@/i18n/routing";
 import { cn } from "@/lib/cn";
 import { env, metadataOrigin } from "@/lib/env";
@@ -104,6 +105,8 @@ export default async function LocaleLayout({
               {children}
             </main>
             <SiteFooter />
+            {/* Fixed vertical contact dock on the left side of the viewport (Phone & WhatsApp) */}
+            <FloatingContactDock />
           </NextIntlClientProvider>
         </ThemeProvider>
         <JsonLd data={organizationJsonLd()} />

@@ -6,12 +6,12 @@ import { HeroNew } from "@/components/sections/HeroNew";
 import { TrustStrip } from "@/components/sections/TrustStrip";
 import { HowItWorks } from "@/components/sections/HowItWorks";
 import { Reviews } from "@/components/sections/Reviews";
+import { RentalGuidelines } from "@/components/sections/RentalGuidelines";
 import { CinematicCta } from "@/components/sections/CinematicCta";
 import { Accordion } from "@/components/ui/Accordion";
 import { ButtonLink } from "@/components/ui/ButtonLink";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { JsonLd } from "@/components/ui/JsonLd";
-import { FloatingWhatsApp } from "@/components/ui/FloatingWhatsApp";
 import { getApprovedFaqs } from "@/data/faqs";
 import { BookingForm } from "@/features/booking/BookingForm";
 import { getBookingFormProps } from "@/features/booking/props";
@@ -215,7 +215,10 @@ export default async function HomePage({ params }: LocaleParams) {
         </section>
       ) : null}
 
-      {/* ── 9. FREQUENTLY ASKED QUESTIONS ── */}
+      {/* ── 9. RENTAL GUIDELINES & POLICIES ── */}
+      <RentalGuidelines />
+
+      {/* ── 10. FREQUENTLY ASKED QUESTIONS ── */}
       {faqs.length ? (
         <section
           id="faq"
@@ -242,11 +245,8 @@ export default async function HomePage({ params }: LocaleParams) {
         </section>
       ) : null}
 
-      {/* ── 10. FINAL CINEMATIC CTA ── */}
+      {/* ── 11. FINAL CINEMATIC CTA ── */}
       <CinematicCta />
-
-      {/* Floating WhatsApp contact trigger */}
-      <FloatingWhatsApp />
 
       {/* Structured data */}
       <JsonLd data={autoRentalJsonLd()} />
