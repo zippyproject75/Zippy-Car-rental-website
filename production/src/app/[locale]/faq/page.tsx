@@ -3,9 +3,11 @@ import { getTranslations } from "next-intl/server";
 import { PageIntro } from "@/components/sections/PageIntro";
 import { Accordion } from "@/components/ui/Accordion";
 import { ButtonLink } from "@/components/ui/ButtonLink";
+import { JsonLd } from "@/components/ui/JsonLd";
 import { getApprovedFaqs } from "@/data/faqs";
 import { resolveLocale, type LocaleParams } from "@/lib/page";
 import { buildMetadata } from "@/lib/seo";
+import { faqPageJsonLd } from "@/lib/jsonld";
 
 export async function generateMetadata({ params }: LocaleParams): Promise<Metadata> {
   const locale = await resolveLocale(params);
@@ -45,6 +47,9 @@ export default async function FaqPage({ params }: LocaleParams) {
           </ButtonLink>
         </aside>
       </div>
+
+      {/* FAQ structured data */}
+      <JsonLd data={faqPageJsonLd(items)} />
     </>
   );
 }
