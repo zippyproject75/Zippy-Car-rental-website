@@ -9,7 +9,8 @@
 # ---------------------------------------------------------------------------
 # Video
 # ---------------------------------------------------------------------------
-*.mp4                filter=lfs diff=lfs merge=lfs -text
+# *.mp4 exempted from Git LFS so Vercel can serve directly
+production/public/videos/*.mp4 -filter -diff -merge text=auto
 *.mov                filter=lfs diff=lfs merge=lfs -text
 *.avi                filter=lfs diff=lfs merge=lfs -text
 *.mkv                filter=lfs diff=lfs merge=lfs -text
