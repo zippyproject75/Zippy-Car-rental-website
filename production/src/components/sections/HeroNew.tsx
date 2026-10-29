@@ -134,6 +134,7 @@ export function HeroNew() {
                   className="object-cover object-center transition-transform duration-700 hover:scale-105"
                   sizes="(max-width: 1024px) 100vw, 45vw"
                   priority
+                  loading="eager"
                 />
                 {/* Contrast gradient overlay */}
                 <div
