@@ -5,252 +5,143 @@
 <h1 align="center">Zippy Car Rental — Pune</h1>
 
 <p align="center">
-  <strong>Self-drive car rental platform for Pune, Maharashtra</strong>
+  <strong>Self-drive car rental platform for Pune, Maharashtra, India</strong>
 </p>
 
 <p align="center">
-  <a href="https://zippycarrental.in">🌐 Live Site</a> ·
+  <a href="https://www.zippycarrental.in">🌐 Live Site</a> ·
   <a href="#-getting-started">🚀 Getting Started</a> ·
-  <a href="#-tech-stack">🛠 Tech Stack</a> ·
-  <a href="#-project-structure">📂 Project Structure</a>
+  <a href="#-tech-stack">🛠 Tech Stack</a>
 </p>
 
 ---
 
-## 📖 About
+## 📖 Overview
 
-**Zippy Car Rental** is a modern, responsive web application that lets users browse and enquire about self-drive rental cars in Pune. The platform showcases a curated fleet of **five Maruti Suzuki vehicles** — Fronx, Brezza, Baleno, and two Ertigas — with an interactive enquiry flow and WhatsApp-based booking confirmation.
+Zippy Car Rental is a multilingual web application for browsing and enquiring about self-drive car rentals in Pune. It showcases a fleet of five Maruti Suzuki vehicles with WhatsApp-based booking enquiries.
 
-### ✨ Key Features
+**Languages:** English (default), Hindi (`/hi`), Marathi (`/mr`)
 
-- 🚗 **Fleet Catalogue** — Browse all available vehicles with high-quality images, specs, and categories
-- 📅 **Interactive Enquiry Form** — Select a vehicle, pick dates, and send a booking enquiry
-- 💬 **WhatsApp Integration** — Direct confirmation via WhatsApp; no automatic charges
-- 📱 **Fully Responsive** — Optimised for mobile, tablet, and desktop viewports
-- 🌙 **Premium Dark Theme** — Sleek dark UI with gold (#D4B373) accent tones
-- ⚡ **Blazing Fast** — Vite-powered dev experience with React 19 and Tailwind CSS v4
-- 🔍 **SEO Ready** — Meta tags, Open Graph, favicon, and semantic HTML out of the box
+**Features:** Responsive design, fleet catalogue, vehicle detail pages, interactive enquiry form, WhatsApp integration, FAQ, legal pages, SEO metadata, XML sitemap, robots.txt, security headers.
 
 ---
 
 ## 🛠 Tech Stack
 
-### Preview / Landing App (Root)
+- **Framework:** Next.js 16.4.2 (App Router)
+- **UI:** React 19.3.1, Tailwind CSS 4.3.3
+- **i18n:** next-intl 4.14.9
+- **Validation:** Zod 4.6.7
+- **Package Manager:** pnpm 10.34.3
+- **Node.js:** ≥22
 
-| Technology | Version | Purpose |
-|---|---|---|
-| [React](https://react.dev) | 19 | UI library |
-| [Vite](https://vite.dev) | 8 | Build tool & dev server |
-| [Tailwind CSS](https://tailwindcss.com) | 4 | Utility-first styling |
-| [TypeScript](https://www.typescriptlang.org) | 5.7 | Type safety |
+---
 
-### Production App (`/production`)
+## 🚀 Getting Started
 
-| Technology | Version | Purpose |
-|---|---|---|
-| [Next.js](https://nextjs.org) | 16 | Full-stack React framework (App Router) |
-| [React](https://react.dev) | 19 | UI library |
-| [Tailwind CSS](https://tailwindcss.com) | 4 | Utility-first styling |
-| [TypeScript](https://www.typescriptlang.org) | 5.9 | Type safety |
-| [Zod](https://zod.dev) | 4 | Runtime schema validation |
-| [Lucide React](https://lucide.dev) | 1.60 | Icon library |
-| [Motion](https://motion.dev) | 14 | Animations |
-| [next-intl](https://next-intl.dev) | 4 | Internationalisation |
-| [next-themes](https://github.com/pacocoursey/next-themes) | 0.4 | Theme management |
-| [date-fns](https://date-fns.org) | 4 | Date utilities |
-| [react-day-picker](https://daypicker.dev) | 10 | Date picker component |
+```bash
+git clone https://github.com/zippyproject75/Zippy-Car-rental-website.git
+cd Zippy-Car-rental-website
+npm install && cd production && pnpm install
+pnpm dev              # http://localhost:3000
+pnpm build && pnpm start
+```
+
+---
+
+## 🔧 Environment Variables
+
+Copy `.env.example` to `.env.local`:
+
+| Variable | Required | Description |
+|----------|----------|-------------|
+| `NEXT_PUBLIC_SITE_ENV` | Yes | `development`, `preview`, or `production` |
+| `NEXT_PUBLIC_SITE_URL` | Yes (production) | Canonical origin, e.g., `https://www.zippycarrental.in` |
+| `NEXT_PUBLIC_GOOGLE_MAPS_EMBED_API_KEY` | No | Google Maps Embed API key |
+| `CSP_MODE` | No | `report-only` (default) or `enforce` |
+
+**Locales:** English (unprefixed), Hindi (`/hi`), Marathi (`/mr`) | **Translation Files:** `production/src/messages/en.json`, `hi.json`, `mr.json`
+
+---
+
+## 🛣️ Key Routes
+
+| Route | Description | Indexable |
+|-------|-------------|-----------|
+| `/` | Homepage | Yes |
+| `/cars` | Fleet listing | Yes |
+| `/cars/[slug]` | Vehicle detail | Yes (except ertiga-2) |
+| `/book` | Enquiry form | No |
+| `/contact` | Contact page | Yes |
+| `/faq` | FAQ page | Yes |
+| `/privacy-policy` | Privacy Policy | Yes (approved) |
+| `/terms-and-conditions` | Terms & Conditions | Yes (approved) |
+
+**Sitemap:** `/sitemap.xml` (30 URLs, 10 pages × 3 locales) | **Robots.txt:** `/robots.txt`
+
+---
+
+## 🧪 Testing & Quality
+
+```bash
+cd production
+pnpm test            # All unit tests (50 tests)
+pnpm typecheck       # TypeScript
+pnpm lint            # ESLint
+pnpm check           # All checks (format → lint → typecheck → test → build)
+```
+
+---
+
+## 🚀 Deployment
+
+### Vercel Configuration
+
+Set environment variables:
+- `NEXT_PUBLIC_SITE_ENV=production`
+- `NEXT_PUBLIC_SITE_URL=https://www.zippycarrental.in`
+- `NEXT_PUBLIC_GOOGLE_MAPS_EMBED_API_KEY=your_key`
+- `CSP_MODE=report-only`
+
+### Post-Deployment Verification
+
+1. Verify HTTPS at `https://www.zippycarrental.in`
+2. Check sitemap at `https://www.zippycarrental.in/sitemap.xml`
+3. Check robots.txt at `https://www.zippycarrental.in/robots.txt`
+4. Test locale routes: `/`, `/hi`, `/mr`
+5. Verify security headers in browser dev tools
+6. Submit sitemap to Google Search Console
 
 ---
 
 ## 📂 Project Structure
 
 ```
-Zippy-Car-rental-website/
-├── public/                        # Static assets (served at root)
-│   ├── zippy_main_logo.png        # Favicon & brand logo
-│   └── images/
-│       └── cars/                  # Fleet vehicle images
-│           ├── fronx.jpeg
-│           ├── brezza.jpeg
-│           ├── baleno.jpeg
-│           └── ertiga.jpeg
-├── src/                           # Vite preview app source
-│   ├── App.tsx                    # Main application component
-│   ├── main.tsx                   # React entry point
-│   └── index.css                  # Global styles + Tailwind v4 import
-├── production/                    # Next.js production application
-│   ├── src/
-│   │   ├── app/                   # Next.js App Router pages
-│   │   ├── components/            # Shared React components
-│   │   ├── data/                  # Static data & constants
-│   │   ├── features/              # Feature modules
-│   │   ├── i18n/                  # Internationalisation config
-│   │   ├── lib/                   # Utility libraries
-│   │   ├── messages/              # i18n translation files
-│   │   ├── services/              # API & service layers
-│   │   └── types/                 # TypeScript type definitions
-│   ├── public/                    # Next.js static assets
-│   ├── tests/                     # E2E & unit tests
-│   ├── scripts/                   # Build & content scripts
-│   ├── next.config.ts             # Next.js configuration
-│   ├── package.json               # Production dependencies
-│   └── pnpm-lock.yaml             # Lockfile (pnpm)
-├── index.html                     # Vite HTML shell
-├── vite.config.ts                 # Vite configuration
-├── package.json                   # Root dependencies
-├── tsconfig.json                  # TypeScript configuration
-├── LICENSE                        # MIT License
-└── README.md                      # This file
+production/src/
+├── app/[locale]/          # Localized routes
+├── components/           # React components
+├── data/                 # Fleet, FAQs, legal, site config
+├── i18n/                 # Internationalisation
+├── lib/                  # Utilities (routes, SEO, security)
+├── messages/             # Translations (en, hi, mr)
+└── types/                # TypeScript types
 ```
 
 ---
 
-## 🚀 Getting Started
+## 🔒 Security
 
-### Prerequisites
+**Score:** 8.5/10 (Strong)
 
-- **Node.js** ≥ 22
-- **npm** (root app) or **pnpm** ≥ 10 (production app)
-- **Git**
+**Features:** CSP, X-Frame-Options, X-Content-Type-Options, Referrer-Policy, Permissions-Policy, no secrets in Git, dependency audit (no vulnerabilities).
 
-### 1. Clone the Repository
-
-```bash
-git clone https://github.com/zippyproject75/Zippy-Car-rental-website.git
-cd Zippy-Car-rental-website
-```
-
-### 2. Install Dependencies
-
-**Root (Vite preview app):**
-
-```bash
-npm install
-```
-
-**Production (Next.js app):**
-
-```bash
-cd production
-pnpm install
-```
-
-### 3. Start Development Servers
-
-**Vite preview app** (port 8443):
-
-```bash
-npm run dev
-# → http://localhost:8443
-```
-
-**Next.js production app** (port 3000):
-
-```bash
-cd production
-pnpm dev
-# → http://localhost:3000
-```
-
-### 4. Build for Production
-
-**Vite preview:**
-
-```bash
-npm run build        # Output: /dist
-npm run preview      # Preview production build
-```
-
-**Next.js production:**
-
-```bash
-cd production
-pnpm build           # Output: /production/.next
-pnpm start           # Start production server
-```
-
----
-
-## 🧪 Testing & Quality
-
-The production app includes a full testing and quality pipeline:
-
-```bash
-cd production
-
-# Run unit tests
-pnpm test
-
-# Run end-to-end tests
-pnpm test:e2e
-
-# Lint
-pnpm lint
-
-# Type-check
-pnpm typecheck
-
-# Format check
-pnpm format:check
-
-# Run all checks (format → lint → typecheck → test → build)
-pnpm check
-
-# Generate content report
-pnpm content:report
-
-# Pre-launch verification
-pnpm launch:check
-```
-
----
-
-## 🌐 Deployment
-
-The production site is deployed at **[zippycarrental.in](https://zippycarrental.in)**.
-
-### Environment Variables
-
-Copy the example env file and fill in values:
-
-```bash
-cd production
-cp .env.example .env.local
-```
-
-See [`.env.example`](production/.env.example) for all available environment variables.
-
----
-
-## 🚗 Fleet
-
-| Vehicle | Category | Seats | Transmission |
-|---|---|---|---|
-| Maruti Suzuki Fronx | Compact SUV | 5 | Manual / Automatic |
-| Maruti Suzuki Brezza | Compact SUV | 5 | Manual / Automatic |
-| Maruti Suzuki Baleno | Hatchback | 5 | Manual / Automatic |
-| Maruti Suzuki Ertiga (Vehicle 1) | MPV | 7 | Manual / Automatic |
-| Maruti Suzuki Ertiga (Vehicle 2) | MPV | 7 | Manual / Automatic |
-
-> **Note:** Rental rates are available on request. All bookings are confirmed manually via WhatsApp — no automatic charges are applied.
-
----
-
-## 🤝 Contributing
-
-1. **Fork** the repository
-2. **Create** a feature branch: `git checkout -b feature/my-feature`
-3. **Commit** your changes: `git commit -m "feat: add my feature"`
-4. **Push** to the branch: `git push origin feature/my-feature`
-5. **Open** a Pull Request
-
-Please follow the existing code style and run `pnpm check` in the production directory before submitting.
+**Limitations:** CSP `unsafe-inline` (required for SSG), no HSTS (requires CDN config).
 
 ---
 
 ## 📄 License
 
-This project is licensed under the **MIT License** — see the [LICENSE](LICENSE) file for details.
+MIT License — see [LICENSE](LICENSE) file.
 
 Copyright © 2026 [zippyproject75](https://github.com/zippyproject75)
 
