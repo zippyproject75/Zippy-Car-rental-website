@@ -64,8 +64,9 @@ describe("indexing", () => {
     expect(isPathContentIndexable("/cars/ertiga-2", "en")).toBe(false);
     expect(isPathContentIndexable("/book", "en")).toBe(false);
     expect(isPathContentIndexable("/about", "en")).toBe(false);
-    expect(isPathContentIndexable("/terms-and-conditions", "en")).toBe(false);
-    expect(isPathContentIndexable("/privacy-policy", "en")).toBe(false);
+    // Terms & Conditions and Privacy Policy are now approved and indexable
+    expect(isPathContentIndexable("/terms-and-conditions", "en")).toBe(true);
+    expect(isPathContentIndexable("/privacy-policy", "en")).toBe(true);
   });
   it("populates sitemap entries with canonical URLs and locale alternates", () => {
     const entries = sitemapEntries({
@@ -74,8 +75,8 @@ describe("indexing", () => {
     });
     const urls = entries.map((e) => e.url);
 
-    // Exactly 8 pages * 3 locales = 24 URLs
-    expect(urls).toHaveLength(24);
+    // Exactly 10 pages * 3 locales = 30 URLs (added Terms & Conditions and Privacy Policy)
+    expect(urls).toHaveLength(30);
     expect(urls).toContain("https://www.zippycarrental.in");
     expect(urls).toContain("https://www.zippycarrental.in/hi");
     expect(urls).toContain("https://www.zippycarrental.in/mr");
