@@ -80,6 +80,22 @@ export function breadcrumbJsonLd(items: { name: string; url: string }[]): JsonLd
   };
 }
 
+export function faqPageJsonLd(faqs: { question: string; answer: string }[]): JsonLd | null {
+  if (!env.isProduction || !env.siteUrl || faqs.length === 0) return null;
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.answer,
+      },
+    })),
+  };
+}
+
 export function carProductJsonLd(car: {
   displayName: string;
   make: string;
