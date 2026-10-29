@@ -6,7 +6,7 @@ export function CinematicCta() {
   return (
     <section
       aria-labelledby="cinematic-cta-title"
-      className="relative overflow-hidden bg-[#090a0d] text-white"
+      className="relative overflow-hidden bg-muted text-ink dark:bg-[#090a0d] dark:text-white"
     >
       {/* Background with real Brezza vehicle imagery (different from hero's Fronx) */}
       <div className="absolute inset-0">
@@ -15,15 +15,23 @@ export function CinematicCta() {
           alt="Maruti Suzuki Brezza on Maharashtra roads"
           aria-hidden
           fill
-          className="object-cover object-center opacity-25"
+          className="object-cover object-center opacity-50"
           sizes="100vw"
         />
         <div
           aria-hidden
-          className="absolute inset-0"
+          className="absolute inset-0 dark:hidden"
           style={{
             background:
-              "linear-gradient(105deg, #090a0d 35%, rgba(9,10,13,0.85) 65%, rgba(9,10,13,0.6) 100%)",
+              "linear-gradient(105deg, color-mix(in oklab, var(--muted) 40%, transparent) 35%, color-mix(in oklab, var(--canvas) 50%, transparent) 65%, color-mix(in oklab, var(--raised) 30%, transparent) 100%)",
+          }}
+        />
+        <div
+          aria-hidden
+          className="absolute inset-0 hidden dark:block"
+          style={{
+            background:
+              "linear-gradient(105deg, #090a0d 35%, rgba(9,10,13,0.3) 65%, rgba(9,10,13,0.15) 100%)",
           }}
         />
       </div>
@@ -45,14 +53,14 @@ export function CinematicCta() {
 
           <h2
             id="cinematic-cta-title"
-            className="font-display text-3xl font-extrabold tracking-[-0.03em] text-white sm:text-5xl lg:text-6xl"
+            className="font-display text-3xl font-extrabold tracking-[-0.03em] text-ink dark:text-white sm:text-5xl lg:text-6xl"
           >
             Your next drive
             <br />
             <span className="text-accent">starts here.</span>
           </h2>
 
-          <p className="mt-5 max-w-lg text-[0.9375rem] leading-relaxed text-white/70 sm:text-lg">
+          <p className="mt-5 max-w-lg text-[0.9375rem] leading-relaxed text-ink-2 dark:text-white/70 sm:text-lg">
             Prepare your self-drive rental enquiry in under a minute. Zippy confirms the price and
             availability personally on WhatsApp — no middleman.
           </p>
@@ -71,14 +79,14 @@ export function CinematicCta() {
             </a>
             <a
               href="#fleet"
-              className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-control border border-white/20 bg-white/5 px-6 text-base font-semibold text-white backdrop-blur-sm transition-colors hover:border-white/40 hover:bg-white/10 sm:w-auto"
+              className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-control border border-line bg-white/5 px-6 text-base font-semibold text-ink dark:border-white/20 dark:bg-white/5 dark:text-white backdrop-blur-sm transition-colors hover:border-line-strong dark:hover:border-white/40 hover:bg-white/10 sm:w-auto"
             >
               Explore Fleet
             </a>
           </div>
 
           {/* Truthful reminder */}
-          <p className="mt-6 text-xs text-white/40">
+          <p className="mt-6 text-xs text-ink-3 dark:text-white/40">
             Enquiries are requests only — no vehicle is reserved until confirmed directly by Zippy Car Rental.
           </p>
         </div>

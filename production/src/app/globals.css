@@ -263,3 +263,41 @@ html.dark,
     radial-gradient(120% 80% at 75% 10%, rgb(212 179 115 / 0.16), transparent 60%),
     linear-gradient(180deg, #121214 0%, #0a0a0b 100%);
 }
+
+/* ── Floating Contact Dock Animations (Phone & WhatsApp) ── */
+@keyframes dockPhoneFloat {
+  0%, 100% {
+    transform: translateY(0);
+    box-shadow: 0 0 0 0 rgba(212, 179, 115, 0.4), 0 12px 28px -6px rgba(0, 0, 0, 0.45);
+  }
+  50% {
+    transform: translateY(-4px);
+    box-shadow: 0 0 0 6px rgba(212, 179, 115, 0), 0 16px 32px -6px rgba(0, 0, 0, 0.55);
+  }
+}
+
+@keyframes dockWhatsAppFloat {
+  0%, 100% {
+    transform: translateY(0);
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.4), 0 12px 28px -6px rgba(0, 0, 0, 0.45);
+  }
+  50% {
+    transform: translateY(-4px);
+    box-shadow: 0 0 0 6px rgba(37, 211, 102, 0), 0 16px 32px -6px rgba(0, 0, 0, 0.55);
+  }
+}
+
+.animate-dock-phone {
+  animation: dockPhoneFloat 3.8s ease-in-out infinite;
+}
+
+.animate-dock-whatsapp {
+  animation: dockWhatsAppFloat 4.2s ease-in-out infinite 1.2s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-dock-phone,
+  .animate-dock-whatsapp {
+    animation: none !important;
+  }
+}
