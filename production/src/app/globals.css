@@ -281,7 +281,6 @@ html.dark,
     linear-gradient(180deg, #121214 0%, #0a0a0b 100%);
 }
 
-<<<<<<< HEAD
 /* ═══════════════════════════════════════════════════════════
    ZIPPY PREMIUM ANIMATION SYSTEM
    ═══════════════════════════════════════════════════════════ */
@@ -635,7 +634,8 @@ html.dark,
 
 .animate-streetlight-pass {
   animation: streetlight-pass 3.2s cubic-bezier(0.25, 0.1, 0.25, 1) infinite;
-=======
+}
+
 /* ── Floating Contact Dock Animations (Phone & WhatsApp) ── */
 @keyframes dockPhoneFloat {
   0%, 100% {
@@ -672,5 +672,4 @@ html.dark,
   .animate-dock-whatsapp {
     animation: none !important;
   }
->>>>>>> 97916827d110607e27dc81ab389e78067458a70c
 }
