@@ -121,8 +121,8 @@
     "ctaSecondary": "Contact Zippy"
   },
   "Fleet": {
-    "title": "Our self-drive fleet",
-    "intro": "Five Maruti Suzuki cars, each a separate unit, available to enquire for self-drive rental in Pune. Specifications and rates appear as soon as Zippy Car Rental confirms them.",
+    "title": "Self-Drive Cars in Pune",
+    "intro": "Explore our fleet of five Maruti Suzuki cars available for self-drive rental in Pune. Choose from hatchbacks, compact SUVs, and MPVs. Specifications and rates appear as soon as Zippy Car Rental confirms them.",
     "viewDetails": "View details",
     "viewDetailsFor": "View details for {car}",
     "enquire": "Enquire",
@@ -335,7 +335,7 @@
     "legal": "Policies",
     "contact": "Contact",
     "honesty": "Website enquiries are requests only. Zippy Car Rental confirms the final price and availability.",
-    "rights": "© {year} Zippy Car Rental",
+    "rights": "© {year} Zippy Car Rental. All rights reserved.",
     "legalPending": "Policies will be listed here once approved.",
     "contactsPending": "Contact details will appear once confirmed.",
     "enquire": "Rental enquiry"
