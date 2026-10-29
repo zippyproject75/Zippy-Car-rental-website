@@ -12,13 +12,21 @@ export function HeroNew() {
   return (
     <section
       aria-labelledby="hero-title"
-      className="relative w-full overflow-hidden bg-[#07080a] text-white"
+      className="relative w-full overflow-hidden bg-muted text-ink dark:bg-[#07080a] dark:text-white"
     >
       {/* ── CINEMATIC ATMOSPHERE ── */}
       {/* Primary golden hour / road glow */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0"
+        className="pointer-events-none absolute inset-0 dark:hidden"
+        style={{
+          background:
+            "radial-gradient(ellipse 110% 60% at 75% 38%, color-mix(in oklab, var(--accent) 20%, transparent) 60%, transparent), radial-gradient(circle 400px at 15% 20%, color-mix(in oklab, var(--accent) 8%, transparent) 70%, transparent), linear-gradient(170deg, var(--muted) 0%, var(--canvas) 45%, var(--raised) 100%)",
+        }}
+      />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 hidden dark:block"
         style={{
           background:
             "radial-gradient(ellipse 110% 60% at 75% 38%, rgb(212 179 115 / 0.2), transparent 60%), radial-gradient(circle 400px at 15% 20%, rgb(212 179 115 / 0.08), transparent 70%), linear-gradient(170deg, #07080a 0%, #0e1015 45%, #141720 100%)",
@@ -64,7 +72,7 @@ export function HeroNew() {
             {/* Main Headline */}
             <h1
               id="hero-title"
-              className="font-display text-[2.6rem] font-extrabold leading-[1.03] tracking-[-0.035em] text-white sm:text-6xl lg:text-[4rem] xl:text-[4.5rem]"
+              className="font-display text-[2.6rem] font-extrabold leading-[1.03] tracking-[-0.035em] text-ink dark:text-white sm:text-6xl lg:text-[4rem] xl:text-[4.5rem]"
             >
               Drive Pune
               <br />
@@ -74,7 +82,7 @@ export function HeroNew() {
             </h1>
 
             {/* Subtitle */}
-            <p className="mt-6 max-w-xl text-base sm:text-lg leading-relaxed text-white/75 font-normal">
+            <p className="mt-6 max-w-xl text-base sm:text-lg leading-relaxed text-ink-2 dark:text-white/75 font-normal">
               Premium self-drive Maruti Suzuki cars ready for your journey across Pune and Maharashtra.
               Direct WhatsApp pricing and instant availability confirmation — no middleman, transparent rates.
             </p>
@@ -94,18 +102,18 @@ export function HeroNew() {
               </a>
               <a
                 href="#fleet"
-                className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-control border border-white/20 bg-white/5 px-7 py-4 text-base font-semibold text-white backdrop-blur-sm transition-all duration-200 hover:border-white/40 hover:bg-white/10 hover:-translate-y-0.5 sm:w-auto"
+                className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-control border border-line bg-white/5 px-7 py-4 text-base font-semibold text-ink dark:border-white/20 dark:bg-white/5 dark:text-white backdrop-blur-sm transition-all duration-200 hover:border-line-strong dark:hover:border-white/40 hover:bg-white/10 hover:-translate-y-0.5 sm:w-auto"
               >
                 Explore Fleet
               </a>
             </div>
 
             {/* Verified Trust Strip */}
-            <ul className="mt-12 flex flex-col sm:flex-row sm:flex-wrap gap-x-6 gap-y-3 border-t border-white/10 pt-7">
+            <ul className="mt-12 flex flex-col sm:flex-row sm:flex-wrap gap-x-6 gap-y-3 border-t border-line dark:border-white/10 pt-7">
               {trustBadges.map(({ icon: Icon, label }) => (
                 <li
                   key={label}
-                  className="flex items-center gap-2 text-xs sm:text-sm text-white/70"
+                  className="flex items-center gap-2 text-xs sm:text-sm text-ink-3 dark:text-white/70"
                 >
                   <Icon aria-hidden className="size-4 shrink-0 text-accent" />
                   <span>{label}</span>
@@ -124,9 +132,9 @@ export function HeroNew() {
             />
 
             {/* Main Showcase Card */}
-            <div className="relative overflow-hidden rounded-2xl border border-white/15 bg-white/[0.04] shadow-2xl backdrop-blur-xl">
+            <div className="relative overflow-hidden rounded-2xl border border-line dark:border-white/15 bg-white/[0.04] dark:bg-white/[0.04] shadow-2xl backdrop-blur-xl">
               {/* Vehicle Photograph Container */}
-              <div className="relative aspect-[16/10] overflow-hidden bg-gradient-to-br from-[#16181f] to-[#0c0d12]">
+              <div className="relative aspect-[16/10] overflow-hidden bg-gradient-to-br from-sunken to-muted dark:from-[#16181f] dark:to-[#0c0d12]">
                 <Image
                   src="/images/cars/fronx.jpeg"
                   alt="Maruti Suzuki Fronx — Premium Self-Drive SUV in Pune"
@@ -139,7 +147,15 @@ export function HeroNew() {
                 {/* Contrast gradient overlay */}
                 <div
                   aria-hidden
-                  className="pointer-events-none absolute inset-0"
+                  className="pointer-events-none absolute inset-0 dark:hidden"
+                  style={{
+                    background:
+                      "linear-gradient(to top, rgba(24,22,15,0.92) 0%, rgba(24,22,15,0.2) 45%, transparent 100%)",
+                  }}
+                />
+                <div
+                  aria-hidden
+                  className="pointer-events-none absolute inset-0 hidden dark:block"
                   style={{
                     background:
                       "linear-gradient(to top, rgba(7,8,10,0.92) 0%, rgba(7,8,10,0.2) 45%, transparent 100%)",
@@ -147,21 +163,24 @@ export function HeroNew() {
                 />
 
                 {/* Floating Category Pill */}
-                <div className="absolute top-4 left-4 rounded-full border border-white/20 bg-black/60 px-3.5 py-1 text-[0.6875rem] font-bold uppercase tracking-wider text-white backdrop-blur-md">
+                <div className="absolute top-4 left-4 rounded-full border border-line dark:border-white/20 bg-ink/85 dark:bg-black/60 dark:hidden px-3.5 py-1 text-[0.6875rem] font-bold uppercase tracking-wider text-white backdrop-blur-md">
+                  Compact SUV · 5 Seater
+                </div>
+                <div className="absolute top-4 left-4 rounded-full border border-white/20 bg-black/60 hidden dark:block px-3.5 py-1 text-[0.6875rem] font-bold uppercase tracking-wider text-white backdrop-blur-md">
                   Compact SUV · 5 Seater
                 </div>
               </div>
 
               {/* Card Footer Details */}
-              <div className="flex items-center justify-between gap-4 border-t border-white/10 bg-white/[0.03] px-6 py-5">
+              <div className="flex items-center justify-between gap-4 border-t border-line dark:border-white/10 bg-white/[0.03] dark:bg-white/[0.03] px-6 py-5">
                 <div>
                   <p className="text-[0.6875rem] font-bold uppercase tracking-widest text-accent">
                     Featured Vehicle
                   </p>
-                  <h3 className="mt-0.5 text-lg sm:text-xl font-bold text-white font-display">
+                  <h3 className="mt-0.5 text-lg sm:text-xl font-bold text-ink dark:text-white font-display">
                     Maruti Suzuki Fronx
                   </h3>
-                  <p className="mt-1 text-xs text-white/60">
+                  <p className="mt-1 text-xs text-ink-3 dark:text-white/60">
                     Manual / Automatic · Petrol · Air Conditioned
                   </p>
                 </div>
@@ -169,7 +188,7 @@ export function HeroNew() {
                   <span className="rounded-full border border-accent/40 bg-accent/15 px-3 py-1.5 text-xs font-bold text-accent">
                     Price on request
                   </span>
-                  <span className="text-[0.625rem] text-white/50">
+                  <span className="text-[0.625rem] text-ink-3 dark:text-white/50">
                     Confirmed upon enquiry
                   </span>
                 </div>
@@ -177,12 +196,12 @@ export function HeroNew() {
             </div>
 
             {/* Fleet Counter Overlay Badge */}
-            <div className="absolute -bottom-4 -left-3 sm:-bottom-5 sm:-left-5 flex items-center gap-3.5 rounded-xl border border-white/15 bg-[#101218]/95 px-5 py-3 shadow-2xl backdrop-blur-lg">
+            <div className="absolute -bottom-4 -left-3 sm:-bottom-5 sm:-left-5 flex items-center gap-3.5 rounded-xl border border-line dark:border-white/15 bg-raised/95 dark:bg-[#101218]/95 px-5 py-3 shadow-2xl backdrop-blur-lg text-ink dark:text-white">
               <div className="flex -space-x-2">
                 {["fronx", "brezza", "baleno"].map((name) => (
                   <div
                     key={name}
-                    className="size-8 overflow-hidden rounded-full border-2 border-[#101218] bg-[#1a1c24]"
+                    className="size-8 overflow-hidden rounded-full border-2 border-line dark:border-[#101218] bg-sunken dark:bg-[#1a1c24]"
                   >
                     <Image
                       src={`/images/cars/${name}.jpeg`}
@@ -196,7 +215,7 @@ export function HeroNew() {
                 ))}
               </div>
               <div className="leading-tight">
-                <p className="text-xs sm:text-sm font-bold text-white">5 Fleet Units Ready</p>
+                <p className="text-xs sm:text-sm font-bold text-ink dark:text-white">5 Fleet Units Ready</p>
                 <p className="text-[0.6875rem] text-accent">Instant WhatsApp Booking</p>
               </div>
             </div>
