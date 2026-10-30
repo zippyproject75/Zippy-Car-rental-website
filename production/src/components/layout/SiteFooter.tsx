@@ -123,7 +123,11 @@ export async function SiteFooter() {
       </div>
       <div className="border-t border-line">
         <div className="container-site flex flex-col gap-2 py-6 text-sm text-ink-3 md:flex-row md:items-center md:justify-between">
-          <p>{t("rights", { year })}</p>
+          <p>
+            <Link href="/copyright" className="hover:text-ink">
+              {t("rights", { year })}
+            </Link>
+          </p>
           <p>{t("honesty")}</p>
         </div>
       </div>
