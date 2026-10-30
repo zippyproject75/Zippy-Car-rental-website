@@ -714,3 +714,58 @@ html.dark,
     animation: none !important;
   }
 }
+
+/* ═══════════════════════════════════════════════════════════
+   GLOBAL PAGE TRANSITION SCREEN ANIMATIONS
+   ═══════════════════════════════════════════════════════════ */
+
+@keyframes spin-ring {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes gold-shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes pulse-gentle {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.95;
+  }
+  50% {
+    transform: scale(1.04);
+    opacity: 1;
+  }
+}
+
+.animate-spin-ring {
+  animation: spin-ring 2.2s linear infinite;
+  transform-origin: center center;
+  will-change: transform;
+}
+
+.animate-gold-shimmer {
+  animation: gold-shimmer 1.8s ease-in-out infinite;
+}
+
+.animate-pulse-gentle {
+  animation: pulse-gentle 2.6s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-spin-ring,
+  .animate-gold-shimmer,
+  .animate-pulse-gentle {
+    animation: none !important;
+  }
+}

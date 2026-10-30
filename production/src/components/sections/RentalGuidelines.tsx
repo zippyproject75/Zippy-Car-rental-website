@@ -1,6 +1,9 @@
 import { FileText, Fuel, Shield, UserCheck, MessageCircle } from "lucide-react";
+<<<<<<< HEAD
+=======
 import { Link } from "@/i18n/navigation";
 import { getTranslations } from "next-intl/server";
+>>>>>>> 66cbda335ef48fff6786f18579afd18c2a560795
 
 export async function RentalGuidelines() {
   const t = await getTranslations("RentalGuidelines");
@@ -120,4 +123,3 @@ export async function RentalGuidelines() {
     </section>
   );
 }
-
