@@ -9,9 +9,13 @@ import { SiteHeader } from "@/components/layout/SiteHeader";
 import { ThemeProvider } from "@/components/layout/ThemeProvider";
 import { JsonLd } from "@/components/ui/JsonLd";
 import { FloatingContactDock } from "@/components/ui/FloatingContactDock";
+<<<<<<< HEAD
 import { PageTransitionProvider } from "@/components/transitions/PageTransitionContext";
 import { PageTransitionOverlay } from "@/components/transitions/PageTransitionOverlay";
 import { PageContentWrapper } from "@/components/transitions/PageContentWrapper";
+=======
+import { AnnouncementBanner } from "@/components/sections/AnnouncementBanner";
+>>>>>>> 66cbda335ef48fff6786f18579afd18c2a560795
 import { localeTags } from "@/i18n/routing";
 import { cn } from "@/lib/cn";
 import { env, metadataOrigin } from "@/lib/env";
@@ -40,6 +44,15 @@ const CLIENT_NAMESPACES = [
   "Common",
   "Fleet",
   "Specs",
+  "Reviews",
+  "RentalGuidelines",
+  "HeroNew",
+  "CinematicCta",
+  "TrustStrip",
+  "Home",
+  "AnnouncementBanner",
+  "PickupLocations",
+  "DoorstepDelivery",
 ];
 
 export const dynamicParams = false;
@@ -95,6 +108,7 @@ export default async function LocaleLayout({
                 href="#main"
                 className="sr-only z-50 rounded-control bg-accent px-4 py-3 font-semibold text-on-accent focus:not-sr-only focus:fixed focus:top-3 focus:left-3"
               >
+<<<<<<< HEAD
                 {t("skipToContent")}
               </a>
               {env.showPendingContent ? (
@@ -115,6 +129,19 @@ export default async function LocaleLayout({
               {/* Fixed vertical contact dock on the left side of the viewport (Phone & WhatsApp) */}
               <FloatingContactDock />
             </PageTransitionProvider>
+=======
+                {t("previewBanner")}
+              </p>
+            ) : null}
+            <SiteHeader />
+            <AnnouncementBanner />
+            <main id="main" tabIndex={-1} className="outline-none">
+              {children}
+            </main>
+            <SiteFooter />
+            {/* Fixed vertical contact dock on the left side of the viewport (Phone & WhatsApp) */}
+            <FloatingContactDock />
+>>>>>>> 66cbda335ef48fff6786f18579afd18c2a560795
           </NextIntlClientProvider>
         </ThemeProvider>
         <JsonLd data={organizationJsonLd()} />

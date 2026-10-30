@@ -1,37 +1,44 @@
 import { FileText, Fuel, Shield, UserCheck, MessageCircle } from "lucide-react";
+<<<<<<< HEAD
+=======
+import { Link } from "@/i18n/navigation";
+import { getTranslations } from "next-intl/server";
+>>>>>>> 66cbda335ef48fff6786f18579afd18c2a560795
 
-const GUIDELINES = [
-  {
-    icon: FileText,
-    num: "01",
-    title: "Original Documents",
-    badge: "Mandatory at pickup",
-    desc: "Valid Indian Driving Licence (held for min. 1 year) along with original Aadhaar Card or Passport for identity and address verification.",
-  },
-  {
-    icon: UserCheck,
-    num: "02",
-    title: "Age & Eligibility",
-    badge: "21+ Years Old",
-    desc: "Drivers must be at least 21 years of age with active driving competence. Additional drivers can be registered prior to journey dispatch.",
-  },
-  {
-    icon: Shield,
-    num: "03",
-    title: "Refundable Security Deposit",
-    badge: "Transparent Terms",
-    desc: "A standard refundable security deposit is collected before handover and credited back promptly following return vehicle inspection.",
-  },
-  {
-    icon: Fuel,
-    num: "04",
-    title: "Fuel & FASTag Tolls",
-    badge: "Like-to-Like",
-    desc: "Return the vehicle at the same fuel level as dispatched. All cars are equipped with an active FASTag for seamless highway travel.",
-  },
-];
+export async function RentalGuidelines() {
+  const t = await getTranslations("RentalGuidelines");
 
-export function RentalGuidelines() {
+  const GUIDELINES = [
+    {
+      icon: FileText,
+      num: "01",
+      title: t("guidelines.1.title"),
+      badge: t("guidelines.1.badge"),
+      desc: t("guidelines.1.desc"),
+    },
+    {
+      icon: UserCheck,
+      num: "02",
+      title: t("guidelines.2.title"),
+      badge: t("guidelines.2.badge"),
+      desc: t("guidelines.2.desc"),
+    },
+    {
+      icon: Shield,
+      num: "03",
+      title: t("guidelines.3.title"),
+      badge: t("guidelines.3.badge"),
+      desc: t("guidelines.3.desc"),
+    },
+    {
+      icon: Fuel,
+      num: "04",
+      title: t("guidelines.4.title"),
+      badge: t("guidelines.4.badge"),
+      desc: t("guidelines.4.desc"),
+    },
+  ];
+
   return (
     <section
       id="guidelines"
@@ -41,15 +48,15 @@ export function RentalGuidelines() {
       <div className="container-site py-16 sm:py-20 lg:py-24">
         {/* Section Header */}
         <div className="max-w-2xl">
-          <p className="eyebrow mb-3">RENTAL REQUIREMENTS & POLICIES</p>
+          <p className="eyebrow mb-3">{t("eyebrow")}</p>
           <h2
             id="guidelines-title"
             className="font-display text-3xl font-bold tracking-[-0.02em] text-ink sm:text-4xl"
           >
-            Simple, transparent rental guidelines.
+            {t("title")}
           </h2>
           <p className="mt-4 text-base sm:text-lg leading-relaxed text-ink-2">
-            Everything you need for an effortless self-drive experience in Pune. No complex paperwork or surprise clauses.
+            {t("subtitle")}
           </p>
         </div>
 
@@ -85,7 +92,7 @@ export function RentalGuidelines() {
 
                 <div className="mt-5 border-t border-line/60 pt-3">
                   <span className="text-[0.6875rem] font-medium text-ink-3">
-                    Verified upon WhatsApp confirmation
+                    {t("verifiedLabel")}
                   </span>
                 </div>
               </div>
@@ -100,7 +107,7 @@ export function RentalGuidelines() {
               <MessageCircle aria-hidden className="size-4.5 fill-white text-white" />
             </span>
             <p className="text-sm font-medium text-ink">
-              Have questions about outstation travel, security deposit, or customized multi-day rentals?
+              {t("whatsappPrompt")}
             </p>
           </div>
           <a
@@ -109,7 +116,7 @@ export function RentalGuidelines() {
             rel="noopener noreferrer"
             className="inline-flex shrink-0 items-center justify-center gap-2 rounded-control bg-raised border border-line px-4 py-2.5 text-xs font-bold text-ink hover:border-line-strong hover:bg-canvas transition-colors"
           >
-            Ask Us on WhatsApp
+            {t("whatsappCta")}
           </a>
         </div>
       </div>

@@ -6,6 +6,7 @@
 export type EnquiryMessageFields = {
   carName: string | null;
   branchName: string | null;
+  pickupLocationName: string | null;
   pickup: string;
   return: string;
   duration: string;
@@ -21,6 +22,7 @@ export type EnquiryMessageLabels = {
   anyCar: string;
   branch: string;
   branchToConfirm: string;
+  pickupLocation: string;
   pickup: string;
   return: string;
   duration: string;

@@ -223,6 +223,47 @@ html.dark,
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+
+  .animate-\[marquee_30s_linear_infinite\] {
+    animation: none !important;
+  }
+}
+
+/* ── Announcement Banner Marquee Animation ── */
+@keyframes marquee-mobile {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes marquee-desktop {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee-content {
+  display: flex;
+  animation: marquee-mobile 5s linear infinite;
+  white-space: nowrap;
+}
+
+@media (min-width: 640px) {
+  .marquee-content {
+    animation: marquee-desktop 15s linear infinite;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-content {
+    animation: none;
+  }
 }
 
 /* ---------------------- Signature details ---------------------- */

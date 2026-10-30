@@ -8,6 +8,9 @@ import { HowItWorks } from "@/components/sections/HowItWorks";
 import { Reviews } from "@/components/sections/Reviews";
 import { RentalGuidelines } from "@/components/sections/RentalGuidelines";
 import { CinematicCta } from "@/components/sections/CinematicCta";
+import { PackageSelector } from "@/components/sections/PackageSelector";
+import { PickupLocations } from "@/components/sections/PickupLocations";
+import { DoorstepDelivery } from "@/components/sections/DoorstepDelivery";
 import { Accordion } from "@/components/ui/Accordion";
 import { ButtonLink } from "@/components/ui/ButtonLink";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -106,6 +109,32 @@ export default async function HomePage({ params }: LocaleParams) {
           />
           <div className="mt-10">
             <CarGrid cars={cars} showFilters />
+          </div>
+        </div>
+      </section>
+
+      {/* ── 4.5. PACKAGE PRICING ── */}
+      <section
+        aria-labelledby="package-title"
+        className="scroll-mt-20 border-b border-line bg-muted/30"
+      >
+        <div className="container-site py-16 sm:py-20 lg:py-24">
+          <div className="grid gap-10 lg:grid-cols-[1fr_1.5fr] lg:gap-16">
+            <div>
+              <p className="eyebrow mb-2 sm:mb-3">{t("packageSectionEyebrow")}</p>
+              <h2
+                id="package-title"
+                className="font-display text-2xl sm:text-3xl font-bold tracking-[-0.02em] text-ink sm:text-4xl"
+              >
+                {t("packageSectionTitle")}
+              </h2>
+              <p className="mt-3 text-sm leading-relaxed text-ink-2">
+                {t("packageSectionIntro")}
+              </p>
+            </div>
+            <div className="lg:self-center">
+              <PackageSelector />
+            </div>
           </div>
         </div>
       </section>
@@ -214,6 +243,12 @@ export default async function HomePage({ params }: LocaleParams) {
           </div>
         </section>
       ) : null}
+
+      {/* ── 8.5. PICKUP LOCATIONS WITH GOOGLE MAPS LINKS ── */}
+      <PickupLocations />
+
+      {/* ── 8.6. DOORSTEP DELIVERY POLICY ── */}
+      <DoorstepDelivery />
 
       {/* ── 9. RENTAL GUIDELINES & POLICIES ── */}
       <RentalGuidelines />

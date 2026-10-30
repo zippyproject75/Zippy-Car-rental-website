@@ -25,12 +25,14 @@ import { optionalFieldsSchema } from "./schema";
 
 export type BookingCarOption = { id: CarId; label: string };
 export type BookingBranchOption = { id: BranchId; name: string; pending: boolean };
+export type BookingPickupLocationOption = { id: string; name: string; googleMapsUrl: string };
 
-type FieldKey = RequestField | "branchId" | "name" | "note";
+type FieldKey = RequestField | "branchId" | "pickupLocationId" | "name" | "note";
 type Errors = Partial<Record<FieldKey, string>>;
 
 const SLOTS = timeSlots(bookingRules.slotMinutes);
 const FIELD_ORDER: FieldKey[] = [
+  "pickupLocationId",
   "branchId",
   "pickupDate",
   "pickupTime",
@@ -44,12 +46,14 @@ export function BookingForm({
   cars,
   branches,
   contacts,
+  pickupLocations,
   initialCarId = null,
   headingId,
 }: {
   cars: BookingCarOption[];
   branches: BookingBranchOption[];
   contacts: VisibleContacts;
+  pickupLocations: BookingPickupLocationOption[];
   initialCarId?: CarId | null;
   headingId?: string;
 }) {
@@ -58,12 +62,14 @@ export function BookingForm({
   const tDuration = useTranslations("Duration");
   const tWa = useTranslations("WhatsApp");
   const tc = useTranslations("Common");
+  const tPickup = useTranslations("PickupLocations");
   const locale = useLocale() as Locale;
 
   const [carId, setCarId] = useState<CarId | "any">(initialCarId ?? "any");
   const [branchId, setBranchId] = useState<BranchId | "">(
     branches.length === 1 ? branches[0]!.id : "",
   );
+  const [pickupLocationId, setPickupLocationId] = useState<string>("");
   const [pickupDate, setPickupDate] = useState("");
   const [pickupTime, setPickupTime] = useState("");
   const [returnDate, setReturnDate] = useState("");
@@ -106,7 +112,9 @@ export function BookingForm({
         next[field] = errorText(code);
       }
     }
-    if (branches.length > 0 && !branchId) next.branchId = t("errors.branchRequired");
+    if (!pickupLocationId) next.pickupLocationId = t("errors.pickupLocationRequired");
+    // Branch selection is now optional - customers can choose from pickup locations on homepage
+    // if (branches.length > 0 && !branchId) next.branchId = t("errors.branchRequired");
     const optional = optionalFieldsSchema.safeParse({ name, note });
     if (!optional.success) {
       for (const issue of optional.error.issues) {
@@ -138,10 +146,12 @@ export function BookingForm({
     );
     const carLabel = cars.find((c) => c.id === selectedCar)?.label ?? null;
     const branch = branches.find((b) => b.id === branchId);
+    const pickupLocation = pickupLocations.find((l) => l.id === pickupLocationId);
     const prepared = enquiryService.prepare(
       {
         carName: carLabel,
         branchName: branch?.name ?? null,
+        pickupLocationName: pickupLocation?.name ?? null,
         pickup: formatDateTime(check.pickupAt, locale),
         return: formatDateTime(check.returnAt, locale),
         duration: formatDuration(check.durationMinutes, tDuration),
@@ -155,6 +165,7 @@ export function BookingForm({
         anyCar: tWa("anyCar"),
         branch: tWa("branch"),
         branchToConfirm: tWa("branchToConfirm"),
+        pickupLocation: tWa("pickupLocation"),
         pickup: tWa("pickup"),
         return: tWa("return"),
         duration: tWa("duration"),
@@ -168,6 +179,7 @@ export function BookingForm({
   }
 
   const fieldLabel: Record<FieldKey, string> = {
+    pickupLocationId: t("pickupLocation"),
     branchId: t("branch"),
     pickupDate: t("pickupDate"),
     pickupTime: t("pickupTime"),
@@ -257,37 +269,59 @@ export function BookingForm({
               </div>
 
               <div className="flex flex-col gap-1.5">
-                {branches.length ? (
-                  <>
-                    <label htmlFor="booking-branchId" className="text-sm font-semibold text-ink">
-                      {t("branch")}
-                    </label>
-                    <select
-                      id="booking-branchId"
-                      value={branchId}
-                      onChange={(e) => setBranchId(e.target.value as BranchId)}
-                      aria-invalid={liveErrors.branchId ? true : undefined}
-                      aria-describedby={liveErrors.branchId ? "booking-branchId-error" : undefined}
-                      className={fieldControlClass(Boolean(liveErrors.branchId))}
-                    >
-                      <option value="">{t("branchPlaceholder")}</option>
-                      {branches.map((b) => (
-                        <option key={b.id} value={b.id}>
-                          {b.pending ? `${b.name} (${tc("pendingBadge")})` : b.name}
-                        </option>
-                      ))}
-                    </select>
-                    <FieldError id="booking-branchId-error" message={liveErrors.branchId} />
-                  </>
-                ) : (
-                  <>
-                    <span className="text-sm font-semibold text-ink">{t("branch")}</span>
-                    <p className="rounded-control border border-line bg-muted p-3.5 text-sm leading-relaxed text-ink-2">
-                      {t("branchesPendingNotice")}
-                    </p>
-                  </>
-                )}
+                <label htmlFor="booking-pickupLocationId" className="text-sm font-semibold text-ink">
+                  {t("pickupLocation")}
+                </label>
+                <select
+                  id="booking-pickupLocationId"
+                  value={pickupLocationId}
+                  onChange={(e) => setPickupLocationId(e.target.value)}
+                  aria-invalid={liveErrors.pickupLocationId ? true : undefined}
+                  aria-describedby={liveErrors.pickupLocationId ? "booking-pickupLocationId-error" : undefined}
+                  className={fieldControlClass(Boolean(liveErrors.pickupLocationId))}
+                >
+                  <option value="">{t("pickupLocationPlaceholder")}</option>
+                  {pickupLocations.map((l) => (
+                    <option key={l.id} value={l.id}>
+                      {l.name}
+                    </option>
+                  ))}
+                </select>
+                <FieldError id="booking-pickupLocationId-error" message={liveErrors.pickupLocationId} />
               </div>
+            </div>
+
+            <div className="flex flex-col gap-1.5">
+              {branches.length ? (
+                <>
+                  <label htmlFor="booking-branchId" className="text-sm font-semibold text-ink">
+                    {t("branch")}
+                  </label>
+                  <select
+                    id="booking-branchId"
+                    value={branchId}
+                    onChange={(e) => setBranchId(e.target.value as BranchId)}
+                    aria-invalid={liveErrors.branchId ? true : undefined}
+                    aria-describedby={liveErrors.branchId ? "booking-branchId-error" : undefined}
+                    className={fieldControlClass(Boolean(liveErrors.branchId))}
+                  >
+                    <option value="">{t("branchPlaceholder")}</option>
+                    {branches.map((b) => (
+                      <option key={b.id} value={b.id}>
+                        {b.pending ? `${b.name} (${tc("pendingBadge")})` : b.name}
+                      </option>
+                    ))}
+                  </select>
+                  <FieldError id="booking-branchId-error" message={liveErrors.branchId} />
+                </>
+              ) : (
+                <>
+                  <span className="text-sm font-semibold text-ink">{t("branch")}</span>
+                  <p className="rounded-control border border-line bg-muted p-3.5 text-sm leading-relaxed text-ink-2">
+                    {t("branchesPendingNotice")}
+                  </p>
+                </>
+              )}
             </div>
 
             <fieldset className="grid gap-5 md:grid-cols-2">
