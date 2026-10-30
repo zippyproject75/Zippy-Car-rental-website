@@ -118,7 +118,15 @@
     "ctaTitle": "तुम्ही तयार असाल तेव्हा.",
     "ctaBody": "एका मिनिटापेक्षा कमी वेळात तुमची चौकशी तयार करा. Zippy तुमच्याशी तपशील निश्चित करते.",
     "ctaPrimary": "चौकशी सुरू करा",
-    "ctaSecondary": "Zippy शी संपर्क साधा"
+    "ctaSecondary": "Zippy शी संपर्क साधा",
+    "packageSelector": "पॅकेज निवडा",
+    "package12Hour": "12-तास पॅकेज",
+    "package24Hour": "24-तास पॅकेज",
+    "freeKmLimit": "{km} किमी मोफत",
+    "priceUnavailable": "किंमत विनंतीनुसार",
+    "packageSectionEyebrow": "पॅकेज किंमत",
+    "packageSectionTitle": "तुमचा भाडा पॅकेज निवडा",
+    "packageSectionIntro": "12-तास आणि 24-तास पॅकेजमधून निवडा. 12-तास पॅकेजसाठी पुष्टी केलेल्या किंमती दिसत आहेत. 24-तास किंमत लवकरच जोडली जाईल."
   },
   "Fleet": {
     "title": "पुण्यातील सेल्फ-ड्राइव्ह कार",

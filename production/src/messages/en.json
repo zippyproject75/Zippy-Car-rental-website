@@ -118,7 +118,15 @@
     "ctaTitle": "Ready when you are.",
     "ctaBody": "Prepare your enquiry in under a minute. Zippy confirms the details with you.",
     "ctaPrimary": "Start an enquiry",
-    "ctaSecondary": "Contact Zippy"
+    "ctaSecondary": "Contact Zippy",
+    "packageSelector": "Select package",
+    "package12Hour": "12-Hour Package",
+    "package24Hour": "24-Hour Package",
+    "freeKmLimit": "{km} km free",
+    "priceUnavailable": "Price on request",
+    "packageSectionEyebrow": "Package Pricing",
+    "packageSectionTitle": "Choose your rental package",
+    "packageSectionIntro": "Select between 12-hour and 24-hour packages. Confirmed prices are shown for 12-hour packages. 24-hour pricing will be added soon."
   },
   "Fleet": {
     "title": "Self-Drive Cars in Pune",

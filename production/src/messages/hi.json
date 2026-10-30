@@ -118,7 +118,15 @@
     "ctaTitle": "जब आप तैयार हों।",
     "ctaBody": "एक मिनट से भी कम में अपनी पूछताछ तैयार करें। Zippy आपसे विवरण की पुष्टि करता है।",
     "ctaPrimary": "पूछताछ शुरू करें",
-    "ctaSecondary": "Zippy से संपर्क करें"
+    "ctaSecondary": "Zippy से संपर्क करें",
+    "packageSelector": "पैकेज चुनें",
+    "package12Hour": "12-घंटे पैकेज",
+    "package24Hour": "24-घंटे पैकेज",
+    "freeKmLimit": "{km} किमी मुफ्त",
+    "priceUnavailable": "कीमत अनुरोध पर",
+    "packageSectionEyebrow": "पैकेज मूल्य निर्धारण",
+    "packageSectionTitle": "अपना किराया पैकेज चुनें",
+    "packageSectionIntro": "12-घंटे और 24-घंटे पैकेज के बीच चुनें। 12-घंटे पैकेज के लिए पुष्टि की गई कीमतें दिखाई गई हैं। 24-घंटे की मूल्य निर्धारण जल्द ही जोड़ा जाएगा।"
   },
   "Fleet": {
     "title": "पुणे में सेल्फ-ड्राइव कारें",
