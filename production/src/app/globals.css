@@ -130,24 +130,6 @@ html.dark,
       transform: none;
     }
   }
-
-  @keyframes marquee-mobile {
-    0% {
-      transform: translateX(0);
-    }
-    100% {
-      transform: translateX(-50%);
-    }
-  }
-
-  @keyframes marquee-desktop {
-    0% {
-      transform: translateX(0);
-    }
-    100% {
-      transform: translateX(-50%);
-    }
-  }
 }
 
 @layer base {
@@ -248,6 +230,24 @@ html.dark,
 }
 
 /* ── Announcement Banner Marquee Animation ── */
+@keyframes marquee-mobile {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes marquee-desktop {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
 .marquee-content {
   display: flex;
   animation: marquee-mobile 5s linear infinite;
