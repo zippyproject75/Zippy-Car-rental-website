@@ -8,14 +8,14 @@ export function CinematicCta() {
       aria-labelledby="cinematic-cta-title"
       className="relative overflow-hidden bg-muted text-ink dark:bg-[#090a0d] dark:text-white"
     >
-      {/* Background: real Brezza vehicle imagery */}
+      {/* Background: Black SUV driving on highway */}
       <div className="absolute inset-0">
         <Image
-          src="/images/cars/brezza.jpeg"
-          alt="Maruti Suzuki Brezza on Maharashtra roads"
+          src="/images/zippy-highway-suv.jpg"
+          alt="Black SUV driving on highway at sunset — Zippy Car Rental"
           aria-hidden
           fill
-          className="object-cover object-center opacity-50 transition-transform duration-[8000ms] hover:scale-105"
+          className="object-cover object-center md:object-right transition-transform duration-[8000ms] hover:scale-105"
           sizes="100vw"
         />
         <div
@@ -23,7 +23,7 @@ export function CinematicCta() {
           className="absolute inset-0 dark:hidden"
           style={{
             background:
-              "linear-gradient(105deg, color-mix(in oklab, var(--muted) 40%, transparent) 35%, color-mix(in oklab, var(--canvas) 50%, transparent) 65%, color-mix(in oklab, var(--raised) 30%, transparent) 100%)",
+              "linear-gradient(105deg, color-mix(in oklab, var(--muted) 70%, transparent) 35%, color-mix(in oklab, var(--canvas) 60%, transparent) 65%, color-mix(in oklab, var(--raised) 30%, transparent) 100%)",
           }}
         />
         <div
@@ -31,7 +31,7 @@ export function CinematicCta() {
           className="absolute inset-0 hidden dark:block"
           style={{
             background:
-              "linear-gradient(105deg, #090a0d 35%, rgba(9,10,13,0.3) 65%, rgba(9,10,13,0.15) 100%)",
+              "linear-gradient(105deg, #090a0d 35%, rgba(9,10,13,0.4) 65%, rgba(9,10,13,0.15) 100%)",
           }}
         />
       </div>

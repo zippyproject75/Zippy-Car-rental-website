@@ -19,14 +19,14 @@ const approvedBase = {
 };
 
 describe("calculateEstimate", () => {
-  it("returns price-on-request for every shipped vehicle (no approved pricing)", () => {
-    for (const carId of ["fronx", "brezza", "baleno", "ertiga-1", "ertiga-2"] as const) {
+  it("returns price-on-request for unapproved vehicles", () => {
+    for (const carId of ["ertiga-1", "ertiga-2"] as const) {
       expect(calculateEstimate({ carId, pickupAt, returnAt: at(600) }, pricingConfig)).toEqual({
         kind: "price-on-request",
         reason: "pricing-not-approved",
       });
     }
-    expect(displayRate(pricingConfig.fronx)).toBeNull();
+    expect(displayRate(pricingConfig["ertiga-1"])).toBeNull();
   });
   it("requires a vehicle and a valid period", () => {
     expect(calculateEstimate({ carId: null, pickupAt, returnAt: at(60) }, pricingConfig).kind).toBe(

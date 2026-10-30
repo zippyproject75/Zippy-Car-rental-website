@@ -4,7 +4,6 @@ import { getTranslations } from "next-intl/server";
 import Image from "next/image";
 import { HeroNew } from "@/components/sections/HeroNew";
 import { TrustStrip } from "@/components/sections/TrustStrip";
-import { HowItWorks } from "@/components/sections/HowItWorks";
 import { Reviews } from "@/components/sections/Reviews";
 import { RentalGuidelines } from "@/components/sections/RentalGuidelines";
 import { CinematicCta } from "@/components/sections/CinematicCta";
@@ -139,18 +138,7 @@ export default async function HomePage({ params }: LocaleParams) {
         </div>
       </section>
 
-      {/* ── 5. HOW IT WORKS ── */}
-      <section
-        id="how-it-works"
-        aria-label={t("howTitle")}
-        className="scroll-mt-20 border-b border-line bg-muted/40"
-      >
-        <div className="container-site py-16 sm:py-20 lg:py-24">
-          <HowItWorks />
-        </div>
-      </section>
-
-      {/* ── 6. WHY ZIPPY / ABOUT (Split layout) ── */}
+      {/* ── 5. WHY ZIPPY / ABOUT (Split layout) ── */}
       <section
         id="about"
         aria-labelledby="about-title"
@@ -218,10 +206,10 @@ export default async function HomePage({ params }: LocaleParams) {
         </div>
       </section>
 
-      {/* ── 7. CUSTOMER FEEDBACK ── */}
+      {/* ── 6. CUSTOMER FEEDBACK ── */}
       <Reviews />
 
-      {/* ── 8. PICKUP LOCATIONS & MAPS ── */}
+      {/* ── 7. PICKUP LOCATIONS & MAPS ── */}
       {branches.length ? (
         <section
           id="branches"
@@ -244,16 +232,16 @@ export default async function HomePage({ params }: LocaleParams) {
         </section>
       ) : null}
 
-      {/* ── 8.5. PICKUP LOCATIONS WITH GOOGLE MAPS LINKS ── */}
+      {/* ── 7.5. PICKUP LOCATIONS WITH GOOGLE MAPS LINKS ── */}
       <PickupLocations />
 
-      {/* ── 8.6. DOORSTEP DELIVERY POLICY ── */}
+      {/* ── 7.6. DOORSTEP DELIVERY POLICY ── */}
       <DoorstepDelivery />
 
-      {/* ── 9. RENTAL GUIDELINES & POLICIES ── */}
+      {/* ── 8. RENTAL GUIDELINES & POLICIES ── */}
       <RentalGuidelines />
 
-      {/* ── 10. FREQUENTLY ASKED QUESTIONS ── */}
+      {/* ── 9. FREQUENTLY ASKED QUESTIONS ── */}
       {faqs.length ? (
         <section
           id="faq"
@@ -280,7 +268,7 @@ export default async function HomePage({ params }: LocaleParams) {
         </section>
       ) : null}
 
-      {/* ── 11. FINAL CINEMATIC CTA ── */}
+      {/* ── 10. FINAL CINEMATIC CTA ── */}
       <CinematicCta />
 
       {/* Structured data */}
