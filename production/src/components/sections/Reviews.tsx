@@ -140,7 +140,7 @@ export function Reviews() {
 
           {/* Review invitation card */}
           <m.div
-            className="mt-8 rounded-card border border-line bg-muted/40 p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-6"
+            className="mt-8 rounded-card border border-line bg-muted/40 p-5 sm:p-8 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-6"
             initial={prefersReducedMotion ? undefined : { opacity: 0, y: 16 }}
             whileInView={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-8%" }}
@@ -166,7 +166,7 @@ export function Reviews() {
               className={buttonClass(
                 "secondary",
                 "md",
-                "whitespace-nowrap shrink-0 hover:bg-raised transition-transform duration-150 hover:-translate-y-0.5"
+                "w-full sm:w-auto text-center justify-center whitespace-nowrap shrink-0 hover:bg-raised transition-transform duration-150 hover:-translate-y-0.5"
               )}
             >
               {t("cta")}
