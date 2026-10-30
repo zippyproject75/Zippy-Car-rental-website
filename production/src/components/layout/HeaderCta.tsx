@@ -6,7 +6,7 @@ import { ENQUIRY_PATH } from "@/data/navigation";
 import { Link, usePathname } from "@/i18n/navigation";
 import { cn } from "@/lib/cn";
 
-export function HeaderCta({ variant = "desktop", className }: { variant?: "desktop" | "mobile"; className?: string }) {
+export function HeaderCta({ className }: { variant?: "desktop" | "mobile"; className?: string }) {
   const t = useTranslations("Nav");
   const pathname = usePathname();
 
@@ -17,7 +17,7 @@ export function HeaderCta({ variant = "desktop", className }: { variant?: "deskt
       href={ENQUIRY_PATH}
       data-testid="header-cta"
       className={cn(
-        "group inline-flex h-9 sm:h-10 items-center justify-center gap-1.5 sm:gap-2 rounded-control bg-accent px-2.5 sm:px-4 text-xs sm:text-[0.875rem] font-bold text-on-accent shadow-xs transition-[background-color,transform] hover:bg-accent-hover active:translate-y-px focus-visible:outline-2 focus-visible:outline-focus whitespace-nowrap shrink-0",
+        "group inline-flex h-10 items-center justify-center gap-1.5 sm:gap-2 rounded-control bg-accent px-3 sm:px-4 text-xs sm:text-[0.875rem] font-bold text-on-accent shadow-xs transition-[background-color,transform] hover:bg-accent-hover active:translate-y-px focus-visible:outline-2 focus-visible:outline-focus whitespace-nowrap shrink-0",
         className,
       )}
     >
