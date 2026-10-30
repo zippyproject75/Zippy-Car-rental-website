@@ -3,36 +3,9 @@
 import { MessageSquareShare, ShieldCheck, Star } from "lucide-react";
 import { LazyMotion, domAnimation, m, useReducedMotion } from "motion/react";
 import { buttonClass } from "@/components/ui/button";
+import { useTranslations } from "next-intl";
 
 const WA_NUMBER = "919921208410";
-
-type ReviewPlaceholder = {
-  id: string;
-  category: string;
-  topic: string;
-  description: string;
-};
-
-const REVIEW_SLOTS: ReviewPlaceholder[] = [
-  {
-    id: "fleet-quality",
-    category: "Fleet Quality",
-    topic: "Maruti Suzuki Condition",
-    description: "Customer feedback on car cleanliness, maintenance, and driving performance.",
-  },
-  {
-    id: "booking-ease",
-    category: "Rental Process",
-    topic: "WhatsApp Coordination",
-    description: "Customer experience with transparent pricing, fast reply times, and zero hidden charges.",
-  },
-  {
-    id: "branch-convenience",
-    category: "Locations",
-    topic: "Pune Branch Pickup",
-    description: "Customer reviews regarding Kondhwa, Gangadham, and Undri pickup convenience.",
-  },
-];
 
 const cardVariants = {
   hidden: { opacity: 0, y: 24 },
@@ -45,7 +18,29 @@ const starVariants = {
 };
 
 export function Reviews() {
+  const t = useTranslations("Reviews");
   const prefersReducedMotion = useReducedMotion();
+
+  const reviewSlots = [
+    {
+      id: "fleet-quality",
+      category: t("slots.fleetQuality.category"),
+      topic: t("slots.fleetQuality.topic"),
+      description: t("slots.fleetQuality.description"),
+    },
+    {
+      id: "booking-ease",
+      category: t("slots.bookingEase.category"),
+      topic: t("slots.bookingEase.topic"),
+      description: t("slots.bookingEase.description"),
+    },
+    {
+      id: "branch-convenience",
+      category: t("slots.branchConvenience.category"),
+      topic: t("slots.branchConvenience.topic"),
+      description: t("slots.branchConvenience.description"),
+    },
+  ];
 
   return (
     <LazyMotion features={domAnimation}>
@@ -60,21 +55,21 @@ export function Reviews() {
             transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
           >
             <div className="max-w-2xl">
-              <p className="eyebrow mb-3">Customer feedback</p>
+              <p className="eyebrow mb-3">{t("eyebrow")}</p>
               <h2
                 id="reviews-title"
                 className="font-display text-3xl font-bold tracking-[-0.02em] text-ink sm:text-4xl"
               >
-                Verified customer experiences
+                {t("title")}
               </h2>
               <p className="mt-3 text-[0.9375rem] leading-relaxed text-ink-2">
-                We collect genuine reviews directly from customers who have driven our cars across Pune and Maharashtra.
+                {t("subtitle")}
               </p>
             </div>
             <div className="shrink-0">
               <span className="inline-flex items-center gap-1.5 rounded-full border border-line bg-muted/60 px-3 py-1 text-xs font-semibold text-ink-3">
                 <ShieldCheck aria-hidden className="size-3.5 text-accent-ink" />
-                Verified Feedback System
+                {t("verifiedBadge")}
               </span>
             </div>
           </m.div>
@@ -90,7 +85,7 @@ export function Reviews() {
               visible: { transition: { staggerChildren: 0.12, delayChildren: 0.05 } },
             }}
           >
-            {REVIEW_SLOTS.map((slot) => (
+            {reviewSlots.map((slot) => (
               <m.article
                 key={slot.id}
                 variants={prefersReducedMotion ? undefined : cardVariants}
@@ -136,7 +131,7 @@ export function Reviews() {
 
                 <div className="mt-6 border-t border-line/60 pt-4">
                   <p className="text-xs italic text-ink-3">
-                    Awaiting owner publication of verified customer submissions.
+                    {t("awaitingPublication")}
                   </p>
                 </div>
               </m.article>
@@ -157,10 +152,10 @@ export function Reviews() {
               </div>
               <div>
                 <h4 className="font-display text-base font-bold text-ink">
-                  Rented with Zippy Car Rental?
+                  {t("invitationTitle")}
                 </h4>
                 <p className="mt-1 text-sm text-ink-2 max-w-xl">
-                  Share your trip experience with us on WhatsApp. Verified reviews are published directly on our website.
+                  {t("invitationBody")}
                 </p>
               </div>
             </div>
@@ -174,7 +169,7 @@ export function Reviews() {
                 "whitespace-nowrap shrink-0 hover:bg-raised transition-transform duration-150 hover:-translate-y-0.5"
               )}
             >
-              Submit Feedback on WhatsApp
+              {t("cta")}
             </a>
           </m.div>
         </div>

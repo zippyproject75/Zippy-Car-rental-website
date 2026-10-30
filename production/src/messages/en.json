@@ -350,5 +350,82 @@
   },
   "Placeholder": {
     "alt": "Photo of {car} coming soon"
+  },
+  "Reviews": {
+    "eyebrow": "Customer feedback",
+    "title": "Verified customer experiences",
+    "subtitle": "We collect genuine reviews directly from customers who have driven our cars across Pune and Maharashtra.",
+    "verifiedBadge": "Verified Feedback System",
+    "slots": {
+      "fleetQuality": {
+        "category": "Fleet Quality",
+        "topic": "Maruti Suzuki Condition",
+        "description": "Customer feedback on car cleanliness, maintenance, and driving performance."
+      },
+      "bookingEase": {
+        "category": "Rental Process",
+        "topic": "WhatsApp Coordination",
+        "description": "Customer experience with transparent pricing, fast reply times, and zero hidden charges."
+      },
+      "branchConvenience": {
+        "category": "Locations",
+        "topic": "Pune Branch Pickup",
+        "description": "Customer reviews regarding Kondhwa, Gangadham, and Undri pickup convenience."
+      }
+    },
+    "awaitingPublication": "Awaiting owner publication of verified customer submissions.",
+    "invitationTitle": "Rented with Zippy Car Rental?",
+    "invitationBody": "Share your trip experience with us on WhatsApp. Verified reviews are published directly on our website.",
+    "cta": "Submit Feedback on WhatsApp"
+  },
+  "RentalGuidelines": {
+    "eyebrow": "RENTAL REQUIREMENTS & POLICIES",
+    "title": "Simple, transparent rental guidelines.",
+    "subtitle": "Everything you need for an effortless self-drive experience in Pune. No complex paperwork or surprise clauses.",
+    "guidelines": {
+      "1": {
+        "title": "Original Documents",
+        "badge": "Mandatory at pickup",
+        "desc": "Valid Indian Driving Licence (held for min. 1 year) along with original Aadhaar Card or Passport for identity and address verification."
+      },
+      "2": {
+        "title": "Age & Eligibility",
+        "badge": "21+ Years Old",
+        "desc": "Drivers must be at least 21 years of age with active driving competence. Additional drivers can be registered prior to journey dispatch."
+      },
+      "3": {
+        "title": "Refundable Security Deposit",
+        "badge": "Transparent Terms",
+        "desc": "A standard refundable security deposit is collected before handover and credited back promptly following return vehicle inspection."
+      },
+      "4": {
+        "title": "Fuel & FASTag Tolls",
+        "badge": "Like-to-Like",
+        "desc": "Return the vehicle at the same fuel level as dispatched. All cars are equipped with an active FASTag for seamless highway travel."
+      }
+    },
+    "verifiedLabel": "Verified upon WhatsApp confirmation",
+    "whatsappPrompt": "Have questions about outstation travel, security deposit, or customized multi-day rentals?",
+    "whatsappCta": "Ask Us on WhatsApp"
+  },
+  "TrustStrip": {
+    "benefits": {
+      "1": {
+        "title": "Well-maintained vehicles",
+        "body": "Every Maruti Suzuki in the fleet is kept in excellent condition before your rental."
+      },
+      "2": {
+        "title": "Flexible rental plans",
+        "body": "Hourly and multi-day rentals available. Enquire for rates tailored to your trip."
+      },
+      "3": {
+        "title": "3 convenient locations",
+        "body": "Pick up from Kondhwa, Gangadham, or Undri — wherever suits you best."
+      },
+      "4": {
+        "title": "Personal WhatsApp support",
+        "body": "Every enquiry is answered by Zippy directly. Real answers, no bots."
+      }
+    }
   }
 }

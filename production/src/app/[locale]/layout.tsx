@@ -37,6 +37,12 @@ const CLIENT_NAMESPACES = [
   "Common",
   "Fleet",
   "Specs",
+  "Reviews",
+  "RentalGuidelines",
+  "HeroNew",
+  "CinematicCta",
+  "TrustStrip",
+  "Home",
 ];
 
 export const dynamicParams = false;

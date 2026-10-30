@@ -1,6 +1,7 @@
 import type { Locale } from "@/i18n/routing";
 import type { LegalDocument, LegalSlug, LegalVersion } from "@/types/legal";
 import { cancellationAndRefundPolicy } from "./cancellation-and-refund-policy";
+import { copyright } from "./copyright";
 import { cookiePolicy } from "./cookie-policy";
 import { privacyPolicy } from "./privacy-policy";
 import { termsAndConditions } from "./terms-and-conditions";
@@ -10,6 +11,7 @@ export const legalDocuments: readonly LegalDocument[] = [
   privacyPolicy,
   cookiePolicy,
   cancellationAndRefundPolicy,
+  copyright,
 ];
 
 export function getLegalDocument(slug: LegalSlug): LegalDocument {

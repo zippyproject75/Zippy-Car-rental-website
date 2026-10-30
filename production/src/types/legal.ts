@@ -5,6 +5,7 @@ export const legalSlugs = [
   "privacy-policy",
   "cookie-policy",
   "cancellation-and-refund-policy",
+  "copyright",
 ] as const;
 export type LegalSlug = (typeof legalSlugs)[number];
 
