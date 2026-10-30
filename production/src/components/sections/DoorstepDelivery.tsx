@@ -25,7 +25,7 @@ export function DoorstepDelivery() {
           </div>
 
           <div className="lg:self-center space-y-6">
-            <div className="rounded-xl border border-line bg-raised p-6 shadow-raised">
+            <div className="rounded-xl border border-line bg-raised p-5 sm:p-6 shadow-raised">
               <h3 className="font-bold text-lg text-ink mb-2">
                 {t("beyond3km")}
               </h3>

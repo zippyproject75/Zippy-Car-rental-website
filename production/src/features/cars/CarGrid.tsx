@@ -76,7 +76,7 @@ export function CarGrid({
                   type="button"
                   onClick={() => setActiveFilter(f.id)}
                   aria-pressed={active}
-                  className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs sm:text-sm font-semibold transition-all duration-150 focus-visible:outline-2 focus-visible:outline-focus ${
+                  className={`inline-flex min-h-10 items-center gap-2 rounded-full px-4 py-2 text-xs sm:text-sm font-semibold transition-all duration-150 focus-visible:outline-2 focus-visible:outline-focus ${
                     active
                       ? "bg-accent text-on-accent shadow-sm scale-[1.03]"
                       : "border border-line bg-raised text-ink-2 hover:border-line-strong hover:bg-muted hover:text-ink hover:scale-[1.02]"
