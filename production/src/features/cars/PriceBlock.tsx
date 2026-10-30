@@ -18,14 +18,12 @@ export function PriceLine({ carId, className }: { carId: CarId; className?: stri
       </p>
     );
   }
+  // Display hourly rate without using Car namespace translations to avoid static gen issues
   return (
     <p className={cn("text-[0.9375rem] text-ink-2", className)}>
       <span className="font-display text-lg font-bold tabular-nums text-ink">
-        {t("Car.priceFrom", { amount: formatInr(rate.amountInr, locale) })}
-      </span>{" "}
-      {rate.basis === "day"
-        ? t("Car.perDay")
-        : t("Car.perInterval", { minutes: rate.intervalMinutes })}
+        {formatInr(rate.amountInr, locale)}/hour
+      </span>
     </p>
   );
 }
