@@ -49,7 +49,7 @@ export function PickupLocations() {
           {locations.map((location) => (
             <article
               key={location.id}
-              className="flex flex-col justify-between gap-4 rounded-2xl border border-line bg-raised p-6 shadow-raised transition-colors hover:border-line-strong"
+              className="flex flex-col justify-between gap-4 rounded-2xl border border-line bg-raised p-5 sm:p-6 shadow-raised transition-colors hover:border-line-strong"
             >
               <div>
                 <h3 className="font-display text-lg font-bold text-ink">
@@ -66,7 +66,7 @@ export function PickupLocations() {
                 href={location.googleMapsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 rounded-lg bg-accent hover:bg-accent-hover text-on-accent font-bold text-sm px-4 py-2.5 transition-colors shadow-sm"
+                className="inline-flex min-h-11 items-center justify-center gap-2 rounded-lg bg-accent hover:bg-accent-hover text-on-accent font-bold text-sm px-4 py-2.5 transition-colors shadow-sm"
               >
                 <Navigation aria-hidden className="size-4 fill-current shrink-0" />
                 {t("getDirections")}

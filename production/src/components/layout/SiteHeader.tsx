@@ -42,7 +42,7 @@ export async function SiteHeader() {
       </div>
 
       {/* Main navigation bar */}
-      <div className="container-site flex h-[4.25rem] items-center justify-between gap-2 sm:gap-4">
+      <div className="container-site flex h-[4.25rem] items-center justify-between gap-1.5 sm:gap-4 px-2.5 sm:px-4">
         {/* Left: Brand Logo */}
         <Link
           href="/"

@@ -19,7 +19,7 @@ export function PackageSelector() {
   });
 
   return (
-    <div className="rounded-card border border-line bg-raised p-6 shadow-raised sm:p-8">
+    <div className="rounded-card border border-line bg-raised p-4 sm:p-6 lg:p-8 shadow-raised">
       <div className="mb-6">
         <h3 className="font-display text-lg font-bold text-ink">{t("packageSelector")}</h3>
       </div>
@@ -27,7 +27,7 @@ export function PackageSelector() {
       <div className="mb-6 flex gap-2 rounded-lg bg-muted p-1.5">
         <button
           onClick={() => setSelectedPackage("12-hour")}
-          className={`flex-1 rounded-md px-4 py-2.5 text-sm font-semibold transition-colors ${
+          className={`flex-1 rounded-md px-3 sm:px-4 py-2.5 text-sm font-semibold transition-colors ${
             selectedPackage === "12-hour"
               ? "bg-accent text-on-accent shadow-sm"
               : "text-ink-2 hover:text-ink"
@@ -37,7 +37,7 @@ export function PackageSelector() {
         </button>
         <button
           onClick={() => setSelectedPackage("24-hour")}
-          className={`flex-1 rounded-md px-4 py-2.5 text-sm font-semibold transition-colors ${
+          className={`flex-1 rounded-md px-3 sm:px-4 py-2.5 text-sm font-semibold transition-colors ${
             selectedPackage === "24-hour"
               ? "bg-accent text-on-accent shadow-sm"
               : "text-ink-2 hover:text-ink"
@@ -55,17 +55,17 @@ export function PackageSelector() {
           return (
             <div
               key={car.id}
-              className="flex items-center justify-between rounded-lg border border-line bg-muted/30 p-4"
+              className="flex items-center justify-between gap-3 rounded-lg border border-line bg-muted/30 p-3.5 sm:p-4"
             >
               <div>
-                <p className="font-semibold text-ink">{car.displayName}</p>
-                <p className="mt-1 text-sm text-ink-2">
+                <p className="font-semibold text-sm sm:text-base text-ink">{car.displayName}</p>
+                <p className="mt-0.5 sm:mt-1 text-xs sm:text-sm text-ink-2">
                   {t("freeKmLimit", { km: pricing.limitKm })}
                 </p>
               </div>
-              <div className="text-right">
-                <p className="font-display text-xl font-bold text-ink">₹{pricing.price}</p>
-                <p className="text-xs text-ink-3">
+              <div className="text-right shrink-0">
+                <p className="font-display text-lg sm:text-xl font-bold text-ink">₹{pricing.price}</p>
+                <p className="text-[0.6875rem] sm:text-xs text-ink-3">
                   {selectedPackage === "12-hour" ? "12 hours" : "24 hours"}
                 </p>
               </div>
