@@ -1,29 +1,36 @@
-import { Car, CheckCircle2, MapPin, MessageCircle } from "lucide-react";
+"use client";
 
-const benefits = [
-  {
-    icon: Car,
-    title: "Well-maintained vehicles",
-    body: "Every Maruti Suzuki in the fleet is kept in excellent condition before your rental.",
-  },
-  {
-    icon: CheckCircle2,
-    title: "Flexible rental plans",
-    body: "Hourly and multi-day rentals available. Enquire for rates tailored to your trip.",
-  },
-  {
-    icon: MapPin,
-    title: "3 convenient locations",
-    body: "Pick up from Kondhwa, Gangadham, or Undri — wherever suits you best.",
-  },
-  {
-    icon: MessageCircle,
-    title: "Personal WhatsApp support",
-    body: "Every enquiry is answered by Zippy directly. Real answers, no bots.",
-  },
-];
+import { Car, CheckCircle2, MapPin, MessageCircle } from "lucide-react";
+import { useTranslations } from "next-intl";
+
+const staggerClasses = ["stagger-1", "stagger-2", "stagger-3", "stagger-4"] as const;
 
 export function TrustStrip() {
+  const t = useTranslations("TrustStrip");
+
+  const benefits = [
+    {
+      icon: Car,
+      title: t("benefits.1.title"),
+      body: t("benefits.1.body"),
+    },
+    {
+      icon: CheckCircle2,
+      title: t("benefits.2.title"),
+      body: t("benefits.2.body"),
+    },
+    {
+      icon: MapPin,
+      title: t("benefits.3.title"),
+      body: t("benefits.3.body"),
+    },
+    {
+      icon: MessageCircle,
+      title: t("benefits.4.title"),
+      body: t("benefits.4.body"),
+    },
+  ];
+
   return (
     <section
       aria-label="Why choose Zippy"
@@ -31,9 +38,12 @@ export function TrustStrip() {
     >
       <div className="container-site py-12 sm:py-16">
         <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {benefits.map(({ icon: Icon, title, body }) => (
-            <li key={title} className="flex gap-4">
-              <div className="mt-0.5 flex size-10 shrink-0 items-center justify-center rounded-xl border border-line bg-muted">
+          {benefits.map(({ icon: Icon, title, body }, i) => (
+            <li
+              key={title}
+              className={`flex gap-4 scroll-reveal ${staggerClasses[i]}`}
+            >
+              <div className="mt-0.5 flex size-10 shrink-0 items-center justify-center rounded-xl border border-line bg-muted transition-[border-color,background-color] duration-300 group-hover:border-accent/30">
                 <Icon aria-hidden className="size-5 text-accent-ink" />
               </div>
               <div>
@@ -49,4 +59,3 @@ export function TrustStrip() {
     </section>
   );
 }
-

@@ -9,6 +9,7 @@ import { SiteHeader } from "@/components/layout/SiteHeader";
 import { ThemeProvider } from "@/components/layout/ThemeProvider";
 import { JsonLd } from "@/components/ui/JsonLd";
 import { FloatingContactDock } from "@/components/ui/FloatingContactDock";
+import { AnnouncementBanner } from "@/components/sections/AnnouncementBanner";
 import { localeTags } from "@/i18n/routing";
 import { cn } from "@/lib/cn";
 import { env, metadataOrigin } from "@/lib/env";
@@ -37,6 +38,15 @@ const CLIENT_NAMESPACES = [
   "Common",
   "Fleet",
   "Specs",
+  "Reviews",
+  "RentalGuidelines",
+  "HeroNew",
+  "CinematicCta",
+  "TrustStrip",
+  "Home",
+  "AnnouncementBanner",
+  "PickupLocations",
+  "DoorstepDelivery",
 ];
 
 export const dynamicParams = false;
@@ -101,6 +111,7 @@ export default async function LocaleLayout({
               </p>
             ) : null}
             <SiteHeader />
+            <AnnouncementBanner />
             <main id="main" tabIndex={-1} className="outline-none">
               {children}
             </main>

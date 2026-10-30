@@ -118,7 +118,15 @@
     "ctaTitle": "Ready when you are.",
     "ctaBody": "Prepare your enquiry in under a minute. Zippy confirms the details with you.",
     "ctaPrimary": "Start an enquiry",
-    "ctaSecondary": "Contact Zippy"
+    "ctaSecondary": "Contact Zippy",
+    "packageSelector": "Select package",
+    "package12Hour": "12-Hour Package",
+    "package24Hour": "24-Hour Package",
+    "freeKmLimit": "{km} km free",
+    "priceUnavailable": "Price on request",
+    "packageSectionEyebrow": "Package Pricing",
+    "packageSectionTitle": "Choose your rental package",
+    "packageSectionIntro": "Select between 12-hour and 24-hour packages. Confirmed prices are shown for 12-hour packages. 24-hour pricing will be added soon."
   },
   "Fleet": {
     "title": "Self-Drive Cars in Pune",
@@ -167,6 +175,8 @@
     "car": "Car",
     "anyCar": "Any available car",
     "anyCarHint": "“Any available car” is a preference only — Zippy will tell you which cars are free for your dates.",
+    "pickupLocation": "Pickup Location",
+    "pickupLocationPlaceholder": "Select a pickup location",
     "branch": "Pickup branch",
     "branchPlaceholder": "Select a branch",
     "branchesPendingNotice": "Pickup branches are being confirmed. Zippy will confirm your pickup point when it replies.",
@@ -212,7 +222,8 @@
       "durationTooShort": "The rental is shorter than the minimum duration.",
       "nameTooLong": "Use {max} characters or fewer.",
       "noteTooLong": "Use {max} characters or fewer.",
-      "branchRequired": "Select a pickup branch."
+      "branchRequired": "Select a pickup branch.",
+      "pickupLocationRequired": "Select a pickup location."
     },
     "honesty": "This is an enquiry, not a booking. No car is reserved until Zippy Car Rental confirms it with you.",
     "readyTitle": "Your enquiry is prepared",
@@ -256,6 +267,7 @@
     "anyCar": "Any available car",
     "branch": "Pickup branch",
     "branchToConfirm": "To be confirmed with Zippy",
+    "pickupLocation": "Pickup Location",
     "pickup": "Pickup",
     "return": "Return",
     "duration": "Duration",
@@ -350,5 +362,106 @@
   },
   "Placeholder": {
     "alt": "Photo of {car} coming soon"
+  },
+  "Reviews": {
+    "eyebrow": "Customer feedback",
+    "title": "Verified customer experiences",
+    "subtitle": "We collect genuine reviews directly from customers who have driven our cars across Pune and Maharashtra.",
+    "verifiedBadge": "Verified Feedback System",
+    "slots": {
+      "fleetQuality": {
+        "category": "Fleet Quality",
+        "topic": "Maruti Suzuki Condition",
+        "description": "Customer feedback on car cleanliness, maintenance, and driving performance."
+      },
+      "bookingEase": {
+        "category": "Rental Process",
+        "topic": "WhatsApp Coordination",
+        "description": "Customer experience with transparent pricing, fast reply times, and zero hidden charges."
+      },
+      "branchConvenience": {
+        "category": "Locations",
+        "topic": "Pune Branch Pickup",
+        "description": "Customer reviews regarding Kondhwa, Gangadham, and Undri pickup convenience."
+      }
+    },
+    "awaitingPublication": "Awaiting owner publication of verified customer submissions.",
+    "invitationTitle": "Rented with Zippy Car Rental?",
+    "invitationBody": "Share your trip experience with us on WhatsApp. Verified reviews are published directly on our website.",
+    "cta": "Submit Feedback on WhatsApp"
+  },
+  "RentalGuidelines": {
+    "eyebrow": "RENTAL REQUIREMENTS & POLICIES",
+    "title": "Simple, transparent rental guidelines.",
+    "subtitle": "Everything you need for an effortless self-drive experience in Pune. No complex paperwork or surprise clauses.",
+    "guidelines": {
+      "1": {
+        "title": "Original Documents",
+        "badge": "Mandatory at pickup",
+        "desc": "Valid Indian Driving Licence (held for min. 1 year) along with original Aadhaar Card or Passport for identity and address verification."
+      },
+      "2": {
+        "title": "Age & Eligibility",
+        "badge": "21+ Years Old",
+        "desc": "Drivers must be at least 21 years of age with active driving competence. Additional drivers can be registered prior to journey dispatch."
+      },
+      "3": {
+        "title": "Refundable Security Deposit",
+        "badge": "Transparent Terms",
+        "desc": "A standard refundable security deposit is collected before handover and credited back promptly following return vehicle inspection."
+      },
+      "4": {
+        "title": "Fuel & FASTag Tolls",
+        "badge": "Like-to-Like",
+        "desc": "Return the vehicle at the same fuel level as dispatched. All cars are equipped with an active FASTag for seamless highway travel."
+      }
+    },
+    "verifiedLabel": "Verified upon WhatsApp confirmation",
+    "whatsappPrompt": "Have questions about outstation travel, security deposit, or customized multi-day rentals?",
+    "whatsappCta": "Ask Us on WhatsApp"
+  },
+  "TrustStrip": {
+    "benefits": {
+      "1": {
+        "title": "Well-maintained vehicles",
+        "body": "Every Maruti Suzuki in the fleet is kept in excellent condition before your rental."
+      },
+      "2": {
+        "title": "Flexible rental plans",
+        "body": "Hourly and multi-day rentals available. Enquire for rates tailored to your trip."
+      },
+      "3": {
+        "title": "3 convenient locations",
+        "body": "Pick up from Kondhwa, Gangadham, or Undri — wherever suits you best."
+      },
+      "4": {
+        "title": "Personal WhatsApp support",
+        "body": "Every enquiry is answered by Zippy directly. Real answers, no bots."
+      }
+    }
+  },
+  "AnnouncementBanner": {
+    "message1": "Free Doorstep Delivery Within 3 KM of Our Pickup Locations",
+    "message2": "Choose Your Preferred Pickup Location",
+    "message3": "₹500 Doorstep Delivery Charge Beyond 3 KM"
+  },
+  "PickupLocations": {
+    "eyebrow": "Pickup Locations",
+    "title": "Choose Your Pickup Location",
+    "intro": "Select from our three convenient pickup locations in Pune. Click Get Directions to open Google Maps.",
+    "location1": "Pickup Location 1",
+    "location2": "Pickup Location 2",
+    "location3": "Pickup Location 3",
+    "address1": "Kamthe Patil Business Center, Pune, Maharashtra",
+    "address2": "S. No 47, Tilekar Nagar, Kondhwa Budruk, Pune, Maharashtra 411048",
+    "address3": "SHOP NO 1, GROUND FLOOR, RK COMPLEX, Road, opposite EURO INTERNATIONAL SCHOOL, Undri Chowk, Undri, Pune, Maharashtra 411060",
+    "getDirections": "Get Directions"
+  },
+  "DoorstepDelivery": {
+    "eyebrow": "Doorstep Delivery Policy",
+    "title": "Free Delivery Within 3 KM",
+    "intro": "Customers receive free doorstep delivery within a 3 km radius of our pickup locations.",
+    "beyond3km": "Beyond 3 KM: ₹500 Delivery Charge",
+    "beyond3kmIntro": "A ₹500 doorstep delivery charge applies beyond the 3 km radius. This charge includes both sides."
   }
 }
