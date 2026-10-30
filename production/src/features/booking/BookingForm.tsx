@@ -5,7 +5,7 @@ import { LazyMotion, MotionConfig, domAnimation, m } from "motion/react";
 import { useLocale, useTranslations } from "next-intl";
 import { useRef, useState, type FormEvent } from "react";
 import { buttonClass } from "@/components/ui/button";
-import { bookingRules, NAME_MAX_LENGTH, NOTE_MAX_LENGTH } from "@/data/booking";
+import { bookingRules } from "@/data/booking";
 import { pricingConfig } from "@/data/pricing";
 import type { Locale } from "@/i18n/routing";
 import { cn } from "@/lib/cn";
@@ -14,20 +14,19 @@ import { requestDateBounds, timeSlots, validateRequest } from "@/lib/dates";
 import { formatDateTime, formatInr, formatTimeKey } from "@/lib/formatting";
 import { calculateEstimate } from "@/lib/pricing";
 import { enquiryService, type EnquiryResult } from "@/services/enquiry";
-import type { EstimateResult, RequestErrorCode, RequestField } from "@/types/booking";
+import type { RequestErrorCode, RequestField } from "@/types/booking";
 import type { CarId } from "@/types/car";
 import type { BranchId } from "@/types/site";
 import { DateField } from "./DateField";
 import { formatDuration } from "./duration";
 import { EnquiryResultPanel } from "./EnquiryResultPanel";
 import { FieldError, fieldControlClass } from "./fields";
-import { optionalFieldsSchema } from "./schema";
 
 export type BookingCarOption = { id: CarId; label: string };
 export type BookingBranchOption = { id: BranchId; name: string; pending: boolean };
 export type BookingPickupLocationOption = { id: string; name: string; googleMapsUrl: string };
 
-type FieldKey = RequestField | "branchId" | "pickupLocationId" | "name" | "note";
+type FieldKey = RequestField | "branchId" | "pickupLocationId";
 type Errors = Partial<Record<FieldKey, string>>;
 
 const SLOTS = timeSlots(bookingRules.slotMinutes);
@@ -38,8 +37,6 @@ const FIELD_ORDER: FieldKey[] = [
   "pickupTime",
   "returnDate",
   "returnTime",
-  "name",
-  "note",
 ];
 
 export function BookingForm({
@@ -58,11 +55,9 @@ export function BookingForm({
   headingId?: string;
 }) {
   const t = useTranslations("Booking");
-  const tPricing = useTranslations("Pricing");
   const tDuration = useTranslations("Duration");
   const tWa = useTranslations("WhatsApp");
   const tc = useTranslations("Common");
-  const tPickup = useTranslations("PickupLocations");
   const locale = useLocale() as Locale;
 
   const [carId, setCarId] = useState<CarId | "any">(initialCarId ?? "any");
@@ -74,8 +69,6 @@ export function BookingForm({
   const [pickupTime, setPickupTime] = useState("");
   const [returnDate, setReturnDate] = useState("");
   const [returnTime, setReturnTime] = useState("");
-  const [name, setName] = useState("");
-  const [note, setNote] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [errors, setErrors] = useState<Errors>({});
   const [result, setResult] = useState<EnquiryResult | null>(null);
@@ -86,16 +79,7 @@ export function BookingForm({
   const { first, last } = requestDateBounds(now, bookingRules);
 
   const draft = { pickupDate, pickupTime, returnDate, returnTime };
-  const allDatesChosen = Boolean(pickupDate && pickupTime && returnDate && returnTime);
-  const validation = allDatesChosen ? validateRequest(draft, new Date(), bookingRules) : null;
   const selectedCar = carId === "any" ? null : carId;
-  const estimate: EstimateResult | null =
-    validation?.ok === true
-      ? calculateEstimate(
-          { carId: selectedCar, pickupAt: validation.pickupAt, returnAt: validation.returnAt },
-          pricingConfig,
-        )
-      : null;
 
   function errorText(code: RequestErrorCode): string {
     return t(`errors.${code}`, { days: bookingRules.maxAdvanceDays });
@@ -115,15 +99,6 @@ export function BookingForm({
     if (!pickupLocationId) next.pickupLocationId = t("errors.pickupLocationRequired");
     // Branch selection is now optional - customers can choose from pickup locations on homepage
     // if (branches.length > 0 && !branchId) next.branchId = t("errors.branchRequired");
-    const optional = optionalFieldsSchema.safeParse({ name, note });
-    if (!optional.success) {
-      for (const issue of optional.error.issues) {
-        const field = issue.path[0] as "name" | "note";
-        next[field] = t(`errors.${issue.message as "nameTooLong" | "noteTooLong"}`, {
-          max: field === "name" ? NAME_MAX_LENGTH : NOTE_MAX_LENGTH,
-        });
-      }
-    }
     return next;
   }
 
@@ -156,8 +131,6 @@ export function BookingForm({
         return: formatDateTime(check.returnAt, locale),
         duration: formatDuration(check.durationMinutes, tDuration),
         estimate: est.kind === "estimate" ? formatInr(est.amountInr, locale) : null,
-        name,
-        note,
       },
       {
         greeting: tWa("greeting"),
@@ -185,8 +158,6 @@ export function BookingForm({
     pickupTime: t("pickupTime"),
     returnDate: t("returnDate"),
     returnTime: t("returnTime"),
-    name: t("name"),
-    note: t("note"),
   };
   const shownErrors = FIELD_ORDER.filter((f) => liveErrors[f]);
 
@@ -397,71 +368,6 @@ export function BookingForm({
               {t("timeZoneNote")}
             </p>
 
-            <div className="grid gap-5 md:grid-cols-2">
-              <div className="flex flex-col gap-1.5">
-                <label htmlFor="booking-name" className="text-sm font-semibold text-ink">
-                  {t("name")} <span className="font-normal text-ink-3">({t("optional")})</span>
-                </label>
-                <input
-                  id="booking-name"
-                  type="text"
-                  autoComplete="name"
-                  maxLength={NAME_MAX_LENGTH}
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  aria-invalid={liveErrors.name ? true : undefined}
-                  aria-describedby={liveErrors.name ? "booking-name-error" : "booking-name-hint"}
-                  className={fieldControlClass(Boolean(liveErrors.name))}
-                />
-                <p id="booking-name-hint" className="text-xs text-ink-3">
-                  {t("nameHint")}
-                </p>
-                <FieldError id="booking-name-error" message={liveErrors.name} />
-              </div>
-              <div className="flex flex-col gap-1.5">
-                <label htmlFor="booking-note" className="text-sm font-semibold text-ink">
-                  {t("note")} <span className="font-normal text-ink-3">({t("optional")})</span>
-                </label>
-                <textarea
-                  id="booking-note"
-                  rows={2}
-                  maxLength={NOTE_MAX_LENGTH}
-                  value={note}
-                  onChange={(e) => setNote(e.target.value)}
-                  aria-invalid={liveErrors.note ? true : undefined}
-                  aria-describedby={liveErrors.note ? "booking-note-error" : "booking-note-hint"}
-                  className={cn(fieldControlClass(Boolean(liveErrors.note)), "py-3")}
-                />
-                <p id="booking-note-hint" className="flex justify-between text-xs text-ink-3">
-                  <span>{t("noteHint", { max: NOTE_MAX_LENGTH })}</span>
-                  <span className="tabular-nums" aria-hidden>
-                    {t("noteCount", { count: note.length, max: NOTE_MAX_LENGTH })}
-                  </span>
-                </p>
-                <FieldError id="booking-note-error" message={liveErrors.note} />
-              </div>
-            </div>
-
-            <RequestSummary
-              durationText={
-                validation?.ok ? formatDuration(validation.durationMinutes, tDuration) : null
-              }
-              estimate={estimate}
-              priceLabel={(e) => formatInr(e, locale)}
-              t={{
-                title: t("summaryTitle"),
-                duration: t("durationLabel"),
-                empty: t("durationEmpty"),
-                estimateLabel: tPricing("estimateLabel"),
-                disclaimer: tPricing("disclaimer"),
-                priceOnRequest: tPricing("priceOnRequest"),
-                reason: (r) => tPricing(`reasons.${r}`),
-                lineDaily: (u, rate) => tPricing("lineDaily", { units: u, rate }),
-                lineHourly: (u, interval, rate) =>
-                  tPricing("lineHourly", { units: u, interval, rate }),
-              }}
-            />
-
             <div className="flex flex-col gap-4 border-t border-line pt-6 md:flex-row md:items-center md:justify-between">
               <p className="flex max-w-xl items-start gap-2 text-sm leading-relaxed text-ink-2">
                 <ShieldCheck aria-hidden className="mt-0.5 size-4 shrink-0 text-accent-ink" />
@@ -480,84 +386,5 @@ export function BookingForm({
         )}
       </LazyMotion>
     </MotionConfig>
-  );
-}
-
-function RequestSummary({
-  durationText,
-  estimate,
-  priceLabel,
-  t,
-}: {
-  durationText: string | null;
-  estimate: EstimateResult | null;
-  priceLabel: (amount: number) => string;
-  t: {
-    title: string;
-    duration: string;
-    empty: string;
-    estimateLabel: string;
-    disclaimer: string;
-    priceOnRequest: string;
-    reason: (r: "no-vehicle-selected" | "pricing-not-approved" | "unknown-vehicle") => string;
-    lineDaily: (units: number, rate: string) => string;
-    lineHourly: (units: number, interval: number, rate: string) => string;
-  };
-}) {
-  return (
-    <section
-      aria-label={t.title}
-      aria-live="polite"
-      className="grid gap-4 rounded-card border border-line bg-canvas p-5 sm:grid-cols-2"
-      data-testid="request-summary"
-    >
-      <div>
-        <p className="eyebrow">{t.duration}</p>
-        {durationText ? (
-          <p
-            className="mt-1.5 font-display text-xl font-bold tabular-nums text-ink"
-            data-testid="duration"
-          >
-            {durationText}
-          </p>
-        ) : (
-          <p className="mt-1.5 text-sm text-ink-3">{t.empty}</p>
-        )}
-      </div>
-      {estimate && estimate.kind !== "invalid" ? (
-        <div data-testid="estimate">
-          {estimate.kind === "estimate" ? (
-            <>
-              <p className="eyebrow">{t.estimateLabel}</p>
-              <p className="mt-1.5 font-display text-2xl font-bold tabular-nums text-ink">
-                {priceLabel(estimate.amountInr)}
-              </p>
-              <ul className="mt-2 space-y-0.5 text-xs text-ink-3 tabular-nums">
-                {estimate.breakdown.map((line, i) => (
-                  <li key={i}>
-                    {line.kind === "daily" && line.units && line.unitAmountInr !== undefined
-                      ? t.lineDaily(line.units, priceLabel(line.unitAmountInr))
-                      : line.kind === "hourly" && line.units && line.unitAmountInr !== undefined
-                        ? t.lineHourly(
-                            line.units,
-                            line.intervalMinutes ?? 60,
-                            priceLabel(line.unitAmountInr),
-                          )
-                        : priceLabel(line.amountInr)}
-                  </li>
-                ))}
-              </ul>
-              <p className="mt-2 text-xs leading-relaxed text-ink-2">{t.disclaimer}</p>
-            </>
-          ) : (
-            <>
-              <p className="eyebrow">{t.estimateLabel}</p>
-              <p className="mt-1.5 font-display text-xl font-bold text-ink">{t.priceOnRequest}</p>
-              <p className="mt-1 text-xs leading-relaxed text-ink-2">{t.reason(estimate.reason)}</p>
-            </>
-          )}
-        </div>
-      ) : null}
-    </section>
   );
 }
