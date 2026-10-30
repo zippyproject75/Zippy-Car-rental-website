@@ -1,3 +1,5 @@
+"use client";
+
 import { useTranslations } from "next-intl";
 
 export function AnnouncementBanner() {
@@ -12,20 +14,19 @@ export function AnnouncementBanner() {
   return (
     <div className="w-full border-b border-line bg-accent text-on-accent">
       <div className="overflow-hidden">
-        <div className="flex animate-[marquee_30s_linear_infinite] whitespace-nowrap motion-reduce:animate-none">
+        <div className="marquee-content">
           {messages.map((message, index) => (
             <span
               key={index}
-              className="mx-8 inline-block py-2 text-sm font-medium"
+              className="mx-4 sm:mx-8 inline-block py-2 text-sm sm:text-base font-medium whitespace-nowrap"
             >
               {message}
             </span>
           ))}
-          {/* Duplicate messages for seamless infinite scroll */}
           {messages.map((message, index) => (
             <span
               key={`dup-${index}`}
-              className="mx-8 inline-block py-2 text-sm font-medium"
+              className="mx-4 sm:mx-8 inline-block py-2 text-sm sm:text-base font-medium whitespace-nowrap"
             >
               {message}
             </span>
