@@ -175,6 +175,8 @@
     "car": "कार",
     "anyCar": "कोणतीही उपलब्ध कार",
     "anyCarHint": "“कोणतीही उपलब्ध कार” ही फक्त पसंती आहे — तुमच्या तारखांसाठी कोणत्या कार मोकळ्या आहेत ते Zippy सांगेल.",
+    "pickupLocation": "पिकअप ठिकाण",
+    "pickupLocationPlaceholder": "पिकअप ठिकाण निवडा",
     "branch": "पिकअप शाखा",
     "branchPlaceholder": "शाखा निवडा",
     "branchesPendingNotice": "पिकअप शाखा निश्चित केल्या जात आहेत. उत्तर देताना Zippy तुमचे पिकअप ठिकाण निश्चित करेल.",
@@ -220,7 +222,8 @@
       "durationTooShort": "भाडे किमान कालावधीपेक्षा कमी आहे.",
       "nameTooLong": "{max} किंवा कमी अक्षरे वापरा.",
       "noteTooLong": "{max} किंवा कमी अक्षरे वापरा.",
-      "branchRequired": "पिकअप शाखा निवडा."
+      "branchRequired": "पिकअप शाखा निवडा.",
+      "pickupLocationRequired": "पिकअप ठिकाण निवडा."
     },
     "honesty": "ही चौकशी आहे, बुकिंग नाही. Zippy Car Rental तुमच्याशी निश्चित करेपर्यंत कोणतीही कार राखीव नसते.",
     "readyTitle": "तुमची चौकशी तयार आहे",
@@ -264,6 +267,7 @@
     "anyCar": "कोणतीही उपलब्ध कार",
     "branch": "पिकअप शाखा",
     "branchToConfirm": "Zippy सोबत निश्चित करायचे",
+    "pickupLocation": "पिकअप ठिकाण",
     "pickup": "पिकअप",
     "return": "परत",
     "duration": "कालावधी",
@@ -435,5 +439,29 @@
         "body": "प्रत्येक चौकशीचे उत्तर थेट Zippy द्वारे दिले जाते. खरे उत्तर, कोणतेही बॉट नाहीत."
       }
     }
+  },
+  "AnnouncementBanner": {
+    "message1": "आमच्या पिकअप ठिकाणांपासून 3 किमी अंतरात विनामूल्य दारावर डिलिव्हरी",
+    "message2": "तुमचे पसंदीदा पिकअप ठिकाण निवडा",
+    "message3": "3 किमी पलीकडे ₹500 दारावर डिलिव्हरी शुल्क"
+  },
+  "PickupLocations": {
+    "eyebrow": "पिकअप ठिकाणे",
+    "title": "तुमचे पिकअप ठिकाण निवडा",
+    "intro": "पुण्यातील आमच्या तीन सोयीस्कर पिकअप ठिकाणांपैकी एक निवडा. Google Maps उघडण्यासाठी दिशा मिळवा वर क्लिक करा.",
+    "location1": "पिकअप ठिकाण 1",
+    "location2": "पिकअप ठिकाण 2",
+    "location3": "पिकअप ठिकाण 3",
+    "address1": "Kamthe Patil Business Center, Pune, Maharashtra",
+    "address2": "S. No 47, Tilekar Nagar, Kondhwa Budruk, Pune, Maharashtra 411048",
+    "address3": "SHOP NO 1, GROUND FLOOR, RK COMPLEX, Road, opposite EURO INTERNATIONAL SCHOOL, Undri Chowk, Undri, Pune, Maharashtra 411060",
+    "getDirections": "दिशा मिळवा"
+  },
+  "DoorstepDelivery": {
+    "eyebrow": "दारावर डिलिव्हरी धोरण",
+    "title": "3 किमी अंतरात विनामूल्य डिलिव्हरी",
+    "intro": "ग्राहकांना आमच्या पिकअप ठिकाणांच्या 3 किमी त्रिज्येत विनामूल्य दारावर डिलिव्हरी मिळते.",
+    "beyond3km": "3 किमी पलीकडे: ₹500 डिलिव्हरी शुल्क",
+    "beyond3kmIntro": "3 किमी त्रिज्येपलीकडे ₹500 दारावर डिलिव्हरी शुल्क लागू होते. हे शुल्क दोन्ही बाजूंसाठी आहे."
   }
 }

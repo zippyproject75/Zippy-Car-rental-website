@@ -11,6 +11,7 @@ export function buildEnquiryMessage(
     labels.greeting,
     "",
     `${labels.car}: ${fields.carName ?? labels.anyCar}`,
+    `${labels.pickupLocation}: ${fields.pickupLocationName ?? "Not specified"}`,
     `${labels.branch}: ${fields.branchName ?? labels.branchToConfirm}`,
     `${labels.pickup}: ${fields.pickup}`,
     `${labels.return}: ${fields.return}`,

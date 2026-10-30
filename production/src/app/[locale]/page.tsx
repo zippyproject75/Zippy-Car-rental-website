@@ -9,6 +9,8 @@ import { Reviews } from "@/components/sections/Reviews";
 import { RentalGuidelines } from "@/components/sections/RentalGuidelines";
 import { CinematicCta } from "@/components/sections/CinematicCta";
 import { PackageSelector } from "@/components/sections/PackageSelector";
+import { PickupLocations } from "@/components/sections/PickupLocations";
+import { DoorstepDelivery } from "@/components/sections/DoorstepDelivery";
 import { Accordion } from "@/components/ui/Accordion";
 import { ButtonLink } from "@/components/ui/ButtonLink";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -241,6 +243,12 @@ export default async function HomePage({ params }: LocaleParams) {
           </div>
         </section>
       ) : null}
+
+      {/* ── 8.5. PICKUP LOCATIONS WITH GOOGLE MAPS LINKS ── */}
+      <PickupLocations />
+
+      {/* ── 8.6. DOORSTEP DELIVERY POLICY ── */}
+      <DoorstepDelivery />
 
       {/* ── 9. RENTAL GUIDELINES & POLICIES ── */}
       <RentalGuidelines />
