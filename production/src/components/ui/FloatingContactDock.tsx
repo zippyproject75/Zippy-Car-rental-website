@@ -1,7 +1,7 @@
 "use client";
 
 import { MessageCircle, Phone } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useMounted } from "@/components/layout/useMounted";
 
 const PHONE_NUMBER_DISPLAY = "+91 99212 08410";
 const PHONE_NUMBER_TEL = "+919921208410";
@@ -22,11 +22,7 @@ const WA_MESSAGE = "Hello Zippy! I'd like to enquire about self-drive car rental
  *  - Does not obscure center page content or forms
  */
 export function FloatingContactDock() {
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  const mounted = useMounted();
 
   if (!mounted) return null;
 
@@ -85,4 +81,3 @@ export function FloatingContactDock() {
 
 // Backwards-compatible alias for any legacy imports
 export { FloatingContactDock as FloatingWhatsApp };
-

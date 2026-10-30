@@ -1,4 +1,4 @@
-import type { Car, CarSpecs } from "@/types/car";
+import type { Car } from "@/types/car";
 import type { Fact, Localized } from "@/types/content";
 
 function confirmed<T>(value: T, source = "Fleet specification"): Fact<T> {

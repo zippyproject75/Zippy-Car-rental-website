@@ -6,7 +6,7 @@ import { ENQUIRY_PATH } from "@/data/navigation";
 import { Link, usePathname } from "@/i18n/navigation";
 import { cn } from "@/lib/cn";
 
-export function HeaderCta({ variant = "desktop", className }: { variant?: "desktop" | "mobile"; className?: string }) {
+export function HeaderCta({ className }: { variant?: "desktop" | "mobile"; className?: string }) {
   const t = useTranslations("Nav");
   const pathname = usePathname();
 

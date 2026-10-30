@@ -9,6 +9,9 @@ import { SiteHeader } from "@/components/layout/SiteHeader";
 import { ThemeProvider } from "@/components/layout/ThemeProvider";
 import { JsonLd } from "@/components/ui/JsonLd";
 import { FloatingContactDock } from "@/components/ui/FloatingContactDock";
+import { PageTransitionProvider } from "@/components/transitions/PageTransitionContext";
+import { PageTransitionOverlay } from "@/components/transitions/PageTransitionOverlay";
+import { PageContentWrapper } from "@/components/transitions/PageContentWrapper";
 import { localeTags } from "@/i18n/routing";
 import { cn } from "@/lib/cn";
 import { env, metadataOrigin } from "@/lib/env";
@@ -86,27 +89,32 @@ export default async function LocaleLayout({
       <body className="min-h-dvh bg-canvas font-sans text-ink antialiased">
         <ThemeProvider>
           <NextIntlClientProvider messages={clientMessages}>
-            <a
-              href="#main"
-              className="sr-only z-50 rounded-control bg-accent px-4 py-3 font-semibold text-on-accent focus:not-sr-only focus:fixed focus:top-3 focus:left-3"
-            >
-              {t("skipToContent")}
-            </a>
-            {env.showPendingContent ? (
-              <p
-                className="border-b border-warning/40 bg-warning-surface px-4 py-1.5 text-center text-xs font-medium text-warning"
-                data-testid="preview-banner"
+            <PageTransitionProvider>
+              <PageTransitionOverlay />
+              <a
+                href="#main"
+                className="sr-only z-50 rounded-control bg-accent px-4 py-3 font-semibold text-on-accent focus:not-sr-only focus:fixed focus:top-3 focus:left-3"
               >
-                {t("previewBanner")}
-              </p>
-            ) : null}
-            <SiteHeader />
-            <main id="main" tabIndex={-1} className="outline-none">
-              {children}
-            </main>
-            <SiteFooter />
-            {/* Fixed vertical contact dock on the left side of the viewport (Phone & WhatsApp) */}
-            <FloatingContactDock />
+                {t("skipToContent")}
+              </a>
+              {env.showPendingContent ? (
+                <p
+                  className="border-b border-warning/40 bg-warning-surface px-4 py-1.5 text-center text-xs font-medium text-warning"
+                  data-testid="preview-banner"
+                >
+                  {t("previewBanner")}
+                </p>
+              ) : null}
+              <SiteHeader />
+              <main id="main" tabIndex={-1} className="outline-none">
+                <PageContentWrapper>
+                  {children}
+                </PageContentWrapper>
+              </main>
+              <SiteFooter />
+              {/* Fixed vertical contact dock on the left side of the viewport (Phone & WhatsApp) */}
+              <FloatingContactDock />
+            </PageTransitionProvider>
           </NextIntlClientProvider>
         </ThemeProvider>
         <JsonLd data={organizationJsonLd()} />

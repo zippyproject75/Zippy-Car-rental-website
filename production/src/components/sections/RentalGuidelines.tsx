@@ -1,5 +1,4 @@
 import { FileText, Fuel, Shield, UserCheck, MessageCircle } from "lucide-react";
-import { Link } from "@/i18n/navigation";
 
 const GUIDELINES = [
   {
@@ -117,4 +116,3 @@ export function RentalGuidelines() {
     </section>
   );
 }
-
