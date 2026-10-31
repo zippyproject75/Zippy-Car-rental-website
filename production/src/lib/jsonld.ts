@@ -15,13 +15,18 @@ export function organizationJsonLd(): JsonLd | null {
     "@type": "Organization",
     name: site.name,
     url: env.siteUrl,
-    description: "Self-drive car rental in Pune, Maharashtra, India.",
+    description: "Self-drive car rental service in Pune, Maharashtra, India. Offers Maruti Suzuki vehicles with doorstep delivery options.",
     address: {
       "@type": "PostalAddress",
       addressLocality: site.city,
       addressRegion: site.region,
       addressCountry: site.country,
     },
+    areaServed: {
+      "@type": "City",
+      name: site.city,
+    },
+    availableLanguage: ["English", "Hindi", "Marathi"],
   };
   const phone = site.contacts.primaryPhone;
   if (phone.status === "confirmed") {
@@ -30,6 +35,7 @@ export function organizationJsonLd(): JsonLd | null {
       telephone: phone.value.e164,
       contactType: "customer service",
       areaServed: site.city,
+      availableLanguage: ["English", "Hindi", "Marathi"],
     };
   }
   if (site.brand.logo.status === "confirmed") {
@@ -48,6 +54,7 @@ export function autoRentalJsonLd(): JsonLd[] {
       "@type": "AutoRental",
       name: `${site.name} — ${b.name.en}`,
       url: env.siteUrl,
+      description: "Self-drive car rental service in Pune, Maharashtra. Fleet includes Maruti Suzuki vehicles with doorstep delivery available.",
       address: {
         "@type": "PostalAddress",
         streetAddress: b.address.value.lines.join(", "),
@@ -60,6 +67,7 @@ export function autoRentalJsonLd(): JsonLd[] {
         "@type": "City",
         name: site.city,
       },
+      availableLanguage: ["English", "Hindi", "Marathi"],
     };
     if (phone.status === "confirmed") data.telephone = phone.value.e164;
     return [data];
@@ -103,12 +111,14 @@ export function webSiteJsonLd(): JsonLd | null {
     "@type": "WebSite",
     name: site.name,
     url: env.siteUrl,
-    description: "Self-drive car rental in Pune, Maharashtra, India.",
+    description: "Self-drive car rental service in Pune, Maharashtra, India. Browse available Maruti Suzuki vehicles and send rental enquiries.",
+    inLanguage: ["en-IN", "hi-IN", "mr-IN"],
     potentialAction: {
       "@type": "SearchAction",
       target: {
         "@type": "EntryPoint",
         urlTemplate: `${env.siteUrl}/cars`,
+        actionPlatform: "https://schema.org/DesktopWebPlatform",
       },
       "query-input": "required name",
     },
@@ -134,7 +144,7 @@ export function carProductJsonLd(car: {
     "@type": "Product",
     name,
     image: imageUrl,
-    description: `Self-drive rental of ${car.displayName} in Pune from Zippy Car Rental.`,
+    description: `Self-drive rental of ${car.displayName} in Pune from Zippy Car Rental. Send an enquiry to check availability and rates.`,
     brand: {
       "@type": "Brand",
       name: car.make,
@@ -146,7 +156,11 @@ export function carProductJsonLd(car: {
       availability: "https://schema.org/InStock",
       priceCurrency: "INR",
       url: carUrl,
-      description: "Price on request - contact Zippy Car Rental for current rates.",
+      description: "Price on request - contact Zippy Car Rental for current rates via WhatsApp enquiry.",
+    },
+    areaServed: {
+      "@type": "City",
+      name: site.city,
     },
   };
 }
