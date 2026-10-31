@@ -3,10 +3,14 @@ import { getTranslations } from "next-intl/server";
 import { CtaBand } from "@/components/sections/CtaBand";
 import { HowItWorks } from "@/components/sections/HowItWorks";
 import { PageIntro } from "@/components/sections/PageIntro";
+import { JsonLd } from "@/components/ui/JsonLd";
 import { CarGrid } from "@/features/cars/CarGrid";
 import { getCars } from "@/lib/catalog";
+import { breadcrumbJsonLd } from "@/lib/jsonld";
+import { localizedPath } from "@/lib/routes";
+import { absoluteUrl, buildMetadata } from "@/lib/seo";
 import { resolveLocale, type LocaleParams } from "@/lib/page";
-import { buildMetadata } from "@/lib/seo";
+import { Link } from "@/i18n/navigation";
 
 export async function generateMetadata({ params }: LocaleParams): Promise<Metadata> {
   const locale = await resolveLocale(params);
@@ -20,9 +24,13 @@ export async function generateMetadata({ params }: LocaleParams): Promise<Metada
 }
 
 export default async function CarsPage({ params }: LocaleParams) {
-  await resolveLocale(params);
+  const locale = await resolveLocale(params);
   const t = await getTranslations();
   const cars = getCars();
+  const crumbs = [
+    { name: t("Common.home"), url: absoluteUrl(localizedPath(locale, "/")) },
+    { name: t("Car.breadcrumbCars"), url: absoluteUrl(localizedPath(locale, "/cars")) },
+  ];
   return (
     <>
       <PageIntro
@@ -34,8 +42,11 @@ export default async function CarsPage({ params }: LocaleParams) {
           {t("Fleet.countLabel", { count: cars.length })}
         </p>
       </PageIntro>
-      <section className="container-site py-14 lg:py-20" aria-label={t("Fleet.title")}>
-        <CarGrid cars={cars} headingLevel="h2" />
+      <section className="container-site py-14 lg:py-20 bg-muted/40" aria-label={t("Fleet.title")}>
+        <div className="flex items-center justify-between mb-8">
+          <h2 className="font-display text-3xl font-bold text-ink">Pick your next ride</h2>
+        </div>
+        <CarGrid cars={cars} headingLevel="h2" showFilters={true} />
       </section>
       <section
         aria-label={t("Home.howTitle")}
@@ -46,6 +57,7 @@ export default async function CarsPage({ params }: LocaleParams) {
         </div>
       </section>
       <CtaBand />
+      <JsonLd data={breadcrumbJsonLd(crumbs)} />
     </>
   );
 }

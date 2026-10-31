@@ -230,16 +230,7 @@ html.dark,
 }
 
 /* ── Announcement Banner Marquee Animation ── */
-@keyframes marquee-mobile {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
-}
-
-@keyframes marquee-desktop {
+@keyframes marquee {
   0% {
     transform: translateX(0);
   }
@@ -250,13 +241,13 @@ html.dark,
 
 .marquee-content {
   display: flex;
-  animation: marquee-mobile 5s linear infinite;
+  animation: marquee 6s linear infinite;
   white-space: nowrap;
 }
 
 @media (min-width: 640px) {
   .marquee-content {
-    animation: marquee-desktop 15s linear infinite;
+    animation: marquee 18s linear infinite;
   }
 }
 
@@ -433,13 +424,6 @@ html.dark,
     animation-range: entry 0% entry 22%;
     animation-duration: 1ms;
   }
-
-  .connector-line {
-    animation: draw-line linear both;
-    animation-timeline: view();
-    animation-range: entry 20% entry 80%;
-    animation-duration: 1ms;
-  }
 }
 
 /* ── Stagger delay helpers ── */
@@ -475,6 +459,41 @@ html.dark,
   .dark .car-card-3d:hover {
     box-shadow: 0 24px 56px -12px rgb(0 0 0 / 0.7), 0 4px 8px rgb(0 0 0 / 0.4);
   }
+}
+
+/* Touch device active state feedback */
+@media (hover: none) and (pointer: coarse) {
+  .car-card-3d:active {
+    transform: scale(0.98);
+    box-shadow: 0 8px 24px -8px rgb(0 0 0 / 0.4);
+  }
+}
+
+/* ── Mobile menu slide animation ── */
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideOutRight {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+
+dialog[open] {
+  animation: slideInRight 0.3s ease-out forwards;
+}
+
+dialog.closing {
+  animation: slideOutRight 0.25s ease-in forwards;
 }
 
 /* ── Shimmer overlay on hero car card ── */

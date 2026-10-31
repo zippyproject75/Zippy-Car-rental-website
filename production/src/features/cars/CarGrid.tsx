@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { LazyMotion, domAnimation, m, useReducedMotion } from "motion/react";
 import type { Car } from "@/types/car";
 import { CarCard } from "./CarCard";
@@ -37,6 +37,39 @@ export function CarGrid({
 }) {
   const [activeFilter, setActiveFilter] = useState<FilterId>("all");
   const prefersReducedMotion = useReducedMotion();
+  const gridRef = useRef<HTMLUListElement>(null);
+  const [isVisible, setIsVisible] = useState(
+    typeof IntersectionObserver === "undefined"
+  );
+
+  // IntersectionObserver for reliable scroll triggering on mobile
+  useEffect(() => {
+    const element = gridRef.current;
+    if (!element || prefersReducedMotion) {
+      setIsVisible(true);
+      return;
+    }
+
+    if (typeof IntersectionObserver === "undefined") {
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0];
+        if (entry?.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.05, rootMargin: "-5%" }
+    );
+
+    observer.observe(element);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [prefersReducedMotion, activeFilter]);
 
   const filtered =
     activeFilter === "all"
@@ -98,13 +131,13 @@ export function CarGrid({
 
         {/* Staggered grid of cars */}
         <m.ul
+          ref={gridRef}
           className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
           data-testid="car-grid"
           key={activeFilter}
           variants={prefersReducedMotion ? undefined : listVariants}
           initial={prefersReducedMotion ? undefined : "hidden"}
-          whileInView={prefersReducedMotion ? undefined : "visible"}
-          viewport={{ once: true, margin: "-8%" }}
+          animate={isVisible ? "visible" : "hidden"}
         >
           {filtered.map((car) => (
             <m.li

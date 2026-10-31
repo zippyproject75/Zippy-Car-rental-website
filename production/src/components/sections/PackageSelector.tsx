@@ -27,20 +27,20 @@ export function PackageSelector() {
       <div className="mb-6 flex gap-2 rounded-lg bg-muted p-1.5">
         <button
           onClick={() => setSelectedPackage("12-hour")}
-          className={`flex-1 rounded-md px-3 sm:px-4 py-2.5 text-sm font-semibold transition-colors ${
+          className={`flex-1 rounded-md px-3 sm:px-4 py-2.5 text-sm font-semibold transition-all duration-150 ${
             selectedPackage === "12-hour"
-              ? "bg-accent text-on-accent shadow-sm"
-              : "text-ink-2 hover:text-ink"
+              ? "bg-accent text-on-accent shadow-sm scale-[1.02]"
+              : "text-ink-2 hover:text-ink active:scale-95"
           }`}
         >
           {t("package12Hour")}
         </button>
         <button
           onClick={() => setSelectedPackage("24-hour")}
-          className={`flex-1 rounded-md px-3 sm:px-4 py-2.5 text-sm font-semibold transition-colors ${
+          className={`flex-1 rounded-md px-3 sm:px-4 py-2.5 text-sm font-semibold transition-all duration-150 ${
             selectedPackage === "24-hour"
-              ? "bg-accent text-on-accent shadow-sm"
-              : "text-ink-2 hover:text-ink"
+              ? "bg-accent text-on-accent shadow-sm scale-[1.02]"
+              : "text-ink-2 hover:text-ink active:scale-95"
           }`}
         >
           {t("package24Hour")}
