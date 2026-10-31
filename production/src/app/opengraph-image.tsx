@@ -4,7 +4,7 @@ export const alt = "Zippy Car Rental — self-drive car rental in Pune";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-/** Branded social image with logo and tagline on black background. */
+/** Branded social image with Zippy branding on black background. */
 export default function OpengraphImage() {
   return new ImageResponse(
     <div
@@ -17,24 +17,27 @@ export default function OpengraphImage() {
         justifyContent: "center",
         background: "#000000",
         color: "#ffffff",
+        padding: 60,
       }}
     >
-      {/* Logo */}
-      <img
-        src="https://www.zippycarrental.in/zippy_main_logo.png"
-        alt="Zippy Car Rental Logo"
-        width={300}
-        height={200}
-        style={{ marginBottom: 40 }}
-      />
+      {/* Brand name */}
+      <div style={{ fontSize: 48, fontWeight: 700, letterSpacing: 6, color: "#d4b373", marginBottom: 30 }}>
+        ZIPPY
+      </div>
+      <div style={{ fontSize: 48, fontWeight: 700, letterSpacing: 6, color: "#d4b373", marginBottom: 50 }}>
+        CAR RENTAL
+      </div>
       
       {/* Tagline */}
-      <div style={{ fontSize: 72, fontWeight: 700, letterSpacing: 2, textAlign: "center" }}>
+      <div style={{ fontSize: 64, fontWeight: 800, letterSpacing: 1, textAlign: "center", lineHeight: 1.2 }}>
         Self-Drive Car Rental
       </div>
-      <div style={{ fontSize: 72, fontWeight: 700, letterSpacing: 2, textAlign: "center", color: "#d4b373" }}>
+      <div style={{ fontSize: 64, fontWeight: 800, letterSpacing: 1, textAlign: "center", color: "#d4b373", lineHeight: 1.2 }}>
         in Pune
       </div>
+      
+      {/* Accent line */}
+      <div style={{ width: 200, height: 4, background: "#d4b373", marginTop: 50 }} />
     </div>,
     size,
   );
