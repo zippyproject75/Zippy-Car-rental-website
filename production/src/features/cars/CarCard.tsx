@@ -66,11 +66,11 @@ export function CarCard({ car, headingLevel = "h3" }: { car: Car; headingLevel?:
       data-testid="car-card"
       onPointerMove={onPointerMove}
       onPointerLeave={onPointerLeave}
-      className="car-card-3d group flex flex-col overflow-hidden rounded-2xl border border-line bg-[#141416] shadow-raised focus-within:border-line-strong w-full transition-[border-color] duration-300 hover:border-accent/40"
+      className="car-card-3d group flex flex-col overflow-hidden rounded-2xl border border-line bg-raised shadow-raised focus-within:border-line-strong w-full transition-[border-color] duration-300 hover:border-accent/40"
     >
       <Link href={`/cars/${car.slug}`} tabIndex={-1} aria-hidden className="block overflow-hidden relative">
         {fuelType && (
-          <span className="absolute top-3 left-3 z-10 bg-black/75 backdrop-blur-md px-3 py-1 text-[0.65rem] font-bold tracking-wider text-white uppercase rounded">
+          <span className="absolute top-3 left-3 z-10 bg-black/75 dark:bg-black/75 backdrop-blur-md px-3 py-1 text-[0.65rem] font-bold tracking-wider text-white uppercase rounded">
             {fuelType}
           </span>
         )}
@@ -78,7 +78,7 @@ export function CarCard({ car, headingLevel = "h3" }: { car: Car; headingLevel?:
       </Link>
       <div className="flex flex-1 flex-col gap-3 p-5 sm:p-6">
         <div>
-          <Heading className="font-display text-lg font-bold tracking-[-0.01em] text-white">
+          <Heading className="font-display text-lg font-bold tracking-[-0.01em] text-ink">
             {car.make} {car.model}
             {car.unitNumber ? (
               <span className="ml-2 align-middle text-xs font-semibold text-accent-ink bg-accent/15 px-2 py-0.5 rounded-full">
@@ -89,18 +89,18 @@ export function CarCard({ car, headingLevel = "h3" }: { car: Car; headingLevel?:
         </div>
 
         {specsString && (
-          <p className="text-xs text-gray-400">
+          <p className="text-xs text-ink-2">
             {specsString} • 350 km/day limit
           </p>
         )}
 
         <div className="mt-auto pt-2 flex items-center justify-between">
           {dailyRate ? (
-            <p className="font-display text-base font-bold text-white">
-              {formatInr(dailyRate, locale)} <span className="text-sm font-normal text-gray-400">PER DAY</span>
+            <p className="font-display text-base font-bold text-ink">
+              {formatInr(dailyRate, locale)} <span className="text-sm font-normal text-ink-2">PER DAY</span>
             </p>
           ) : (
-            <p className="text-sm font-semibold text-gray-400">{t("Common.priceOnRequest")}</p>
+            <p className="text-sm font-semibold text-ink-2">{t("Common.priceOnRequest")}</p>
           )}
         </div>
 

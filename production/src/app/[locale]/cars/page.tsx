@@ -42,9 +42,9 @@ export default async function CarsPage({ params }: LocaleParams) {
           {t("Fleet.countLabel", { count: cars.length })}
         </p>
       </PageIntro>
-      <section className="container-site py-14 lg:py-20 bg-[#0a0a0b]" aria-label={t("Fleet.title")}>
+      <section className="container-site py-14 lg:py-20 bg-muted/40" aria-label={t("Fleet.title")}>
         <div className="flex items-center justify-between mb-8">
-          <h2 className="font-display text-3xl font-bold text-white">Pick your next ride</h2>
+          <h2 className="font-display text-3xl font-bold text-ink">Pick your next ride</h2>
         </div>
         <CarGrid cars={cars} headingLevel="h2" showFilters={true} />
       </section>

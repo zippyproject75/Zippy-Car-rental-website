@@ -86,7 +86,7 @@ export default async function CarPage({ params }: Params) {
         <div className="mt-6 grid gap-8 lg:grid-cols-[1.45fr_1fr] lg:gap-12">
           {/* Left Column: Car Details */}
           <div className="flex flex-col gap-8">
-            <div className="overflow-hidden rounded-card border border-line bg-[#141416]">
+            <div className="overflow-hidden rounded-card border border-line bg-raised">
               <CarMedia car={car} variant="detail" priority sizes="(min-width: 1024px) 60vw, 100vw" />
             </div>
 
@@ -95,11 +95,11 @@ export default async function CarPage({ params }: Params) {
               <span className="inline-block bg-green-600 text-white text-xs font-bold px-3 py-1 rounded">
                 AVAILABLE NOW
               </span>
-              <p className="text-gray-400 text-sm">{car.make} {car.model}</p>
+              <p className="text-ink-2 text-sm">{car.make} {car.model}</p>
             </div>
 
             <div>
-              <h1 className="font-display text-4xl font-extrabold tracking-[-0.03em] text-white sm:text-5xl">
+              <h1 className="font-display text-4xl font-extrabold tracking-[-0.03em] text-ink sm:text-5xl">
                 {car.model.toUpperCase()}
                 {unit ? (
                   <span className="mt-2 block text-2xl font-bold text-accent sm:text-3xl">
@@ -113,9 +113,9 @@ export default async function CarPage({ params }: Params) {
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
               {specs.length ? (
                 specs.slice(0, 4).map((spec) => (
-                  <div key={spec.key} className="bg-[#1c1c1f] border border-[#29292d] rounded-lg p-4 text-center">
-                    <p className="text-gray-400 text-xs uppercase mb-1">{t(`Specs.${spec.key}`)}</p>
-                    <p className="text-white font-semibold">{String(spec.value)}</p>
+                  <div key={spec.key} className="bg-muted border border-line rounded-lg p-4 text-center">
+                    <p className="text-ink-2 text-xs uppercase mb-1">{t(`Specs.${spec.key}`)}</p>
+                    <p className="text-ink font-semibold">{String(spec.value)}</p>
                   </div>
                 ))
               ) : null}
@@ -123,10 +123,10 @@ export default async function CarPage({ params }: Params) {
 
             {/* About This Vehicle */}
             <section>
-              <h2 className="font-display text-xl font-bold text-white mb-4">ABOUT THIS VEHICLE</h2>
-              <p className="text-gray-400 leading-relaxed">{intro}</p>
+              <h2 className="font-display text-xl font-bold text-ink mb-4">ABOUT THIS VEHICLE</h2>
+              <p className="text-ink-2 leading-relaxed">{intro}</p>
               {description ? (
-                <p className="text-gray-400 leading-relaxed mt-4">
+                <p className="text-ink-2 leading-relaxed mt-4">
                   {description.value[locale]}
                 </p>
               ) : null}
@@ -135,8 +135,8 @@ export default async function CarPage({ params }: Params) {
 
           {/* Right Column: Booking Form */}
           <div className="flex flex-col gap-6">
-            <div className="bg-[#141416] border border-[#29292d] rounded-card p-6 shadow-raised">
-              <h2 className="font-display text-2xl font-bold text-white mb-6">BOOKING</h2>
+            <div className="bg-raised border border-line rounded-card p-6 shadow-raised">
+              <h2 className="font-display text-2xl font-bold text-ink mb-6">BOOKING</h2>
 
               {/* Price */}
               <div className="mb-6">
@@ -150,7 +150,7 @@ export default async function CarPage({ params }: Params) {
         </div>
 
         <section aria-labelledby="policies-title" className="mt-16">
-          <h2 id="policies-title" className="font-display text-2xl font-bold text-white">
+          <h2 id="policies-title" className="font-display text-2xl font-bold text-ink">
             {t("Car.policiesTitle")}
           </h2>
           {policies.length ? (
@@ -159,7 +159,7 @@ export default async function CarPage({ params }: Params) {
                 <li key={doc.slug}>
                   <Link
                     href={`/${doc.slug}`}
-                    className="inline-flex min-h-11 items-center gap-2 rounded-control border border-line px-4 text-sm font-medium text-white hover:bg-muted"
+                    className="inline-flex min-h-11 items-center gap-2 rounded-control border border-line px-4 text-sm font-medium text-ink hover:bg-muted"
                   >
                     <FileText aria-hidden className="size-4 text-accent-ink" />
                     {doc.title}
@@ -171,13 +171,13 @@ export default async function CarPage({ params }: Params) {
               ))}
             </ul>
           ) : null}
-          <p className="mt-4 max-w-2xl text-sm leading-relaxed text-gray-400">
+          <p className="mt-4 max-w-2xl text-sm leading-relaxed text-ink-2">
             {t("Car.policiesPending")}
           </p>
         </section>
 
         <section aria-labelledby="related-title" className="mt-20">
-          <h2 id="related-title" className="font-display text-2xl font-bold text-white">
+          <h2 id="related-title" className="font-display text-2xl font-bold text-ink">
             {t("Car.relatedTitle")}
           </h2>
           <ul className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
@@ -191,9 +191,9 @@ export default async function CarPage({ params }: Params) {
       </div>
 
       {/* Mobile sticky enquiry action */}
-      <div className="fixed inset-x-0 bottom-0 z-30 border-t border-line bg-[#141416] px-4 pt-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] lg:hidden">
+      <div className="fixed inset-x-0 bottom-0 z-30 border-t border-line bg-raised px-4 pt-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] lg:hidden">
         <div className="mx-auto flex max-w-xl items-center justify-between gap-3">
-          <PriceLine carId={car.id} className="min-w-0 truncate text-sm text-white" />
+          <PriceLine carId={car.id} className="min-w-0 truncate text-sm text-ink" />
           <ButtonLink href={{ pathname: "/book", query: { car: car.slug } }} size="md">
             {t("Fleet.enquire")}
           </ButtonLink>
