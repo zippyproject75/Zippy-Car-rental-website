@@ -21,7 +21,7 @@ import { CarGrid } from "@/features/cars/CarGrid";
 import { BranchCard } from "@/features/maps/BranchCard";
 import { getCars, getPublishedBranches } from "@/lib/catalog";
 import { env } from "@/lib/env";
-import { autoRentalJsonLd } from "@/lib/jsonld";
+import { autoRentalJsonLd, faqPageJsonLd, webSiteJsonLd } from "@/lib/jsonld";
 import { resolveLocale, type LocaleParams } from "@/lib/page";
 import { buildMetadata } from "@/lib/seo";
 
@@ -272,7 +272,9 @@ export default async function HomePage({ params }: LocaleParams) {
       <CinematicCta />
 
       {/* Structured data */}
+      <JsonLd data={webSiteJsonLd()} />
       <JsonLd data={autoRentalJsonLd()} />
+      {faqs.length ? <JsonLd data={faqPageJsonLd(faqs)} /> : null}
     </>
   );
 }

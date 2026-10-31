@@ -61,8 +61,8 @@ export async function SiteFooter() {
               </Link>
             </li>
             <li>
-              <Link href="/how-it-works" className={linkClass}>
-                {nav("howItWorks")}
+              <Link href="/calculator" className={linkClass}>
+                Calculator
               </Link>
             </li>
             <li>

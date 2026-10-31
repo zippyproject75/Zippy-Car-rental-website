@@ -4,12 +4,15 @@ import { getTranslations } from "next-intl/server";
 import { CtaBand } from "@/components/sections/CtaBand";
 import { PageIntro } from "@/components/sections/PageIntro";
 import { ButtonLink } from "@/components/ui/ButtonLink";
+import { JsonLd } from "@/components/ui/JsonLd";
 import { Notice } from "@/components/ui/Notice";
 import { site } from "@/data/site";
 import { visibleFact } from "@/lib/content";
 import { env } from "@/lib/env";
+import { breadcrumbJsonLd } from "@/lib/jsonld";
+import { localizedPath } from "@/lib/routes";
+import { absoluteUrl, buildMetadata } from "@/lib/seo";
 import { resolveLocale, type LocaleParams } from "@/lib/page";
-import { buildMetadata } from "@/lib/seo";
 
 export async function generateMetadata({ params }: LocaleParams): Promise<Metadata> {
   const locale = await resolveLocale(params);
@@ -29,6 +32,10 @@ export default async function AboutPage({ params }: LocaleParams) {
   const facts = (["selfDrive", "fleet", "city", "confirm"] as const).map((k) =>
     t(`About.facts.${k}`),
   );
+  const crumbs = [
+    { name: t("Common.home"), url: absoluteUrl(localizedPath(locale, "/")) },
+    { name: t("Nav.about"), url: absoluteUrl(localizedPath(locale, "/about")) },
+  ];
 
   return (
     <>
@@ -68,6 +75,7 @@ export default async function AboutPage({ params }: LocaleParams) {
         </div>
       </div>
       <CtaBand />
+      <JsonLd data={breadcrumbJsonLd(crumbs)} />
     </>
   );
 }

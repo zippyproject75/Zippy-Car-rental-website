@@ -27,6 +27,7 @@ export function AnnouncementBanner() {
             <span
               key={`dup-${index}`}
               className="mx-4 sm:mx-8 inline-block py-2 text-sm sm:text-base font-medium whitespace-nowrap"
+              aria-hidden="true"
             >
               {message}
             </span>

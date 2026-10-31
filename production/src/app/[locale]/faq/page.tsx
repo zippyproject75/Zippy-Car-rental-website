@@ -7,7 +7,9 @@ import { JsonLd } from "@/components/ui/JsonLd";
 import { getApprovedFaqs } from "@/data/faqs";
 import { resolveLocale, type LocaleParams } from "@/lib/page";
 import { buildMetadata } from "@/lib/seo";
-import { faqPageJsonLd } from "@/lib/jsonld";
+import { breadcrumbJsonLd, faqPageJsonLd } from "@/lib/jsonld";
+import { localizedPath } from "@/lib/routes";
+import { absoluteUrl } from "@/lib/seo";
 
 export async function generateMetadata({ params }: LocaleParams): Promise<Metadata> {
   const locale = await resolveLocale(params);
@@ -28,6 +30,10 @@ export default async function FaqPage({ params }: LocaleParams) {
     question: f.content[locale].question,
     answer: f.content[locale].answer ?? "",
   }));
+  const crumbs = [
+    { name: t("Common.home"), url: absoluteUrl(localizedPath(locale, "/")) },
+    { name: t("Nav.faq"), url: absoluteUrl(localizedPath(locale, "/faq")) },
+  ];
   return (
     <>
       <PageIntro
@@ -49,6 +55,7 @@ export default async function FaqPage({ params }: LocaleParams) {
       </div>
 
       {/* FAQ structured data */}
+      <JsonLd data={breadcrumbJsonLd(crumbs)} />
       <JsonLd data={faqPageJsonLd(items)} />
     </>
   );

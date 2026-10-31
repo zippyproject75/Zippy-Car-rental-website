@@ -40,7 +40,7 @@ export function CarMedia({
           fill
           priority={priority}
           sizes={sizes ?? "(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"}
-          className="object-cover object-center transition-transform duration-500 ease-out group-hover:scale-105"
+          className="object-cover object-center transition-transform duration-500 ease-out scale-100 group-hover:scale-105 active:scale-95"
         />
         {car.unitNumber ? (
           <div className="absolute top-3 right-3 rounded-md bg-black/75 backdrop-blur-md px-2.5 py-1 text-[0.6875rem] font-bold tracking-wider text-accent uppercase">
