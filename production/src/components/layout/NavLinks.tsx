@@ -7,9 +7,6 @@ import { cn } from "@/lib/cn";
 
 export function isActivePath(pathname: string, href: string): boolean {
   const basePath = href.split("#")[0] || "/";
-  if (href === "/#how-it-works") {
-    return false;
-  }
   if (basePath === "/") {
     return pathname === "/";
   }

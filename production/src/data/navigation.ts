@@ -2,14 +2,14 @@
  * Primary header navigation (5 items).
  * Desktop header order:
  * 1. Our Cars (/cars)
- * 2. How It Works (/#how-it-works)
+ * 2. How It Works (/how-it-works)
  * 3. Pickup Locations (/#pickup-locations)
  * 4. FAQ (/faq)
  * 5. Contact (/contact)
  */
 export const headerNavigation = [
   { key: "cars", href: "/cars" },
-  { key: "howItWorks", href: "/#how-it-works" },
+  { key: "howItWorks", href: "/how-it-works" },
   { key: "locations", href: "/#pickup-locations" },
   { key: "faq", href: "/faq" },
   { key: "contact", href: "/contact" },
@@ -22,7 +22,7 @@ export type HeaderNavKey = (typeof headerNavigation)[number]["key"];
  */
 export const mobileNavigation = [
   { key: "cars", href: "/cars" },
-  { key: "howItWorks", href: "/#how-it-works" },
+  { key: "howItWorks", href: "/how-it-works" },
   { key: "locations", href: "/#pickup-locations" },
   { key: "faq", href: "/faq" },
   { key: "contact", href: "/contact" },

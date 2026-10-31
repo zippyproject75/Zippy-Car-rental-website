@@ -1,4 +1,5 @@
 import { Mail, Phone } from "lucide-react";
+import Image from "next/image";
 import { getLocale, getTranslations } from "next-intl/server";
 import { PendingBadge } from "@/components/ui/PendingBadge";
 import { visibleLegalLinks } from "@/data/legal";
@@ -21,8 +22,25 @@ export async function SiteFooter() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-line bg-canvas text-ink">
-      <div className="container-site grid gap-12 py-16 md:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr_1.3fr]">
+    <footer className="relative overflow-hidden border-t border-line bg-canvas text-ink">
+      {/* ── Panoramic Cityscape Photography Background ── */}
+      <div className="absolute inset-0 pointer-events-none select-none z-0">
+        <Image
+          src="/images/footer-cityscape.jpg"
+          alt="Panoramic view of Pune hills and cityscape at sunset"
+          fill
+          priority={false}
+          sizes="100vw"
+          className="object-cover object-bottom"
+        />
+        {/* Subtle, natural overlay to guarantee text legibility across light and dark themes */}
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 bg-canvas/85 dark:bg-[#07080a]/80"
+        />
+      </div>
+
+      <div className="relative z-10 container-site grid gap-12 py-16 md:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr_1.3fr]">
         <div className="max-w-xs space-y-4">
           <Wordmark tagline={tc("brandTagline")} />
           <p className="text-[0.9375rem] leading-relaxed text-ink-2">{t("tagline")}</p>
@@ -126,7 +144,7 @@ export async function SiteFooter() {
           )}
         </div>
       </div>
-      <div className="border-t border-line">
+      <div className="relative z-10 border-t border-line/80">
         <div className="container-site flex flex-col gap-2 py-6 text-sm text-ink-3 md:flex-row md:items-center md:justify-between">
           <p>
             <Link href="/copyright" className="hover:text-ink">

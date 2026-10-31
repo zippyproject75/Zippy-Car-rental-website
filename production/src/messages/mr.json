@@ -17,7 +17,9 @@
     "faqTitle": "वारंवार विचारले जाणारे प्रश्न",
     "faqDescription": "पुण्यात Zippy Car Rental कडे सेल्फ-ड्राइव्ह कारची चौकशी करण्याबद्दल उत्तरे: चौकशी, WhatsApp आणि किंमत निश्चिती कशी होते.",
     "legalDescription": "Zippy Car Rental वेबसाइटसाठी {title}.",
-    "notFoundTitle": "पेज सापडले नाही"
+    "notFoundTitle": "पेज सापडले नाही",
+    "howItWorksTitle": "हे कसे कार्य करते | Zippy Car Rental",
+    "howItWorksDescription": "पुण्यात झिपीकडून सेल्फ-ड्राइव्ह कार भाड्याने घेण्याची सोपी 6-टप्प्यांची प्रक्रिया जाणून घ्या: कार निवडा, तारीख ठरवा आणि WhatsApp वर खात्री मिळवा."
   },
   "Common": {
     "skipToContent": "मुख्य मजकुराकडे जा",
@@ -163,9 +165,21 @@
     "modelYear": "मॉडेल वर्ष",
     "variant": "व्हेरिएंट",
     "colour": "रंग",
-    "bodyTypes": { "hatchback": "हॅचबॅक", "compact-suv": "कॉम्पॅक्ट SUV", "mpv": "MPV" },
-    "transmissions": { "manual": "मॅन्युअल", "automatic": "ऑटोमॅटिक" },
-    "fuels": { "petrol": "पेट्रोल", "diesel": "डिझेल", "cng": "CNG", "petrol-cng": "पेट्रोल + CNG" },
+    "bodyTypes": {
+      "hatchback": "हॅचबॅक",
+      "compact-suv": "कॉम्पॅक्ट SUV",
+      "mpv": "MPV"
+    },
+    "transmissions": {
+      "manual": "मॅन्युअल",
+      "automatic": "ऑटोमॅटिक"
+    },
+    "fuels": {
+      "petrol": "पेट्रोल",
+      "diesel": "डिझेल",
+      "cng": "CNG",
+      "petrol-cng": "पेट्रोल + CNG"
+    },
     "seatsValue": "{count} आसने"
   },
   "Booking": {

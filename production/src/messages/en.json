@@ -17,7 +17,9 @@
     "faqTitle": "Frequently Asked Questions",
     "faqDescription": "Answers about enquiring for a self-drive car with Zippy Car Rental in Pune: how enquiries, WhatsApp and price confirmation work.",
     "legalDescription": "{title} for the Zippy Car Rental website.",
-    "notFoundTitle": "Page not found"
+    "notFoundTitle": "Page not found",
+    "howItWorksTitle": "How It Works | Zippy Car Rental",
+    "howItWorksDescription": "Explore how self-drive car rental works with Zippy in Pune. Browse our Maruti fleet, pick dates and location, enquire on WhatsApp, and enjoy your journey."
   },
   "Common": {
     "skipToContent": "Skip to main content",
@@ -163,9 +165,21 @@
     "modelYear": "Model year",
     "variant": "Variant",
     "colour": "Colour",
-    "bodyTypes": { "hatchback": "Hatchback", "compact-suv": "Compact SUV", "mpv": "MPV" },
-    "transmissions": { "manual": "Manual", "automatic": "Automatic" },
-    "fuels": { "petrol": "Petrol", "diesel": "Diesel", "cng": "CNG", "petrol-cng": "Petrol + CNG" },
+    "bodyTypes": {
+      "hatchback": "Hatchback",
+      "compact-suv": "Compact SUV",
+      "mpv": "MPV"
+    },
+    "transmissions": {
+      "manual": "Manual",
+      "automatic": "Automatic"
+    },
+    "fuels": {
+      "petrol": "Petrol",
+      "diesel": "Diesel",
+      "cng": "CNG",
+      "petrol-cng": "Petrol + CNG"
+    },
     "seatsValue": "{count} seats"
   },
   "Booking": {

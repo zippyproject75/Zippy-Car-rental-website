@@ -17,7 +17,9 @@
     "faqTitle": "अक्सर पूछे जाने वाले प्रश्न",
     "faqDescription": "पुणे में Zippy Car Rental से सेल्फ-ड्राइव कार की पूछताछ के बारे में उत्तर: पूछताछ, WhatsApp और कीमत की पुष्टि कैसे होती है।",
     "legalDescription": "Zippy Car Rental वेबसाइट के लिए {title}।",
-    "notFoundTitle": "पेज नहीं मिला"
+    "notFoundTitle": "पेज नहीं मिला",
+    "howItWorksTitle": "यह कैसे काम करता है | Zippy Car Rental",
+    "howItWorksDescription": "पुणे में ज़िपि से सेल्फ़-ड्राइव कार किराए पर लेने की पूरी 6-चरणीय प्रक्रिया जानें: वाहन चुनें, दिनांक तय करें और WhatsApp पर पुष्टि पाएं।"
   },
   "Common": {
     "skipToContent": "मुख्य सामग्री पर जाएं",
@@ -163,9 +165,21 @@
     "modelYear": "मॉडल वर्ष",
     "variant": "वेरिएंट",
     "colour": "रंग",
-    "bodyTypes": { "hatchback": "हैचबैक", "compact-suv": "कॉम्पैक्ट SUV", "mpv": "MPV" },
-    "transmissions": { "manual": "मैनुअल", "automatic": "ऑटोमैटिक" },
-    "fuels": { "petrol": "पेट्रोल", "diesel": "डीज़ल", "cng": "CNG", "petrol-cng": "पेट्रोल + CNG" },
+    "bodyTypes": {
+      "hatchback": "हैचबैक",
+      "compact-suv": "कॉम्पैक्ट SUV",
+      "mpv": "MPV"
+    },
+    "transmissions": {
+      "manual": "मैनुअल",
+      "automatic": "ऑटोमैटिक"
+    },
+    "fuels": {
+      "petrol": "पेट्रोल",
+      "diesel": "डीज़ल",
+      "cng": "CNG",
+      "petrol-cng": "पेट्रोल + CNG"
+    },
     "seatsValue": "{count} सीटें"
   },
   "Booking": {

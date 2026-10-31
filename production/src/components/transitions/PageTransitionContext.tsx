@@ -64,7 +64,7 @@ export function PageTransitionProvider({ children }: { children: ReactNode }) {
       const timer = setTimeout(() => {
         setIsTransitioning(false);
         clearTimers();
-      }, 140);
+      }, 160);
 
       return () => clearTimeout(timer);
     }
@@ -89,7 +89,7 @@ export function PageTransitionProvider({ children }: { children: ReactNode }) {
       // Transition exit duration before routing
       navigateTimerRef.current = setTimeout(() => {
         router.push(href);
-      }, 200);
+      }, 220);
 
       // Watchdog safety: Ensure overlay never hangs if navigation is cancelled or stalled
       watchdogTimerRef.current = setTimeout(() => {
@@ -167,7 +167,7 @@ export function PageTransitionProvider({ children }: { children: ReactNode }) {
     };
 
     // Attach to document with capture to intercept before other handlers
-    document.addEventListener("click", handleClick, { capture: false });
+    document.addEventListener("click", handleClick, { capture: true });
 
     // Handle browser back/forward buttons
     const handlePopState = () => {

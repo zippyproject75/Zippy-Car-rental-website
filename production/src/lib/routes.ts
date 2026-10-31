@@ -12,6 +12,7 @@ export function allPublicPaths(): string[] {
     "/cars",
     ...cars.map((c) => `/cars/${c.slug}`),
     "/book",
+    "/how-it-works",
     "/about",
     "/contact",
     "/faq",
@@ -36,7 +37,7 @@ function contactConfirmed(config: SiteConfig): boolean {
 /** Whether the page's own content allows indexing (independent of environment). */
 export function isPathContentIndexable(path: string, locale: Locale, config = site): boolean {
   if (config.copyReview[locale] !== "approved") return false;
-  if (path === "/" || path === "/cars") return true;
+  if (path === "/" || path === "/cars" || path === "/how-it-works") return true;
   if (path.startsWith("/cars/"))
     return cars.find((c) => `/cars/${c.slug}` === path)?.indexable ?? false;
   if (path === "/book") return false;
