@@ -1,14 +1,17 @@
 "use client";
 
 import { ArrowRight } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import { useRef, useCallback } from "react";
 import { ButtonLink } from "@/components/ui/ButtonLink";
 import { Link } from "@/i18n/navigation";
 import { env } from "@/lib/env";
+import { formatInr } from "@/lib/formatting";
+import { displayRate } from "@/lib/pricing";
+import { pricingConfig } from "@/data/pricing";
 import type { Car } from "@/types/car";
+import type { Locale } from "@/i18n/routing";
 import { CarMedia } from "./CarMedia";
-import { PriceLine } from "./PriceBlock";
 import { useSpecValue } from "./SpecList";
 import { getPublicSpecs } from "./specs";
 
@@ -18,10 +21,21 @@ export function carLabel(car: Car, unitText: (unit: number) => string): string {
 
 export function CarCard({ car, headingLevel = "h3" }: { car: Car; headingLevel?: "h2" | "h3" }) {
   const t = useTranslations();
+  const locale = useLocale() as Locale;
   const format = useSpecValue();
   const Heading = headingLevel;
   const fullName = carLabel(car, (unit) => t("Common.vehicleUnit", { unit }));
-  const specs = getPublicSpecs(car, env.showPendingContent).slice(0, 3);
+  const specs = getPublicSpecs(car, env.showPendingContent);
+  const rate = displayRate(pricingConfig[car.id]);
+  const dailyRate = rate ? rate.amountInr * 24 : null;
+
+  // Get fuel type for badge
+  const fuelSpec = specs.find((s) => s.key === "fuel");
+  const fuelType = fuelSpec ? format(fuelSpec).toUpperCase() : null;
+
+  // Build specs string excluding fuel (shown as badge)
+  const otherSpecs = specs.filter((s) => s.key !== "fuel").slice(0, 3);
+  const specsString = otherSpecs.map((s) => format(s)).join(" • ");
 
   /* ── 3D pointer-tracking tilt (mouse/trackpad only) ── */
   const cardRef = useRef<HTMLElement | null>(null);
@@ -52,18 +66,20 @@ export function CarCard({ car, headingLevel = "h3" }: { car: Car; headingLevel?:
       data-testid="car-card"
       onPointerMove={onPointerMove}
       onPointerLeave={onPointerLeave}
-      className="car-card-3d group flex flex-col overflow-hidden rounded-2xl border border-line bg-raised shadow-raised focus-within:border-line-strong w-full transition-[border-color] duration-300 hover:border-accent/40"
+      className="car-card-3d group flex flex-col overflow-hidden rounded-2xl border border-line bg-[#141416] shadow-raised focus-within:border-line-strong w-full transition-[border-color] duration-300 hover:border-accent/40"
     >
-      <Link href={`/cars/${car.slug}`} tabIndex={-1} aria-hidden className="block overflow-hidden">
+      <Link href={`/cars/${car.slug}`} tabIndex={-1} aria-hidden className="block overflow-hidden relative">
+        {fuelType && (
+          <span className="absolute top-3 left-3 z-10 bg-black/75 backdrop-blur-md px-3 py-1 text-[0.65rem] font-bold tracking-wider text-white uppercase rounded">
+            {fuelType}
+          </span>
+        )}
         <CarMedia car={car} />
       </Link>
-      <div className="flex flex-1 flex-col gap-4 p-5 sm:p-6">
+      <div className="flex flex-1 flex-col gap-3 p-5 sm:p-6">
         <div>
-          <p className="text-[0.6875rem] font-bold tracking-[0.16em] text-accent-ink uppercase">
-            {car.make}
-          </p>
-          <Heading className="mt-1 font-display text-xl font-bold tracking-[-0.01em] text-ink">
-            {car.model}
+          <Heading className="font-display text-lg font-bold tracking-[-0.01em] text-white">
+            {car.make} {car.model}
             {car.unitNumber ? (
               <span className="ml-2 align-middle text-xs font-semibold text-accent-ink bg-accent/15 px-2 py-0.5 rounded-full">
                 {t("Common.vehicleUnit", { unit: car.unitNumber })}
@@ -72,43 +88,30 @@ export function CarCard({ car, headingLevel = "h3" }: { car: Car; headingLevel?:
           </Heading>
         </div>
 
-        {specs.length ? (
-          <ul className="flex flex-wrap gap-1.5 text-xs">
-            {specs.map((s) => (
-              <li
-                key={s.key}
-                className="inline-flex items-center rounded-md border border-line bg-muted/50 px-2.5 py-1 font-medium text-ink-2"
-              >
-                {format(s)}
-              </li>
-            ))}
-          </ul>
-        ) : null}
+        {specsString && (
+          <p className="text-xs text-gray-400">
+            {specsString} • 350 km/day limit
+          </p>
+        )}
 
-        <div className="mt-auto pt-2">
-          <PriceLine carId={car.id} />
+        <div className="mt-auto pt-2 flex items-center justify-between">
+          {dailyRate ? (
+            <p className="font-display text-base font-bold text-white">
+              {formatInr(dailyRate, locale)} <span className="text-sm font-normal text-gray-400">PER DAY</span>
+            </p>
+          ) : (
+            <p className="text-sm font-semibold text-gray-400">{t("Common.priceOnRequest")}</p>
+          )}
         </div>
 
-        <div className="grid grid-cols-2 gap-2.5 border-t border-line/70 pt-4">
-          <ButtonLink
-            href={`/cars/${car.slug}`}
-            variant="secondary"
-            size="sm"
-            aria-label={t("Fleet.viewDetailsFor", { car: fullName })}
-            className="w-full justify-center text-xs font-semibold transition-transform duration-150 hover:-translate-y-0.5"
-          >
-            {t("Fleet.viewDetails")}
-          </ButtonLink>
-          <ButtonLink
-            href={{ pathname: "/book", query: { car: car.slug } }}
-            size="sm"
-            aria-label={t("Fleet.enquireFor", { car: fullName })}
-            className="w-full justify-center text-xs font-bold bg-accent text-on-accent hover:bg-accent-hover transition-transform duration-150 hover:-translate-y-0.5"
-          >
-            {t("Fleet.enquire")}
-            <ArrowRight aria-hidden className="size-3.5" />
-          </ButtonLink>
-        </div>
+        <ButtonLink
+          href={{ pathname: "/book", query: { car: car.slug } }}
+          size="sm"
+          aria-label={t("Fleet.enquireFor", { car: fullName })}
+          className="w-full justify-center text-xs font-bold bg-accent text-on-accent hover:bg-accent-hover transition-transform duration-150 hover:-translate-y-0.5"
+        >
+          BOOK
+        </ButtonLink>
       </div>
     </article>
   );

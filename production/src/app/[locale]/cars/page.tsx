@@ -10,6 +10,7 @@ import { breadcrumbJsonLd } from "@/lib/jsonld";
 import { localizedPath } from "@/lib/routes";
 import { absoluteUrl, buildMetadata } from "@/lib/seo";
 import { resolveLocale, type LocaleParams } from "@/lib/page";
+import { Link } from "@/i18n/navigation";
 
 export async function generateMetadata({ params }: LocaleParams): Promise<Metadata> {
   const locale = await resolveLocale(params);
@@ -41,8 +42,11 @@ export default async function CarsPage({ params }: LocaleParams) {
           {t("Fleet.countLabel", { count: cars.length })}
         </p>
       </PageIntro>
-      <section className="container-site py-14 lg:py-20" aria-label={t("Fleet.title")}>
-        <CarGrid cars={cars} headingLevel="h2" />
+      <section className="container-site py-14 lg:py-20 bg-[#0a0a0b]" aria-label={t("Fleet.title")}>
+        <div className="flex items-center justify-between mb-8">
+          <h2 className="font-display text-3xl font-bold text-white">Pick your next ride</h2>
+        </div>
+        <CarGrid cars={cars} headingLevel="h2" showFilters={true} />
       </section>
       <section
         aria-label={t("Home.howTitle")}
