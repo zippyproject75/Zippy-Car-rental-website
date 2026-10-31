@@ -3,6 +3,7 @@
 import { LazyMotion, domAnimation, m } from "motion/react";
 import { useReducedMotion } from "motion/react";
 import type { ReactNode } from "react";
+import { useScrollReveal } from "./useScrollReveal";
 
 interface ScrollRevealProps {
   children: ReactNode;
@@ -17,9 +18,10 @@ export function ScrollReveal({
   delay = 0,
   direction = "up",
   className,
-  once = true,
+  once: _once = true,
 }: ScrollRevealProps) {
   const prefersReducedMotion = useReducedMotion();
+  const { ref, isVisible } = useScrollReveal<HTMLDivElement>({ threshold: 0.1, rootMargin: "-5%" });
 
   const variants = {
     hidden: prefersReducedMotion
@@ -39,10 +41,10 @@ export function ScrollReveal({
   return (
     <LazyMotion features={domAnimation}>
       <m.div
+        ref={ref}
         className={className}
         initial="hidden"
-        whileInView="visible"
-        viewport={{ once, margin: "-10%" }}
+        animate={isVisible ? "visible" : "hidden"}
         variants={variants}
         transition={{
           duration: prefersReducedMotion ? 0.01 : 0.6,
