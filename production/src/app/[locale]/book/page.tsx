@@ -3,11 +3,14 @@ import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { Suspense } from "react";
 import { PageIntro } from "@/components/sections/PageIntro";
+import { JsonLd } from "@/components/ui/JsonLd";
 import { BookFromSearchParams } from "@/features/booking/BookFromSearchParams";
 import { BookingForm } from "@/features/booking/BookingForm";
 import { getBookingFormProps } from "@/features/booking/props";
+import { breadcrumbJsonLd } from "@/lib/jsonld";
+import { localizedPath } from "@/lib/routes";
+import { absoluteUrl, buildMetadata } from "@/lib/seo";
 import { resolveLocale, type LocaleParams } from "@/lib/page";
-import { buildMetadata } from "@/lib/seo";
 
 export async function generateMetadata({ params }: LocaleParams): Promise<Metadata> {
   const locale = await resolveLocale(params);
@@ -25,6 +28,10 @@ export default async function BookPage({ params }: LocaleParams) {
   const t = await getTranslations();
   const props = await getBookingFormProps(locale);
   const steps = (["1", "2", "3", "4"] as const).map((n) => t(`Home.steps.${n}.title`));
+  const crumbs = [
+    { name: t("Common.home"), url: absoluteUrl(localizedPath(locale, "/")) },
+    { name: t("Booking.pageTitle"), url: absoluteUrl(localizedPath(locale, "/book")) },
+  ];
 
   return (
     <>
@@ -78,6 +85,7 @@ export default async function BookPage({ params }: LocaleParams) {
           ) : null}
         </aside>
       </div>
+      <JsonLd data={breadcrumbJsonLd(crumbs)} />
     </>
   );
 }

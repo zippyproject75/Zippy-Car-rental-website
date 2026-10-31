@@ -96,6 +96,25 @@ export function faqPageJsonLd(faqs: { question: string; answer: string }[]): Jso
   };
 }
 
+export function webSiteJsonLd(): JsonLd | null {
+  if (!env.isProduction || !env.siteUrl) return null;
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: site.name,
+    url: env.siteUrl,
+    description: "Self-drive car rental in Pune, Maharashtra, India.",
+    potentialAction: {
+      "@type": "SearchAction",
+      target: {
+        "@type": "EntryPoint",
+        urlTemplate: `${env.siteUrl}/cars`,
+      },
+      "query-input": "required name",
+    },
+  };
+}
+
 export function carProductJsonLd(car: {
   displayName: string;
   make: string;
