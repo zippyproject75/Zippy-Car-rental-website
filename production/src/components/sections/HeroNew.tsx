@@ -17,8 +17,8 @@ import { buttonClass } from "@/components/ui/button";
 
 const trustBadges = [
   { icon: CheckCircle2, label: "Well-Maintained Maruti Suzuki Fleet" },
-  { icon: MapPin, label: "3 Pune Branches: Kondhwa · Gangadham · Undri" },
   { icon: Star, label: "Direct Owner Confirmation on WhatsApp" },
+  { icon: MapPin, label: "Three Convenient Pickup Locations in Pune" },
 ];
 
 export function HeroNew() {
@@ -186,7 +186,7 @@ export function HeroNew() {
             >
               <Sparkles aria-hidden className="size-3 sm:size-3.5 text-accent" />
               <span className="text-[0.6875rem] sm:text-xs font-bold tracking-[0.16em] uppercase text-accent">
-                PUNE&apos;S PREMIER SELF-DRIVE SERVICE
+                PUNE, MAHARASHTRA
               </span>
             </m.div>
 
@@ -201,7 +201,7 @@ export function HeroNew() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
               >
-                Drive Pune
+                Self-drive cars
               </m.span>
               <m.span
                 className="text-accent underline decoration-accent/40 decoration-wavy underline-offset-4 sm:underline-offset-8 inline-block"
@@ -209,7 +209,7 @@ export function HeroNew() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.55, delay: prefersReducedMotion ? 0 : 0.15, ease: [0.22, 1, 0.36, 1] }}
               >
-                on your terms.
+                in Pune.
               </m.span>
             </h1>
 
@@ -221,7 +221,7 @@ export function HeroNew() {
               variants={fadeUp}
               transition={{ duration: 0.45, delay: prefersReducedMotion ? 0 : 0.25, ease: [0.22, 1, 0.36, 1] }}
             >
-              Premium self-drive cars in Pune.
+              Five Maruti Suzuki cars. Direct WhatsApp confirmation.
             </m.p>
 
             <m.p
@@ -231,8 +231,8 @@ export function HeroNew() {
               variants={fadeUp}
               transition={{ duration: 0.5, delay: prefersReducedMotion ? 0 : 0.3, ease: [0.22, 1, 0.36, 1] }}
             >
-              Premium self-drive Maruti Suzuki cars ready for your journey across Pune and Maharashtra.
-              Direct WhatsApp pricing and instant availability confirmation — no middleman, transparent rates.
+              Five Maruti Suzuki cars available for self-drive rental in Pune: Fronx, Brezza, Baleno, and two Ertigas.
+              Direct WhatsApp pricing and availability confirmation — no middleman, transparent rates.
             </m.p>
 
             {/* ── 4. DEDICATED MOBILE ANIMATED VEHICLE STAGE (Mobile Only: < lg) ── */}
@@ -308,13 +308,13 @@ export function HeroNew() {
               </span>
               <span className="text-white/30" aria-hidden>•</span>
               <span className="inline-flex items-center gap-1.5">
-                <MapPin className="size-3.5 text-accent shrink-0" />
-                <span>3 Pune Branches</span>
+                <Star className="size-3.5 text-accent shrink-0" />
+                <span>WhatsApp Confirmation</span>
               </span>
               <span className="text-white/30" aria-hidden>•</span>
               <span className="inline-flex items-center gap-1.5">
-                <Star className="size-3.5 text-accent shrink-0" />
-                <span>WhatsApp Confirmation</span>
+                <MapPin className="size-3.5 text-accent shrink-0" />
+                <span>3 Pickup Locations</span>
               </span>
             </m.div>
 

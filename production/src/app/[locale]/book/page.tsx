@@ -27,7 +27,7 @@ export default async function BookPage({ params }: LocaleParams) {
   const locale = await resolveLocale(params);
   const t = await getTranslations();
   const props = await getBookingFormProps(locale);
-  const steps = (["1", "2", "3", "4"] as const).map((n) => t(`Home.steps.${n}.title`));
+  const steps = (["1", "2", "3"] as const).map((n) => t(`Home.steps.${n}.title`));
   const crumbs = [
     { name: t("Common.home"), url: absoluteUrl(localizedPath(locale, "/")) },
     { name: t("Booking.pageTitle"), url: absoluteUrl(localizedPath(locale, "/book")) },

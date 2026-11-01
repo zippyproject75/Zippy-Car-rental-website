@@ -9,7 +9,7 @@ import { RentalGuidelines } from "@/components/sections/RentalGuidelines";
 import { CinematicCta } from "@/components/sections/CinematicCta";
 import { PackageSelector } from "@/components/sections/PackageSelector";
 import { PickupLocations } from "@/components/sections/PickupLocations";
-import { DoorstepDelivery } from "@/components/sections/DoorstepDelivery";
+import { HowItWorks } from "@/components/sections/HowItWorks";
 import { Accordion } from "@/components/ui/Accordion";
 import { ButtonLink } from "@/components/ui/ButtonLink";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -51,10 +51,10 @@ export default async function HomePage({ params }: LocaleParams) {
 
   return (
     <>
-      {/* ── 1. CINEMATIC HERO ── */}
+      {/* ── SECTION 1: HERO — WHAT YOU OFFER AND WHERE ── */}
       <HeroNew />
 
-      {/* ── 2. RENTAL ENQUIRY FORM (Immediately beneath hero) ── */}
+      {/* ── RENTAL ENQUIRY FORM (Primary action after hero) ── */}
       <section
         id="enquiry"
         aria-labelledby="enquiry-title"
@@ -84,10 +84,10 @@ export default async function HomePage({ params }: LocaleParams) {
         </div>
       </section>
 
-      {/* ── 3. TRUST STRIP (4 concise verified benefits) ── */}
+      {/* ── TRUST STRIP (Concise verified benefits) ── */}
       <TrustStrip />
 
-      {/* ── 4. FLEET WITH REAL-TIME FILTERS ── */}
+      {/* ── SECTION 2: FLEET — AVAILABLE VEHICLES ── */}
       <section
         id="fleet"
         aria-labelledby="fleet-title"
@@ -112,7 +112,7 @@ export default async function HomePage({ params }: LocaleParams) {
         </div>
       </section>
 
-      {/* ── 4.5. PACKAGE PRICING ── */}
+      {/* ── SECTION 3: RENTAL PACKAGES — UNDERSTAND THE OPTIONS ── */}
       <section
         aria-labelledby="package-title"
         className="scroll-mt-20 border-b border-line bg-muted/30"
@@ -138,110 +138,27 @@ export default async function HomePage({ params }: LocaleParams) {
         </div>
       </section>
 
-      {/* ── 5. WHY ZIPPY / ABOUT (Split layout) ── */}
+      {/* ── SECTION 4: HOW IT WORKS — THREE SIMPLE STEPS ── */}
       <section
-        id="about"
-        aria-labelledby="about-title"
+        id="how-it-works"
+        aria-labelledby="how-it-works-title"
         className="scroll-mt-20 border-b border-line bg-canvas"
       >
-        <div className="container-site grid gap-10 py-16 sm:py-20 lg:grid-cols-2 lg:items-center lg:gap-16 lg:py-24">
-          {/* Left: Brand message & key facts */}
-          <div>
-            <p className="eyebrow mb-3">{t("aboutEyebrow")}</p>
-            <h2
-              id="about-title"
-              className="font-display text-3xl font-bold tracking-[-0.02em] text-ink sm:text-4xl"
-            >
-              {t("aboutTitle")}
-            </h2>
-            <p className="mt-5 text-[1rem] leading-relaxed text-ink-2 sm:text-lg">
-              {t("aboutBody")}
-            </p>
-
-            {/* 4 Balanced benefit cards */}
-            <ul className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {[
-                { label: "Transparent Pricing", sub: "Clear rates with no hidden surprises" },
-                { label: "No Surprise Charges", sub: "Everything discussed upfront before you drive" },
-                { label: "3 Pickup Locations", sub: "Kondhwa, Gangadham, and Undri branches" },
-                { label: "Personal Support", sub: "Direct WhatsApp contact with the business" },
-              ].map(({ label, sub }) => (
-                <li
-                  key={label}
-                  className="rounded-xl border border-line bg-raised p-4 shadow-xs"
-                >
-                  <p className="text-sm font-bold text-ink">{label}</p>
-                  <p className="mt-1 text-xs text-ink-3 leading-snug">{sub}</p>
-                </li>
-              ))}
-            </ul>
-
-            <ButtonLink href="/about" variant="quiet" className="mt-8">
-              {t("aboutCta")}
-              <ArrowRight aria-hidden className="size-4" />
-            </ButtonLink>
-          </div>
-
-          {/* Right: Authentic vehicle photograph */}
-          <div className="relative">
-            <div className="overflow-hidden rounded-2xl border border-line shadow-raised">
-              <div className="relative aspect-[4/3] overflow-hidden bg-sunken">
-                <Image
-                  src="/images/cars/baleno.jpeg"
-                  alt="Maruti Suzuki Baleno — Zippy Car Rental Pune fleet"
-                  fill
-                  className="object-cover object-center"
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                />
-              </div>
-            </div>
-            {/* Overlay badge */}
-            <div className="absolute -bottom-4 left-6 rounded-xl border border-line bg-raised px-4 py-3 shadow-raised">
-              <p className="text-xs font-semibold text-accent-ink uppercase tracking-wider">
-                Maruti Suzuki
-              </p>
-              <p className="text-sm font-bold text-ink">Baleno · City Hatchback</p>
-            </div>
-          </div>
+        <div className="container-site py-16 sm:py-20 lg:py-24">
+          <HowItWorks withHeading={true} />
         </div>
       </section>
 
-      {/* ── 6. CUSTOMER FEEDBACK ── */}
-      <Reviews />
-
-      {/* ── 7. PICKUP LOCATIONS & MAPS ── */}
-      {branches.length ? (
-        <section
-          id="branches"
-          aria-labelledby="branches-title"
-          className="scroll-mt-20 border-t border-line bg-muted/30"
-        >
-          <div className="container-site py-16 sm:py-20 lg:py-24">
-            <SectionHeading
-              id="branches-title"
-              eyebrow={t("branchesEyebrow")}
-              title={t("branchesTitle")}
-              intro={t("branchesIntro")}
-            />
-            <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-              {branches.map((b) => (
-                <BranchCard key={b.id} branch={b} />
-              ))}
-            </div>
-          </div>
-        </section>
-      ) : null}
-
-      {/* ── 7.5. PICKUP LOCATIONS WITH GOOGLE MAPS LINKS ── */}
+      {/* ── SECTION 5: PICKUP LOCATIONS — WHERE CUSTOMERS CAN COLLECT VEHICLES ── */}
       <PickupLocations />
 
-      {/* ── 7.6. DOORSTEP DELIVERY POLICY ── */}
-      <DoorstepDelivery />
-
-      {/* ── 8. RENTAL GUIDELINES & POLICIES ── */}
+      {/* ── SECTION 6: RENTAL REQUIREMENTS — WHAT CUSTOMERS NEED ── */}
       <RentalGuidelines />
 
-      {/* ── 9. FREQUENTLY ASKED QUESTIONS ── */}
+      {/* ── SECTION 7: CUSTOMER REVIEWS — GENUINE SOCIAL PROOF ── */}
+      <Reviews />
+
+      {/* ── SECTION 8: FAQ — ANSWER COMMON RENTAL QUESTIONS ── */}
       {faqs.length ? (
         <section
           id="faq"
@@ -268,7 +185,7 @@ export default async function HomePage({ params }: LocaleParams) {
         </section>
       ) : null}
 
-      {/* ── 10. FINAL CINEMATIC CTA ── */}
+      {/* ── SECTION 9: FINAL CTA — PLAN YOUR RENTAL ── */}
       <CinematicCta />
 
       {/* Structured data */}

@@ -74,6 +74,13 @@ export function PickupLocations() {
             </article>
           ))}
         </div>
+
+        {/* Doorstep delivery note */}
+        <div className="mt-8 rounded-xl border border-line bg-muted/40 p-5 sm:p-6">
+          <p className="text-sm leading-relaxed text-ink-2">
+            <span className="font-semibold text-ink">Free doorstep delivery:</span> Available within 3 km of our pickup locations. A ₹500 charge applies beyond 3 km.
+          </p>
+        </div>
       </div>
     </section>
   );

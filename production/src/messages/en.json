@@ -87,24 +87,20 @@
     "fleetTitle": "Five cars. Each one a separate unit.",
     "fleetIntro": "Specifications, photographs and rates appear as soon as Zippy Car Rental confirms them.",
     "fleetAll": "See all cars",
-    "howEyebrow": "03 — How it works",
-    "howTitle": "An enquiry, confirmed personally",
+    "howEyebrow": "How it works",
+    "howTitle": "How to rent a car in three steps",
     "steps": {
       "1": {
-        "title": "Choose a car",
-        "body": "Pick one of the five cars, or choose “Any available car”."
+        "title": "Choose your vehicle and package",
+        "body": "Browse our five Maruti Suzuki cars and select 12-hour or 24-hour rental package."
       },
       "2": {
-        "title": "Pick branch and times",
-        "body": "Select your pickup branch and pickup and return times in IST."
+        "title": "Submit your rental enquiry",
+        "body": "Fill in your pickup location, dates, and times. WhatsApp opens with your enquiry prepared."
       },
       "3": {
-        "title": "Send on WhatsApp",
-        "body": "WhatsApp opens with your enquiry written. You press Send."
-      },
-      "4": {
-        "title": "Zippy confirms",
-        "body": "Zippy replies to confirm availability and the final price."
+        "title": "Confirm with Zippy",
+        "body": "Zippy replies on WhatsApp to confirm availability and the final price before you drive."
       }
     },
     "aboutEyebrow": "04 — About Zippy",
@@ -456,8 +452,8 @@
         "body": "Hourly and multi-day rentals available. Enquire for rates tailored to your trip."
       },
       "3": {
-        "title": "3 convenient locations",
-        "body": "Pick up from Kondhwa, Gangadham, or Undri — wherever suits you best."
+        "title": "Transparent pricing",
+        "body": "Clear rates with no hidden charges. Price confirmed on WhatsApp before you drive."
       },
       "4": {
         "title": "Personal WhatsApp support",
