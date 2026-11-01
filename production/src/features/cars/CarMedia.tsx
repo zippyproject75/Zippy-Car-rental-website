@@ -1,5 +1,9 @@
+"use client";
+
 import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
+import { useState } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import type { Locale } from "@/i18n/routing";
 import { cn } from "@/lib/cn";
 import { env } from "@/lib/env";
@@ -31,12 +35,25 @@ export function CarMedia({
   const photo = car.images.primary;
   const unit = car.unitNumber ? t("Common.vehicleUnit", { unit: car.unitNumber }) : null;
 
+  // Get all images (primary + gallery)
+  const allImages = [photo, ...(car.images.gallery || [])];
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const hasMultipleImages = allImages.length > 1;
+
+  const goToPrevious = () => {
+    setCurrentIndex((prev) => (prev === 0 ? allImages.length - 1 : prev - 1));
+  };
+
+  const goToNext = () => {
+    setCurrentIndex((prev) => (prev === allImages.length - 1 ? 0 : prev + 1));
+  };
+
   if (photo) {
     return (
       <div className={cn("relative overflow-hidden bg-sunken", ratio[variant])}>
         <Image
-          src={photo.src}
-          alt={photo.alt[locale]}
+          src={allImages[currentIndex].src}
+          alt={allImages[currentIndex].alt[locale]}
           fill
           priority={priority}
           sizes={sizes ?? "(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"}
@@ -47,6 +64,40 @@ export function CarMedia({
             Unit {car.unitNumber}
           </div>
         ) : null}
+
+        {/* Navigation Arrows */}
+        {hasMultipleImages && (
+          <>
+            <button
+              onClick={goToPrevious}
+              className="absolute left-2 top-1/2 -translate-y-1/2 z-20 p-2 rounded-full bg-black/50 hover:bg-black/70 backdrop-blur-sm transition-all"
+              aria-label="Previous image"
+            >
+              <ChevronLeft className="w-5 h-5 text-white" />
+            </button>
+            <button
+              onClick={goToNext}
+              className="absolute right-2 top-1/2 -translate-y-1/2 z-20 p-2 rounded-full bg-black/50 hover:bg-black/70 backdrop-blur-sm transition-all"
+              aria-label="Next image"
+            >
+              <ChevronRight className="w-5 h-5 text-white" />
+            </button>
+
+            {/* Image Indicator Dots */}
+            <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-20 flex gap-1.5 transition-opacity">
+              {allImages.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setCurrentIndex(index)}
+                  className={`w-2 h-2 rounded-full transition-all ${
+                    index === currentIndex ? "bg-white scale-110" : "bg-white/50 hover:bg-white/70"
+                  }`}
+                  aria-label={`Go to image ${index + 1}`}
+                />
+              ))}
+            </div>
+          </>
+        )}
       </div>
     );
   }

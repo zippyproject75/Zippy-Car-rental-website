@@ -3,7 +3,7 @@
     "homeTitle": "Self-Drive Car Rental in Pune | Zippy Car Rental",
     "homeDescription": "Self-drive car rental in Pune from Zippy Car Rental. Explore five Maruti Suzuki cars, choose your dates and times, and send an enquiry on WhatsApp.",
     "carsTitle": "Self-Drive Cars in Pune",
-    "carsDescription": "The Zippy Car Rental fleet: Maruti Suzuki Fronx, Brezza, Baleno and two Ertigas, available to enquire for self-drive rental in Pune.",
+    "carsDescription": "The Zippy Car Rental fleet: Maruti Suzuki Fronx, Brezza, Baleno and Ertiga and XL6, available to enquire for self-drive rental in Pune.",
     "carTitle": "{car} Self-Drive Rental in Pune",
     "carTitleUnit": "{car} Vehicle {unit} Self-Drive Rental in Pune",
     "carDescription": "Enquire about renting the {car} for self-drive in Pune with Zippy Car Rental. Choose your dates and times and prepare a WhatsApp enquiry.",
@@ -139,7 +139,7 @@
     "breadcrumbCars": "कारें",
     "intro": "{car} Zippy Car Rental की पुणे, महाराष्ट्र में सेल्फ-ड्राइव फ्लीट का हिस्सा है। पिकअप और रिटर्न की तारीख और समय चुनकर पूछताछ तैयार करें; Zippy अंतिम कीमत और उपलब्धता की पुष्टि आपके साथ करेगा।",
     "introUnit": "यह {car} वाहन {unit} है, Zippy Car Rental की पुणे, महाराष्ट्र में सेल्फ-ड्राइव फ्लीट में दो अलग-अलग एर्टिगा इकाइयों में से एक है। अपनी तारीख और समय चुनकर पूछताछ तैयार करें; Zippy अंतिम कीमत और उपलब्धता की पुष्टि आपके साथ करेगा।",
-    "ertigaNote": "Zippy के पास दो अलग-अलग एर्टिगा इकाइयां हैं। उन्हें अलग बताने वाले विवरण पुष्टि होने के बाद जोड़े जाएंगे।",
+    "ertigaNote": "Zippy के पास दो अलग-अलग MPV इकाइयां (Ertiga और XL6) हैं। उन्हें अलग बताने वाले विवरण पुष्टि होने के बाद जोड़े जाएंगे।",
     "specsTitle": "विनिर्देश",
     "specsPending": "इस कार के विनिर्देश Zippy Car Rental द्वारा पुष्टि होने के बाद प्रकाशित किए जाएंगे।",
     "priceTitle": "किराया मूल्य",
@@ -334,7 +334,7 @@
     "factsTitle": "एक नज़र में",
     "facts": {
       "selfDrive": "सेल्फ-ड्राइव किराया — आप स्वयं कार चलाते हैं।",
-      "fleet": "पाँच मारुति सुजुकी कारें: Fronx, Brezza, Baleno और दो Ertigas।",
+      "fleet": "पाँच मारुति सुजुकी कारें: Fronx, Brezza, Baleno, Ertiga और XL6।",
       "city": "पुणे, महाराष्ट्र में आधारित।",
       "confirm": "हर पूछताछ का जवाब व्यक्तिगत रूप से Zippy द्वारा अंतिम मूल्य और उपलब्धता के साथ दिया जाता है।"
     },

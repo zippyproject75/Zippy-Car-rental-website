@@ -3,7 +3,7 @@
     "homeTitle": "पुण्यात सेल्फ-ड्राइव्ह कार भाड्याने | Zippy Car Rental",
     "homeDescription": "पुण्यात Zippy Car Rental कडून सेल्फ-ड्राइव्ह कार भाड्याने घ्या. पाच Maruti Suzuki कार पहा, तारीख व वेळ निवडा आणि WhatsApp वर चौकशी पाठवा.",
     "carsTitle": "पुण्यातील सेल्फ-ड्राइव्ह कार",
-    "carsDescription": "Zippy Car Rental चा ताफा: Maruti Suzuki Fronx, Brezza, Baleno आणि दोन Ertiga, पुण्यात सेल्फ-ड्राइव्ह भाड्याच्या चौकशीसाठी.",
+    "carsDescription": "Zippy Car Rental चा ताफा: Maruti Suzuki Fronx, Brezza, Baleno आणि Ertiga आणि XL6, पुण्यात सेल्फ-ड्राइव्ह भाड्याच्या चौकशीसाठी.",
     "carTitle": "पुण्यात {car} सेल्फ-ड्राइव्ह भाड्याने",
     "carTitleUnit": "पुण्यात {car} वाहन {unit} सेल्फ-ड्राइव्ह भाड्याने",
     "carDescription": "पुण्यात सेल्फ-ड्राइव्हसाठी Zippy Car Rental कडून {car} भाड्याने घेण्याची चौकशी करा. तुमची तारीख व वेळ निवडा आणि WhatsApp चौकशी तयार करा.",
@@ -138,8 +138,8 @@
   "Car": {
     "breadcrumbCars": "कार",
     "intro": "{car} ही पुण्यातील Zippy Car Rental च्या सेल्फ-ड्राइव्ह ताफ्याचा भाग आहे. चौकशी तयार करण्यासाठी पिकअप व परतीची तारीख आणि वेळ निवडा; Zippy तुमच्याशी अंतिम किंमत आणि उपलब्धता निश्चित करेल.",
-    "introUnit": "ही {car} वाहन {unit} आहे, पुण्यातील Zippy Car Rental च्या सेल्फ-ड्राइव्ह ताफ्यातील दोन स्वतंत्र Ertiga पैकी एक. चौकशी तयार करण्यासाठी तुमची तारीख व वेळ निवडा; Zippy तुमच्याशी अंतिम किंमत आणि उपलब्धता निश्चित करेल.",
-    "ertigaNote": "Zippy कडे दोन स्वतंत्र Ertiga आहेत. त्यांना वेगळे ओळखणारे तपशील निश्चित झाल्यावर जोडले जातील.",
+    "introUnit": "ही {car} वाहन {unit} आहे, पुण्यातील Zippy Car Rental च्या सेल्फ-ड्राइव्ह ताफ्यातील दोन स्वतंत्र MPV (Ertiga आणि XL6) पैकी एक. चौकशी तयार करण्यासाठी तुमची तारीख व वेळ निवडा; Zippy तुमच्याशी अंतिम किंमत आणि उपलब्धता निश्चित करेल.",
+    "ertigaNote": "Zippy कडे दोन स्वतंत्र MPV (Ertiga आणि XL6) आहेत. त्यांना वेगळे ओळखणारे तपशील निश्चित झाल्यावर जोडले जातील.",
     "specsTitle": "तपशील",
     "specsPending": "या कारचे तपशील Zippy Car Rental ने निश्चित केल्यावर प्रकाशित केले जातील.",
     "priceTitle": "भाड्याची किंमत",
@@ -334,7 +334,7 @@
     "factsTitle": "थोडक्यात",
     "facts": {
       "selfDrive": "सेल्फ-ड्राइव्ह भाडे — कार तुम्ही स्वतः चालवता.",
-      "fleet": "पाच Maruti Suzuki कार: Fronx, Brezza, Baleno आणि दोन Ertiga.",
+      "fleet": "पाच Maruti Suzuki कार: Fronx, Brezza, Baleno आणि Ertiga आणि XL6.",
       "city": "पुणे, महाराष्ट्र येथे स्थित.",
       "confirm": "प्रत्येक चौकशीला Zippy वैयक्तिकरित्या अंतिम किंमत आणि उपलब्धतेसह उत्तर देते."
     },

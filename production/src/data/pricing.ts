@@ -2,7 +2,7 @@ import type { PricingConfig } from "@/types/booking";
 
 /**
  * Central rental pricing. Approved hourly rates for fronx, brezza, and baleno.
- * Ertiga units remain pending until owner approval.
+ * Ertiga and XL6 units remain pending until owner approval.
  */
 export const pricingConfig: PricingConfig = {
   fronx: {
@@ -45,7 +45,7 @@ export const pricingConfig: PricingConfig = {
     approvedOn: "2026-10-30",
   },
   "ertiga-1": { status: "pending", note: "Owner to approve rates and rules" },
-  "ertiga-2": { status: "pending", note: "Owner to approve rates and rules" },
+  xl6: { status: "pending", note: "Owner to approve rates and rules" },
 };
 
 /**
@@ -59,13 +59,13 @@ export const packagePricing = {
     brezza: { price: 2000, limitKm: 180 },
     baleno: { price: 1700, limitKm: 180 },
     "ertiga-1": null,
-    "ertiga-2": null,
+    xl6: null,
   },
   "24-hour": {
     fronx: null,
     brezza: null,
     baleno: null,
     "ertiga-1": null,
-    "ertiga-2": null,
+    xl6: null,
   },
 } as const;

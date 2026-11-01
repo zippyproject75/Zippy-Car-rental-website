@@ -451,7 +451,7 @@ export function BookingForm({
                 return (
                   <div key={kind} className="rounded-card border border-line bg-muted/50 p-4">
                     <p className="eyebrow mb-3">{t(kind)}</p>
-                    <div className="grid gap-4 grid-cols-1 sm:grid-cols-[1.3fr_1fr] md:grid-cols-1 xl:grid-cols-[1.3fr_1fr]">
+                    <div className="grid gap-4 grid-cols-1">
                       <DateField
                         id={`booking-${dateKey}`}
                         label={t(dateKey)}

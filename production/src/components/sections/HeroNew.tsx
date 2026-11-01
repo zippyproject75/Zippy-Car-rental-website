@@ -145,8 +145,9 @@ export function HeroNew() {
               transition={{ duration: 0.5, delay: prefersReducedMotion ? 0 : 0.3, ease: [0.22, 1, 0.36, 1] }}
             >
               Experience the freedom of premium self-drive rentals across Pune. Choose from our curated fleet of
-              <span className="font-semibold text-accent"> Fronx, Brezza, Baleno</span>, and
-              <span className="font-semibold text-accent"> Ertiga</span>. No middlemen, no hidden fees — just transparent pricing and direct confirmation from the owner.
+              <span className="font-semibold text-accent"> Fronx, Brezza, Baleno</span>,
+              <span className="font-semibold text-accent"> Ertiga</span>, and
+              <span className="font-semibold text-accent"> XL6</span>. No middlemen, no hidden fees — just transparent pricing and direct confirmation from the owner.
             </m.p>
 
 

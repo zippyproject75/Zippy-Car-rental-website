@@ -3,7 +3,7 @@
     "homeTitle": "Self-Drive Car Rental in Pune | Zippy Car Rental",
     "homeDescription": "Self-drive car rental in Pune from Zippy Car Rental. Explore five Maruti Suzuki cars, choose your dates and times, and send an enquiry on WhatsApp.",
     "carsTitle": "Self-Drive Cars in Pune",
-    "carsDescription": "The Zippy Car Rental fleet: Maruti Suzuki Fronx, Brezza, Baleno and two Ertigas, available to enquire for self-drive rental in Pune.",
+    "carsDescription": "The Zippy Car Rental fleet: Maruti Suzuki Fronx, Brezza, Baleno, Ertiga and XL6, available to enquire for self-drive rental in Pune.",
     "carTitle": "{car} Self-Drive Rental in Pune",
     "carTitleUnit": "{car} Vehicle {unit} Self-Drive Rental in Pune",
     "carDescription": "Enquire about renting the {car} for self-drive in Pune with Zippy Car Rental. Choose your dates and times and prepare a WhatsApp enquiry.",
@@ -138,8 +138,8 @@
   "Car": {
     "breadcrumbCars": "Cars",
     "intro": "The {car} is part of Zippy Car Rental’s self-drive fleet in Pune. Choose your pickup and return dates and times to prepare an enquiry; Zippy will confirm the final price and availability with you.",
-    "introUnit": "This is {car} Vehicle {unit}, one of two separate Ertiga units in Zippy Car Rental’s self-drive fleet in Pune. Choose your dates and times to prepare an enquiry; Zippy will confirm the final price and availability with you.",
-    "ertigaNote": "Zippy has two separate Ertiga units. Details that tell them apart will be added once confirmed.",
+    "introUnit": "This is {car} Vehicle {unit}, one of two separate MPV units in Zippy Car Rental’s self-drive fleet in Pune. Choose your dates and times to prepare an enquiry; Zippy will confirm the final price and availability with you.",
+    "mpvNote": "Zippy has two separate MPV units (Ertiga and XL6). Details that tell them apart will be added once confirmed.",
     "specsTitle": "Specifications",
     "specsPending": "Specifications for this car will be published once Zippy Car Rental confirms them.",
     "priceTitle": "Rental price",
@@ -334,7 +334,7 @@
     "factsTitle": "At a glance",
     "facts": {
       "selfDrive": "Self-drive rental — you drive the car yourself.",
-      "fleet": "Five Maruti Suzuki cars: Fronx, Brezza, Baleno and two Ertigas.",
+      "fleet": "Five Maruti Suzuki cars: Fronx, Brezza, Baleno, Ertiga and XL6.",
       "city": "Based in Pune, Maharashtra.",
       "confirm": "Every enquiry is answered personally by Zippy with the final price and availability."
     },
