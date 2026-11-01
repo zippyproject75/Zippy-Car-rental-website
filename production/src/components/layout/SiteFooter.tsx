@@ -1,5 +1,4 @@
 import { Mail, Phone } from "lucide-react";
-import Image from "next/image";
 import { getLocale, getTranslations } from "next-intl/server";
 import { PendingBadge } from "@/components/ui/PendingBadge";
 import { visibleLegalLinks } from "@/data/legal";
@@ -10,7 +9,7 @@ import { getVisibleContacts } from "@/lib/contacts";
 import { env } from "@/lib/env";
 import { Wordmark } from "./Wordmark";
 
-const linkClass = "inline-flex min-h-10 items-center text-[0.9375rem] text-ink-2 hover:text-ink";
+const linkClass = "inline-flex min-h-10 items-center text-[0.9375rem] text-ink-2 hover:text-ink dark:text-white/70 dark:hover:text-white transition-colors duration-200";
 
 export async function SiteFooter() {
   const locale = (await getLocale()) as Locale;
@@ -22,34 +21,20 @@ export async function SiteFooter() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="relative overflow-hidden border-t border-line bg-canvas text-ink">
-      {/* ── Panoramic Cityscape Photography Background ── */}
-      <div className="absolute inset-0 pointer-events-none select-none z-0">
-        <Image
-          src="/images/footer-cityscape.jpg"
-          alt="Panoramic view of Pune hills and cityscape at sunset"
-          fill
-          priority={false}
-          sizes="100vw"
-          className="object-cover object-bottom"
-        />
-        {/* Subtle, natural overlay to guarantee text legibility across light and dark themes */}
-        <div
-          aria-hidden="true"
-          className="absolute inset-0 bg-canvas/85 dark:bg-[#07080a]/80"
-        />
-      </div>
-
-      <div className="relative z-10 container-site grid gap-12 py-16 md:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr_1.3fr]">
+    <footer className="border-t border-line bg-canvas text-ink dark:bg-[#07080a] dark:text-white">
+      <div className="container-site grid gap-8 py-12 sm:gap-10 sm:py-14 md:grid-cols-2 lg:grid-cols-[1.2fr_1fr_1fr_1fr_1.2fr]">
+        {/* Brand Section */}
         <div className="max-w-xs space-y-4">
           <Wordmark tagline={tc("brandTagline")} />
-          <p className="text-[0.9375rem] leading-relaxed text-ink-2">{t("tagline")}</p>
+          <p className="text-[0.9375rem] leading-relaxed text-ink-2 dark:text-white/70">{t("tagline")}</p>
         </div>
+
+        {/* Explore Links */}
         <nav aria-labelledby="footer-explore">
           <h2 id="footer-explore" className="eyebrow mb-3">
             {t("explore")}
           </h2>
-          <ul>
+          <ul className="space-y-2">
             <li>
               <Link href="/" className={linkClass}>
                 {nav("home")}
@@ -72,11 +57,13 @@ export async function SiteFooter() {
             </li>
           </ul>
         </nav>
+
+        {/* Company Links */}
         <nav aria-labelledby="footer-company">
           <h2 id="footer-company" className="eyebrow mb-3">
             {t("company")}
           </h2>
-          <ul>
+          <ul className="space-y-2">
             <li>
               <Link href="/about" className={linkClass}>
                 {nav("about")}
@@ -94,12 +81,14 @@ export async function SiteFooter() {
             </li>
           </ul>
         </nav>
+
+        {/* Legal Links */}
         <nav aria-labelledby="footer-legal">
           <h2 id="footer-legal" className="eyebrow mb-3">
             {t("legal")}
           </h2>
           {legal.length ? (
-            <ul>
+            <ul className="space-y-2">
               {legal.map((doc) => (
                 <li key={doc.slug} className="flex flex-wrap items-center gap-2">
                   <Link href={`/${doc.slug}`} className={linkClass}>
@@ -110,13 +99,15 @@ export async function SiteFooter() {
               ))}
             </ul>
           ) : (
-            <p className="text-sm text-ink-3">{t("legalPending")}</p>
+            <p className="text-sm text-ink-3 dark:text-white/50">{t("legalPending")}</p>
           )}
         </nav>
+
+        {/* Contact Section */}
         <div>
           <h2 className="eyebrow mb-3">{t("contact")}</h2>
           {contacts.phones.length || contacts.email ? (
-            <ul className="space-y-1">
+            <ul className="space-y-2">
               {contacts.phones.map((p) => (
                 <li key={p.e164} className="flex flex-wrap items-center gap-2">
                   <a href={`tel:${p.e164}`} className={`${linkClass} gap-2 tabular-nums`}>
@@ -140,14 +131,16 @@ export async function SiteFooter() {
               ) : null}
             </ul>
           ) : (
-            <p className="text-sm text-ink-3">{t("contactsPending")}</p>
+            <p className="text-sm text-ink-3 dark:text-white/50">{t("contactsPending")}</p>
           )}
         </div>
       </div>
-      <div className="relative z-10 border-t border-line/80">
-        <div className="container-site flex flex-col gap-2 py-6 text-sm text-ink-3 md:flex-row md:items-center md:justify-between">
+
+      {/* Bottom Bar */}
+      <div className="border-t border-line/80 dark:border-white/10">
+        <div className="container-site flex flex-col gap-3 py-6 text-sm text-ink-3 dark:text-white/50 md:flex-row md:items-center md:justify-between md:gap-0">
           <p>
-            <Link href="/copyright" className="hover:text-ink">
+            <Link href="/copyright" className="hover:text-ink dark:hover:text-white">
               {t("rights", { year })}
             </Link>
           </p>

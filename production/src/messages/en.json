@@ -455,11 +455,6 @@
       }
     }
   },
-  "AnnouncementBanner": {
-    "message1": "Free Doorstep Delivery Within 3 KM of Our Pickup Locations",
-    "message2": "Choose Your Preferred Pickup Location",
-    "message3": "₹500 Doorstep Delivery Charge Beyond 3 KM"
-  },
   "PickupLocations": {
     "eyebrow": "Pickup Locations",
     "title": "Choose Your Pickup Location",

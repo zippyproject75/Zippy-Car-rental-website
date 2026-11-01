@@ -241,38 +241,6 @@ html.dark,
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
-
-  .animate-\[marquee_30s_linear_infinite\] {
-    animation: none !important;
-  }
-}
-
-/* ── Announcement Banner Marquee Animation ── */
-@keyframes marquee {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
-}
-
-.marquee-content {
-  display: flex;
-  animation: marquee 6s linear infinite;
-  white-space: nowrap;
-}
-
-@media (min-width: 640px) {
-  .marquee-content {
-    animation: marquee 18s linear infinite;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .marquee-content {
-    animation: none;
-  }
 }
 
 /* ---------------------- Signature details ---------------------- */
@@ -284,6 +252,13 @@ html.dark,
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--accent-ink);
+}
+
+[data-theme="dark"] .eyebrow,
+.dark .eyebrow,
+html.dark .eyebrow,
+.scheme-dark .eyebrow {
+  color: var(--accent);
 }
 
 @utility container-site {

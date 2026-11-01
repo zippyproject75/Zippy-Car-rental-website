@@ -1,5 +1,4 @@
 import { ArrowRight } from "lucide-react";
-import Image from "next/image";
 import { buttonClass } from "@/components/ui/button";
 
 export function CinematicCta() {
@@ -8,44 +7,6 @@ export function CinematicCta() {
       aria-labelledby="cinematic-cta-title"
       className="relative overflow-hidden bg-muted text-ink dark:bg-[#090a0d] dark:text-white"
     >
-      {/* Background: Black SUV driving on highway */}
-      <div className="absolute inset-0">
-        <Image
-          src="/images/zippy-highway-suv.jpg"
-          alt="Black SUV driving on highway at sunset — Zippy Car Rental"
-          aria-hidden
-          fill
-          className="object-cover object-center md:object-right transition-transform duration-[8000ms] hover:scale-105"
-          sizes="100vw"
-        />
-        <div
-          aria-hidden
-          className="absolute inset-0 dark:hidden"
-          style={{
-            background:
-              "linear-gradient(105deg, color-mix(in oklab, var(--muted) 70%, transparent) 35%, color-mix(in oklab, var(--canvas) 60%, transparent) 65%, color-mix(in oklab, var(--raised) 30%, transparent) 100%)",
-          }}
-        />
-        <div
-          aria-hidden
-          className="absolute inset-0 hidden dark:block"
-          style={{
-            background:
-              "linear-gradient(105deg, #090a0d 35%, rgba(9,10,13,0.4) 65%, rgba(9,10,13,0.15) 100%)",
-          }}
-        />
-      </div>
-
-      {/* Warm ambient lighting */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute right-0 top-0 h-full w-1/2 opacity-25"
-        style={{
-          background:
-            "radial-gradient(ellipse 80% 60% at 80% 50%, rgb(201 166 96 / 0.55), transparent 70%)",
-        }}
-      />
-
       <div className="container-site relative z-10 py-20 sm:py-24 lg:py-32">
         <div className="max-w-2xl">
           {/* Eyebrow */}
