@@ -13,7 +13,7 @@ export function AnnouncementBanner() {
 
   return (
     <div className="w-full border-b border-line bg-accent text-on-accent">
-      <div className="overflow-hidden">
+      <div className="overflow-hidden max-w-full">
         <div className="marquee-content">
           {messages.map((message, index) => (
             <span

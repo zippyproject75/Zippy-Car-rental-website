@@ -92,7 +92,7 @@ export function DateField({
         onClick={(e) => {
           if (e.target === e.currentTarget) setOpen(false);
         }}
-        className="m-auto w-full max-w-[min(26rem,calc(100vw-1.5rem))] rounded-card border border-line bg-raised p-0 text-ink shadow-raised max-sm:mb-0 max-sm:max-w-full max-sm:rounded-b-none"
+        className="m-auto w-full max-w-[min(28rem,calc(100vw-1rem))] rounded-card border border-line bg-raised p-0 text-ink shadow-raised max-sm:mb-0 max-sm:max-w-full max-sm:rounded-b-none max-sm:h-[calc(100dvh-1rem)] max-sm:my-auto"
       >
         <div className="p-5">
           <div className="mb-2 flex items-start justify-between gap-4">

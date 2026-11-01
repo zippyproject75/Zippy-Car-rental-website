@@ -1,16 +1,16 @@
 "use client";
 
-import { ArrowRight, CircleAlert, Clock, ShieldCheck } from "lucide-react";
+import { ArrowRight, CircleAlert, Clock, Info, RefreshCw, ShieldCheck } from "lucide-react";
 import { LazyMotion, MotionConfig, domAnimation, m } from "motion/react";
 import { useLocale, useTranslations } from "next-intl";
-import { useRef, useState, type FormEvent } from "react";
+import { useRef, useState, useEffect, type FormEvent } from "react";
 import { buttonClass } from "@/components/ui/button";
 import { bookingRules } from "@/data/booking";
-import { pricingConfig } from "@/data/pricing";
+import { packagePricing, pricingConfig } from "@/data/pricing";
 import type { Locale } from "@/i18n/routing";
 import { cn } from "@/lib/cn";
 import type { VisibleContacts } from "@/lib/contacts";
-import { requestDateBounds, timeSlots, validateRequest } from "@/lib/dates";
+import { requestDateBounds, timeSlots, validateRequest, parseBusinessDateTime, businessDateKey, businessTimeKey } from "@/lib/dates";
 import { formatDateTime, formatInr, formatTimeKey } from "@/lib/formatting";
 import { calculateEstimate } from "@/lib/pricing";
 import { enquiryService, type EnquiryResult } from "@/services/enquiry";
@@ -26,6 +26,7 @@ export type BookingCarOption = { id: CarId; label: string };
 export type BookingBranchOption = { id: BranchId; name: string; pending: boolean };
 export type BookingPickupLocationOption = { id: string; name: string; googleMapsUrl: string };
 
+type PackageType = "12-hour" | "24-hour";
 type FieldKey = RequestField | "branchId" | "pickupLocationId";
 type Errors = Partial<Record<FieldKey, string>>;
 
@@ -69,6 +70,8 @@ export function BookingForm({
   const [pickupTime, setPickupTime] = useState("");
   const [returnDate, setReturnDate] = useState("");
   const [returnTime, setReturnTime] = useState("");
+  const [selectedPackage, setSelectedPackage] = useState<PackageType>("12-hour");
+  const [returnTimeManuallyEdited, setReturnTimeManuallyEdited] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [errors, setErrors] = useState<Errors>({});
   const [result, setResult] = useState<EnquiryResult | null>(null);
@@ -80,6 +83,95 @@ export function BookingForm({
 
   const draft = { pickupDate, pickupTime, returnDate, returnTime };
   const selectedCar = carId === "any" ? null : carId;
+
+  // Calculate suggested return date/time based on package
+  useEffect(() => {
+    if (pickupDate && pickupTime && !returnTimeManuallyEdited) {
+      const pickupAt = parseBusinessDateTime(pickupDate, pickupTime);
+      if (pickupAt) {
+        const packageHours = selectedPackage === "12-hour" ? 12 : 24;
+        const suggestedReturn = new Date(pickupAt.getTime() + packageHours * 60 * 60 * 1000);
+        const suggestedDate = businessDateKey(suggestedReturn);
+        const suggestedTime = businessTimeKey(suggestedReturn);
+        // Batch state updates to avoid cascading renders
+        requestAnimationFrame(() => {
+          setReturnDate(suggestedDate);
+          setReturnTime(suggestedTime);
+        });
+      }
+    }
+  }, [pickupDate, pickupTime, selectedPackage, returnTimeManuallyEdited]);
+
+  // Reset manual edit flag when package changes to allow auto-suggestion
+  useEffect(() => {
+    if (returnTimeManuallyEdited) {
+      requestAnimationFrame(() => {
+        setReturnTimeManuallyEdited(false);
+      });
+    }
+  }, [selectedPackage, returnTimeManuallyEdited]);
+
+  // Detect manual return time edit
+  const handleReturnDateChange = (value: string) => {
+    setReturnDate(value);
+    setReturnTimeManuallyEdited(true);
+  };
+
+  const handleReturnTimeChange = (value: string) => {
+    setReturnTime(value);
+    setReturnTimeManuallyEdited(true);
+  };
+
+  // Reset return time auto-management when requested
+  const useSuggestedReturn = () => {
+    setReturnTimeManuallyEdited(false);
+  };
+
+  // Calculate rental summary
+  const rentalSummary = (() => {
+    const check = validateRequest(draft, new Date(), bookingRules);
+    if (!check.ok) {
+      return {
+        valid: false,
+        vehicleName: selectedCar ? cars.find((c) => c.id === selectedCar)?.label ?? null : t("anyCar"),
+        packageName: selectedPackage === "12-hour" ? t("package12Hour") : t("package24Hour"),
+        pickupLocationName: pickupLocations.find((l) => l.id === pickupLocationId)?.name ?? null,
+        branchName: branches.find((b) => b.id === branchId)?.name ?? null,
+        pickupDate: null,
+        pickupTime: null,
+        returnDate: null,
+        returnTime: null,
+        duration: null,
+        packagePrice: null,
+        freeKm: null,
+      };
+    }
+
+    const est = calculateEstimate(
+      { carId: selectedCar, pickupAt: check.pickupAt, returnAt: check.returnAt },
+      pricingConfig,
+    );
+
+    const packageInfo = selectedCar ? packagePricing[selectedPackage][selectedCar] : null;
+    const packagePrice = packageInfo?.price ?? null;
+    const freeKm = packageInfo?.limitKm ?? null;
+
+    return {
+      valid: true,
+      vehicleName: selectedCar ? cars.find((c) => c.id === selectedCar)?.label ?? null : t("anyCar"),
+      packageName: selectedPackage === "12-hour" ? t("package12Hour") : t("package24Hour"),
+      pickupLocationName: pickupLocations.find((l) => l.id === pickupLocationId)?.name ?? null,
+      branchName: branches.find((b) => b.id === branchId)?.name ?? null,
+      pickupDate: formatDateTime(check.pickupAt, locale),
+      pickupTime: formatTimeKey(pickupTime, locale),
+      returnDate: formatDateTime(check.returnAt, locale),
+      returnTime: formatTimeKey(returnTime, locale),
+      duration: formatDuration(check.durationMinutes, tDuration),
+      packagePrice: packagePrice ? formatInr(packagePrice, locale) : null,
+      freeKm,
+      estimate: est.kind === "estimate" ? formatInr(est.amountInr, locale) : null,
+    };
+  })();
 
   function errorText(code: RequestErrorCode): string {
     return t(`errors.${code}`, { days: bookingRules.maxAdvanceDays });
@@ -122,6 +214,11 @@ export function BookingForm({
     const carLabel = cars.find((c) => c.id === selectedCar)?.label ?? null;
     const branch = branches.find((b) => b.id === branchId);
     const pickupLocation = pickupLocations.find((l) => l.id === pickupLocationId);
+    const packageInfo = selectedCar ? packagePricing[selectedPackage][selectedCar] : null;
+    const packageName = selectedPackage === "12-hour" ? t("package12Hour") : t("package24Hour");
+    const packagePrice = packageInfo?.price ? formatInr(packageInfo.price, locale) : null;
+    const freeKm = packageInfo?.limitKm ?? null;
+
     const prepared = enquiryService.prepare(
       {
         carName: carLabel,
@@ -130,7 +227,9 @@ export function BookingForm({
         pickup: formatDateTime(check.pickupAt, locale),
         return: formatDateTime(check.returnAt, locale),
         duration: formatDuration(check.durationMinutes, tDuration),
-        estimate: est.kind === "estimate" ? formatInr(est.amountInr, locale) : null,
+        estimate: est.kind === "estimate" ? formatInr(est.amountInr, locale) : packagePrice,
+        packageName,
+        freeKm: freeKm ? `${freeKm} km` : null,
       },
       {
         greeting: tWa("greeting"),
@@ -146,6 +245,8 @@ export function BookingForm({
         name: tWa("name"),
         note: tWa("note"),
         closing: tWa("closing"),
+        package: tWa("package"),
+        freeKm: tWa("freeKm"),
       },
     );
     setResult(prepared);
@@ -262,6 +363,40 @@ export function BookingForm({
               </div>
             </div>
 
+            {/* Rental Package Selector */}
+            <div className="flex flex-col gap-1.5">
+              <label className="text-sm font-semibold text-ink">{t("packageLabel")}</label>
+              <div className="flex gap-2 rounded-lg bg-muted p-1.5">
+                <button
+                  type="button"
+                  onClick={() => setSelectedPackage("12-hour")}
+                  className={`flex-1 rounded-md px-3 sm:px-4 py-2.5 text-sm font-semibold transition-all duration-150 min-h-[3rem] ${
+                    selectedPackage === "12-hour"
+                      ? "bg-accent text-on-accent shadow-sm scale-[1.02]"
+                      : "text-ink-2 hover:text-ink active:scale-95"
+                  }`}
+                  aria-pressed={selectedPackage === "12-hour"}
+                >
+                  {t("package12Hour")}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setSelectedPackage("24-hour")}
+                  className={`flex-1 rounded-md px-3 sm:px-4 py-2.5 text-sm font-semibold transition-all duration-150 min-h-[3rem] ${
+                    selectedPackage === "24-hour"
+                      ? "bg-accent text-on-accent shadow-sm scale-[1.02]"
+                      : "text-ink-2 hover:text-ink active:scale-95"
+                  }`}
+                  aria-pressed={selectedPackage === "24-hour"}
+                >
+                  {t("package24Hour")}
+                </button>
+              </div>
+              <p className="text-xs leading-relaxed text-ink-3">
+                {selectedPackage === "12-hour" ? t("package12HourHint") : t("package24HourHint")}
+              </p>
+            </div>
+
             <div className="flex flex-col gap-1.5">
               {branches.length ? (
                 <>
@@ -307,7 +442,7 @@ export function BookingForm({
                 return (
                   <div key={kind} className="rounded-card border border-line bg-muted/50 p-4">
                     <p className="eyebrow mb-3">{t(kind)}</p>
-                    <div className="grid gap-4 sm:grid-cols-[1.3fr_1fr] md:grid-cols-1 xl:grid-cols-[1.3fr_1fr]">
+                    <div className="grid gap-4 grid-cols-1 sm:grid-cols-[1.3fr_1fr] md:grid-cols-1 xl:grid-cols-[1.3fr_1fr]">
                       <DateField
                         id={`booking-${dateKey}`}
                         label={t(dateKey)}
@@ -324,7 +459,9 @@ export function BookingForm({
                           if (kind === "pickup") {
                             setPickupDate(v);
                             if (returnDate && returnDate < v) setReturnDate("");
-                          } else setReturnDate(v);
+                          } else {
+                            handleReturnDateChange(v);
+                          }
                         }}
                       />
                       <div className="flex flex-col gap-1.5">
@@ -337,9 +474,13 @@ export function BookingForm({
                         <select
                           id={`booking-${timeKey}`}
                           value={timeValue}
-                          onChange={(e) =>
-                            (kind === "pickup" ? setPickupTime : setReturnTime)(e.target.value)
-                          }
+                          onChange={(e) => {
+                            if (kind === "pickup") {
+                              setPickupTime(e.target.value);
+                            } else {
+                              handleReturnTimeChange(e.target.value);
+                            }
+                          }}
                           aria-invalid={liveErrors[timeKey] ? true : undefined}
                           aria-describedby={
                             liveErrors[timeKey] ? `booking-${timeKey}-error` : "booking-tz-note"
@@ -367,6 +508,99 @@ export function BookingForm({
               <Clock aria-hidden className="size-3.5" />
               {t("timeZoneNote")}
             </p>
+
+            {/* Return time suggestion hint */}
+            {returnTimeManuallyEdited && pickupDate && pickupTime && (
+              <div className="flex items-start gap-2 rounded-lg bg-muted/50 p-3 text-sm">
+                <Info aria-hidden className="mt-0.5 size-4 shrink-0 text-accent-ink" />
+                <div className="flex-1">
+                  <p className="font-medium text-ink">{t("returnTimeManuallyEdited")}</p>
+                  <button
+                    type="button"
+                    onClick={useSuggestedReturn}
+                    className="mt-1 flex items-center gap-1.5 text-sm font-medium text-accent-ink hover:underline"
+                  >
+                    <RefreshCw aria-hidden className="size-3.5" />
+                    {t("useSuggestedReturn")}
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {/* Live Rental Summary */}
+            <div className="rounded-card border border-line bg-muted/50 p-4 sm:p-5">
+              <h3 className="font-display text-lg font-bold text-ink">{t("summaryTitle")}</h3>
+              <dl className="mt-4 space-y-3 text-sm">
+                <div className="flex justify-between gap-2 sm:gap-4">
+                  <dt className="text-ink-2 shrink-0">{t("car")}</dt>
+                  <dd className="font-medium text-ink text-right truncate">{rentalSummary.vehicleName}</dd>
+                </div>
+                <div className="flex justify-between gap-2 sm:gap-4">
+                  <dt className="text-ink-2 shrink-0">{t("packageLabel")}</dt>
+                  <dd className="font-medium text-ink text-right">{rentalSummary.packageName}</dd>
+                </div>
+                {rentalSummary.pickupLocationName && (
+                  <div className="flex justify-between gap-2 sm:gap-4">
+                    <dt className="text-ink-2 shrink-0">{t("pickupLocation")}</dt>
+                    <dd className="font-medium text-ink text-right truncate">{rentalSummary.pickupLocationName}</dd>
+                  </div>
+                )}
+                {rentalSummary.branchName && (
+                  <div className="flex justify-between gap-2 sm:gap-4">
+                    <dt className="text-ink-2 shrink-0">{t("branch")}</dt>
+                    <dd className="font-medium text-ink text-right truncate">{rentalSummary.branchName}</dd>
+                  </div>
+                )}
+                {rentalSummary.pickupDate && (
+                  <div className="flex justify-between gap-2 sm:gap-4">
+                    <dt className="text-ink-2 shrink-0">{t("pickupDate")}</dt>
+                    <dd className="font-medium text-ink text-right truncate">{rentalSummary.pickupDate}</dd>
+                  </div>
+                )}
+                {rentalSummary.pickupTime && (
+                  <div className="flex justify-between gap-2 sm:gap-4">
+                    <dt className="text-ink-2 shrink-0">{t("pickupTime")}</dt>
+                    <dd className="font-medium text-ink text-right">{rentalSummary.pickupTime}</dd>
+                  </div>
+                )}
+                {rentalSummary.returnDate && (
+                  <div className="flex justify-between gap-2 sm:gap-4">
+                    <dt className="text-ink-2 shrink-0">{t("returnDate")}</dt>
+                    <dd className="font-medium text-ink text-right truncate">{rentalSummary.returnDate}</dd>
+                  </div>
+                )}
+                {rentalSummary.returnTime && (
+                  <div className="flex justify-between gap-2 sm:gap-4">
+                    <dt className="text-ink-2 shrink-0">{t("returnTime")}</dt>
+                    <dd className="font-medium text-ink text-right">{rentalSummary.returnTime}</dd>
+                  </div>
+                )}
+                {rentalSummary.duration && (
+                  <div className="flex justify-between gap-2 sm:gap-4">
+                    <dt className="text-ink-2 shrink-0">{t("durationLabel")}</dt>
+                    <dd className="font-medium text-ink text-right">{rentalSummary.duration}</dd>
+                  </div>
+                )}
+                {rentalSummary.packagePrice && (
+                  <div className="flex justify-between gap-2 sm:gap-4 border-t border-line pt-3">
+                    <dt className="text-ink-2 shrink-0">{t("packagePrice")}</dt>
+                    <dd className="font-display text-lg font-bold text-ink text-right">{rentalSummary.packagePrice}</dd>
+                  </div>
+                )}
+                {rentalSummary.freeKm && (
+                  <div className="flex justify-between gap-2 sm:gap-4">
+                    <dt className="text-ink-2 shrink-0">{t("freeKm")}</dt>
+                    <dd className="font-medium text-ink text-right">{rentalSummary.freeKm}</dd>
+                  </div>
+                )}
+                {!rentalSummary.valid && (
+                  <div className="flex justify-between gap-2 sm:gap-4 border-t border-line pt-3">
+                    <dt className="text-ink-2 shrink-0">{t("durationLabel")}</dt>
+                    <dd className="text-ink-3 text-right">{t("durationEmpty")}</dd>
+                  </div>
+                )}
+              </dl>
+            </div>
 
             <div className="flex flex-col gap-4 border-t border-line pt-6 md:flex-row md:items-center md:justify-between">
               <p className="flex max-w-xl items-start gap-2 text-sm leading-relaxed text-ink-2">

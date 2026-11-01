@@ -12,6 +12,10 @@ export type EnquiryMessageFields = {
   duration: string;
   /** Only present when a valid estimate was calculated from approved pricing. */
   estimate: string | null;
+  /** Rental package name (e.g., "12-Hour Package") */
+  packageName?: string;
+  /** Free kilometres included in the package (e.g., "180 km") */
+  freeKm?: string | null;
   name?: string;
   note?: string;
 };
@@ -27,6 +31,8 @@ export type EnquiryMessageLabels = {
   return: string;
   duration: string;
   estimate: string;
+  package: string;
+  freeKm: string;
   name: string;
   note: string;
   closing: string;

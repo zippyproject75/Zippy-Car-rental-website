@@ -11,13 +11,19 @@ export function buildEnquiryMessage(
     labels.greeting,
     "",
     `${labels.car}: ${fields.carName ?? labels.anyCar}`,
+  ];
+  if (fields.packageName) {
+    lines.push(`${labels.package}: ${fields.packageName}`);
+  }
+  lines.push(
     `${labels.pickupLocation}: ${fields.pickupLocationName ?? "Not specified"}`,
     `${labels.branch}: ${fields.branchName ?? labels.branchToConfirm}`,
     `${labels.pickup}: ${fields.pickup}`,
     `${labels.return}: ${fields.return}`,
     `${labels.duration}: ${fields.duration}`,
-  ];
+  );
   if (fields.estimate) lines.push(`${labels.estimate}: ${fields.estimate}`);
+  if (fields.freeKm) lines.push(`${labels.freeKm}: ${fields.freeKm}`);
   const name = clean(fields.name);
   if (name) lines.push(`${labels.name}: ${name}`);
   const note = fields.note?.trim();

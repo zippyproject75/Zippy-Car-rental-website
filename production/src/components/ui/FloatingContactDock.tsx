@@ -29,7 +29,7 @@ export function FloatingContactDock() {
   return (
     <aside
       aria-label="Direct contact options"
-      className="fixed bottom-6 left-3.5 sm:left-6 z-40 flex flex-col items-center gap-3.5 print:hidden select-none"
+      className="fixed bottom-6 right-3.5 sm:left-6 sm:right-auto z-40 flex flex-col items-center gap-3.5 print:hidden select-none pb-[env(safe-area-inset-bottom)]"
     >
       {/* ── BUTTON A: Direct Phone Call ── */}
       <div className="group relative flex items-center">
@@ -41,10 +41,10 @@ export function FloatingContactDock() {
           <Phone aria-hidden className="size-5 sm:size-5.5 transition-transform duration-200 group-hover:scale-110" />
         </a>
 
-        {/* Accessible Right-side Tooltip */}
+        {/* Accessible Tooltip - left on mobile, right on desktop */}
         <div
           role="tooltip"
-          className="pointer-events-none absolute left-full top-1/2 ml-3 -translate-y-1/2 translate-x-1 opacity-0 transition-all duration-200 group-hover:translate-x-0 group-hover:opacity-100 group-focus-within:translate-x-0 group-focus-within:opacity-100 hidden sm:flex items-center gap-1.5 whitespace-nowrap rounded-lg border border-line/80 bg-raised/95 px-3 py-1.5 text-xs font-bold text-ink shadow-raised backdrop-blur-md"
+          className="pointer-events-none absolute top-1/2 -translate-y-1/2 opacity-0 transition-all duration-200 group-hover:opacity-100 group-focus-within:opacity-100 hidden sm:flex items-center gap-1.5 whitespace-nowrap rounded-lg border border-line/80 bg-raised/95 px-3 py-1.5 text-xs font-bold text-ink shadow-raised backdrop-blur-md right-full mr-3 sm:left-full sm:mr-0 sm:ml-3"
         >
           <span className="size-1.5 rounded-full bg-accent" />
           <span>Call: {PHONE_NUMBER_DISPLAY}</span>
@@ -66,10 +66,10 @@ export function FloatingContactDock() {
           />
         </a>
 
-        {/* Accessible Right-side Tooltip */}
+        {/* Accessible Tooltip - left on mobile, right on desktop */}
         <div
           role="tooltip"
-          className="pointer-events-none absolute left-full top-1/2 ml-3 -translate-y-1/2 translate-x-1 opacity-0 transition-all duration-200 group-hover:translate-x-0 group-hover:opacity-100 group-focus-within:translate-x-0 group-focus-within:opacity-100 hidden sm:flex items-center gap-1.5 whitespace-nowrap rounded-lg border border-line/80 bg-raised/95 px-3 py-1.5 text-xs font-bold text-ink shadow-raised backdrop-blur-md"
+          className="pointer-events-none absolute top-1/2 -translate-y-1/2 opacity-0 transition-all duration-200 group-hover:opacity-100 group-focus-within:opacity-100 hidden sm:flex items-center gap-1.5 whitespace-nowrap rounded-lg border border-line/80 bg-raised/95 px-3 py-1.5 text-xs font-bold text-ink shadow-raised backdrop-blur-md right-full mr-3 sm:left-full sm:mr-0 sm:ml-3"
         >
           <span className="size-1.5 rounded-full bg-[#25D366]" />
           <span>WhatsApp: {PHONE_NUMBER_DISPLAY}</span>

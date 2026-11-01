@@ -132,7 +132,7 @@ export function CarGrid({
         {/* Staggered grid of cars */}
         <m.ul
           ref={gridRef}
-          className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
+          className="grid gap-5 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
           data-testid="car-grid"
           key={activeFilter}
           variants={prefersReducedMotion ? undefined : listVariants}
