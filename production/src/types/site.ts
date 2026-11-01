@@ -1,6 +1,6 @@
 import type { Fact, Localized } from "./content";
 
-export type BranchId = "kondhwa" | "gangadham" | "undri";
+export type BranchId = "kondhwa" | "kondhwa-2" | "undri";
 
 export type Branch = {
   id: BranchId;

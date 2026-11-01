@@ -28,21 +28,21 @@ export function CinematicCta() {
 
           <div className="mt-8 sm:mt-10 flex flex-col gap-3 sm:flex-row sm:gap-4 scroll-reveal stagger-3">
             <a
-              href="#enquiry"
+              href="/book"
               className={buttonClass(
                 "primary",
                 "lg",
                 "w-full justify-center sm:w-auto bg-accent text-[#090a0d] font-bold hover:bg-accent-hover gap-2.5 shadow-lg shadow-accent/25 transition-transform duration-150 hover:-translate-y-0.5",
               )}
             >
-              <span>Plan My Rental</span>
+              <span>Book Now</span>
               <ArrowRight aria-hidden className="size-5" />
             </a>
             <a
-              href="#fleet"
+              href="/cars"
               className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-control border border-line bg-white/5 px-6 text-base font-semibold text-ink dark:border-white/20 dark:bg-white/5 dark:text-white backdrop-blur-sm transition-[border-color,background-color,transform] duration-200 hover:border-line-strong dark:hover:border-white/40 hover:bg-white/10 hover:-translate-y-0.5 sm:w-auto"
             >
-              Explore Fleet
+              Search Cars
             </a>
           </div>
 

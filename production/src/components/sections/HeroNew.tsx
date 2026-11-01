@@ -161,7 +161,7 @@ export function HeroNew() {
               transition={{ duration: 0.5, delay: prefersReducedMotion ? 0 : 0.38, ease: [0.22, 1, 0.36, 1] }}
             >
               <a
-                href="#enquiry"
+                href="/book"
                 className={buttonClass(
                   "primary",
                   "lg",
@@ -172,10 +172,10 @@ export function HeroNew() {
                 <ArrowRight aria-hidden className="size-5" />
               </a>
               <a
-                href="#fleet"
+                href="/cars"
                 className="inline-flex min-h-11 sm:min-h-12 w-full items-center justify-center gap-2 rounded-control border border-line bg-muted/50 px-6 py-2.5 sm:py-4 text-sm sm:text-base font-semibold text-ink backdrop-blur-md transition-all duration-200 hover:border-line-strong hover:bg-muted/70 hover:-translate-y-0.5 sm:w-auto text-center dark:border-white/20 dark:bg-white/10 dark:text-white dark:hover:border-white/50 dark:hover:bg-white/20"
               >
-                View Our Cars
+                Search Cars
               </a>
             </m.div>
 

@@ -1,4 +1,20 @@
 {
+  "Common": {
+    "skipToContent": "Skip to main content",
+    "brandTagline": "Car rental",
+    "homeLink": "Zippy Car Rental home",
+    "pendingBadge": "Pending confirmation",
+    "pendingHint": "Preview only. Shown until the owner confirms it; hidden in production.",
+    "draftBadge": "Draft",
+    "previewBanner": "Preview build — unconfirmed details are marked and the site is not indexed.",
+    "priceOnRequest": "Price on request",
+    "photoComingSoon": "Photo coming soon",
+    "vehicleUnit": "Vehicle {unit}",
+    "opensInNewTab": "(opens in a new tab)",
+    "close": "Close",
+    "breadcrumb": "Breadcrumb",
+    "home": "Home"
+  },
   "Meta": {
     "homeTitle": "Self-Drive Car Rental in Pune | Zippy Car Rental",
     "homeDescription": "Self-drive car rental in Pune from Zippy Car Rental. Explore five Maruti Suzuki cars, choose your dates and times, and send an enquiry on WhatsApp.",
@@ -19,23 +35,10 @@
     "legalDescription": "{title} for the Zippy Car Rental website.",
     "notFoundTitle": "Page not found",
     "howItWorksTitle": "How It Works | Zippy Car Rental",
-    "howItWorksDescription": "Explore how self-drive car rental works with Zippy in Pune. Browse our Maruti fleet, pick dates and location, enquire on WhatsApp, and enjoy your journey."
-  },
-  "Common": {
-    "skipToContent": "Skip to main content",
-    "brandTagline": "Car rental",
-    "homeLink": "Zippy Car Rental home",
-    "pendingBadge": "Pending confirmation",
-    "pendingHint": "Preview only. Shown until the owner confirms it; hidden in production.",
-    "draftBadge": "Draft",
-    "previewBanner": "Preview build — unconfirmed details are marked and the site is not indexed.",
-    "priceOnRequest": "Price on request",
-    "photoComingSoon": "Photo coming soon",
-    "vehicleUnit": "Vehicle {unit}",
-    "opensInNewTab": "(opens in a new tab)",
-    "close": "Close",
-    "breadcrumb": "Breadcrumb",
-    "home": "Home"
+    "howItWorksDescription": "Explore how self-drive car rental works with Zippy in Pune. Browse our Maruti fleet, pick dates and location, enquire on WhatsApp, and enjoy your journey.",
+    "locationsTitle": "Pickup Locations in Pune",
+    "locationsDescription": "Choose from our convenient pickup locations across Pune for your self-drive car rental.",
+    "getDirections": "Get Directions"
   },
   "Nav": {
     "home": "Home",
@@ -46,8 +49,8 @@
     "enquire": "Enquire",
     "howItWorks": "How It Works",
     "locations": "Pickup Locations",
-    "planMyRental": "Plan My Rental",
-    "planRentalShort": "Plan Rental",
+    "planMyRental": "Book Now",
+    "planRentalShort": "Book Now",
     "primary": "Main",
     "openMenu": "Open menu",
     "closeMenu": "Close menu",
@@ -227,7 +230,7 @@
     "freeKm": "Free kilometres",
     "returnTimeManuallyEdited": "You've manually set the return time. The suggested return time based on your package is no longer applied.",
     "useSuggestedReturn": "Use suggested return time",
-    "submit": "Enquire on WhatsApp",
+    "submit": "Book (connect on whatsapp)",
     "errorSummary": "Please correct {count, plural, one {# field} other {# fields}}.",
     "errors": {
       "required": "This is required.",

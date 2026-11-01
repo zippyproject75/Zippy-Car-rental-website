@@ -144,7 +144,6 @@ export async function SiteFooter() {
               {t("rights", { year })}
             </Link>
           </p>
-          <p>{t("honesty")}</p>
         </div>
       </div>
     </footer>

@@ -29,7 +29,7 @@ export const cars: readonly Car[] = [
       bodyType: confirmed("compact-suv"),
       seats: confirmed(5),
       transmission: confirmed("manual"),
-      fuel: confirmed("petrol"),
+      fuel: confirmed("petrol-cng"),
       modelYear: pending("Model year to be confirmed by the owner"),
       variant: pending("Variant to be confirmed by the owner"),
       colour: pending("Colour to be confirmed by the owner"),
@@ -84,7 +84,7 @@ export const cars: readonly Car[] = [
       bodyType: confirmed("compact-suv"),
       seats: confirmed(5),
       transmission: confirmed("manual"),
-      fuel: confirmed("petrol"),
+      fuel: confirmed("diesel"),
       modelYear: pending("Model year to be confirmed by the owner"),
       variant: pending("Variant to be confirmed by the owner"),
       colour: pending("Colour to be confirmed by the owner"),
@@ -139,14 +139,14 @@ export const cars: readonly Car[] = [
       bodyType: confirmed("hatchback"),
       seats: confirmed(5),
       transmission: confirmed("manual"),
-      fuel: confirmed("petrol"),
+      fuel: confirmed("petrol-cng"),
       modelYear: pending("Model year to be confirmed by the owner"),
       variant: pending("Variant to be confirmed by the owner"),
       colour: pending("Colour to be confirmed by the owner"),
     },
     images: {
       primary: {
-        src: "/images/cars/baleno.jpeg",
+        src: "/images/cars/baleno.png",
         width: 1280,
         height: 960,
         alt: {
@@ -157,7 +157,7 @@ export const cars: readonly Car[] = [
       },
       gallery: [
         {
-          src: "/images/cars/baleno_front_view.png",
+          src: "/images/cars/baleno.png",
           width: 1600,
           height: 900,
           alt: {

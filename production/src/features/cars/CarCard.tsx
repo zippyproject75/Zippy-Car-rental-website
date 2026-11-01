@@ -1,6 +1,6 @@
 "use client";
 
-import { MessageCircle, Users, Gauge } from "lucide-react";
+import { MessageCircle, Users, Gauge, Fuel } from "lucide-react";
 import { useTranslations, useLocale } from "next-intl";
 import { useRef, useCallback, useState } from "react";
 import { ButtonLink } from "@/components/ui/ButtonLink";
@@ -38,13 +38,10 @@ export function CarCard({ car, headingLevel = "h3" }: { car: Car; headingLevel?:
   // Check if 24-hour package has pricing configured for this specific car
   const has24HourPricing = packagePricing["24-hour"][car.id as keyof typeof packagePricing["24-hour"]] !== null;
 
-  // Get fuel type for badge
-  const fuelSpec = specs.find((s) => s.key === "fuel");
-  const fuelType = fuelSpec ? format(fuelSpec).toUpperCase() : null;
-
-  // Get transmission and seats for display
+  // Get transmission, seats, and fuel for display
   const transmissionSpec = specs.find((s) => s.key === "transmission");
   const seatsSpec = specs.find((s) => s.key === "seats");
+  const fuelSpec = specs.find((s) => s.key === "fuel");
 
   // WhatsApp message generation
   const whatsappNumber = site.contacts.whatsapp.status === "confirmed" && site.contacts.whatsapp.value 
@@ -93,24 +90,14 @@ export function CarCard({ car, headingLevel = "h3" }: { car: Car; headingLevel?:
       className="car-card-3d group flex flex-col overflow-hidden rounded-2xl border border-line bg-raised shadow-raised focus-within:border-line-strong w-full transition-[border-color] duration-300 hover:border-accent/40"
     >
       <Link href={`/cars/${car.slug}`} tabIndex={-1} aria-hidden className="block overflow-hidden relative aspect-[4/3]">
-        {fuelType && (
-          <span className="absolute top-3 left-3 z-10 bg-black/75 dark:bg-black/75 backdrop-blur-md px-3 py-1.5 text-[0.65rem] font-bold tracking-wider text-white uppercase rounded-lg">
-            {fuelType}
-          </span>
-        )}
         <CarMedia car={car} />
       </Link>
       
       <div className="flex flex-1 flex-col gap-4 p-4 sm:p-6">
         {/* Vehicle Name and Unit */}
         <div>
-          <Heading className="font-display text-base sm:text-lg font-bold tracking-[-0.01em] text-ink leading-tight">
-            {car.make} {car.model}
-            {car.unitNumber ? (
-              <span className="ml-2 align-middle text-xs font-semibold text-accent-ink bg-accent/15 px-2 py-0.5 rounded-full inline-block">
-                {t("Common.vehicleUnit", { unit: car.unitNumber })}
-              </span>
-            ) : null}
+          <Heading className="font-display text-lg sm:text-xl font-bold tracking-[-0.01em] text-ink leading-tight">
+            {car.model}
           </Heading>
         </div>
 
@@ -128,6 +115,12 @@ export function CarCard({ car, headingLevel = "h3" }: { car: Car; headingLevel?:
               <span className="truncate">{format(seatsSpec)}</span>
             </div>
           )}
+          {fuelSpec && (
+            <div className="flex items-center gap-1.5">
+              <Fuel className="size-3.5" aria-hidden />
+              <span className="truncate">{format(fuelSpec)}</span>
+            </div>
+          )}
         </div>
 
         {/* Divider */}
@@ -140,7 +133,7 @@ export function CarCard({ car, headingLevel = "h3" }: { car: Car; headingLevel?:
               <div className="flex items-center justify-between">
                 <div>
                   <p className="font-display text-xl font-bold text-ink">
-                    {formatInr(packagePrice.price, locale)}
+                    {formatInr(packagePrice.price, locale)} / per day
                   </p>
                   <p className="text-xs text-ink-2">
                     {selectedPackage} package
@@ -158,7 +151,7 @@ export function CarCard({ car, headingLevel = "h3" }: { car: Car; headingLevel?:
                         : "bg-muted text-ink-2 hover:bg-muted/80"
                     }`}
                   >
-                    12h
+                    12HR
                   </button>
                   {has24HourPricing && (
                     <button
@@ -199,10 +192,10 @@ export function CarCard({ car, headingLevel = "h3" }: { car: Car; headingLevel?:
           <ButtonLink
             href={{ pathname: "/book", query: { car: car.slug } }}
             size="sm"
-            aria-label={`Check availability for ${fullName}`}
+            aria-label={`Book ${fullName}`}
             className="flex-1 justify-center text-xs sm:text-sm font-semibold min-h-[2.75rem]"
           >
-            Check Availability
+            Book Now
           </ButtonLink>
           {whatsappNumber && (
             <a

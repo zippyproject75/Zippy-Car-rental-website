@@ -341,7 +341,7 @@ export function BookingForm({
                   ))}
                 </select>
                 <p id="booking-carId-hint" className="text-xs leading-relaxed text-ink-3">
-                  {carId === "any" ? t("anyCarHint") : t("honesty")}
+                  {t("anyCarHint")}
                 </p>
               </div>
 
@@ -612,10 +612,6 @@ export function BookingForm({
             </div>
 
             <div className="flex flex-col gap-4 border-t border-line pt-6 md:flex-row md:items-center md:justify-between">
-              <p className="flex max-w-xl items-start gap-2 text-sm leading-relaxed text-ink-2">
-                <ShieldCheck aria-hidden className="mt-0.5 size-4 shrink-0 text-accent-ink" />
-                {t("honesty")}
-              </p>
               <button
                 type="submit"
                 className={buttonClass("primary", "lg", "md:shrink-0")}

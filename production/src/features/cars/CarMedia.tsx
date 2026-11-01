@@ -63,32 +63,33 @@ export function CarMedia({
           sizes={sizes ?? "(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"}
           className="object-cover object-center transition-transform duration-500 ease-out scale-100 group-hover:scale-105 active:scale-95"
         />
-        {car.unitNumber ? (
-          <div className="absolute top-3 right-3 rounded-md bg-black/75 backdrop-blur-md px-2.5 py-1 text-[0.6875rem] font-bold tracking-wider text-accent uppercase">
-            Unit {car.unitNumber}
-          </div>
-        ) : null}
+        
+        {/* Available Badge */}
+        <div className="absolute top-2 right-2 z-10 flex items-center gap-1.5 bg-black/75 backdrop-blur-md px-2 py-0.5 rounded-lg sm:top-3 sm:right-3 sm:px-2.5 sm:py-1">
+          <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-green-500"></div>
+          <span className="text-[0.6rem] sm:text-[0.65rem] font-bold tracking-wider text-white uppercase">Available</span>
+        </div>
 
-        {/* Navigation Arrows */}
+        {/* Navigation Arrows - Hidden on mobile */}
         {hasMultipleImages && (
           <>
             <button
               onClick={goToPrevious}
-              className="absolute left-2 top-1/2 -translate-y-1/2 z-20 p-2 rounded-full bg-black/50 hover:bg-black/70 backdrop-blur-sm transition-all"
+              className="hidden sm:flex absolute left-2 top-1/2 -translate-y-1/2 z-20 p-2 rounded-full bg-black/50 hover:bg-black/70 backdrop-blur-sm transition-all"
               aria-label="Previous image"
             >
               <ChevronLeft className="w-5 h-5 text-white" />
             </button>
             <button
               onClick={goToNext}
-              className="absolute right-2 top-1/2 -translate-y-1/2 z-20 p-2 rounded-full bg-black/50 hover:bg-black/70 backdrop-blur-sm transition-all"
+              className="hidden sm:flex absolute right-2 top-1/2 -translate-y-1/2 z-20 p-2 rounded-full bg-black/50 hover:bg-black/70 backdrop-blur-sm transition-all"
               aria-label="Next image"
             >
               <ChevronRight className="w-5 h-5 text-white" />
             </button>
 
-            {/* Image Indicator Dots */}
-            <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-20 flex gap-1.5 transition-opacity">
+            {/* Image Indicator Dots - Hidden on mobile */}
+            <div className="hidden sm:flex absolute bottom-3 left-1/2 -translate-x-1/2 z-20 flex gap-1.5 transition-opacity">
               {allImages.map((_, index) => (
                 <button
                   key={index}

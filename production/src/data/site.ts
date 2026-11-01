@@ -38,11 +38,11 @@ export const site: SiteConfig = {
   branches: [
     {
       id: "kondhwa",
-      name: { en: "Kondhwa", hi: "कोंढवा", mr: "कोंढवा" },
+      name: { en: "Kondhwa - Raghunandan Kasturi", hi: "कोंढवा - रघुनंदन कस्तुरी", mr: "कोंढवा - रघुनंदन कस्तुरी" },
       address: {
         status: "confirmed",
         value: {
-          lines: ["Khadi Machine Chowk", "Kondhwa Saswad Road"],
+          lines: ["Raghunandan kasturi, near sinhagad college", "Antulya Nagar, Kondhwa Budruk"],
           locality: "Pune",
           postalCode: "411048",
         },
@@ -52,14 +52,14 @@ export const site: SiteConfig = {
       phone: { status: "pending", value: null, note: "No branch-specific number confirmed" },
     },
     {
-      id: "gangadham",
-      name: { en: "Gangadham", hi: "गंगाधाम", mr: "गंगाधाम" },
+      id: "kondhwa-2",
+      name: { en: "Kondhwa - Tilekar Nagar", hi: "कोंढवा - टिलकर नगर", mr: "कोंढवा - टिलकर नगर" },
       address: {
         status: "confirmed",
         value: {
-          lines: ["Gangadham Chowk", "Beside Solitaire Premier", "Ganga Dham Road, Phase 1"],
+          lines: ["S. No 47, Tilekar Nagar", "Kondhwa Budruk"],
           locality: "Pune",
-          postalCode: "411037",
+          postalCode: "411048",
         },
         source: "Owner-confirmed branch location",
       },
@@ -68,12 +68,12 @@ export const site: SiteConfig = {
     },
     {
       id: "undri",
-      name: { en: "Undri", hi: "उंड्री", mr: "उंड्री" },
+      name: { en: "Undri - RK Complex", hi: "उंड्री - RK कॉम्प्लेक्स", mr: "उंड्री - RK कॉम्प्लेक्स" },
       address: {
         status: "confirmed",
         value: {
-          lines: ["Opposite Euro School", "Undri Marg", "Near My Toy Trolly"],
-          locality: "Undri, Pune",
+          lines: ["SHOP NO 1, GROUND FLOOR, RK COMPLEX", "Road, opposite EURO INTERNATIONAL SCHOOL", "Undri Chowk, Undri"],
+          locality: "Pune",
           postalCode: "411060",
         },
         source: "Owner-confirmed branch location",
