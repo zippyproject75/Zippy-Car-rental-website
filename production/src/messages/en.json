@@ -124,7 +124,7 @@
     "priceUnavailable": "Price on request",
     "packageSectionEyebrow": "Package Pricing",
     "packageSectionTitle": "Choose your rental package",
-    "packageSectionIntro": "Select between 12-hour and 24-hour packages. Confirmed prices are shown for 12-hour packages. 24-hour pricing will be added soon."
+    "packageSectionIntro": "12-hour packages are available with confirmed pricing. 24-hour packages will be added once pricing is confirmed."
   },
   "Fleet": {
     "title": "Self-Drive Cars in Pune",
@@ -384,32 +384,26 @@
   "Placeholder": {
     "alt": "Photo of {car} coming soon"
   },
-  "Reviews": {
-    "eyebrow": "Customer feedback",
-    "title": "Verified customer experiences",
-    "subtitle": "We collect genuine reviews directly from customers who have driven our cars across Pune and Maharashtra.",
-    "verifiedBadge": "Verified Feedback System",
-    "slots": {
-      "fleetQuality": {
-        "category": "Fleet Quality",
-        "topic": "Maruti Suzuki Condition",
-        "description": "Customer feedback on car cleanliness, maintenance, and driving performance."
-      },
-      "bookingEase": {
-        "category": "Rental Process",
-        "topic": "WhatsApp Coordination",
-        "description": "Customer experience with transparent pricing, fast reply times, and zero hidden charges."
-      },
-      "branchConvenience": {
-        "category": "Locations",
-        "topic": "Pune Branch Pickup",
-        "description": "Customer reviews regarding Kondhwa, Gangadham, and Undri pickup convenience."
-      }
+  "RentalProcess": {
+    "eyebrow": "How rentals work",
+    "title": "A clear and straightforward rental process",
+    "subtitle": "Understand what to expect when you rent with Zippy Car Rental, from selecting your vehicle to pickup and return.",
+    "vehicleSelection": {
+      "title": "Select your vehicle and package",
+      "description": "Choose from our Maruti Suzuki fleet and select between 12-hour and 24-hour rental packages. Each package includes a specified kilometre allowance."
     },
-    "awaitingPublication": "Awaiting owner publication of verified customer submissions.",
-    "invitationTitle": "Rented with Zippy Car Rental?",
-    "invitationBody": "Share your trip experience with us on WhatsApp. Verified reviews are published directly on our website.",
-    "cta": "Submit Feedback on WhatsApp"
+    "packageUnderstanding": {
+      "title": "Understand included kilometres and charges",
+      "description": "12-hour packages include 180 km. Additional kilometres are charged at ₹10/km. Final pricing and availability are confirmed by Zippy on WhatsApp."
+    },
+    "pickupArrangements": {
+      "title": "Provide your details and confirm pickup",
+      "description": "Submit your enquiry with pickup location, dates, and times. Zippy confirms availability and final details before you arrive for pickup."
+    },
+    "confirmationNote": {
+      "title": "Availability and pricing confirmation",
+      "description": "This website helps you prepare an enquiry. Zippy confirms vehicle availability, final pricing, and booking details directly with you on WhatsApp."
+    }
   },
   "RentalGuidelines": {
     "eyebrow": "RENTAL REQUIREMENTS & POLICIES",

@@ -1,84 +1,84 @@
 {
   "Meta": {
-    "homeTitle": "पुणे में सेल्फ-ड्राइव कार किराया | Zippy Car Rental",
-    "homeDescription": "पुणे में Zippy Car Rental से सेल्फ-ड्राइव कार किराये पर लें। पाँच Maruti Suzuki कारें देखें, तारीख और समय चुनें, और WhatsApp पर पूछताछ भेजें।",
-    "carsTitle": "पुणे में सेल्फ-ड्राइव कारें",
-    "carsDescription": "Zippy Car Rental का बेड़ा: Maruti Suzuki Fronx, Brezza, Baleno और दो Ertiga, पुणे में सेल्फ-ड्राइव किराये की पूछताछ के लिए।",
-    "carTitle": "पुणे में {car} सेल्फ-ड्राइव किराया",
-    "carTitleUnit": "पुणे में {car} वाहन {unit} सेल्फ-ड्राइव किराया",
-    "carDescription": "पुणे में सेल्फ-ड्राइव के लिए Zippy Car Rental से {car} किराये पर लेने की पूछताछ करें। अपनी तारीख और समय चुनें और WhatsApp पूछताछ तैयार करें।",
-    "carDescriptionUnit": "पुणे में सेल्फ-ड्राइव किराये के लिए Zippy Car Rental से {car} वाहन {unit} की पूछताछ करें। अपनी तारीख और समय चुनें और WhatsApp पूछताछ तैयार करें।",
-    "bookTitle": "किराया पूछताछ",
-    "bookDescription": "पुणे में Zippy Car Rental के लिए सेल्फ-ड्राइव किराया पूछताछ तैयार करें: कार, शाखा और पिकअप व वापसी का समय चुनें।",
-    "aboutTitle": "Zippy Car Rental के बारे में",
-    "aboutDescription": "Zippy Car Rental पुणे, महाराष्ट्र में पाँच Maruti Suzuki कारों के साथ सेल्फ-ड्राइव कार किराया सेवा देता है।",
-    "contactTitle": "Zippy Car Rental से संपर्क करें",
-    "contactDescription": "पुणे में Zippy Car Rental से संपर्क करें और सेल्फ-ड्राइव कार किराये के लिए शाखाओं के स्थान और दिशा-निर्देश पाएं।",
-    "faqTitle": "अक्सर पूछे जाने वाले प्रश्न",
-    "faqDescription": "पुणे में Zippy Car Rental से सेल्फ-ड्राइव कार की पूछताछ के बारे में उत्तर: पूछताछ, WhatsApp और कीमत की पुष्टि कैसे होती है।",
-    "legalDescription": "Zippy Car Rental वेबसाइट के लिए {title}।",
-    "notFoundTitle": "पेज नहीं मिला",
-    "howItWorksTitle": "यह कैसे काम करता है | Zippy Car Rental",
-    "howItWorksDescription": "पुणे में ज़िपि से सेल्फ़-ड्राइव कार किराए पर लेने की पूरी 6-चरणीय प्रक्रिया जानें: वाहन चुनें, दिनांक तय करें और WhatsApp पर पुष्टि पाएं।"
+    "homeTitle": "Self-Drive Car Rental in Pune | Zippy Car Rental",
+    "homeDescription": "Self-drive car rental in Pune from Zippy Car Rental. Explore five Maruti Suzuki cars, choose your dates and times, and send an enquiry on WhatsApp.",
+    "carsTitle": "Self-Drive Cars in Pune",
+    "carsDescription": "The Zippy Car Rental fleet: Maruti Suzuki Fronx, Brezza, Baleno and two Ertigas, available to enquire for self-drive rental in Pune.",
+    "carTitle": "{car} Self-Drive Rental in Pune",
+    "carTitleUnit": "{car} Vehicle {unit} Self-Drive Rental in Pune",
+    "carDescription": "Enquire about renting the {car} for self-drive in Pune with Zippy Car Rental. Choose your dates and times and prepare a WhatsApp enquiry.",
+    "carDescriptionUnit": "Enquire about {car} Vehicle {unit} for self-drive rental in Pune with Zippy Car Rental. Choose your dates and times and prepare a WhatsApp enquiry.",
+    "bookTitle": "Rental Enquiry",
+    "bookDescription": "Prepare a self-drive rental enquiry for Zippy Car Rental in Pune: choose a car, branch, and pickup and return times.",
+    "aboutTitle": "About Zippy Car Rental",
+    "aboutDescription": "Zippy Car Rental offers self-drive car rental in Pune, Maharashtra, with a fleet of five Maruti Suzuki cars.",
+    "contactTitle": "Contact Zippy Car Rental",
+    "contactDescription": "Contact Zippy Car Rental in Pune and find branch locations and directions for self-drive car rental.",
+    "faqTitle": "Frequently Asked Questions",
+    "faqDescription": "Answers about enquiring for a self-drive car with Zippy Car Rental in Pune: how enquiries, WhatsApp and price confirmation work.",
+    "legalDescription": "{title} for the Zippy Car Rental website.",
+    "notFoundTitle": "Page not found",
+    "howItWorksTitle": "How It Works | Zippy Car Rental",
+    "howItWorksDescription": "Explore how self-drive car rental works with Zippy in Pune. Browse our Maruti fleet, pick dates and location, enquire on WhatsApp, and enjoy your journey."
   },
   "Common": {
-    "skipToContent": "मुख्य सामग्री पर जाएं",
-    "brandTagline": "कार किराया",
-    "homeLink": "Zippy Car Rental होम",
-    "pendingBadge": "पुष्टि लंबित",
-    "pendingHint": "केवल प्रीव्यू। मालिक द्वारा पुष्टि होने तक दिखाया गया; प्रोडक्शन में छिपा रहेगा।",
-    "draftBadge": "मसौदा",
-    "previewBanner": "प्रीव्यू बिल्ड — अपुष्ट विवरण चिह्नित हैं और साइट इंडेक्स नहीं होती।",
-    "priceOnRequest": "कीमत अनुरोध पर",
-    "photoComingSoon": "फ़ोटो जल्द आ रही है",
-    "vehicleUnit": "वाहन {unit}",
-    "opensInNewTab": "(नए टैब में खुलता है)",
-    "close": "बंद करें",
-    "breadcrumb": "ब्रेडक्रंब",
-    "home": "होम"
+    "skipToContent": "Skip to main content",
+    "brandTagline": "Car rental",
+    "homeLink": "Zippy Car Rental home",
+    "pendingBadge": "Pending confirmation",
+    "pendingHint": "Preview only. Shown until the owner confirms it; hidden in production.",
+    "draftBadge": "Draft",
+    "previewBanner": "Preview build — unconfirmed details are marked and the site is not indexed.",
+    "priceOnRequest": "Price on request",
+    "photoComingSoon": "Photo coming soon",
+    "vehicleUnit": "Vehicle {unit}",
+    "opensInNewTab": "(opens in a new tab)",
+    "close": "Close",
+    "breadcrumb": "Breadcrumb",
+    "home": "Home"
   },
   "Nav": {
-    "home": "होम",
-    "cars": "हमारी कारें",
-    "about": "हमारे बारे में",
-    "faq": "प्रश्नोत्तर",
-    "contact": "संपर्क",
-    "enquire": "पूछताछ करें",
-    "howItWorks": "यह कैसे काम करता है",
-    "locations": "पिकअप स्थान",
-    "planMyRental": "किराया योजना बनाएं",
-    "planRentalShort": "योजना बनाएं",
-    "primary": "मुख्य",
-    "openMenu": "मेनू खोलें",
-    "closeMenu": "मेनू बंद करें",
-    "menuTitle": "मेनू"
+    "home": "Home",
+    "cars": "Our Cars",
+    "about": "About",
+    "faq": "FAQ",
+    "contact": "Contact",
+    "enquire": "Enquire",
+    "howItWorks": "How It Works",
+    "locations": "Pickup Locations",
+    "planMyRental": "Plan My Rental",
+    "planRentalShort": "Plan Rental",
+    "primary": "Main",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "menuTitle": "Menu"
   },
   "Theme": {
-    "toDark": "डार्क थीम पर जाएं",
-    "toLight": "लाइट थीम पर जाएं",
-    "label": "थीम",
-    "light": "लाइट",
-    "dark": "डार्क"
+    "toDark": "Switch to dark theme",
+    "toLight": "Switch to light theme",
+    "label": "Theme",
+    "light": "Light",
+    "dark": "Dark"
   },
   "Language": {
-    "label": "भाषा"
+    "label": "Language"
   },
   "Hero": {
-    "eyebrow": "सेल्फ-ड्राइव · पुणे, महाराष्ट्र",
-    "titleLead": "पुणे में सेल्फ-ड्राइव",
-    "titleAccent": "कार किराया।",
-    "subtitle": "पाँच Maruti Suzuki कारें। अपनी तारीख और समय चुनें, पूछताछ तैयार करें, और Zippy Car Rental आपसे कीमत और उपलब्धता की पुष्टि करता है।",
-    "primaryCta": "पूछताछ शुरू करें",
-    "secondaryCta": "बेड़ा देखें",
-    "mediaCaption": "बेड़े की फ़ोटो जल्द आ रही हैं",
-    "fleetIndex": "बेड़ा"
+    "eyebrow": "Self-drive · Pune, Maharashtra",
+    "titleLead": "Self-drive car rental",
+    "titleAccent": "in Pune.",
+    "subtitle": "Five Maruti Suzuki cars. Choose your dates and times, prepare an enquiry, and Zippy Car Rental confirms the price and availability with you.",
+    "primaryCta": "Start an enquiry",
+    "secondaryCta": "View the fleet",
+    "mediaCaption": "Fleet photography coming soon",
+    "fleetIndex": "The fleet"
   },
   "Home": {
     "facts": {
-      "selfDrive": "सेल्फ-ड्राइव किराया",
-      "fleet": "पाँच Maruti Suzuki कारें",
-      "city": "पुणे, महाराष्ट्र",
-      "confirm": "कीमत और उपलब्धता की पुष्टि Zippy करता है"
+      "selfDrive": "Self-drive rental",
+      "fleet": "Five Maruti Suzuki cars",
+      "city": "Pune, Maharashtra",
+      "confirm": "Price and availability confirmed by Zippy"
     },
     "enquiryEyebrow": "01 — पूछताछ",
     "enquiryTitle": "अपना किराया योजना बनाएं",
@@ -91,20 +91,16 @@
     "howTitle": "पूछताछ, व्यक्तिगत रूप से पुष्ट",
     "steps": {
       "1": {
-        "title": "कार चुनें",
-        "body": "पाँच में से एक कार चुनें, या “कोई भी उपलब्ध कार” चुनें।"
+        "title": "अपना वाहन और पैकेज चुनें",
+        "body": "हमारे पाँच मारुति सुजुकी कारों में से ब्राउज़ करें और 12-घंटे या 24-घंटे किराया पैकेज चुनें।"
       },
       "2": {
-        "title": "शाखा और समय चुनें",
-        "body": "अपनी पिकअप शाखा और IST में पिकअप व वापसी का समय चुनें।"
+        "title": "अपनी किराया पूछताछ जमा करें",
+        "body": "अपना पिकअप स्थान, तारीख और समय भरें। WhatsApp आपकी तैयार पूछताछ के साथ खुलता है।"
       },
       "3": {
-        "title": "WhatsApp पर भेजें",
-        "body": "WhatsApp आपकी लिखी हुई पूछताछ के साथ खुलता है। आप Send दबाते हैं।"
-      },
-      "4": {
-        "title": "Zippy पुष्टि करता है",
-        "body": "Zippy उपलब्धता और अंतिम कीमत की पुष्टि के लिए जवाब देता है।"
+        "title": "Zippy के साथ पुष्टि करें",
+        "body": "Zippy चलाने से पहले उपलब्धता और अंतिम कीमत की पुष्टि के लिए WhatsApp पर जवाब देता है।"
       }
     },
     "aboutEyebrow": "04 — Zippy के बारे में",
@@ -113,48 +109,48 @@
     "aboutCta": "Zippy के बारे में",
     "branchesEyebrow": "05 — शाखाएं",
     "branchesTitle": "पुणे में पिकअप शाखाएं",
-    "branchesIntro": "नक्शे केवल आपके कहने पर लोड होते हैं। दिशा-निर्देश Google Maps में खुलते हैं।",
+    "branchesIntro": "मानचित्र केवल तब लोड होते हैं जब आप उन्हें मांगते हैं। दिशाएं Google Maps में खुलती हैं।",
     "faqEyebrow": "06 — प्रश्न",
     "faqTitle": "पूछताछ से पहले",
     "faqAll": "सभी प्रश्न",
-    "ctaTitle": "जब आप तैयार हों।",
-    "ctaBody": "एक मिनट से भी कम में अपनी पूछताछ तैयार करें। Zippy आपसे विवरण की पुष्टि करता है।",
+    "ctaTitle": "तैयार जब आप हों।",
+    "ctaBody": "एक मिनट से भी कम समय में अपनी पूछताछ तैयार करें। Zippy विवरण की पुष्टि करता है।",
     "ctaPrimary": "पूछताछ शुरू करें",
     "ctaSecondary": "Zippy से संपर्क करें",
     "packageSelector": "पैकेज चुनें",
     "package12Hour": "12-घंटे पैकेज",
     "package24Hour": "24-घंटे पैकेज",
     "freeKmLimit": "{km} किमी मुफ्त",
-    "priceUnavailable": "कीमत अनुरोध पर",
+    "priceUnavailable": "कीमत पर पूछताछ",
     "packageSectionEyebrow": "पैकेज मूल्य निर्धारण",
     "packageSectionTitle": "अपना किराया पैकेज चुनें",
-    "packageSectionIntro": "12-घंटे और 24-घंटे पैकेज के बीच चुनें। 12-घंटे पैकेज के लिए पुष्टि की गई कीमतें दिखाई गई हैं। 24-घंटे की मूल्य निर्धारण जल्द ही जोड़ा जाएगा।"
+    "packageSectionIntro": "12-घंटे के पैकेज पुष्टि की गई कीमतों के साथ उपलब्ध हैं। 24-घंटे के पैकेज मूल्य निर्धारण की पुष्टि होने के बाद जोड़े जाएंगे।"
   },
   "Fleet": {
     "title": "पुणे में सेल्फ-ड्राइव कारें",
-    "intro": "पुणे में सेल्फ-ड्राइव किराये के लिए पाँच Maruti Suzuki कारों के हमारे बेड़े का अन्वेषण करें। हैचबैक, कॉम्पैक्ट SUV और MPV में से चुनें। Zippy Car Rental द्वारा पुष्टि होते ही विनिर्देश और दरें दिखाई देंगी।",
+    "intro": "पुणे में सेल्फ-ड्राइव किराये के लिए उपलब्ध हमारे पाँच मारुति सुजुकी कारों की फ्लीट का अन्वेषण करें। हैचबैक, कॉम्पैक्ट एसयूवी और एमपीवी में से चुनें। विनिर्देश और दरें Zippy Car Rental द्वारा पुष्टि होते ही दिखाई देंगे।",
     "viewDetails": "विवरण देखें",
     "viewDetailsFor": "{car} का विवरण देखें",
-    "enquire": "पूछताछ करें",
+    "enquire": "पूछताछ",
     "enquireFor": "{car} के बारे में पूछताछ करें",
     "countLabel": "{count} कारें"
   },
   "Car": {
     "breadcrumbCars": "कारें",
-    "intro": "{car} पुणे में Zippy Car Rental के सेल्फ-ड्राइव बेड़े का हिस्सा है। पूछताछ तैयार करने के लिए पिकअप और वापसी की तारीख और समय चुनें; Zippy आपसे अंतिम कीमत और उपलब्धता की पुष्टि करेगा।",
-    "introUnit": "यह {car} वाहन {unit} है, पुणे में Zippy Car Rental के सेल्फ-ड्राइव बेड़े की दो अलग Ertiga में से एक। पूछताछ तैयार करने के लिए अपनी तारीख और समय चुनें; Zippy आपसे अंतिम कीमत और उपलब्धता की पुष्टि करेगा।",
-    "ertigaNote": "Zippy के पास दो अलग Ertiga हैं। उन्हें अलग पहचानने वाले विवरण पुष्टि होने पर जोड़े जाएंगे।",
+    "intro": "{car} Zippy Car Rental की पुणे, महाराष्ट्र में सेल्फ-ड्राइव फ्लीट का हिस्सा है। पिकअप और रिटर्न की तारीख और समय चुनकर पूछताछ तैयार करें; Zippy अंतिम कीमत और उपलब्धता की पुष्टि आपके साथ करेगा।",
+    "introUnit": "यह {car} वाहन {unit} है, Zippy Car Rental की पुणे, महाराष्ट्र में सेल्फ-ड्राइव फ्लीट में दो अलग-अलग एर्टिगा इकाइयों में से एक है। अपनी तारीख और समय चुनकर पूछताछ तैयार करें; Zippy अंतिम कीमत और उपलब्धता की पुष्टि आपके साथ करेगा।",
+    "ertigaNote": "Zippy के पास दो अलग-अलग एर्टिगा इकाइयां हैं। उन्हें अलग बताने वाले विवरण पुष्टि होने के बाद जोड़े जाएंगे।",
     "specsTitle": "विनिर्देश",
-    "specsPending": "इस कार के विनिर्देश Zippy Car Rental द्वारा पुष्टि होने पर प्रकाशित किए जाएंगे।",
-    "priceTitle": "किराया कीमत",
-    "pricePending": "इस कार की दरें अभी प्रकाशित नहीं हुई हैं। Zippy आपकी तारीखों के लिए कीमत की पुष्टि करेगा।",
+    "specsPending": "इस कार के विनिर्देश Zippy Car Rental द्वारा पुष्टि होने के बाद प्रकाशित किए जाएंगे।",
+    "priceTitle": "किराया मूल्य",
+    "pricePending": "इस कार की दरें अभी प्रकाशित नहीं हुई हैं। Zippy आपकी तारीखों के लिए मूल्य की पुष्टि करेगा।",
     "priceFrom": "{amount} से",
     "perDay": "प्रति 24 घंटे",
     "perInterval": "प्रति {minutes} मिनट",
     "enquiryTitle": "इस कार के बारे में पूछताछ करें",
     "policiesTitle": "किराये से पहले",
-    "policiesPending": "किराये की नीतियां अभी प्रकाशित नहीं हुई हैं। Zippy Car Rental किसी भी किराये से पहले लागू शर्तें समझाएगा।",
-    "relatedTitle": "बेड़े की अन्य कारें",
+    "policiesPending": "किराया नीतियां अभी प्रकाशित नहीं हुई हैं। Zippy Car Rental किसी भी किराये से पहले लागू शर्तों की व्याख्या करेगा।",
+    "relatedTitle": "फ्लीट में अन्य कारें",
     "stickyEnquire": "इस कार के बारे में पूछताछ करें"
   },
   "Specs": {
@@ -167,8 +163,8 @@
     "colour": "रंग",
     "bodyTypes": {
       "hatchback": "हैचबैक",
-      "compact-suv": "कॉम्पैक्ट SUV",
-      "mpv": "MPV"
+      "compact-suv": "कॉम्पैक्ट एसयूवी",
+      "mpv": "एमपीवी"
     },
     "transmissions": {
       "manual": "मैनुअल",
@@ -176,205 +172,205 @@
     },
     "fuels": {
       "petrol": "पेट्रोल",
-      "diesel": "डीज़ल",
-      "cng": "CNG",
-      "petrol-cng": "पेट्रोल + CNG"
+      "diesel": "डीजल",
+      "cng": "सीएनजी",
+      "petrol-cng": "पेट्रोल + सीएनजी"
     },
     "seatsValue": "{count} सीटें"
   },
   "Booking": {
     "pageTitle": "किराया पूछताछ",
-    "pageIntro": "कार, पिकअप शाखा और पिकअप व वापसी का समय चुनें। आपको अनुरोधित अवधि और, जहां दरें प्रकाशित हैं, अनुमानित किराया लागत दिखेगी।",
+    "pageIntro": "Zippy Car Rental के लिए एक सेल्फ-ड्राइव किराया पूछताछ तैयार करें: कार, शाखा, और पिकअप और रिटर्न समय चुनें।",
     "formLabel": "किराया पूछताछ",
     "car": "कार",
     "anyCar": "कोई भी उपलब्ध कार",
-    "anyCarHint": "“कोई भी उपलब्ध कार” केवल एक पसंद है — Zippy आपको बताएगा कि आपकी तारीखों के लिए कौन-सी कारें खाली हैं।",
+    "anyCarHint": "कोई भी उपलब्ध कार केवल एक प्राथमिकता है — Zippy आपको बताएगा कि आपकी तारीखों के लिए कौन सी कारें मुफ्त हैं।",
     "pickupLocation": "पिकअप स्थान",
     "pickupLocationPlaceholder": "पिकअप स्थान चुनें",
     "branch": "पिकअप शाखा",
     "branchPlaceholder": "शाखा चुनें",
-    "branchesPendingNotice": "पिकअप शाखाओं की पुष्टि की जा रही है। Zippy जवाब देते समय आपके पिकअप स्थान की पुष्टि करेगा।",
+    "branchesPendingNotice": "पिकअप शाखाएं पुष्टि की जा रही हैं। Zippy जवाब देते समय आपका पिकअप बिंदु पुष्टि करेगा।",
     "pickup": "पिकअप",
-    "return": "वापसी",
-    "pickupDate": "पिकअप की तारीख",
-    "pickupTime": "पिकअप का समय",
-    "returnDate": "वापसी की तारीख",
-    "returnTime": "वापसी का समय",
+    "return": "रिटर्न",
+    "pickupDate": "पिकअप तारीख",
+    "pickupTime": "पिकअप समय",
+    "returnDate": "रिटर्न तारीख",
+    "returnTime": "रिटर्न समय",
     "chooseDate": "तारीख चुनें",
     "selectTime": "समय चुनें",
-    "changeDate": "{label}: {date}। तारीख बदलें",
-    "chooseDateFor": "{label}: चुनी नहीं गई। तारीख चुनें",
-    "pickupDialogTitle": "पिकअप की तारीख चुनें",
-    "returnDialogTitle": "वापसी की तारीख चुनें",
-    "calendarHint": "पूछताछ अवधि के बाहर की तारीखें नहीं चुनी जा सकतीं। कैलेंडर यह नहीं दिखाता कि कार उपलब्ध है या नहीं।",
+    "changeDate": "{label}: {date}. तारीख बदलें",
+    "chooseDateFor": "{label}: चयनित नहीं। तारीख चुनें",
+    "pickupDialogTitle": "पिकअप तारीख चुनें",
+    "returnDialogTitle": "रिटर्न तारीख चुनें",
+    "calendarHint": "पूछताछ विंडो के बाहर की तारीखों का चयन नहीं किया जा सकता। कैलेंडर यह नहीं दिखाता कि कार उपलब्ध है या नहीं।",
     "calendarLoading": "कैलेंडर लोड हो रहा है…",
     "calendarNext": "अगला महीना",
     "calendarPrevious": "पिछला महीना",
     "calendarToday": "आज",
-    "calendarSelected": "चुना गया",
+    "calendarSelected": "चयनित",
     "name": "आपका नाम",
     "optional": "वैकल्पिक",
     "nameHint": "केवल आपके WhatsApp संदेश में शामिल।",
     "note": "Zippy के लिए नोट",
-    "noteHint": "अधिकतम {max} अक्षर।",
+    "noteHint": "अधिकतम {max} वर्ण।",
     "noteCount": "{count} / {max}",
-    "timeZoneNote": "सभी समय भारतीय मानक समय (IST) में हैं।",
+    "timeZoneNote": "सभी समय भारतीय मानक समय (IST) हैं।",
     "summaryTitle": "आपका किराया सारांश",
     "durationLabel": "अनुरोधित अवधि",
-    "durationEmpty": "अवधि देखने के लिए पिकअप और वापसी की तारीख और समय चुनें।",
+    "durationEmpty": "अवधि देखने के लिए पिकअप और रिटर्न की तारीख और समय चुनें।",
     "packageLabel": "किराया पैकेज",
-    "package12Hour": "12-घंटे का पैकेज",
-    "package24Hour": "24-घंटे का पैकेज",
-    "package12HourHint": "अधिकांश वाहनों के लिए पुष्ट कीमतों के साथ 12-घंटे का किराया।",
-    "package24HourHint": "24-घंटे का किराया। कीमत की पुष्टि Zippy करेगा।",
-    "packagePrice": "पैकेज कीमत",
+    "package12Hour": "12-घंटे पैकेज",
+    "package24Hour": "24-घंटे पैकेज",
+    "package12HourHint": "अधिकांश वाहनों के लिए पुष्टि की गई मूल्य निर्धारण के साथ 12-घंटे किराया।",
+    "package24HourHint": "24-घंटे किराया। मूल्य निर्धारण Zippy द्वारा पुष्टि किया जाएगा।",
+    "packagePrice": "पैकेज मूल्य",
     "freeKm": "मुफ्त किलोमीटर",
-    "returnTimeManuallyEdited": "आपने वापसी का समय मैन्युअल रूप से सेट किया है। आपके पैकेज के आधार पर सुझाई गई वापसी का समय अब लागू नहीं है।",
-    "useSuggestedReturn": "सुझाई गई वापसी का समय उपयोग करें",
-    "submit": "WhatsApp पर पूछताछ करें",
-    "errorSummary": "कृपया {count} फ़ील्ड ठीक करें।",
+    "returnTimeManuallyEdited": "आपने रिटर्न समय मैन्युअल रूप से सेट किया है। आपके पैकेज के आधार पर सुझाई गई रिटर्न समय अब लागू नहीं होता है।",
+    "useSuggestedReturn": "सुझाई गई रिटर्न समय का उपयोग करें",
+    "submit": "WhatsApp पर पूछताछ भेजें",
+    "errorSummary": "कृपया {count, plural, one {# फ़ील्ड} other {# फ़ील्ड्स}} सुधारें।",
     "errors": {
       "required": "यह आवश्यक है।",
-      "invalid": "मान्य मान दर्ज करें।",
-      "pickupInPast": "पिकअप बीते समय में नहीं हो सकता।",
-      "pickupTooSoon": "पिकअप अनुरोध किए जा सकने वाले सबसे पहले समय से पहले है।",
-      "pickupTooFar": "पिकअप {days} दिनों की पूछताछ अवधि से आगे है।",
-      "outsideHours": "यह समय पिकअप के घंटों से बाहर है।",
-      "returnNotAfterPickup": "वापसी पिकअप के बाद होनी चाहिए।",
-      "returnTooFar": "वापसी {days} दिनों की पूछताछ अवधि से आगे है।",
-      "durationTooShort": "किराया न्यूनतम अवधि से छोटा है।",
-      "nameTooLong": "{max} या उससे कम अक्षर उपयोग करें।",
-      "noteTooLong": "{max} या उससे कम अक्षर उपयोग करें।",
+      "invalid": "एक मान्य मान दर्ज करें।",
+      "pickupInPast": "पिकअप भूतकाल में नहीं हो सकता।",
+      "pickupTooSoon": "पिकअप सबसे पहले अनुरोधित समय से पहले है।",
+      "pickupTooFar": "पिकअप {days}-दिन की पूछताछ विंडो से परे है।",
+      "outsideHours": "यह समय पिकअप घंटों के बाहर है।",
+      "returnNotAfterPickup": "रिटर्न पिकअप के बाद होना चाहिए।",
+      "returnTooFar": "रिटर्न {days}-दिन की पूछताछ विंडो से परे है।",
+      "durationTooShort": "किराया न्यूनतम अवधि से कम है।",
+      "nameTooLong": "{max} वर्ण या उससे कम का उपयोग करें।",
+      "noteTooLong": "{max} वर्ण या उससे कम का उपयोग करें।",
       "branchRequired": "पिकअप शाखा चुनें।",
       "pickupLocationRequired": "पिकअप स्थान चुनें।"
     },
-    "honesty": "यह पूछताछ है, बुकिंग नहीं। Zippy Car Rental द्वारा आपसे पुष्टि होने तक कोई कार आरक्षित नहीं होती।",
+    "honesty": "यह एक पूछताछ है, बुकिंग नहीं। Zippy Car Rental इसे आपके साथ पुष्टि करने तक कोई कार आरक्षित नहीं है।",
     "readyTitle": "आपकी पूछताछ तैयार है",
-    "readyBody": "WhatsApp आपकी तैयार पूछताछ के साथ खुलेगा। इसे भेजने के लिए WhatsApp में Send दबाएं। Zippy अंतिम कीमत और उपलब्धता की पुष्टि करेगा।",
+    "readyBody": "WhatsApp आपकी तैयार पूछताछ के साथ खुलेगा। WhatsApp में Send दबाएं इसे भेजने के लिए। Zippy अंतिम कीमत और उपलब्धता की पुष्टि करेगा।",
     "openWhatsApp": "WhatsApp खोलें",
-    "whatsappUnavailable": "Zippy Car Rental द्वारा अपना WhatsApp नंबर पुष्ट करने के बाद WhatsApp पूछताछ शुरू होगी। साझा करने के लिए नीचे अपनी पूछताछ कॉपी करें।",
+    "whatsappUnavailable": "WhatsApp पूछताछ Zippy Car Rental द्वारा अपना WhatsApp नंबर पुष्टि करने के बाद सक्षम हो जाएंगी। इसे साझा करने के लिए अपनी पूछताछ कॉपी करें।",
     "messageLabel": "आपका पूछताछ संदेश",
     "copy": "संदेश कॉपी करें",
     "copied": "संदेश आपके क्लिपबोर्ड पर कॉपी हो गया।",
-    "copyFailed": "अपने-आप कॉपी नहीं हो सका। संदेश का पाठ चुनें और स्वयं कॉपी करें।",
+    "copyFailed": "स्वचालित रूप से कॉपी नहीं किया जा सका। संदेश पाठ का चयन करें और इसे मैन्युअल रूप से कॉपी करें।",
     "edit": "अनुरोध संपादित करें",
-    "otherWays": "Zippy से संपर्क के अन्य तरीके",
+    "otherWays": "Zippy तक पहुंचने के अन्य तरीके",
     "call": "{number} पर कॉल करें",
-    "email": "{email} पर ईमेल करें",
-    "noOtherContacts": "फ़ोन और ईमेल विवरण पुष्टि होने पर यहां दिखाई देंगे।",
-    "afterOpen": "यदि WhatsApp नहीं खुला, तो संदेश कॉपी करके स्वयं भेजें, या Zippy से संपर्क का कोई अन्य तरीका अपनाएं।"
+    "email": "{email} को ईमेल करें",
+    "noOtherContacts": "फोन और ईमेल विवरण यहां पुष्टि होने के बाद दिखाई देंगे।",
+    "afterOpen": "यदि WhatsApp नहीं खुला, तो संदेश कॉपी करें और इसे स्वयं भेजें, या Zippy तक पहुंचने का कोई अन्य तरीका उपयोग करें।"
   },
   "Duration": {
-    "days": "{count} दिन",
-    "hours": "{count} घंटे",
-    "minutes": "{count} मिनट"
+    "days": "{count, plural, one {# दिन} other {# दिन}}",
+    "hours": "{count, plural, one {# घंटा} other {# घंटे}}",
+    "minutes": "{count, plural, one {# मिनट} other {# मिनट}}"
   },
   "Pricing": {
     "estimateLabel": "अनुमानित किराया लागत",
-    "disclaimer": "अंतिम किराया कीमत और वाहन उपलब्धता की पुष्टि Zippy Car Rental करेगा।",
-    "priceOnRequest": "कीमत अनुरोध पर",
+    "disclaimer": "अंतिम किराया मूल्य और वाहन उपलब्धता Zippy Car Rental द्वारा पुष्टि की जाएगी।",
+    "priceOnRequest": "कीमत पर पूछताछ",
     "reasons": {
-      "no-vehicle-selected": "जहां दरें प्रकाशित हैं वहां अनुमान देखने के लिए कोई विशेष कार चुनें। Zippy लागू कीमत की पुष्टि करेगा।",
-      "pricing-not-approved": "Zippy लागू कीमत की पुष्टि करेगा।",
-      "unknown-vehicle": "Zippy लागू कीमत की पुष्टि करेगा।"
+      "no-vehicle-selected": "दर प्रकाशित होने पर अनुमान देखने के लिए एक विशिष्ट कार चुनें। Zippy लागू मूल्य की पुष्टि करेगा।",
+      "pricing-not-approved": "Zippy लागू मूल्य की पुष्टि करेगा।",
+      "unknown-vehicle": "Zippy लागू मूल्य की पुष्टि करेगा।"
     },
-    "breakdownTitle": "यह अनुमान कैसे निकाला गया",
-    "lineDaily": "{units} × 24 घंटे, {rate} की दर से",
-    "lineHourly": "{units} × {interval} मिनट, {rate} की दर से",
-    "minimumApplied": "न्यूनतम बिल योग्य अवधि लागू: {duration}",
-    "taxIncluded": "दरों में Zippy द्वारा स्वीकृत लागू कर शामिल हैं।"
+    "breakdownTitle": "यह अनुमान कैसे गणना किया जाता है",
+    "lineDaily": "{units} × 24 घंटे पर {rate}",
+    "lineHourly": "{units} × {interval} मिनट पर {rate}",
+    "minimumApplied": "न्यूनतम बिलेबल अवधि लागू: {duration}",
+    "taxIncluded": "दरें में Zippy द्वारा अनुमोदित लागू कर शामिल हैं।"
   },
   "WhatsApp": {
-    "greeting": "नमस्ते Zippy Car Rental, मैं उपलब्धता जानना चाहता/चाहती हूँ। यह पूछताछ है, पुष्ट बुकिंग नहीं।",
+    "greeting": "हैलो Zippy Car Rental, मैं उपलब्धता जांचना चाहूंगा। यह एक पूछताछ है, पुष्टि की गई बुकिंग नहीं।",
     "car": "कार",
     "anyCar": "कोई भी उपलब्ध कार",
     "branch": "पिकअप शाखा",
-    "branchToConfirm": "Zippy के साथ पुष्टि होगी",
+    "branchToConfirm": "Zippy के साथ पुष्टि करने के लिए",
     "pickupLocation": "पिकअप स्थान",
     "pickup": "पिकअप",
-    "return": "वापसी",
+    "return": "रिटर्न",
     "duration": "अवधि",
-    "estimate": "अनुमानित किराया लागत (पुष्टि होनी है)",
+    "estimate": "अनुमानित किराया लागत (पुष्टि के लिए)",
     "package": "किराया पैकेज",
     "freeKm": "मुफ्त किलोमीटर",
     "name": "नाम",
     "note": "नोट",
-    "closing": "कृपया उपलब्धता और अंतिम कीमत की पुष्टि करें। धन्यवाद।"
+    "closing": "कृपया उपलब्धता और अंतिम मूल्य की पुष्टि करें। धन्यवाद।"
   },
   "Maps": {
-    "viewMap": "नक्शा देखें",
-    "viewMapFor": "{branch} शाखा का नक्शा देखें",
-    "hideMap": "नक्शा छिपाएं",
-    "loading": "नक्शा लोड हो रहा है…",
-    "mapTitle": "Zippy Car Rental {branch} शाखा का नक्शा",
-    "directions": "दिशा-निर्देश पाएं",
-    "directionsFor": "Google Maps में {branch} शाखा के लिए दिशा-निर्देश पाएं",
-    "unavailable": "नक्शा लोड नहीं हो सका। Google Maps खोलने के लिए दिशा-निर्देश पाएं का उपयोग करें।",
-    "notConfigured": "Google Maps सेवा कॉन्फ़िगर होने पर इंटरैक्टिव नक्शा दिखाई देगा। Google Maps खोलने के लिए दिशा-निर्देश पाएं का उपयोग करें।",
-    "privacy": "नक्शा लोड करने पर Google से कनेक्शन होता है, जो कुकीज़ सेट कर सकता है।",
-    "retry": "फिर से प्रयास करें",
-    "facadeLabel": "{branch} शाखा नक्शे का पूर्वावलोकन"
+    "viewMap": "मानचित्र देखें",
+    "viewMapFor": "{branch} शाखा का मानचित्र देखें",
+    "hideMap": "मानचित्र छिपाएं",
+    "loading": "मानचित्र लोड हो रहा है…",
+    "mapTitle": "Zippy Car Rental {branch} शाखा का मानचित्र",
+    "directions": "दिशाएं प्राप्त करें",
+    "directionsFor": "Google Maps में {branch} शाखा की दिशाएं प्राप्त करें",
+    "unavailable": "मानचित्र लोड नहीं हो सका। दिशाएं प्राप्त करें का उपयोग करके Google Maps खोलें।",
+    "notConfigured": "इंटरैक्टिव मानचित्र Google Maps सेवा कॉन्फ़िगर होने के बाद दिखाई देगा। दिशाएं प्राप्त करें का उपयोग करके Google Maps खोलें।",
+    "privacy": "मानचित्र लोड करने से Google से कनेक्ट होता है, जो कुकीज़ सेट कर सकता है।",
+    "retry": "पुनः प्रयास करें",
+    "facadeLabel": "{branch} शाखा मानचित्र पूर्वावलोकन"
   },
   "Contact": {
     "title": "Zippy Car Rental से संपर्क करें",
-    "intro": "नीचे दिए विवरण से Zippy Car Rental से संपर्क करें, या अपनी तारीखों के साथ पूछताछ तैयार करें।",
+    "intro": "नीचे दिए गए विवरण का उपयोग करके Zippy Car Rental तक पहुंचें, या अपनी तारीखों के साथ एक पूछताछ तैयार करें।",
     "methodsTitle": "संपर्क विवरण",
-    "phone": "फ़ोन",
-    "alternatePhone": "वैकल्पिक फ़ोन",
+    "phone": "फोन",
+    "alternatePhone": "वैकल्पिक फोन",
     "email": "ईमेल",
     "whatsapp": "WhatsApp",
-    "contactsPending": "पुष्ट फ़ोन और ईमेल विवरण यहां प्रकाशित किए जाएंगे।",
+    "contactsPending": "पुष्टि किए गए फोन और ईमेल विवरण यहां प्रकाशित किए जाएंगे।",
     "branchesTitle": "शाखाएं",
-    "branchesPending": "शाखाओं के पते पुष्टि होने पर प्रकाशित किए जाएंगे।",
-    "hours": "समय",
-    "branchPhone": "शाखा फ़ोन",
-    "enquireTitle": "तारीखें तय हैं?",
-    "enquireBody": "पूछताछ तैयार करें और WhatsApp पर भेजें। Zippy कीमत और उपलब्धता की पुष्टि करता है।",
+    "branchesPending": "शाखा पते पुष्टि होने के बाद प्रकाशित किए जाएंगे।",
+    "hours": "घंटे",
+    "branchPhone": "शाखा फोन",
+    "enquireTitle": "तारीखों में रुचि है?",
+    "enquireBody": "एक पूछताछ तैयार करें और इसे WhatsApp पर भेजें। Zippy मूल्य और उपलब्धता की पुष्टि करता है।",
     "enquireCta": "पूछताछ शुरू करें"
   },
   "About": {
     "title": "Zippy Car Rental के बारे में",
-    "intro": "Zippy Car Rental पुणे, महाराष्ट्र में सेल्फ-ड्राइव कार किराया सेवा देता है।",
+    "intro": "Zippy Car Rental पुणे, महाराष्ट्र में सेल्फ-ड्राइव कार किराया प्रदान करता है।",
     "factsTitle": "एक नज़र में",
     "facts": {
-      "selfDrive": "सेल्फ-ड्राइव किराया — कार आप स्वयं चलाते हैं।",
-      "fleet": "पाँच Maruti Suzuki कारें: Fronx, Brezza, Baleno और दो Ertiga।",
-      "city": "पुणे, महाराष्ट्र में स्थित।",
-      "confirm": "हर पूछताछ का जवाब Zippy व्यक्तिगत रूप से अंतिम कीमत और उपलब्धता के साथ देता है।"
+      "selfDrive": "सेल्फ-ड्राइव किराया — आप स्वयं कार चलाते हैं।",
+      "fleet": "पाँच मारुति सुजुकी कारें: Fronx, Brezza, Baleno और दो Ertigas।",
+      "city": "पुणे, महाराष्ट्र में आधारित।",
+      "confirm": "हर पूछताछ का जवाब व्यक्तिगत रूप से Zippy द्वारा अंतिम मूल्य और उपलब्धता के साथ दिया जाता है।"
     },
     "storyPending": "Zippy Car Rental की कहानी जल्द ही यहां साझा की जाएगी।",
-    "cta": "बेड़ा देखें"
+    "cta": "फ्लीट का अन्वेषण करें"
   },
   "Faq": {
     "title": "अक्सर पूछे जाने वाले प्रश्न",
-    "intro": "इस वेबसाइट पर पूछताछ कैसे काम करती है। Zippy Car Rental द्वारा किराये की नीतियों की पुष्टि होने पर और उत्तर जोड़े जाएंगे।",
-    "moreQuestions": "आपका उत्तर नहीं मिला?",
-    "moreQuestionsBody": "अपनी पूछताछ के नोट में Zippy से सीधे पूछें, या संपर्क पेज का उपयोग करें।",
+    "intro": "इस वेबसाइट पर पूछताछ कैसे काम करती है। Zippy Car Rental अपनी किराया नीतियों की पुष्टि करने के बाद अधिक उत्तर जोड़े जाएंगे।",
+    "moreQuestions": "अपना उत्तर नहीं मिला?",
+    "moreQuestionsBody": "अपनी पूछताछ नोट में सीधे Zippy से पूछें, या संपर्क पेज का उपयोग करें।",
     "contactCta": "Zippy से संपर्क करें"
   },
   "Legal": {
-    "draftBanner": "मसौदा — Zippy Car Rental द्वारा स्वीकृत नहीं और कानूनी सलाह नहीं। केवल प्रीव्यू बिल्ड में दिखाई देता है।",
-    "translationDraft": "इस अनुवाद की समीक्षा नहीं हुई है।",
+    "draftBanner": "ड्राफ्ट — Zippy Car Rental द्वारा अनुमोदित नहीं और कानूनी सलाह नहीं। केवल पूर्वावलोकन बिल्ड में दिखाई देता है।",
+    "translationDraft": "इस अनुवाद की समीक्षा नहीं की गई है।",
     "version": "संस्करण {version}",
-    "effective": "{date} से प्रभावी",
-    "effectivePending": "प्रभावी तारीख अभी तय नहीं",
-    "updated": "अंतिम अपडेट {date}",
+    "effective": "प्रभावी {date}",
+    "effectivePending": "प्रभावी तारीख अभी निर्धारित नहीं",
+    "updated": "अंतिम अद्यतन {date}",
     "contents": "इस पेज पर",
-    "notPublishedTitle": "अभी प्रकाशित नहीं",
-    "notPublished": "यह नीति तैयार की जा रही है और अभी प्रकाशित नहीं हुई है।",
-    "notPublishedBody": "प्रश्नों के लिए कृपया Zippy Car Rental से संपर्क करें।",
+    "notPublishedTitle": "अभी तक प्रकाशित नहीं",
+    "notPublished": "यह नीति तैयार की जा रही है और अभी तक प्रकाशित नहीं हुई है।",
+    "notPublishedBody": "प्रश्नों के लिए, कृपया Zippy Car Rental से संपर्क करें।",
     "contactCta": "Zippy से संपर्क करें"
   },
   "Footer": {
     "tagline": "पुणे में सेल्फ-ड्राइव कार किराया।",
-    "explore": "देखें",
+    "explore": "अन्वेषण करें",
     "company": "कंपनी",
     "legal": "नीतियां",
     "contact": "संपर्क",
-    "honesty": "वेबसाइट पूछताछ केवल अनुरोध हैं। अंतिम कीमत और उपलब्धता की पुष्टि Zippy Car Rental करता है।",
-    "rights": "© {year} Zippy Car Rental. सर्वाधिकार सुरक्षित.",
-    "legalPending": "स्वीकृति के बाद नीतियां यहां सूचीबद्ध होंगी।",
-    "contactsPending": "संपर्क विवरण पुष्टि होने पर दिखाई देंगे।",
+    "honesty": "वेबसाइट पूछताछ केवल अनुरोध हैं। Zippy Car Rental अंतिम मूल्य और उपलब्धता की पुष्टि करता है।",
+    "rights": "© {year} Zippy Car Rental. सर्वाधिकार सुरक्षित।",
+    "legalPending": "नीतियां अनुमोदन के बाद यहां सूचीबद्ध की जाएंगी।",
+    "contactsPending": "संपर्क विवरण पुष्टि होने के बाद दिखाई देंगे।",
     "enquire": "किराया पूछताछ"
   },
   "NotFound": {
@@ -388,32 +384,26 @@
   "Placeholder": {
     "alt": "{car} की फ़ोटो जल्द आ रही है"
   },
-  "Reviews": {
-    "eyebrow": "ग्राहक प्रतिक्रिया",
-    "title": "सत्यापित ग्राहक अनुभव",
-    "subtitle": "हम पुणे और महाराष्ट्र में हमारी कारें चलाने वाले ग्राहकों से सीधे वास्तविक समीक्षाएं एकत्र करते हैं।",
-    "verifiedBadge": "सत्यापित प्रतिक्रिया प्रणाली",
-    "slots": {
-      "fleetQuality": {
-        "category": "बेड़ा गुणवत्ता",
-        "topic": "मारुति सुजुकी स्थिति",
-        "description": "कार की साफ-सफाई, रखरखाव और ड्राइविंग प्रदर्शन पर ग्राहक प्रतिक्रिया।"
-      },
-      "bookingEase": {
-        "category": "किराया प्रक्रिया",
-        "topic": "व्हाट्सएप समन्वय",
-        "description": "पारदर्शी मूल्य निर्धारण, तेजी से उत्तर समय और शून्य छिपी शुल्क के साथ ग्राहक अनुभव।"
-      },
-      "branchConvenience": {
-        "category": "स्थान",
-        "topic": "पुणे शाखा पिकअप",
-        "description": "कोंढवा, गंगाधाम और उंद्री पिकअप सुविधा के बारे में ग्राहक समीक्षाएं।"
-      }
+  "RentalProcess": {
+    "eyebrow": "किराया कैसे काम करता है",
+    "title": "एक स्पष्ट और सीधी किराया प्रक्रिया",
+    "subtitle": "Zippy Car Rental के साथ किराया लेते समय क्या उम्मीद करें, वाहन चयन से लेकर पिकअप और वापसी तक।",
+    "vehicleSelection": {
+      "title": "अपना वाहन और पैकेज चुनें",
+      "description": "हमारे मारुति सुजुकी बेड़े से चुनें और 12-घंटे और 24-घंटे किराया पैकेज के बीच चयन करें। प्रत्येक पैकेज में एक निर्दिष्ट किलोमीटर भत्ता शामिल है।"
     },
-    "awaitingPublication": "सत्यापित ग्राहक जमा करने के मालिक के प्रकाशन की प्रतीक्षा।",
-    "invitationTitle": "Zippy Car Rental के साथ किराया लिया?",
-    "invitationBody": "व्हाट्सएप पर हमारे साथ अपनी यात्रा का अनुभव साझा करें। सत्यापित समीक्षाएं सीधे हमारी वेबसाइट पर प्रकाशित होती हैं।",
-    "cta": "व्हाट्सएप पर प्रतिक्रिया भेजें"
+    "packageUnderstanding": {
+      "title": "शामिल किलोमीटर और शुल्क समझें",
+      "description": "12-घंटे के पैकेज में 180 किमी शामिल है। अतिरिक्त किलोमीटर ₹10/किमी पर चार्ज किए जाते हैं। अंतिम मूल्य और उपलब्धता Zippy द्वारा व्हाट्सएप पर पुष्टि की जाती है।"
+    },
+    "pickupArrangements": {
+      "title": "अपना विवरण प्रदान करें और पिकअप की पुष्टि करें",
+      "description": "पिकअप स्थान, तारीख और समय के साथ अपनी पूछताछ जमा करें। आने से पहले Zippy उपलब्धता और अंतिम विवरण की पुष्टि करता है।"
+    },
+    "confirmationNote": {
+      "title": "उपलब्धता और मूल्य पुष्टि",
+      "description": "यह वेबसाइट आपको पूछताछ तैयार करने में मदद करती है। Zippy वाहन उपलब्धता, अंतिम मूल्य और बुकिंग विवरण सीधे आपके साथ व्हाट्सएप पर पुष्टि करता है।"
+    }
   },
   "RentalGuidelines": {
     "eyebrow": "किराया आवश्यकताएं और नीतियां",
@@ -437,56 +427,56 @@
       },
       "4": {
         "title": "ईंधन और FASTag टोल",
-        "badge": "जैसा-जैसा",
-        "desc": "वाहन को उसी ईंधन स्तर पर वापस करें जैसे भेजा गया था. सभी कारों में सहज हाईवे यात्रा के लिए सक्रिय FASTag है."
+        "badge": "लाइक-टू-लाइक",
+        "desc": "वाहन को उसी ईंधन स्तर पर वापस करें जैसा भेजा गया था। सभी कारों में सहज हाईवे यात्रा के लिए एक सक्रिय FASTag है।"
       }
     },
-    "verifiedLabel": "व्हाट्सएप पुष्टि पर सत्यापित",
-    "whatsappPrompt": "बाहरी स्थान यात्रा, सुरक्षा जमा, या अनुकूलित बहु-दिवसीय किराये के बारे में प्रश्न हैं?",
-    "whatsappCta": "व्हाट्सएप पर हमसे पूछें"
+    "verifiedLabel": "WhatsApp पुष्टि पर सत्यापित",
+    "whatsappPrompt": "आउटस्टेशन यात्रा, सुरक्षा जमा, या अनुकूलित बहु-दिवसीय किराये के बारे में प्रश्न हैं?",
+    "whatsappCta": "WhatsApp पर पूछें"
   },
   "TrustStrip": {
     "benefits": {
       "1": {
-        "title": "अच्छी तरह से बनाए रखी गई वाहन",
-        "body": "बेड़े में हर मारुति सुजुकी आपके किराये से पहले उत्कृष्ट स्थिति में रखी जाती है."
+        "title": "अच्छी तरह से बनाए रखे गए वाहन",
+        "body": "हर मारुति सुजुकी फ्लीट किराये से पहले उत्कृष्ट स्थिति में रखी जाती है।"
       },
       "2": {
         "title": "लचीले किराया योजनाएं",
-        "body": "घंटे और बहु-दिवसीय किराये उपलब्ध हैं. अपनी यात्रा के अनुसार दरों के लिए पूछताछ करें."
+        "body": "घंटे और बहु-दिवसीय किराये उपलब्ध। अपनी यात्रा के लिए दरों के बारे में पूछताछ करें।"
       },
       "3": {
-        "title": "3 सुविधाजनक स्थान",
-        "body": "कोंढवा, गंगाधाम, या उंद्री से उठाएं — जो भी आपके लिए सबसे अच्छा हो."
+        "title": "पारदर्शी मूल्य निर्धारण",
+        "body": "कोई छिपी शुल्क के साथ स्पष्ट दरें। चलाने से पहले WhatsApp पर मूल्य पुष्टि किया जाता है।"
       },
       "4": {
-        "title": "व्यक्तिगत व्हाट्सएप समर्थन",
-        "body": "हर पूछताछ का जवाब सीधे Zippy द्वारा दिया जाता है. वास्तविक उत्तर, कोई बॉट नहीं."
+        "title": "व्यक्तिगत WhatsApp समर्थन",
+        "body": "हर पूछताछ का जवाब सीधे Zippy द्वारा दिया जाता है। वास्तविक उत्तर, कोई बॉट नहीं।"
       }
     }
   },
   "AnnouncementBanner": {
-    "message1": "हमारे पिकअप स्थानों से 3 किमी के भीतर मुफ्त दरवाजे पर डिलीवरी",
+    "message1": "हमारे पिकअप स्थानों के 3 किमी के भीतर मुफ्त डोरस्टेप डिलीवरी",
     "message2": "अपना पसंदीदा पिकअप स्थान चुनें",
-    "message3": "3 किमी से आगे ₹500 दरवाजे पर डिलीवरी शुल्क"
+    "message3": "3 किमी के बाद ₹500 डोरस्टेप डिलीवरी शुल्क"
   },
   "PickupLocations": {
     "eyebrow": "पिकअप स्थान",
     "title": "अपना पिकअप स्थान चुनें",
-    "intro": "पुणे में हमारे तीन सुविधाजनक पिकअप स्थानों में से चुनें। Google Maps खोलने के लिए दिशा-निर्देश प्राप्त करें पर क्लिक करें।",
+    "intro": "पुणे में हमारे तीन सुविधाजनक पिकअप स्थानों में से चुनें। दिशाएं प्राप्त करें पर क्लिक करें Google Maps खोलने के लिए।",
     "location1": "पिकअप स्थान 1",
     "location2": "पिकअप स्थान 2",
     "location3": "पिकअप स्थान 3",
     "address1": "Kamthe Patil Business Center, Pune, Maharashtra",
     "address2": "S. No 47, Tilekar Nagar, Kondhwa Budruk, Pune, Maharashtra 411048",
     "address3": "SHOP NO 1, GROUND FLOOR, RK COMPLEX, Road, opposite EURO INTERNATIONAL SCHOOL, Undri Chowk, Undri, Pune, Maharashtra 411060",
-    "getDirections": "दिशा-निर्देश प्राप्त करें"
+    "getDirections": "दिशाएं प्राप्त करें"
   },
   "DoorstepDelivery": {
-    "eyebrow": "दरवाजे पर डिलीवरी नीति",
+    "eyebrow": "डोरस्टेप डिलीवरी नीति",
     "title": "3 किमी के भीतर मुफ्त डिलीवरी",
-    "intro": "ग्राहकों को हमारे पिकअप स्थानों के 3 किमी की रेडियस के भीतर मुफ्त दरवाजे पर डिलीवरी मिलती है।",
-    "beyond3km": "3 किमी से आगे: ₹500 डिलीवरी शुल्क",
-    "beyond3kmIntro": "3 किमी रेडियस से आगे ₹500 दरवाजे पर डिलीवरी शुल्क लागू होता है। यह शुल्क दोनों तरफ शामिल है।"
+    "intro": "ग्राहकों को हमारे पिकअप स्थानों के 3 किमी की त्रिज्या के भीतर मुफ्त डोरस्टेप डिलीवरी मिलती है।",
+    "beyond3km": "3 किमी के बाद: ₹500 डिलीवरी शुल्क",
+    "beyond3kmIntro": "3 किमी की त्रिज्या के बाद ₹500 डोरस्टेप डिलीवरी शुल्क लागू होता है। यह शुल्क दोनों तरफ शामिल है।"
   }
 }

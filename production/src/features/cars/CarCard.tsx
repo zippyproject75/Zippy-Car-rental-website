@@ -35,7 +35,8 @@ export function CarCard({ car, headingLevel = "h3" }: { car: Car; headingLevel?:
   // Package state
   const [selectedPackage, setSelectedPackage] = useState<PackageType>("12-hour");
   const packagePrice = packagePricing[selectedPackage][car.id as keyof typeof packagePricing["12-hour"]];
-  const has24HourPackage = packagePricing["24-hour"][car.id as keyof typeof packagePricing["24-hour"]] !== null;
+  // Check if 24-hour package has pricing configured for this specific car
+  const has24HourPricing = packagePricing["24-hour"][car.id as keyof typeof packagePricing["24-hour"]] !== null;
 
   // Get fuel type for badge
   const fuelSpec = specs.find((s) => s.key === "fuel");
@@ -159,7 +160,7 @@ export function CarCard({ car, headingLevel = "h3" }: { car: Car; headingLevel?:
                   >
                     12h
                   </button>
-                  {has24HourPackage && (
+                  {has24HourPricing && (
                     <button
                       type="button"
                       onClick={() => setSelectedPackage("24-hour")}

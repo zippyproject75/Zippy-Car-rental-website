@@ -155,7 +155,7 @@ export default async function HomePage({ params }: LocaleParams) {
       {/* ── SECTION 6: RENTAL REQUIREMENTS — WHAT CUSTOMERS NEED ── */}
       <RentalGuidelines />
 
-      {/* ── SECTION 7: CUSTOMER REVIEWS — GENUINE SOCIAL PROOF ── */}
+      {/* ── SECTION 7: RENTAL PROCESS — HOW IT WORKS ── */}
       <Reviews />
 
       {/* ── SECTION 8: FAQ — ANSWER COMMON RENTAL QUESTIONS ── */}

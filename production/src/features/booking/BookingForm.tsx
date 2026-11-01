@@ -77,6 +77,11 @@ export function BookingForm({
   const [result, setResult] = useState<EnquiryResult | null>(null);
   const summaryRef = useRef<HTMLDivElement>(null);
 
+  // Check if 24-hour package has any pricing configured
+  const has24HourPricing = cars.some((car) => {
+    return packagePricing["24-hour"][car.id as CarId] !== null;
+  });
+
   // Bounds are computed from "now" on the client; the server render uses a stable window.
   const [now] = useState(() => new Date());
   const { first, last } = requestDateBounds(now, bookingRules);
@@ -381,15 +386,19 @@ export function BookingForm({
                 </button>
                 <button
                   type="button"
+                  disabled={!has24HourPricing}
                   onClick={() => setSelectedPackage("24-hour")}
                   className={`flex-1 rounded-md px-3 sm:px-4 py-2.5 text-sm font-semibold transition-all duration-150 min-h-[3rem] ${
                     selectedPackage === "24-hour"
                       ? "bg-accent text-on-accent shadow-sm scale-[1.02]"
+                      : !has24HourPricing
+                      ? "text-ink-3 cursor-not-allowed opacity-60"
                       : "text-ink-2 hover:text-ink active:scale-95"
                   }`}
                   aria-pressed={selectedPackage === "24-hour"}
                 >
                   {t("package24Hour")}
+                  {!has24HourPricing && <span className="ml-1.5 text-xs font-normal opacity-75">— Coming soon</span>}
                 </button>
               </div>
               <p className="text-xs leading-relaxed text-ink-3">

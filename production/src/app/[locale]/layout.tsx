@@ -43,6 +43,7 @@ const CLIENT_NAMESPACES = [
   "Specs",
   "Reviews",
   "RentalGuidelines",
+  "RentalProcess",
   "HeroNew",
   "CinematicCta",
   "TrustStrip",
