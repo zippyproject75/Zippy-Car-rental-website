@@ -464,13 +464,8 @@
     "eyebrow": "पिकअप ठिकाणे",
     "title": "तुमचे पिकअप ठिकाण निवडा",
     "intro": "पुण्यातील आमच्या तीन सोयीस्कर पिकअप ठिकाणांपैकी एक निवडा. Google Maps उघडण्यासाठी दिशा मिळवा वर क्लिक करा.",
-    "location1": "पिकअप ठिकाण 1",
-    "location2": "पिकअप ठिकाण 2",
-    "location3": "पिकअप ठिकाण 3",
-    "address1": "Kamthe Patil Business Center, Pune, Maharashtra",
-    "address2": "S. No 47, Tilekar Nagar, Kondhwa Budruk, Pune, Maharashtra 411048",
-    "address3": "SHOP NO 1, GROUND FLOOR, RK COMPLEX, Road, opposite EURO INTERNATIONAL SCHOOL, Undri Chowk, Undri, Pune, Maharashtra 411060",
-    "getDirections": "दिशा मिळवा"
+    "getDirections": "दिशा मिळवा",
+    "viewDetails": "तपशील पहा"
   },
   "DoorstepDelivery": {
     "eyebrow": "दारावर डिलिव्हरी धोरण",

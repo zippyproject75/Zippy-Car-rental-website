@@ -11,6 +11,7 @@ export function allPublicPaths(): string[] {
     "/",
     "/cars",
     ...cars.map((c) => `/cars/${c.slug}`),
+    ...site.branches.map((b) => `/locations/${b.id}`),
     "/book",
     "/how-it-works",
     "/about",
@@ -38,8 +39,14 @@ function contactConfirmed(config: SiteConfig): boolean {
 export function isPathContentIndexable(path: string, locale: Locale, config = site): boolean {
   if (config.copyReview[locale] !== "approved") return false;
   if (path === "/" || path === "/cars" || path === "/how-it-works") return true;
-  if (path.startsWith("/cars/"))
-    return cars.find((c) => `/cars/${c.slug}` === path)?.indexable ?? false;
+  if (path.startsWith("/cars/")) {
+    const car = cars.find((c) => `/cars/${c.slug}` === path);
+    return car ? car.indexable : false;
+  }
+  if (path.startsWith("/locations/")) {
+    const branch = config.branches.find((b) => `/locations/${b.id}` === path);
+    return branch ? branch.address.status === "confirmed" : false;
+  }
   if (path === "/book") return false;
   if (path === "/about") return config.aboutStory.status === "confirmed";
   if (path === "/contact") return contactConfirmed(config);

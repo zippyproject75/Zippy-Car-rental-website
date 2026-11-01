@@ -2,7 +2,9 @@ import { getTranslations } from "next-intl/server";
 import type { Locale } from "@/i18n/routing";
 import { getCars, getPublishedBranches } from "@/lib/catalog";
 import { getVisibleContacts } from "@/lib/contacts";
+import { visibleFact } from "@/lib/content";
 import { env } from "@/lib/env";
+import { site } from "@/data/site";
 import type { BookingBranchOption, BookingCarOption, BookingPickupLocationOption } from "./BookingForm";
 
 /** Serializable, localized data for the client booking form (built on the server). */
@@ -19,22 +21,17 @@ export async function getBookingFormProps(locale: Locale) {
     name: b.name[locale],
     pending: b.pending,
   }));
-  const pickupLocations: BookingPickupLocationOption[] = [
-    {
-      id: "1",
-      name: "Pickup Location 1 - Kamthe Patil Business Center",
-      googleMapsUrl: "https://maps.app.goo.gl/djJbgsDjYRjmRTS46?g_st=awb",
-    },
-    {
-      id: "2",
-      name: "Pickup Location 2 - S. No 47, Tilekar Nagar, Kondhwa Budruk",
-      googleMapsUrl: "https://maps.app.goo.gl/mCiepbpm1HKzLvdFA?g_st=awb",
-    },
-    {
-      id: "3",
-      name: "Pickup Location 3 - RK COMPLEX, Undri Chowk",
-      googleMapsUrl: "https://maps.app.goo.gl/Q7BcqGz99FZdcB2U8?g_st=awb",
-    },
-  ];
+  const pickupLocations: BookingPickupLocationOption[] = site.branches
+    .map((branch) => {
+      const address = visibleFact(branch.address, env.showPendingContent);
+      if (!address) return null;
+      const fullAddress = `${address.value.lines.join(", ")}, ${address.value.locality} ${address.value.postalCode}`;
+      return {
+        id: branch.id,
+        name: branch.name[locale],
+        googleMapsUrl: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(fullAddress)}`,
+      };
+    })
+    .filter((loc): loc is NonNullable<typeof loc> => loc !== null);
   return { cars, branches, pickupLocations, contacts: getVisibleContacts(env.showPendingContent) };
 }

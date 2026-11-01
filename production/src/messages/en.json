@@ -464,13 +464,8 @@
     "eyebrow": "Pickup Locations",
     "title": "Choose Your Pickup Location",
     "intro": "Select from our three convenient pickup locations in Pune. Click Get Directions to open Google Maps.",
-    "location1": "Pickup Location 1",
-    "location2": "Pickup Location 2",
-    "location3": "Pickup Location 3",
-    "address1": "Kamthe Patil Business Center, Pune, Maharashtra",
-    "address2": "S. No 47, Tilekar Nagar, Kondhwa Budruk, Pune, Maharashtra 411048",
-    "address3": "SHOP NO 1, GROUND FLOOR, RK COMPLEX, Road, opposite EURO INTERNATIONAL SCHOOL, Undri Chowk, Undri, Pune, Maharashtra 411060",
-    "getDirections": "Get Directions"
+    "getDirections": "Get Directions",
+    "viewDetails": "View Details"
   },
   "DoorstepDelivery": {
     "eyebrow": "Doorstep Delivery Policy",
