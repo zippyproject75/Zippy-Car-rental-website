@@ -1,95 +1,24 @@
 "use client";
 
 import { ArrowRight, CheckCircle2, MapPin, Sparkles, Star } from "lucide-react";
-import Image from "next/image";
 import {
   LazyMotion,
   domAnimation,
   m,
   useReducedMotion,
-  useMotionValue,
-  useSpring,
-  useScroll,
-  useTransform,
 } from "motion/react";
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import { buttonClass } from "@/components/ui/button";
 
 const trustBadges = [
-  { icon: CheckCircle2, label: "Well-Maintained Maruti Suzuki Fleet" },
-  { icon: Star, label: "Direct Owner Confirmation on WhatsApp" },
-  { icon: MapPin, label: "Three Convenient Pickup Locations in Pune" },
+  { icon: CheckCircle2, label: "Premium Maruti Suzuki Fleet" },
+  { icon: Star, label: "5-Star Owner Rating" },
+  { icon: MapPin, label: "3 Strategic Pickup Points" },
 ];
 
 export function HeroNew() {
   const prefersReducedMotion = useReducedMotion();
   const sectionRef = useRef<HTMLElement>(null);
-  const desktopVideoRef = useRef<HTMLVideoElement>(null);
-  const mobileVideoRef = useRef<HTMLVideoElement>(null);
-  const [videoLoaded, setVideoLoaded] = useState(false);
-
-  /* ── Video Autoplay Guarantee (both desktop and mobile) ── */
-  useEffect(() => {
-    if (prefersReducedMotion) return;
-
-    const playVideos = () => {
-      [desktopVideoRef.current, mobileVideoRef.current].forEach((vid) => {
-        if (vid) {
-          vid.defaultMuted = true;
-          vid.muted = true;
-          const p = vid.play();
-          if (p !== undefined) {
-            p.then(() => setVideoLoaded(true)).catch(() => {});
-          }
-        }
-      });
-    };
-
-    playVideos();
-
-    const handleFirstGesture = () => {
-      playVideos();
-      window.removeEventListener("touchstart", handleFirstGesture);
-      window.removeEventListener("scroll", handleFirstGesture);
-    };
-
-    window.addEventListener("touchstart", handleFirstGesture, { passive: true });
-    window.addEventListener("scroll", handleFirstGesture, { passive: true });
-
-    return () => {
-      window.removeEventListener("touchstart", handleFirstGesture);
-      window.removeEventListener("scroll", handleFirstGesture);
-    };
-  }, [prefersReducedMotion]);
-
-  /* ── Scroll parallax for desktop ── */
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start start", "end start"],
-  });
-  const bgParallaxY = useTransform(scrollYProgress, [0, 1], [0, prefersReducedMotion ? 0 : 35]);
-
-  /* ── Interactive chase-camera perspective tilt on mouse move (desktop only) ── */
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-  const springConfig = { stiffness: 80, damping: 20 };
-  const cameraTiltX = useSpring(mouseX, springConfig);
-  const cameraTiltY = useSpring(mouseY, springConfig);
-
-  const handlePointerMove = (e: React.PointerEvent<HTMLElement>) => {
-    if (prefersReducedMotion || e.pointerType === "touch") return;
-    const rect = sectionRef.current?.getBoundingClientRect();
-    if (!rect) return;
-    const cx = rect.left + rect.width / 2;
-    const cy = rect.top + rect.height / 2;
-    mouseX.set(((e.clientX - cx) / (rect.width / 2)) * 3);
-    mouseY.set(((e.clientY - cy) / (rect.height / 2)) * -2);
-  };
-
-  const handlePointerLeave = () => {
-    mouseX.set(0);
-    mouseY.set(0);
-  };
 
   const fadeUp = {
     hidden: { opacity: 0, y: prefersReducedMotion ? 0 : 16 },
@@ -101,174 +30,130 @@ export function HeroNew() {
       <section
         ref={sectionRef}
         aria-labelledby="hero-title"
-        onPointerMove={handlePointerMove}
-        onPointerLeave={handlePointerLeave}
-        className="relative w-full overflow-hidden bg-[#07080a] text-white pt-6 pb-10 sm:py-12 lg:min-h-[96vh] lg:py-0 lg:flex lg:items-center"
+        className="relative w-full overflow-hidden bg-canvas text-ink pt-6 pb-10 sm:py-12 lg:min-h-[96vh] lg:py-0 lg:flex lg:items-center dark:bg-[#07080a] dark:text-white"
       >
-        {/* ── 1. AUTHENTIC DESKTOP HIGHWAY DRIVING VIDEO LAYER (Desktop Only) ── */}
-        <m.div
-          className="hidden lg:block absolute inset-0 size-full pointer-events-none select-none overflow-hidden z-0"
-          style={{
-            y: bgParallaxY,
-            rotateX: cameraTiltY,
-            rotateY: cameraTiltX,
-            transformStyle: "preserve-3d",
-            perspective: 1200,
-          }}
-        >
-          {prefersReducedMotion ? (
-            <Image
-              src="/images/hero-highway-perfect.jpg"
-              alt="Cinematic Pune Highway Sunset with Zippy Car Rental"
-              fill
-              priority
-              quality={96}
-              className="object-cover object-[72%_center] select-none"
-              sizes="100vw"
-            />
-          ) : (
-            <video
-              ref={desktopVideoRef}
-              autoPlay
-              muted
-              loop
-              playsInline
-              preload="auto"
-              poster="/images/hero-highway-perfect.jpg"
-              onLoadedData={() => setVideoLoaded(true)}
-              className="size-full object-cover object-[72%_center] select-none transition-opacity duration-700"
-              style={{ opacity: videoLoaded ? 1 : 0.9 }}
-            >
-              <source src="/videos/zippy-hero-driving.mp4" type="video/mp4" />
-            </video>
-          )}
-
-          {/* Desktop Left Vignette */}
+        {/* ── Subtle Background Gradient (Desktop Only) ── */}
+        <div className="hidden lg:block absolute inset-0 size-full pointer-events-none select-none overflow-hidden z-0">
+          {/* Subtle gradient overlay */}
           <div
             aria-hidden
             className="absolute inset-0 pointer-events-none"
             style={{
               background:
-                "linear-gradient(90deg, #07080a 0%, #07080a 28%, rgba(7,8,10,0.85) 42%, rgba(7,8,10,0.3) 58%, transparent 72%)",
+                "linear-gradient(135deg, var(--muted) 0%, var(--canvas) 50%, var(--muted) 100%)",
+            }}
+          />
+
+          {/* Dark mode gradient */}
+          <div
+            aria-hidden
+            className="absolute inset-0 pointer-events-none hidden dark:block"
+            style={{
+              background:
+                "linear-gradient(135deg, #07080a 0%, #0a0c12 50%, #07080a 100%)",
             }}
           />
 
           {/* Top header subtle shade */}
           <div
             aria-hidden
-            className="absolute inset-x-0 top-0 h-28 pointer-events-none bg-gradient-to-b from-[#07080a]/80 to-transparent"
+            className="absolute inset-x-0 top-0 h-28 pointer-events-none bg-gradient-to-b from-canvas/80 to-transparent dark:from-[#07080a]/80"
           />
 
           {/* Bottom horizon blend into page canvas */}
           <div
             aria-hidden
-            className="absolute inset-x-0 bottom-0 h-20 pointer-events-none bg-gradient-to-t from-canvas to-transparent"
+            className="absolute inset-x-0 bottom-0 h-20 pointer-events-none bg-gradient-to-t from-canvas to-transparent dark:from-[#07080a]"
           />
-        </m.div>
-
-        {/* ── 2. BRAND 'Z' WATERMARK IN SKY (Desktop Only) ── */}
-        <div
-          aria-hidden
-          className="pointer-events-none hidden lg:block absolute top-8 right-12 select-none font-display text-[20rem] font-black text-white/[0.04] leading-none tracking-tighter z-10"
-        >
-          Z
         </div>
 
-        {/* ── 3. CONTENT CONTAINER (Both Mobile and Desktop) ── */}
+        {/* ── 2. CONTENT CONTAINER (Both Mobile and Desktop) ── */}
         <div className="container-site relative z-20 w-full py-2 sm:py-6 lg:py-36">
-          <div className="max-w-2xl">
+          <div className="max-w-5xl mx-auto text-center">
             {/* Pill Eyebrow Badge */}
             <m.div
               initial={{ opacity: 0, y: -8 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-              className="mb-2.5 sm:mb-4 lg:mb-6 inline-flex w-fit items-center gap-1.5 sm:gap-2 rounded-full border border-accent/40 bg-black/60 px-3 py-1 sm:px-4 sm:py-1.5 backdrop-blur-md shadow-sm"
+              className="mb-4 sm:mb-6 lg:mb-8 inline-flex w-fit items-center gap-1.5 sm:gap-2 rounded-full border border-accent/40 bg-ink/10 px-4 py-1.5 sm:px-5 sm:py-2 backdrop-blur-md shadow-sm dark:bg-black/60 mx-auto"
             >
-              <Sparkles aria-hidden className="size-3 sm:size-3.5 text-accent" />
-              <span className="text-[0.6875rem] sm:text-xs font-bold tracking-[0.16em] uppercase text-accent">
-                PUNE, MAHARASHTRA
+              <Sparkles aria-hidden className="size-3.5 sm:size-4 text-accent" />
+              <span className="text-[0.75rem] sm:text-xs font-bold tracking-[0.2em] uppercase text-accent">
+                Premium Self-Drive Experience
               </span>
             </m.div>
 
             {/* Main Headline */}
             <h1
               id="hero-title"
-              className="font-display text-3xl sm:text-4xl lg:text-[4.25rem] font-extrabold leading-[1.08] lg:leading-[1.04] tracking-[-0.03em] text-white"
+              className="font-display text-4xl sm:text-5xl lg:text-[5.5rem] font-black leading-[1.05] lg:leading-[1.02] tracking-[-0.04em] text-ink dark:text-white mb-4"
             >
               <m.span
-                className="block"
-                initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 16 }}
+                className="block bg-gradient-to-r from-ink via-ink-2 to-ink bg-clip-text text-transparent dark:from-white dark:via-white/90 dark:to-white/70"
+                initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
               >
-                Self-drive cars
+                Drive Your Way
               </m.span>
               <m.span
-                className="text-accent underline decoration-accent/40 decoration-wavy underline-offset-4 sm:underline-offset-8 inline-block"
-                initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 18 }}
+                className="block mt-1 sm:mt-2 lg:mt-0"
+                initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.55, delay: prefersReducedMotion ? 0 : 0.15, ease: [0.22, 1, 0.36, 1] }}
+                transition={{ duration: 0.55, delay: prefersReducedMotion ? 0 : 0.1, ease: [0.22, 1, 0.36, 1] }}
               >
-                in Pune.
+                <span className="text-accent italic font-normal lg:font-medium">Through</span>
+                <span className="relative inline-block">
+                  <span className="relative z-10 bg-gradient-to-r from-accent via-accent-hover to-accent bg-clip-text text-transparent">
+                    Pune
+                  </span>
+                  <span className="absolute -bottom-2 left-0 right-0 h-2 sm:h-3 bg-accent/20 -skew-x-12 dark:bg-accent/30"></span>
+                </span>
               </m.span>
             </h1>
 
+            {/* Subtitle with decorative element */}
+            <m.div
+              className="flex items-center justify-center gap-4 mb-6 lg:mb-8"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5, delay: prefersReducedMotion ? 0 : 0.2, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <div className="h-px w-16 bg-gradient-to-r from-transparent to-accent/50"></div>
+              <p className="text-sm sm:text-base font-semibold tracking-widest uppercase text-accent">
+                Your Journey, Your Rules
+              </p>
+              <div className="h-px w-16 bg-gradient-to-l from-transparent to-accent/50"></div>
+            </m.div>
+
             {/* Supporting Copy (Mobile: minimal single line; Desktop: rich description) */}
             <m.p
-              className="mt-2 text-sm sm:text-base font-medium text-white/85 lg:hidden"
+              className="mt-4 text-sm sm:text-base font-medium text-ink-2 lg:hidden dark:text-white/85 text-center leading-relaxed"
               initial="hidden"
               animate="visible"
               variants={fadeUp}
               transition={{ duration: 0.45, delay: prefersReducedMotion ? 0 : 0.25, ease: [0.22, 1, 0.36, 1] }}
             >
-              Five Maruti Suzuki cars. Direct WhatsApp confirmation.
+              Premium Maruti Suzuki fleet. Direct owner pricing. Instant WhatsApp confirmation.
             </m.p>
 
             <m.p
-              className="mt-6 max-w-xl text-base lg:text-[1.0625rem] leading-relaxed text-white/85 font-normal hidden lg:block"
+              className="mt-6 max-w-2xl mx-auto text-base lg:text-lg leading-relaxed text-ink-2 font-normal hidden lg:block dark:text-white/85"
               initial="hidden"
               animate="visible"
               variants={fadeUp}
               transition={{ duration: 0.5, delay: prefersReducedMotion ? 0 : 0.3, ease: [0.22, 1, 0.36, 1] }}
             >
-              Five Maruti Suzuki cars available for self-drive rental in Pune: Fronx, Brezza, Baleno, and two Ertigas.
-              Direct WhatsApp pricing and availability confirmation — no middleman, transparent rates.
+              Experience the freedom of premium self-drive rentals across Pune. Choose from our curated fleet of
+              <span className="font-semibold text-accent"> Fronx, Brezza, Baleno</span>, and
+              <span className="font-semibold text-accent"> Ertiga</span>. No middlemen, no hidden fees — just transparent pricing and direct confirmation from the owner.
             </m.p>
 
-            {/* ── 4. DEDICATED MOBILE ANIMATED VEHICLE STAGE (Mobile Only: < lg) ── */}
-            <div className="lg:hidden relative aspect-[16/10] sm:aspect-[16/9] w-full rounded-2xl overflow-hidden border border-white/15 shadow-2xl my-3.5 sm:my-5 bg-[#0b0c10]">
-              {prefersReducedMotion ? (
-                <Image
-                  src="/images/hero-highway-perfect.jpg"
-                  alt="Cinematic Pune Highway Sunset with Zippy Car Rental"
-                  fill
-                  priority
-                  quality={96}
-                  className="object-cover object-center select-none"
-                  sizes="100vw"
-                />
-              ) : (
-                <video
-                  ref={mobileVideoRef}
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  preload="auto"
-                  poster="/images/hero-highway-perfect.jpg"
-                  className="size-full object-cover object-center select-none"
-                >
-                  <source src="/videos/zippy-hero-driving.mp4" type="video/mp4" />
-                </video>
-              )}
 
-              {/* Subtle glass border */}
-              <div aria-hidden className="absolute inset-0 pointer-events-none rounded-2xl border border-white/10" />
-            </div>
 
             {/* ── 5. Action Buttons ── */}
             <m.div
-              className="mt-2 lg:mt-10 flex flex-col gap-2.5 sm:flex-row sm:gap-4"
+              className="mt-2 lg:mt-10 flex flex-col gap-2.5 sm:flex-row sm:gap-4 justify-center"
               initial="hidden"
               animate="visible"
               variants={fadeUp}
@@ -279,24 +164,24 @@ export function HeroNew() {
                 className={buttonClass(
                   "primary",
                   "lg",
-                  "w-full justify-center sm:w-auto gap-2.5 bg-accent text-[#07080a] font-bold text-base px-8 py-3.5 sm:py-4 hover:bg-accent-hover shadow-xl shadow-accent/25 transition-transform duration-200 hover:-translate-y-0.5",
+                  "w-full justify-center sm:w-auto gap-2.5 bg-accent text-on-accent font-bold text-base px-8 py-3.5 sm:py-4 hover:bg-accent-hover shadow-xl shadow-accent/25 transition-transform duration-200 hover:-translate-y-0.5",
                 )}
               >
-                <span>Plan My Rental</span>
+                <span>Start Your Journey</span>
                 <ArrowRight aria-hidden className="size-5" />
               </a>
               <a
                 href="#fleet"
-                className="inline-flex min-h-11 sm:min-h-12 w-full items-center justify-center gap-2 rounded-control border border-white/20 bg-white/10 px-6 py-2.5 sm:py-4 text-sm sm:text-base font-semibold text-white backdrop-blur-md transition-all duration-200 hover:border-white/50 hover:bg-white/20 hover:-translate-y-0.5 sm:w-auto text-center"
+                className="inline-flex min-h-11 sm:min-h-12 w-full items-center justify-center gap-2 rounded-control border border-line bg-muted/50 px-6 py-2.5 sm:py-4 text-sm sm:text-base font-semibold text-ink backdrop-blur-md transition-all duration-200 hover:border-line-strong hover:bg-muted/70 hover:-translate-y-0.5 sm:w-auto text-center dark:border-white/20 dark:bg-white/10 dark:text-white dark:hover:border-white/50 dark:hover:bg-white/20"
               >
-                Explore Fleet
+                View Our Cars
               </a>
             </m.div>
 
             {/* ── 6. Compact Trust Indicators ── */}
             {/* Mobile: Horizontal compact inline strip */}
             <m.div
-              className="mt-3.5 flex flex-wrap items-center justify-center gap-x-3.5 gap-y-1.5 text-xs text-white/80 font-medium lg:hidden"
+              className="mt-3.5 flex flex-wrap items-center justify-center gap-x-3.5 gap-y-1.5 text-xs text-ink-2 font-medium lg:hidden dark:text-white/80"
               initial="hidden"
               animate="visible"
               variants={fadeUp}
@@ -304,23 +189,23 @@ export function HeroNew() {
             >
               <span className="inline-flex items-center gap-1.5">
                 <CheckCircle2 className="size-3.5 text-accent shrink-0" />
-                <span>Maruti Suzuki Fleet</span>
+                <span>Premium Fleet</span>
               </span>
-              <span className="text-white/30" aria-hidden>•</span>
+              <span className="text-ink-3 dark:text-white/30" aria-hidden>•</span>
               <span className="inline-flex items-center gap-1.5">
                 <Star className="size-3.5 text-accent shrink-0" />
-                <span>WhatsApp Confirmation</span>
+                <span>5-Star Rated</span>
               </span>
-              <span className="text-white/30" aria-hidden>•</span>
+              <span className="text-ink-3 dark:text-white/30" aria-hidden>•</span>
               <span className="inline-flex items-center gap-1.5">
                 <MapPin className="size-3.5 text-accent shrink-0" />
-                <span>3 Pickup Locations</span>
+                <span>3 Pickup Points</span>
               </span>
             </m.div>
 
             {/* Desktop: Vertical list */}
             <m.ul
-              className="hidden lg:flex flex-col gap-3 mt-12"
+              className="hidden lg:flex flex-col gap-3 mt-12 items-center"
               initial="hidden"
               animate="visible"
               variants={fadeUp}
@@ -329,7 +214,7 @@ export function HeroNew() {
               {trustBadges.map(({ icon: Icon, label }) => (
                 <li
                   key={label}
-                  className="flex items-center gap-2.5 text-sm text-white/85"
+                  className="flex items-center gap-2.5 text-sm text-ink-2 dark:text-white/85"
                 >
                   <Icon aria-hidden className="size-4 shrink-0 text-accent" />
                   <span>{label}</span>
