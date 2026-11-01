@@ -6,32 +6,32 @@ import { buildMetadata } from "@/lib/seo";
 
 const PICKUP_LOCATIONS = [
   {
-    id: "kondhwa",
+    id: "khadi-machine-chowk",
     name: {
-      en: "Kondhwa",
-      hi: "कोंढवा",
-      mr: "कोंढवा",
+      en: "Khadi Machine Chowk",
+      hi: "खादी मशीन चौक",
+      mr: "खादी मशीन चौक",
     },
     address: {
-      en: "Raghunandan kasturi, near sinhagad college, Antulya Nagar, Kondhwa Budruk, Pune, Maharashtra 411048",
-      hi: "रघुनंदन कस्तुरी, सिंहगड कॉलेज के पास, अंतुल्या नगर, कोंढवा बुड्रुक, पुणे, महाराष्ट्र 411048",
-      mr: "रघुनंदन कस्तुरी, सिंहगड कॉलेजच्या पास, अंतुल्या नगर, कोंढवा बुड्रुक, पुणे, महाराष्ट्र 411048",
+      en: "Khadi Machine Chowk, Pune, Maharashtra 411048",
+      hi: "खादी मशीन चौक, पुणे, महाराष्ट्र 411048",
+      mr: "खादी मशीन चौक, पुणे, महाराष्ट्र 411048",
     },
-    mapUrl: "https://maps.app.goo.gl/djJbgsDjYRjmRTS46?g_st=awb",
+    mapUrl: "https://maps.app.goo.gl/NgJLjwf5Gz8Kayow9?g_st=awb",
   },
   {
-    id: "kondhwa-2",
+    id: "ganga-dham",
     name: {
-      en: "Kondhwa - Tilekar Nagar",
-      hi: "कोंढवा - टिलकर नगर",
-      mr: "कोंढवा - टिलकर नगर",
+      en: "Ganga Dham",
+      hi: "गंगा धाम",
+      mr: "गंगा धाम",
     },
     address: {
-      en: "S. No 47, Tilekar Nagar, Kondhwa Budruk, Pune, Maharashtra 411048",
-      hi: "एस नंबर 47, टिलकर नगर, कोंढवा बुड्रुक, पुणे, महाराष्ट्र 411048",
-      mr: "एस नंबर 47, टिलकर नगर, कोंढवा बुड्रुक, पुणे, महाराष्ट्र 411048",
+      en: "Ganga Dham, Pune, Maharashtra 411048",
+      hi: "गंगा धाम, पुणे, महाराष्ट्र 411048",
+      mr: "गंगा धाम, पुणे, महाराष्ट्र 411048",
     },
-    mapUrl: "https://maps.app.goo.gl/mCiepbpm1HKzLvdFA?g_st=awb",
+    mapUrl: "https://maps.app.goo.gl/HhaVdxAMNHdPfZti7?g_st=awb",
   },
   {
     id: "undri",
@@ -41,11 +41,11 @@ const PICKUP_LOCATIONS = [
       mr: "उंड्री",
     },
     address: {
-      en: "SHOP NO 1, GROUND FLOOR, RK COMPLEX, Road, opposite EURO INTERNATIONAL SCHOOL, Undri Chowk, Undri, Pune, Maharashtra 411060",
-      hi: "शॉप नंबर 1, ग्राउंड फ्लोर, आरके कॉम्प्लेक्स, रोड, यूरो इंटरनेशनल स्कूल के विपरीत, उंड्री चौक, उंड्री, पुणे, महाराष्ट्र 411060",
-      mr: "शॉप नंबर 1, ग्राउंड फ्लोर, आरके कॉम्प्लेक्स, रोड, यूरो इंटरनेशनल स्कूलच्या विरुद्ध, उंड्री चौक, उंड्री, पुणे, महाराष्ट्र 411060",
+      en: "Undri, Pune, Maharashtra 411060",
+      hi: "उंड्री, पुणे, महाराष्ट्र 411060",
+      mr: "उंड्री, पुणे, महाराष्ट्र 411060",
     },
-    mapUrl: "https://maps.app.goo.gl/Q7BcqGz99FZdcB2U8?g_st=awb",
+    mapUrl: "https://maps.app.goo.gl/GgxcQBUnbwYiDJw87?g_st=awb",
   },
 ];
 

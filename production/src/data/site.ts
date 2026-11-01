@@ -37,12 +37,12 @@ export const site: SiteConfig = {
   },
   branches: [
     {
-      id: "kondhwa",
-      name: { en: "Kondhwa - Raghunandan Kasturi", hi: "कोंढवा - रघुनंदन कस्तुरी", mr: "कोंढवा - रघुनंदन कस्तुरी" },
+      id: "khadi-machine-chowk",
+      name: { en: "Khadi Machine Chowk", hi: "खादी मशीन चौक", mr: "खादी मशीन चौक" },
       address: {
         status: "confirmed",
         value: {
-          lines: ["Raghunandan kasturi, near sinhagad college", "Antulya Nagar, Kondhwa Budruk"],
+          lines: ["Khadi Machine Chowk"],
           locality: "Pune",
           postalCode: "411048",
         },
@@ -52,12 +52,12 @@ export const site: SiteConfig = {
       phone: { status: "pending", value: null, note: "No branch-specific number confirmed" },
     },
     {
-      id: "kondhwa-2",
-      name: { en: "Kondhwa - Tilekar Nagar", hi: "कोंढवा - टिलकर नगर", mr: "कोंढवा - टिलकर नगर" },
+      id: "ganga-dham",
+      name: { en: "Ganga Dham", hi: "गंगा धाम", mr: "गंगा धाम" },
       address: {
         status: "confirmed",
         value: {
-          lines: ["S. No 47, Tilekar Nagar", "Kondhwa Budruk"],
+          lines: ["Ganga Dham"],
           locality: "Pune",
           postalCode: "411048",
         },
@@ -68,11 +68,11 @@ export const site: SiteConfig = {
     },
     {
       id: "undri",
-      name: { en: "Undri - RK Complex", hi: "उंड्री - RK कॉम्प्लेक्स", mr: "उंड्री - RK कॉम्प्लेक्स" },
+      name: { en: "Undri", hi: "उंड्री", mr: "उंड्री" },
       address: {
         status: "confirmed",
         value: {
-          lines: ["SHOP NO 1, GROUND FLOOR, RK COMPLEX", "Road, opposite EURO INTERNATIONAL SCHOOL", "Undri Chowk, Undri"],
+          lines: ["Undri"],
           locality: "Pune",
           postalCode: "411060",
         },

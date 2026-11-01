@@ -26,19 +26,19 @@ export async function getBookingFormProps(locale: Locale) {
       googleMapsUrl: "",
     },
     {
-      id: "kondhwa",
-      name: locale === "hi" ? "कोंढवा - रघुनंदन कस्तुरी" : locale === "mr" ? "कोंढवा - रघुनंदन कस्तुरी" : "Kondhwa - Raghunandan Kasturi",
-      googleMapsUrl: "https://maps.app.goo.gl/djJbgsDjYRjmRTS46?g_st=awb",
+      id: "khadi-machine-chowk",
+      name: locale === "hi" ? "खादी मशीन चौक" : locale === "mr" ? "खादी मशीन चौक" : "Khadi Machine Chowk",
+      googleMapsUrl: "https://maps.app.goo.gl/NgJLjwf5Gz8Kayow9?g_st=awb",
     },
     {
-      id: "kondhwa-2",
-      name: locale === "hi" ? "कोंढवा - टिलकर नगर" : locale === "mr" ? "कोंढवा - टिलकर नगर" : "Kondhwa - Tilekar Nagar",
-      googleMapsUrl: "https://maps.app.goo.gl/mCiepbpm1HKzLvdFA?g_st=awb",
+      id: "ganga-dham",
+      name: locale === "hi" ? "गंगा धाम" : locale === "mr" ? "गंगा धाम" : "Ganga Dham",
+      googleMapsUrl: "https://maps.app.goo.gl/HhaVdxAMNHdPfZti7?g_st=awb",
     },
     {
       id: "undri",
-      name: locale === "hi" ? "उंड्री - RK कॉम्प्लेक्स" : locale === "mr" ? "उंड्री - RK कॉम्प्लेक्स" : "Undri - RK Complex",
-      googleMapsUrl: "https://maps.app.goo.gl/Q7BcqGz99FZdcB2U8?g_st=awb",
+      name: locale === "hi" ? "उंड्री" : locale === "mr" ? "उंड्री" : "Undri",
+      googleMapsUrl: "https://maps.app.goo.gl/GgxcQBUnbwYiDJw87?g_st=awb",
     },
   ];
   return { cars, branches, pickupLocations, contacts: getVisibleContacts(env.showPendingContent) };

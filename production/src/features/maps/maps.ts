@@ -9,8 +9,8 @@ export function addressQuery(address: PostalAddress, region = "Maharashtra", cou
 
 /** Branch redirect links for Google Maps */
 export const BRANCH_MAP_REDIRECTS: Record<string, string> = {
-  kondhwa: "https://maps.app.goo.gl/NgJLjwf5Gz8Kayow9?g_st=awb",
-  gangadham: "https://maps.app.goo.gl/HhaVdxAMNHdPfZti7?g_st=awb",
+  "khadi-machine-chowk": "https://maps.app.goo.gl/NgJLjwf5Gz8Kayow9?g_st=awb",
+  "ganga-dham": "https://maps.app.goo.gl/HhaVdxAMNHdPfZti7?g_st=awb",
   undri: "https://maps.app.goo.gl/GgxcQBUnbwYiDJw87?g_st=awb",
   "411048": "https://maps.app.goo.gl/NgJLjwf5Gz8Kayow9?g_st=awb",
   "411037": "https://maps.app.goo.gl/HhaVdxAMNHdPfZti7?g_st=awb",
