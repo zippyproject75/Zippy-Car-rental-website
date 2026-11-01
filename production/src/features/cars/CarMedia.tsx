@@ -49,11 +49,15 @@ export function CarMedia({
   };
 
   if (photo) {
+    const currentImage = allImages[currentIndex];
+    if (!currentImage) {
+      return null;
+    }
     return (
       <div className={cn("relative overflow-hidden bg-sunken", ratio[variant])}>
         <Image
-          src={allImages[currentIndex].src}
-          alt={allImages[currentIndex].alt[locale]}
+          src={currentImage.src}
+          alt={currentImage.alt[locale]}
           fill
           priority={priority}
           sizes={sizes ?? "(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"}
