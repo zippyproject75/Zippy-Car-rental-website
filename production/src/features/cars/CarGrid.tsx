@@ -38,9 +38,7 @@ export function CarGrid({
   const [activeFilter, setActiveFilter] = useState<FilterId>("all");
   const prefersReducedMotion = useReducedMotion();
   const gridRef = useRef<HTMLUListElement>(null);
-  const [isVisible, setIsVisible] = useState(
-    typeof IntersectionObserver === "undefined"
-  );
+  const [isVisible, setIsVisible] = useState(true);
 
   // IntersectionObserver for reliable scroll triggering on mobile
   useEffect(() => {
@@ -51,6 +49,7 @@ export function CarGrid({
     }
 
     if (typeof IntersectionObserver === "undefined") {
+      setIsVisible(true);
       return;
     }
 
@@ -61,7 +60,7 @@ export function CarGrid({
           setIsVisible(true);
         }
       },
-      { threshold: 0.05, rootMargin: "-5%" }
+      { threshold: 0.01, rootMargin: "0px" }
     );
 
     observer.observe(element);
