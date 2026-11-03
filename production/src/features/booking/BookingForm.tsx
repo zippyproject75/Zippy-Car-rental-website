@@ -289,7 +289,7 @@ export function BookingForm({
             onSubmit={handleSubmit}
             aria-labelledby={headingId}
             aria-label={headingId ? undefined : t("formLabel")}
-            className="space-y-6"
+            className="space-y-6 w-full max-w-full"
             data-testid="booking-form"
           >
             <div

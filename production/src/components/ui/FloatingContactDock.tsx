@@ -29,7 +29,7 @@ export function FloatingContactDock() {
   return (
     <aside
       aria-label="Direct contact options"
-      className="fixed bottom-6 right-3.5 sm:left-6 sm:right-auto z-40 flex flex-col items-center gap-3.5 print:hidden select-none pb-[env(safe-area-inset-bottom)]"
+      className="fixed bottom-6 right-4 sm:left-6 sm:right-auto z-40 flex flex-col items-center gap-3.5 print:hidden select-none pb-[env(safe-area-inset-bottom)]"
     >
       {/* ── BUTTON A: Direct Phone Call ── */}
       <div className="group relative flex items-center">

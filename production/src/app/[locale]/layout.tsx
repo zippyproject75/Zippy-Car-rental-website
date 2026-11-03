@@ -55,6 +55,9 @@ export const dynamicParams = false;
 export const generateStaticParams = localeStaticParams;
 
 export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "#f6f3ed" },
     { media: "(prefers-color-scheme: dark)", color: "#0a0a0b" },
@@ -95,7 +98,7 @@ export default async function LocaleLayout({
       suppressHydrationWarning
       className={cn(inter.variable, manrope.variable, devanagari.variable)}
     >
-      <body className="min-h-dvh bg-canvas font-sans text-ink antialiased">
+      <body className="min-h-dvh w-full bg-canvas font-sans text-ink antialiased overflow-x-hidden">
         <ThemeProvider>
           <NextIntlClientProvider messages={clientMessages}>
             <PageTransitionProvider>

@@ -40,10 +40,10 @@ export default async function BookPage({ params }: LocaleParams) {
         title={t("Booking.pageTitle")}
         intro={t("Booking.pageIntro")}
       />
-      <div className="container-site grid gap-10 py-12 lg:grid-cols-[1fr_20rem] lg:py-16">
+      <div className="container-site grid gap-10 py-12 lg:grid-cols-[1fr_20rem] lg:py-16 max-w-full overflow-x-hidden">
         <section
           aria-labelledby="book-form-title"
-          className="rounded-card border border-line bg-raised p-5 shadow-raised sm:p-8"
+          className="rounded-card border border-line bg-raised p-5 shadow-raised sm:p-8 w-full max-w-full overflow-x-hidden"
         >
           <h2 id="book-form-title" className="sr-only">
             {t("Booking.formLabel")}
