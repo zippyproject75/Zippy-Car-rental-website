@@ -87,13 +87,13 @@ export function CarCard({ car, headingLevel = "h3" }: { car: Car; headingLevel?:
       data-testid="car-card"
       onPointerMove={onPointerMove}
       onPointerLeave={onPointerLeave}
-      className="car-card-3d group flex flex-col overflow-hidden rounded-2xl border border-line bg-raised shadow-raised focus-within:border-line-strong w-full transition-[border-color] duration-300 hover:border-accent/40"
+      className="car-card-3d group flex flex-col overflow-hidden rounded-2xl border border-line bg-raised shadow-raised focus-within:border-line-strong w-full max-w-full transition-[border-color] duration-300 hover:border-accent/40"
     >
-      <Link href={`/cars/${car.slug}`} tabIndex={-1} aria-hidden className="block overflow-hidden relative aspect-[4/3]">
+      <Link href={`/cars/${car.slug}`} tabIndex={-1} aria-hidden className="block overflow-hidden relative aspect-[4/3] w-full max-w-full">
         <CarMedia car={car} />
       </Link>
-      
-      <div className="flex flex-1 flex-col gap-4 p-4 sm:p-6">
+
+      <div className="flex flex-1 flex-col gap-4 p-4 sm:p-6 w-full max-w-full">
         {/* Vehicle Name and Unit */}
         <div>
           <Heading className="font-display text-lg sm:text-xl font-bold tracking-[-0.01em] text-ink leading-tight">
@@ -102,7 +102,7 @@ export function CarCard({ car, headingLevel = "h3" }: { car: Car; headingLevel?:
         </div>
 
         {/* Vehicle Specifications */}
-        <div className="flex flex-wrap gap-2 sm:gap-3 text-xs text-ink-2">
+        <div className="flex flex-wrap gap-2 sm:gap-3 text-xs text-ink-2 w-full max-w-full">
           {transmissionSpec && (
             <div className="flex items-center gap-1.5">
               <Gauge className="size-3.5" aria-hidden />
@@ -127,12 +127,12 @@ export function CarCard({ car, headingLevel = "h3" }: { car: Car; headingLevel?:
         <div className="h-px bg-line" />
 
         {/* Price and Package Information */}
-        <div className="space-y-2">
+        <div className="space-y-2 w-full max-w-full">
           {rate && packagePrice ? (
             <>
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="font-display text-xl font-bold text-ink">
+              <div className="flex items-center justify-between gap-2">
+                <div className="min-w-0 flex-1">
+                  <p className="font-display text-xl font-bold text-ink truncate">
                     {formatInr(packagePrice.price, locale)} / per day
                   </p>
                   <p className="text-xs text-ink-2">
@@ -140,7 +140,7 @@ export function CarCard({ car, headingLevel = "h3" }: { car: Car; headingLevel?:
                   </p>
                 </div>
                 {/* Package Selector */}
-                <div className="flex gap-1.5">
+                <div className="flex gap-1.5 flex-shrink-0">
                   <button
                     type="button"
                     onClick={() => setSelectedPackage("12-hour")}
@@ -169,14 +169,14 @@ export function CarCard({ car, headingLevel = "h3" }: { car: Car; headingLevel?:
                   )}
                 </div>
               </div>
-              
+
               {/* Hourly Rate */}
               <p className="text-xs text-ink-2">
                 or {formatInr(rate.amountInr, locale)}/hour
               </p>
-              
+
               {/* Kilometre Allowance */}
-              <div className="flex items-center gap-2 text-xs text-ink-2">
+              <div className="flex items-center gap-2 text-xs text-ink-2 flex-wrap">
                 <span>{packagePrice.limitKm} km included</span>
                 <span className="text-ink-3">•</span>
                 <span>₹{EXCESS_KM_RATE}/km extra</span>
@@ -188,7 +188,7 @@ export function CarCard({ car, headingLevel = "h3" }: { car: Car; headingLevel?:
         </div>
 
         {/* Action Buttons */}
-        <div className="mt-auto flex gap-2">
+        <div className="mt-auto flex gap-2 w-full max-w-full">
           <ButtonLink
             href={{ pathname: "/book", query: { car: car.slug } }}
             size="sm"
@@ -203,7 +203,7 @@ export function CarCard({ car, headingLevel = "h3" }: { car: Car; headingLevel?:
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`Enquire on WhatsApp about ${fullName}`}
-              className="inline-flex items-center justify-center min-h-[2.75rem] min-w-[2.75rem] px-3 rounded-control border border-line bg-transparent text-ink hover:border-line-strong hover:bg-muted transition-all"
+              className="inline-flex items-center justify-center min-h-[2.75rem] min-w-[2.75rem] px-3 rounded-control border border-line bg-transparent text-ink hover:border-line-strong hover:bg-muted transition-all flex-shrink-0"
             >
               <MessageCircle className="size-4 sm:size-5" aria-hidden />
             </a>

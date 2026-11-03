@@ -61,7 +61,7 @@ export function CarMedia({
           fill
           priority={priority}
           sizes={sizes ?? "(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"}
-          className="object-cover object-center transition-transform duration-500 ease-out scale-100 group-hover:scale-105 active:scale-95"
+          className="object-cover object-center scale-100"
         />
         
         {/* Available Badge */}

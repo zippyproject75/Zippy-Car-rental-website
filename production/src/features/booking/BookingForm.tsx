@@ -321,8 +321,8 @@ export function BookingForm({
               ) : null}
             </div>
 
-            <div className="grid gap-5 sm:grid-cols-2">
-              <div className="flex flex-col gap-1.5">
+            <div className="grid gap-5 sm:grid-cols-2 w-full max-w-full">
+              <div className="flex flex-col gap-1.5 w-full max-w-full">
                 <label htmlFor="booking-carId" className="text-sm font-semibold text-ink">
                   {t("car")}
                 </label>
@@ -345,7 +345,7 @@ export function BookingForm({
                 </p>
               </div>
 
-              <div className="flex flex-col gap-1.5">
+              <div className="flex flex-col gap-1.5 w-full max-w-full">
                 <label htmlFor="booking-pickupLocationId" className="text-sm font-semibold text-ink">
                   {t("pickupLocation")}
                 </label>
@@ -369,9 +369,9 @@ export function BookingForm({
             </div>
 
             {/* Rental Package Selector */}
-            <div className="flex flex-col gap-1.5">
+            <div className="flex flex-col gap-1.5 w-full max-w-full">
               <label className="text-sm font-semibold text-ink">{t("packageLabel")}</label>
-              <div className="flex gap-2 rounded-lg bg-muted p-1.5">
+              <div className="flex gap-2 rounded-lg bg-muted p-1.5 w-full max-w-full">
                 <button
                   type="button"
                   onClick={() => setSelectedPackage("12-hour")}
@@ -406,7 +406,7 @@ export function BookingForm({
               </p>
             </div>
 
-            <div className="flex flex-col gap-1.5">
+            <div className="flex flex-col gap-1.5 w-full max-w-full">
               {branches.length ? (
                 <>
                   <label htmlFor="booking-branchId" className="text-sm font-semibold text-ink">
@@ -439,7 +439,7 @@ export function BookingForm({
               )}
             </div>
 
-            <fieldset className="grid gap-5 sm:grid-cols-2">
+            <fieldset className="grid gap-5 sm:grid-cols-2 w-full max-w-full">
               <legend className="sr-only">
                 {t("pickup")} / {t("return")}
               </legend>
@@ -449,9 +449,9 @@ export function BookingForm({
                 const dateValue = kind === "pickup" ? pickupDate : returnDate;
                 const timeValue = kind === "pickup" ? pickupTime : returnTime;
                 return (
-                  <div key={kind} className="rounded-card border border-line bg-muted/50 p-4 sm:p-5">
+                  <div key={kind} className="rounded-card border border-line bg-muted/50 p-4 sm:p-5 w-full max-w-full">
                     <p className="eyebrow mb-3">{t(kind)}</p>
-                    <div className="grid gap-4 grid-cols-1">
+                    <div className="grid gap-4 grid-cols-1 w-full max-w-full">
                       <DateField
                         id={`booking-${dateKey}`}
                         label={t(dateKey)}
@@ -520,9 +520,9 @@ export function BookingForm({
 
             {/* Return time suggestion hint */}
             {returnTimeManuallyEdited && pickupDate && pickupTime && (
-              <div className="flex items-start gap-2 rounded-lg bg-muted/50 p-3 sm:p-4 text-sm">
+              <div className="flex items-start gap-2 rounded-lg bg-muted/50 p-3 sm:p-4 text-sm w-full max-w-full">
                 <Info aria-hidden className="mt-0.5 size-4 shrink-0 text-accent-ink" />
-                <div className="flex-1">
+                <div className="flex-1 min-w-0">
                   <p className="font-medium text-ink">{t("returnTimeManuallyEdited")}</p>
                   <button
                     type="button"
@@ -537,75 +537,75 @@ export function BookingForm({
             )}
 
             {/* Live Rental Summary */}
-            <div className="rounded-card border border-line bg-muted/50 p-4 sm:p-5">
+            <div className="rounded-card border border-line bg-muted/50 p-4 sm:p-5 w-full max-w-full">
               <h3 className="font-display text-lg font-bold text-ink">{t("summaryTitle")}</h3>
               <dl className="mt-4 space-y-3 text-sm">
                 <div className="flex flex-col sm:flex-row sm:justify-between sm:gap-4">
                   <dt className="text-ink-2 mb-1 sm:mb-0">{t("car")}</dt>
-                  <dd className="font-medium text-ink sm:text-right">{rentalSummary.vehicleName}</dd>
+                  <dd className="font-medium text-ink sm:text-right break-words">{rentalSummary.vehicleName}</dd>
                 </div>
                 <div className="flex flex-col sm:flex-row sm:justify-between sm:gap-4">
                   <dt className="text-ink-2 mb-1 sm:mb-0">{t("packageLabel")}</dt>
-                  <dd className="font-medium text-ink sm:text-right">{rentalSummary.packageName}</dd>
+                  <dd className="font-medium text-ink sm:text-right break-words">{rentalSummary.packageName}</dd>
                 </div>
                 {rentalSummary.pickupLocationName && (
                   <div className="flex flex-col sm:flex-row sm:justify-between sm:gap-4">
                     <dt className="text-ink-2 mb-1 sm:mb-0">{t("pickupLocation")}</dt>
-                    <dd className="font-medium text-ink sm:text-right">{rentalSummary.pickupLocationName}</dd>
+                    <dd className="font-medium text-ink sm:text-right break-words">{rentalSummary.pickupLocationName}</dd>
                   </div>
                 )}
                 {rentalSummary.branchName && (
                   <div className="flex flex-col sm:flex-row sm:justify-between sm:gap-4">
                     <dt className="text-ink-2 mb-1 sm:mb-0">{t("branch")}</dt>
-                    <dd className="font-medium text-ink sm:text-right">{rentalSummary.branchName}</dd>
+                    <dd className="font-medium text-ink sm:text-right break-words">{rentalSummary.branchName}</dd>
                   </div>
                 )}
                 {rentalSummary.pickupDate && (
                   <div className="flex flex-col sm:flex-row sm:justify-between sm:gap-4">
                     <dt className="text-ink-2 mb-1 sm:mb-0">{t("pickupDate")}</dt>
-                    <dd className="font-medium text-ink sm:text-right">{rentalSummary.pickupDate}</dd>
+                    <dd className="font-medium text-ink sm:text-right break-words">{rentalSummary.pickupDate}</dd>
                   </div>
                 )}
                 {rentalSummary.pickupTime && (
                   <div className="flex flex-col sm:flex-row sm:justify-between sm:gap-4">
                     <dt className="text-ink-2 mb-1 sm:mb-0">{t("pickupTime")}</dt>
-                    <dd className="font-medium text-ink sm:text-right">{rentalSummary.pickupTime}</dd>
+                    <dd className="font-medium text-ink sm:text-right break-words">{rentalSummary.pickupTime}</dd>
                   </div>
                 )}
                 {rentalSummary.returnDate && (
                   <div className="flex flex-col sm:flex-row sm:justify-between sm:gap-4">
                     <dt className="text-ink-2 mb-1 sm:mb-0">{t("returnDate")}</dt>
-                    <dd className="font-medium text-ink sm:text-right">{rentalSummary.returnDate}</dd>
+                    <dd className="font-medium text-ink sm:text-right break-words">{rentalSummary.returnDate}</dd>
                   </div>
                 )}
                 {rentalSummary.returnTime && (
                   <div className="flex flex-col sm:flex-row sm:justify-between sm:gap-4">
                     <dt className="text-ink-2 mb-1 sm:mb-0">{t("returnTime")}</dt>
-                    <dd className="font-medium text-ink sm:text-right">{rentalSummary.returnTime}</dd>
+                    <dd className="font-medium text-ink sm:text-right break-words">{rentalSummary.returnTime}</dd>
                   </div>
                 )}
                 {rentalSummary.duration && (
                   <div className="flex flex-col sm:flex-row sm:justify-between sm:gap-4">
                     <dt className="text-ink-2 mb-1 sm:mb-0">{t("durationLabel")}</dt>
-                    <dd className="font-medium text-ink sm:text-right">{rentalSummary.duration}</dd>
+                    <dd className="font-medium text-ink sm:text-right break-words">{rentalSummary.duration}</dd>
                   </div>
                 )}
                 {rentalSummary.packagePrice && (
                   <div className="flex flex-col sm:flex-row sm:justify-between sm:gap-4 border-t border-line pt-3">
                     <dt className="text-ink-2 mb-1 sm:mb-0">{t("packagePrice")}</dt>
-                    <dd className="font-display text-lg font-bold text-ink sm:text-right">{rentalSummary.packagePrice}</dd>
+                    <dd className="font-display text-lg font-bold text-ink sm:text-right break-words">{rentalSummary.packagePrice}</dd>
                   </div>
                 )}
                 {rentalSummary.freeKm && (
                   <div className="flex flex-col sm:flex-row sm:justify-between sm:gap-4">
                     <dt className="text-ink-2 mb-1 sm:mb-0">{t("freeKm")}</dt>
-                    <dd className="font-medium text-ink sm:text-right">{rentalSummary.freeKm}</dd>
+                    <dd className="font-medium text-ink sm:text-right break-words">{rentalSummary.freeKm}</dd>
                   </div>
                 )}
                 {!rentalSummary.valid && (
                   <div className="flex flex-col sm:flex-row sm:justify-between sm:gap-4 border-t border-line pt-3">
                     <dt className="text-ink-2 mb-1 sm:mb-0">{t("durationLabel")}</dt>
-                    <dd className="text-ink-3 sm:text-right">{t("durationEmpty")}</dd>
+                    <dd className="text-ink-3 sm:text-right break-words">{t("durationEmpty")}</dd>
                   </div>
                 )}
               </dl>
