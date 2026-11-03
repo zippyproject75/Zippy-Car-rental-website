@@ -134,8 +134,8 @@ export default async function CarPage({ params }: Params) {
           </div>
 
           {/* Right Column: Booking Form */}
-          <div className="flex flex-col gap-6">
-            <div className="bg-raised border border-line rounded-card p-6 shadow-raised">
+          <div className="flex flex-col gap-6 w-full max-w-full">
+            <div className="bg-raised border border-line rounded-card p-6 shadow-raised w-full max-w-full">
               <h2 className="font-display text-2xl font-bold text-ink mb-6">BOOKING</h2>
 
               {/* Price */}
