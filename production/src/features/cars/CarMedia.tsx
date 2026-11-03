@@ -13,7 +13,7 @@ type Variant = "card" | "detail";
 
 const ratio: Record<Variant, string> = {
   card: "aspect-[16/10]",
-  detail: "aspect-[4/5] md:aspect-video",
+  detail: "aspect-[16/9] md:aspect-video",
 };
 
 /**
@@ -60,8 +60,8 @@ export function CarMedia({
           alt={currentImage.alt[locale]}
           fill
           priority={priority}
-          sizes={sizes ?? "(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"}
-          className="object-cover object-center scale-100"
+          sizes={sizes ?? "(min-width: 1024px) 60vw, (min-width: 640px) 100vw, 100vw"}
+          className="object-cover object-center scale-100 w-full h-full"
         />
         
         {/* Available Badge */}
