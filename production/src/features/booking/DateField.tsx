@@ -60,7 +60,7 @@ export function DateField({
   }, [open]);
 
   return (
-    <div className="flex flex-col gap-1.5">
+    <div className="flex flex-col gap-1.5 min-w-0">
       <span className="text-sm font-semibold text-ink" aria-hidden>
         {label}
       </span>
@@ -74,7 +74,7 @@ export function DateField({
           display ? t("changeDate", { label, date: display }) : t("chooseDateFor", { label })
         }
         onClick={() => setOpen(true)}
-        className={cn(fieldControlClass(Boolean(error)), "flex items-center gap-2.5 text-left")}
+        className={cn(fieldControlClass(Boolean(error)), "flex items-center gap-2.5 text-left min-w-0")}
       >
         <CalendarDays aria-hidden className="size-4 shrink-0 text-ink-3" />
         <span className={cn("truncate tabular-nums", !display && "text-ink-3")}>

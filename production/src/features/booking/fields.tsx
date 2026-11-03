@@ -3,7 +3,7 @@ import { cn } from "@/lib/cn";
 
 export function fieldControlClass(invalid: boolean): string {
   return cn(
-    "min-h-12 w-full max-w-full rounded-control border bg-canvas px-3.5 text-[0.9375rem] text-ink transition-colors hover:border-ink-3 box-border",
+    "min-h-12 w-full max-w-full rounded-control border bg-canvas px-3.5 text-[0.9375rem] text-ink transition-colors hover:border-ink-3 box-border overflow-hidden",
     invalid ? "border-danger" : "border-line-strong",
   );
 }

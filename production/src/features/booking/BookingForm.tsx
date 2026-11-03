@@ -275,6 +275,7 @@ export function BookingForm({
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.25 }}
+            className="w-full max-w-full overflow-hidden"
           >
             <EnquiryResultPanel
               result={result}
@@ -289,7 +290,7 @@ export function BookingForm({
             onSubmit={handleSubmit}
             aria-labelledby={headingId}
             aria-label={headingId ? undefined : t("formLabel")}
-            className="space-y-6 w-full max-w-full"
+            className="space-y-6 w-full max-w-full overflow-x-hidden"
             data-testid="booking-form"
           >
             <div
@@ -321,8 +322,8 @@ export function BookingForm({
               ) : null}
             </div>
 
-            <div className="grid gap-5 sm:grid-cols-2 w-full max-w-full">
-              <div className="flex flex-col gap-1.5 w-full max-w-full">
+            <div className="grid gap-5 sm:grid-cols-2 w-full max-w-full overflow-hidden">
+              <div className="flex flex-col gap-1.5 w-full max-w-full min-w-0">
                 <label htmlFor="booking-carId" className="text-sm font-semibold text-ink">
                   {t("car")}
                 </label>
@@ -345,7 +346,7 @@ export function BookingForm({
                 </p>
               </div>
 
-              <div className="flex flex-col gap-1.5 w-full max-w-full">
+              <div className="flex flex-col gap-1.5 w-full max-w-full min-w-0">
                 <label htmlFor="booking-pickupLocationId" className="text-sm font-semibold text-ink">
                   {t("pickupLocation")}
                 </label>
@@ -369,7 +370,7 @@ export function BookingForm({
             </div>
 
             {/* Rental Package Selector */}
-            <div className="flex flex-col gap-1.5 w-full max-w-full">
+            <div className="flex flex-col gap-1.5 w-full max-w-full min-w-0">
               <label className="text-sm font-semibold text-ink">{t("packageLabel")}</label>
               <div className="flex gap-2 rounded-lg bg-muted p-1.5 w-full max-w-full">
                 <button
@@ -406,7 +407,7 @@ export function BookingForm({
               </p>
             </div>
 
-            <div className="flex flex-col gap-1.5 w-full max-w-full">
+            <div className="flex flex-col gap-1.5 w-full max-w-full min-w-0">
               {branches.length ? (
                 <>
                   <label htmlFor="booking-branchId" className="text-sm font-semibold text-ink">
@@ -439,7 +440,7 @@ export function BookingForm({
               )}
             </div>
 
-            <fieldset className="grid gap-5 sm:grid-cols-2 w-full max-w-full">
+            <fieldset className="grid gap-5 sm:grid-cols-2 w-full max-w-full overflow-hidden">
               <legend className="sr-only">
                 {t("pickup")} / {t("return")}
               </legend>
@@ -449,9 +450,9 @@ export function BookingForm({
                 const dateValue = kind === "pickup" ? pickupDate : returnDate;
                 const timeValue = kind === "pickup" ? pickupTime : returnTime;
                 return (
-                  <div key={kind} className="rounded-card border border-line bg-muted/50 p-4 sm:p-5 w-full max-w-full">
+                  <div key={kind} className="rounded-card border border-line bg-muted/50 p-4 sm:p-5 w-full max-w-full overflow-hidden min-w-0">
                     <p className="eyebrow mb-3">{t(kind)}</p>
-                    <div className="grid gap-4 grid-cols-1 w-full max-w-full">
+                    <div className="grid gap-4 grid-cols-1 w-full max-w-full overflow-hidden min-w-0">
                       <DateField
                         id={`booking-${dateKey}`}
                         label={t(dateKey)}
@@ -537,7 +538,7 @@ export function BookingForm({
             )}
 
             {/* Live Rental Summary */}
-            <div className="rounded-card border border-line bg-muted/50 p-4 sm:p-5 w-full max-w-full">
+            <div className="rounded-card border border-line bg-muted/50 p-4 sm:p-5 w-full max-w-full overflow-hidden">
               <h3 className="font-display text-lg font-bold text-ink">{t("summaryTitle")}</h3>
               <dl className="mt-4 space-y-3 text-sm">
                 <div className="flex flex-col sm:flex-row sm:justify-between sm:gap-4">

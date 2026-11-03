@@ -278,6 +278,7 @@ html.dark .eyebrow,
   padding-inline: 1rem;
   overflow-x: hidden;
   box-sizing: border-box;
+  min-width: 0;
 
   @media (width >=40rem) {
     padding-inline: 1.5rem;
