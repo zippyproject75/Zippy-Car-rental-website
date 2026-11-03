@@ -118,7 +118,7 @@ export default async function LocaleLayout({
                 </p>
               ) : null}
               <SiteHeader />
-              <main id="main" tabIndex={-1} className="outline-none">
+              <main id="main" tabIndex={-1} className="outline-none w-full max-w-full overflow-hidden">
                 <PageContentWrapper>
                   {children}
                 </PageContentWrapper>

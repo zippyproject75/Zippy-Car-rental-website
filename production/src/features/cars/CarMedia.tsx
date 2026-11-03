@@ -75,14 +75,16 @@ export function CarMedia({
           <>
             <button
               onClick={goToPrevious}
-              className="absolute left-1.5 top-1/2 -translate-y-1/2 z-20 p-1 sm:p-2.5 rounded-full bg-black/50 hover:bg-black/70 backdrop-blur-sm transition-all"
+              className="absolute left-1 top-1/2 -translate-y-1/2 z-20 p-1 sm:p-2.5 rounded-full bg-black/50 hover:bg-black/70 backdrop-blur-sm transition-all"
+              style={{ minHeight: 'auto', minWidth: 'auto' }}
               aria-label="Previous image"
             >
               <ChevronLeft className="w-2.5 h-2.5 sm:w-5 sm:h-5 text-white" />
             </button>
             <button
               onClick={goToNext}
-              className="absolute right-1.5 top-1/2 -translate-y-1/2 z-20 p-1 sm:p-2.5 rounded-full bg-black/50 hover:bg-black/70 backdrop-blur-sm transition-all"
+              className="absolute right-1 top-1/2 -translate-y-1/2 z-20 p-1 sm:p-2.5 rounded-full bg-black/50 hover:bg-black/70 backdrop-blur-sm transition-all"
+              style={{ minHeight: 'auto', minWidth: 'auto' }}
               aria-label="Next image"
             >
               <ChevronRight className="w-2.5 h-2.5 sm:w-5 sm:h-5 text-white" />
@@ -94,9 +96,10 @@ export function CarMedia({
                 <button
                   key={index}
                   onClick={() => setCurrentIndex(index)}
-                  className={`w-1 h-1 sm:w-2 sm:h-2 rounded-full transition-all ${
+                  className={`w-[2px] h-[2px] sm:w-2 sm:h-2 rounded-full transition-all ${
                     index === currentIndex ? "bg-white" : "bg-white/50 hover:bg-white/70"
                   }`}
+                  style={{ minHeight: 'auto', minWidth: 'auto' }}
                   aria-label={`Go to image ${index + 1}`}
                 />
               ))}

@@ -81,9 +81,9 @@ export default async function CarPage({ params }: Params) {
 
   return (
     <>
-      <div className="container-site pt-8 pb-28 lg:pb-20 w-full max-w-full overflow-x-hidden">
+      <div className="container-site pt-8 pb-28 lg:pb-20 w-full max-w-full overflow-hidden">
         <Breadcrumbs items={crumbs} />
-        <div className="mt-6 grid gap-8 lg:grid-cols-[1.45fr_1fr] lg:gap-12 w-full max-w-full overflow-hidden">
+        <div className="mt-6 grid gap-8 lg:grid-cols-[1.45fr_1fr] lg:gap-12 w-full max-w-full overflow-hidden min-w-0">
           {/* Left Column: Car Details */}
           <div className="flex flex-col gap-8 w-full max-w-full overflow-hidden">
             <div className="overflow-hidden rounded-card border border-line bg-raised">
