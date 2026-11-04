@@ -36,7 +36,7 @@ export function FloatingContactDock() {
         <a
           href={`tel:${PHONE_NUMBER_TEL}`}
           aria-label={`Call Zippy Car Rental at ${PHONE_NUMBER_DISPLAY}`}
-          className="animate-dock-phone relative flex size-12 sm:size-13 items-center justify-center rounded-full border-2 border-accent bg-[#0d0f17] text-accent shadow-2xl transition-all duration-300 hover:scale-105 hover:bg-accent hover:text-[#07080a] hover:border-accent active:scale-95 focus-visible:outline-2 focus-visible:outline-focus focus-visible:outline-offset-2"
+          className="animate-dock-phone relative flex size-12 sm:size-13 items-center justify-center rounded-full bg-[#25D366] text-white shadow-2xl transition-all duration-300 hover:scale-105 hover:bg-[#20bd5a] active:scale-95 focus-visible:outline-2 focus-visible:outline-focus focus-visible:outline-offset-2"
         >
           <Phone aria-hidden className="size-5 sm:size-5.5 transition-transform duration-200 group-hover:scale-110" />
         </a>
@@ -46,7 +46,7 @@ export function FloatingContactDock() {
           role="tooltip"
           className="pointer-events-none absolute top-1/2 -translate-y-1/2 opacity-0 transition-all duration-200 group-hover:opacity-100 group-focus-within:opacity-100 hidden sm:flex items-center gap-1.5 whitespace-nowrap rounded-lg border border-line/80 bg-raised/95 px-3 py-1.5 text-xs font-bold text-ink shadow-raised backdrop-blur-md right-full mr-3 sm:left-full sm:mr-0 sm:ml-3"
         >
-          <span className="size-1.5 rounded-full bg-accent" />
+          <span className="size-1.5 rounded-full bg-[#25D366]" />
           <span>Call: {PHONE_NUMBER_DISPLAY}</span>
         </div>
       </div>
