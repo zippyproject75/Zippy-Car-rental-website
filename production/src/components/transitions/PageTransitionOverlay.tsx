@@ -19,19 +19,19 @@ export function PageTransitionOverlay() {
         isTransitioning
           ? "opacity-100 pointer-events-auto"
           : "opacity-0 pointer-events-none"
-      } bg-[#07080a] text-white dark:bg-[#07080a]`}
+      } bg-[#040507] text-white dark:bg-[#040507]`}
       style={{
         background:
-          "radial-gradient(circle at center, #12141a 0%, #07080a 65%, #030405 100%)",
+          "radial-gradient(circle at center, #0e1017 0%, #06070a 60%, #020304 100%)",
       }}
     >
       {/* ── Soft Ambient Gold Backlight Glow ── */}
       <div
         aria-hidden
-        className="pointer-events-none absolute size-56 sm:size-64 rounded-full blur-3xl opacity-35"
+        className="pointer-events-none absolute size-64 sm:size-72 rounded-full blur-3xl opacity-30"
         style={{
           background:
-            "radial-gradient(circle, rgba(212,179,115,0.45) 0%, rgba(201,166,96,0.15) 50%, transparent 70%)",
+            "radial-gradient(circle, rgba(229,189,86,0.35) 0%, rgba(201,150,50,0.12) 50%, transparent 70%)",
         }}
       />
 
@@ -42,23 +42,24 @@ export function PageTransitionOverlay() {
         }`}
       >
         {/* Ring & Logo Housing */}
-        <div className="relative flex size-36 sm:size-40 items-center justify-center">
-          {/* Continuous Rotating Metallic Gold Ring (Matching Reference Image 1) */}
+        <div className="relative flex size-40 sm:size-44 items-center justify-center">
+          {/* Continuous Rotating Metallic Gold Ring (Matching Exact Proportions & Sheen of Reference Image 1) */}
           <svg
             viewBox="0 0 160 160"
-            className="size-full animate-spin-ring drop-shadow-[0_0_18px_rgba(212,179,115,0.35)]"
+            className="size-full animate-spin-ring drop-shadow-[0_0_24px_rgba(212,175,85,0.4)]"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >
             <defs>
               {/* Premium Multi-Stop Metallic Gold Gradient */}
-              <linearGradient id="goldMetallicGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#d4b373" />
-                <stop offset="20%" stopColor="#fff4d4" />
-                <stop offset="45%" stopColor="#c9a660" />
-                <stop offset="70%" stopColor="#9e7b39" />
-                <stop offset="85%" stopColor="#ffebad" />
-                <stop offset="100%" stopColor="#d4b373" />
+              <linearGradient id="goldMetallicGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="#7a5318" />
+                <stop offset="15%" stopColor="#b4832c" />
+                <stop offset="32%" stopColor="#dfb256" />
+                <stop offset="50%" stopColor="#fff8e7" />
+                <stop offset="68%" stopColor="#f3cb69" />
+                <stop offset="85%" stopColor="#c79940" />
+                <stop offset="100%" stopColor="#6e4912" />
               </linearGradient>
 
               {/* Soft Ring Glow Filter */}
@@ -75,32 +76,49 @@ export function PageTransitionOverlay() {
             <circle
               cx="80"
               cy="80"
-              r="62"
-              stroke="rgba(212,179,115,0.12)"
-              strokeWidth="12"
+              r="58"
+              stroke="rgba(212,175,85,0.1)"
+              strokeWidth="26"
             />
 
-            {/* Glowing Metallic Gold Ring */}
+            {/* Glowing Solid Metallic Gold Torus Ring (Matching Reference Image 1) */}
             <circle
               cx="80"
               cy="80"
-              r="62"
+              r="58"
               stroke="url(#goldMetallicGrad)"
-              strokeWidth="13"
-              strokeLinecap="round"
+              strokeWidth="26"
               filter="url(#goldGlow)"
             />
 
-            {/* High-Velocity Specular Rim Highlight */}
+            {/* Crisp Outer Bevel Rim */}
             <circle
               cx="80"
               cy="80"
-              r="62"
+              r="70.5"
+              stroke="rgba(255,248,220,0.4)"
+              strokeWidth="1"
+            />
+
+            {/* Crisp Inner Bevel Rim */}
+            <circle
+              cx="80"
+              cy="80"
+              r="45.5"
+              stroke="rgba(255,248,220,0.35)"
+              strokeWidth="1"
+            />
+
+            {/* High-Velocity Specular Rim Highlight Arc */}
+            <circle
+              cx="80"
+              cy="80"
+              r="58"
               stroke="#ffffff"
               strokeWidth="2.5"
-              strokeDasharray="45 340"
+              strokeDasharray="50 310"
               strokeLinecap="round"
-              opacity="0.9"
+              opacity="0.92"
             />
           </svg>
 
@@ -109,9 +127,9 @@ export function PageTransitionOverlay() {
             <Image
               src="/zippy_main_logo.png"
               alt="Zippy Car Rental"
-              width={64}
-              height={44}
-              className="h-10 w-auto object-contain drop-shadow-[0_2px_12px_rgba(212,179,115,0.35)] animate-pulse-gentle"
+              width={54}
+              height={36}
+              className="h-8 sm:h-9 w-auto object-contain drop-shadow-[0_2px_14px_rgba(212,175,85,0.4)] animate-pulse-gentle"
               priority
             />
           </div>
@@ -119,7 +137,7 @@ export function PageTransitionOverlay() {
 
         {/* ── Brand Typography ── */}
         <div className="mt-6 flex flex-col items-center text-center">
-          <span className="font-display text-sm sm:text-base font-extrabold tracking-[0.24em] text-white">
+          <span className="font-display text-sm sm:text-base font-extrabold tracking-[0.26em] text-white">
             ZIPPY CAR RENTAL
           </span>
           <span className="mt-1.5 text-[0.6875rem] font-semibold tracking-[0.28em] text-accent uppercase">
@@ -135,4 +153,3 @@ export function PageTransitionOverlay() {
     </div>
   );
 }
-

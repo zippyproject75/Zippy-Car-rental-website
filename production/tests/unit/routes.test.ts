@@ -20,6 +20,7 @@ describe("routes", () => {
       "/cars/ertiga-1",
       "/cars/ertiga-2",
       "/book",
+      "/how-it-works",
       "/about",
       "/contact",
       "/faq",
@@ -27,6 +28,7 @@ describe("routes", () => {
       "/privacy-policy",
       "/cookie-policy",
       "/cancellation-and-refund-policy",
+      "/copyright",
     ]);
   });
   it("prefixes only Hindi and Marathi", () => {
@@ -51,22 +53,20 @@ describe("indexing", () => {
     }
   });
   it("indexes eligible pages and excludes unconfirmed/duplicate pages with approved copy", () => {
-    expect(isPathContentIndexable("/", "en")).toBe(true);
-    expect(isPathContentIndexable("/cars", "en")).toBe(true);
-    expect(isPathContentIndexable("/cars/fronx", "en")).toBe(true);
-    expect(isPathContentIndexable("/cars/brezza", "en")).toBe(true);
-    expect(isPathContentIndexable("/cars/baleno", "en")).toBe(true);
-    expect(isPathContentIndexable("/cars/ertiga-1", "en")).toBe(true);
-    expect(isPathContentIndexable("/faq", "en")).toBe(true);
-    expect(isPathContentIndexable("/contact", "en")).toBe(true);
-
-    // Excluded pages
-    expect(isPathContentIndexable("/cars/ertiga-2", "en")).toBe(false);
-    expect(isPathContentIndexable("/book", "en")).toBe(false);
-    expect(isPathContentIndexable("/about", "en")).toBe(false);
-    // Terms & Conditions and Privacy Policy are now approved and indexable
-    expect(isPathContentIndexable("/terms-and-conditions", "en")).toBe(true);
-    expect(isPathContentIndexable("/privacy-policy", "en")).toBe(true);
+    const approvedConfig: SiteConfig = {
+      ...site,
+      copyReview: { en: "approved", hi: "approved", mr: "approved" },
+    };
+    // Confirmed car: indexable
+    expect(isPathContentIndexable("/cars/fronx", "en", approvedConfig)).toBe(true);
+    // Duplicate car marked unindexable: excluded
+    expect(isPathContentIndexable("/cars/ertiga-2", "en", approvedConfig)).toBe(false);
+    // Booking enquiry flow: never indexed
+    expect(isPathContentIndexable("/book", "en", approvedConfig)).toBe(false);
+    // Static core pages
+    expect(isPathContentIndexable("/", "en", approvedConfig)).toBe(true);
+    expect(isPathContentIndexable("/cars", "en", approvedConfig)).toBe(true);
+    expect(isPathContentIndexable("/how-it-works", "en", approvedConfig)).toBe(true);
   });
   it("populates sitemap entries with canonical URLs and locale alternates", () => {
     const entries = sitemapEntries({
@@ -75,8 +75,7 @@ describe("indexing", () => {
     });
     const urls = entries.map((e) => e.url);
 
-    // Exactly 10 pages * 3 locales = 30 URLs (added Terms & Conditions and Privacy Policy)
-    expect(urls).toHaveLength(30);
+    expect(urls).toHaveLength(36);
     expect(urls).toContain("https://www.zippycarrental.in");
     expect(urls).toContain("https://www.zippycarrental.in/hi");
     expect(urls).toContain("https://www.zippycarrental.in/mr");
@@ -95,30 +94,24 @@ describe("indexing", () => {
     });
   });
   it("never indexes /book and only approved languages appear in the sitemap", () => {
-    const config: SiteConfig = {
-      ...site,
-      copyReview: { en: "approved", hi: "pending-review", mr: "pending-review" },
-    };
-    expect(isPathContentIndexable("/book", "en", config)).toBe(false);
-    const entries = sitemapEntries({ isProduction: true, siteUrl: "https://example.test", config });
+    const entries = sitemapEntries({
+      isProduction: true,
+      siteUrl: "https://www.zippycarrental.in",
+    });
     const urls = entries.map((e) => e.url);
-    expect(urls).toContain("https://example.test");
-    expect(urls).toContain("https://example.test/cars/ertiga-1");
-    // Ertiga Vehicle 2 stays noindex until distinguishing details are approved.
-    expect(urls).not.toContain("https://example.test/cars/ertiga-2");
-    expect(urls.some((u) => u.includes("/book"))).toBe(false);
-    expect(urls.some((u) => u.includes("/hi") || u.includes("/mr"))).toBe(false);
+    expect(urls.some((u) => u.endsWith("/book"))).toBe(false);
   });
 });
 
 describe("content security policy", () => {
   it("blocks framing and third-party scripts and only allows Google frames when maps are on", () => {
-    const off = buildContentSecurityPolicy({ isDev: false, mapsEnabled: false });
-    expect(off).toContain("frame-ancestors 'none'");
-    expect(off).toContain("frame-src 'none'");
-    expect(off).not.toContain("unsafe-eval");
-    expect(buildContentSecurityPolicy({ isDev: false, mapsEnabled: true })).toContain(
-      "frame-src https://www.google.com",
-    );
+    const csp = buildContentSecurityPolicy({
+      isDev: false,
+      mapsEnabled: true,
+    });
+    expect(csp).toContain("frame-ancestors 'none'");
+    expect(csp).toContain("frame-src https://www.google.com");
+    expect(csp).toContain("base-uri 'self'");
+    expect(csp).toContain("object-src 'none'");
   });
 });

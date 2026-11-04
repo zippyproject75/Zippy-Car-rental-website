@@ -3,11 +3,11 @@ import { getTranslations } from "next-intl/server";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 
-const STEP_ICONS: LucideIcon[] = [CarFront, CalendarDays, MessageCircle, CheckCircle2];
+const STEP_ICONS: LucideIcon[] = [CarFront, CalendarDays, MessageCircle];
 
 export async function HowItWorks({ withHeading = true }: { withHeading?: boolean }) {
   const t = await getTranslations("Home");
-  const steps = (["1", "2", "3", "4"] as const).map((n, i) => ({
+  const steps = (["1", "2", "3"] as const).map((n, i) => ({
     n,
     Icon: STEP_ICONS[i]!,
     title: t(`steps.${n}.title`),
@@ -20,12 +20,12 @@ export async function HowItWorks({ withHeading = true }: { withHeading?: boolean
           <SectionHeading eyebrow={t("howEyebrow")} title={t("howTitle")} />
         </ScrollReveal>
       ) : null}
-      <ol className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+      <ol className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {steps.map((s, i) => (
             <ScrollReveal key={s.n} delay={i * 0.08}>
               <li className="relative flex flex-col gap-4 rounded-card border border-line bg-raised p-6 transition-[border-color] hover:border-accent/30">
                 {/* Connector line (desktop) — subtle static line */}
-                {i < 3 && (
+                {i < 2 && (
                   <div
                     aria-hidden
                     className="absolute -right-2.5 top-10 hidden h-px w-5 bg-accent/40 lg:block"

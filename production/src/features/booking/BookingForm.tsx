@@ -1,33 +1,33 @@
 "use client";
 
-import { ArrowRight, CircleAlert, Clock, ShieldCheck } from "lucide-react";
+import { ArrowRight, CircleAlert, Clock, Info, RefreshCw, ShieldCheck } from "lucide-react";
 import { LazyMotion, MotionConfig, domAnimation, m } from "motion/react";
 import { useLocale, useTranslations } from "next-intl";
-import { useRef, useState, type FormEvent } from "react";
+import { useRef, useState, useEffect, type FormEvent } from "react";
 import { buttonClass } from "@/components/ui/button";
-import { bookingRules, NAME_MAX_LENGTH, NOTE_MAX_LENGTH } from "@/data/booking";
-import { pricingConfig } from "@/data/pricing";
+import { bookingRules } from "@/data/booking";
+import { packagePricing, pricingConfig } from "@/data/pricing";
 import type { Locale } from "@/i18n/routing";
 import { cn } from "@/lib/cn";
 import type { VisibleContacts } from "@/lib/contacts";
-import { requestDateBounds, timeSlots, validateRequest } from "@/lib/dates";
+import { requestDateBounds, timeSlots, validateRequest, parseBusinessDateTime, businessDateKey, businessTimeKey } from "@/lib/dates";
 import { formatDateTime, formatInr, formatTimeKey } from "@/lib/formatting";
 import { calculateEstimate } from "@/lib/pricing";
 import { enquiryService, type EnquiryResult } from "@/services/enquiry";
-import type { EstimateResult, RequestErrorCode, RequestField } from "@/types/booking";
+import type { RequestErrorCode, RequestField } from "@/types/booking";
 import type { CarId } from "@/types/car";
 import type { BranchId } from "@/types/site";
 import { DateField } from "./DateField";
 import { formatDuration } from "./duration";
 import { EnquiryResultPanel } from "./EnquiryResultPanel";
 import { FieldError, fieldControlClass } from "./fields";
-import { optionalFieldsSchema } from "./schema";
 
 export type BookingCarOption = { id: CarId; label: string };
 export type BookingBranchOption = { id: BranchId; name: string; pending: boolean };
 export type BookingPickupLocationOption = { id: string; name: string; googleMapsUrl: string };
 
-type FieldKey = RequestField | "branchId" | "pickupLocationId" | "name" | "note";
+type PackageType = "12-hour" | "24-hour";
+type FieldKey = RequestField | "branchId" | "pickupLocationId";
 type Errors = Partial<Record<FieldKey, string>>;
 
 const SLOTS = timeSlots(bookingRules.slotMinutes);
@@ -38,8 +38,6 @@ const FIELD_ORDER: FieldKey[] = [
   "pickupTime",
   "returnDate",
   "returnTime",
-  "name",
-  "note",
 ];
 
 export function BookingForm({
@@ -58,11 +56,9 @@ export function BookingForm({
   headingId?: string;
 }) {
   const t = useTranslations("Booking");
-  const tPricing = useTranslations("Pricing");
   const tDuration = useTranslations("Duration");
   const tWa = useTranslations("WhatsApp");
   const tc = useTranslations("Common");
-  const tPickup = useTranslations("PickupLocations");
   const locale = useLocale() as Locale;
 
   const [carId, setCarId] = useState<CarId | "any">(initialCarId ?? "any");
@@ -74,28 +70,113 @@ export function BookingForm({
   const [pickupTime, setPickupTime] = useState("");
   const [returnDate, setReturnDate] = useState("");
   const [returnTime, setReturnTime] = useState("");
-  const [name, setName] = useState("");
-  const [note, setNote] = useState("");
+  const [selectedPackage, setSelectedPackage] = useState<PackageType>("12-hour");
+  const [returnTimeManuallyEdited, setReturnTimeManuallyEdited] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [errors, setErrors] = useState<Errors>({});
   const [result, setResult] = useState<EnquiryResult | null>(null);
   const summaryRef = useRef<HTMLDivElement>(null);
+
+  // Check if 24-hour package has any pricing configured
+  const has24HourPricing = cars.some((car) => {
+    return packagePricing["24-hour"][car.id as CarId] !== null;
+  });
 
   // Bounds are computed from "now" on the client; the server render uses a stable window.
   const [now] = useState(() => new Date());
   const { first, last } = requestDateBounds(now, bookingRules);
 
   const draft = { pickupDate, pickupTime, returnDate, returnTime };
-  const allDatesChosen = Boolean(pickupDate && pickupTime && returnDate && returnTime);
-  const validation = allDatesChosen ? validateRequest(draft, new Date(), bookingRules) : null;
   const selectedCar = carId === "any" ? null : carId;
-  const estimate: EstimateResult | null =
-    validation?.ok === true
-      ? calculateEstimate(
-          { carId: selectedCar, pickupAt: validation.pickupAt, returnAt: validation.returnAt },
-          pricingConfig,
-        )
-      : null;
+
+  // Calculate suggested return date/time based on package
+  useEffect(() => {
+    if (pickupDate && pickupTime && !returnTimeManuallyEdited) {
+      const pickupAt = parseBusinessDateTime(pickupDate, pickupTime);
+      if (pickupAt) {
+        const packageHours = selectedPackage === "12-hour" ? 12 : 24;
+        const suggestedReturn = new Date(pickupAt.getTime() + packageHours * 60 * 60 * 1000);
+        const suggestedDate = businessDateKey(suggestedReturn);
+        const suggestedTime = businessTimeKey(suggestedReturn);
+        // Batch state updates to avoid cascading renders
+        requestAnimationFrame(() => {
+          setReturnDate(suggestedDate);
+          setReturnTime(suggestedTime);
+        });
+      }
+    }
+  }, [pickupDate, pickupTime, selectedPackage, returnTimeManuallyEdited]);
+
+  // Reset manual edit flag when package changes to allow auto-suggestion
+  useEffect(() => {
+    if (returnTimeManuallyEdited) {
+      requestAnimationFrame(() => {
+        setReturnTimeManuallyEdited(false);
+      });
+    }
+  }, [selectedPackage, returnTimeManuallyEdited]);
+
+  // Detect manual return time edit
+  const handleReturnDateChange = (value: string) => {
+    setReturnDate(value);
+    setReturnTimeManuallyEdited(true);
+  };
+
+  const handleReturnTimeChange = (value: string) => {
+    setReturnTime(value);
+    setReturnTimeManuallyEdited(true);
+  };
+
+  // Reset return time auto-management when requested
+  const useSuggestedReturn = () => {
+    setReturnTimeManuallyEdited(false);
+  };
+
+  // Calculate rental summary
+  const rentalSummary = (() => {
+    const check = validateRequest(draft, new Date(), bookingRules);
+    if (!check.ok) {
+      return {
+        valid: false,
+        vehicleName: selectedCar ? cars.find((c) => c.id === selectedCar)?.label ?? null : t("anyCar"),
+        packageName: selectedPackage === "12-hour" ? t("package12Hour") : t("package24Hour"),
+        pickupLocationName: pickupLocations.find((l) => l.id === pickupLocationId)?.name ?? null,
+        branchName: branches.find((b) => b.id === branchId)?.name ?? null,
+        pickupDate: null,
+        pickupTime: null,
+        returnDate: null,
+        returnTime: null,
+        duration: null,
+        packagePrice: null,
+        freeKm: null,
+      };
+    }
+
+    const est = calculateEstimate(
+      { carId: selectedCar, pickupAt: check.pickupAt, returnAt: check.returnAt },
+      pricingConfig,
+    );
+
+    const packageInfo = selectedCar ? packagePricing[selectedPackage][selectedCar] : null;
+    const packagePrice = packageInfo?.price ?? null;
+    const freeKm = packageInfo?.limitKm ?? null;
+
+    return {
+      valid: true,
+      vehicleName: selectedCar ? cars.find((c) => c.id === selectedCar)?.label ?? null : t("anyCar"),
+      packageName: selectedPackage === "12-hour" ? t("package12Hour") : t("package24Hour"),
+      pickupLocationName: pickupLocations.find((l) => l.id === pickupLocationId)?.name ?? null,
+      branchName: branches.find((b) => b.id === branchId)?.name ?? null,
+      pickupDate: formatDateTime(check.pickupAt, locale),
+      pickupTime: formatTimeKey(pickupTime, locale),
+      returnDate: formatDateTime(check.returnAt, locale),
+      returnTime: formatTimeKey(returnTime, locale),
+      duration: formatDuration(check.durationMinutes, tDuration),
+      packagePrice: packagePrice ? formatInr(packagePrice, locale) : null,
+      freeKm,
+      estimate: est.kind === "estimate" ? formatInr(est.amountInr, locale) : null,
+    };
+  })();
 
   function errorText(code: RequestErrorCode): string {
     return t(`errors.${code}`, { days: bookingRules.maxAdvanceDays });
@@ -115,15 +196,6 @@ export function BookingForm({
     if (!pickupLocationId) next.pickupLocationId = t("errors.pickupLocationRequired");
     // Branch selection is now optional - customers can choose from pickup locations on homepage
     // if (branches.length > 0 && !branchId) next.branchId = t("errors.branchRequired");
-    const optional = optionalFieldsSchema.safeParse({ name, note });
-    if (!optional.success) {
-      for (const issue of optional.error.issues) {
-        const field = issue.path[0] as "name" | "note";
-        next[field] = t(`errors.${issue.message as "nameTooLong" | "noteTooLong"}`, {
-          max: field === "name" ? NAME_MAX_LENGTH : NOTE_MAX_LENGTH,
-        });
-      }
-    }
     return next;
   }
 
@@ -147,6 +219,11 @@ export function BookingForm({
     const carLabel = cars.find((c) => c.id === selectedCar)?.label ?? null;
     const branch = branches.find((b) => b.id === branchId);
     const pickupLocation = pickupLocations.find((l) => l.id === pickupLocationId);
+    const packageInfo = selectedCar ? packagePricing[selectedPackage][selectedCar] : null;
+    const packageName = selectedPackage === "12-hour" ? t("package12Hour") : t("package24Hour");
+    const packagePrice = packageInfo?.price ? formatInr(packageInfo.price, locale) : null;
+    const freeKm = packageInfo?.limitKm ?? null;
+
     const prepared = enquiryService.prepare(
       {
         carName: carLabel,
@@ -155,9 +232,9 @@ export function BookingForm({
         pickup: formatDateTime(check.pickupAt, locale),
         return: formatDateTime(check.returnAt, locale),
         duration: formatDuration(check.durationMinutes, tDuration),
-        estimate: est.kind === "estimate" ? formatInr(est.amountInr, locale) : null,
-        name,
-        note,
+        estimate: est.kind === "estimate" ? formatInr(est.amountInr, locale) : packagePrice,
+        packageName,
+        freeKm: freeKm ? `${freeKm} km` : null,
       },
       {
         greeting: tWa("greeting"),
@@ -173,6 +250,8 @@ export function BookingForm({
         name: tWa("name"),
         note: tWa("note"),
         closing: tWa("closing"),
+        package: tWa("package"),
+        freeKm: tWa("freeKm"),
       },
     );
     setResult(prepared);
@@ -185,8 +264,6 @@ export function BookingForm({
     pickupTime: t("pickupTime"),
     returnDate: t("returnDate"),
     returnTime: t("returnTime"),
-    name: t("name"),
-    note: t("note"),
   };
   const shownErrors = FIELD_ORDER.filter((f) => liveErrors[f]);
 
@@ -198,6 +275,7 @@ export function BookingForm({
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.25 }}
+            className="w-full max-w-full overflow-hidden"
           >
             <EnquiryResultPanel
               result={result}
@@ -212,7 +290,7 @@ export function BookingForm({
             onSubmit={handleSubmit}
             aria-labelledby={headingId}
             aria-label={headingId ? undefined : t("formLabel")}
-            className="space-y-6"
+            className="space-y-6 w-full max-w-full overflow-x-hidden"
             data-testid="booking-form"
           >
             <div
@@ -244,8 +322,8 @@ export function BookingForm({
               ) : null}
             </div>
 
-            <div className="grid gap-5 md:grid-cols-2">
-              <div className="flex flex-col gap-1.5">
+            <div className="grid gap-5 sm:grid-cols-2 w-full max-w-full overflow-hidden">
+              <div className="flex flex-col gap-1.5 w-full max-w-full min-w-0">
                 <label htmlFor="booking-carId" className="text-sm font-semibold text-ink">
                   {t("car")}
                 </label>
@@ -264,11 +342,11 @@ export function BookingForm({
                   ))}
                 </select>
                 <p id="booking-carId-hint" className="text-xs leading-relaxed text-ink-3">
-                  {carId === "any" ? t("anyCarHint") : t("honesty")}
+                  {t("anyCarHint")}
                 </p>
               </div>
 
-              <div className="flex flex-col gap-1.5">
+              <div className="flex flex-col gap-1.5 w-full max-w-full min-w-0">
                 <label htmlFor="booking-pickupLocationId" className="text-sm font-semibold text-ink">
                   {t("pickupLocation")}
                 </label>
@@ -291,7 +369,45 @@ export function BookingForm({
               </div>
             </div>
 
-            <div className="flex flex-col gap-1.5">
+            {/* Rental Package Selector */}
+            <div className="flex flex-col gap-1.5 w-full max-w-full min-w-0">
+              <label className="text-sm font-semibold text-ink">{t("packageLabel")}</label>
+              <div className="flex gap-2 rounded-lg bg-muted p-1.5 w-full max-w-full">
+                <button
+                  type="button"
+                  onClick={() => setSelectedPackage("12-hour")}
+                  className={`flex-1 rounded-md px-4 py-3 text-sm font-semibold transition-all duration-150 min-h-[3.5rem] sm:min-h-[3rem] ${
+                    selectedPackage === "12-hour"
+                      ? "bg-accent text-on-accent shadow-sm scale-[1.02]"
+                      : "text-ink-2 hover:text-ink active:scale-95"
+                  }`}
+                  aria-pressed={selectedPackage === "12-hour"}
+                >
+                  {t("package12Hour")}
+                </button>
+                <button
+                  type="button"
+                  disabled={!has24HourPricing}
+                  onClick={() => setSelectedPackage("24-hour")}
+                  className={`flex-1 rounded-md px-4 py-3 text-sm font-semibold transition-all duration-150 min-h-[3.5rem] sm:min-h-[3rem] ${
+                    selectedPackage === "24-hour"
+                      ? "bg-accent text-on-accent shadow-sm scale-[1.02]"
+                      : !has24HourPricing
+                      ? "text-ink-3 cursor-not-allowed opacity-60"
+                      : "text-ink-2 hover:text-ink active:scale-95"
+                  }`}
+                  aria-pressed={selectedPackage === "24-hour"}
+                >
+                  {t("package24Hour")}
+                  {!has24HourPricing && <span className="ml-1.5 text-xs font-normal opacity-75 block sm:inline">— Coming soon</span>}
+                </button>
+              </div>
+              <p className="text-xs leading-relaxed text-ink-3">
+                {selectedPackage === "12-hour" ? t("package12HourHint") : t("package24HourHint")}
+              </p>
+            </div>
+
+            <div className="flex flex-col gap-1.5 w-full max-w-full min-w-0">
               {branches.length ? (
                 <>
                   <label htmlFor="booking-branchId" className="text-sm font-semibold text-ink">
@@ -324,7 +440,7 @@ export function BookingForm({
               )}
             </div>
 
-            <fieldset className="grid gap-5 md:grid-cols-2">
+            <fieldset className="grid gap-5 sm:grid-cols-2 w-full max-w-full overflow-hidden">
               <legend className="sr-only">
                 {t("pickup")} / {t("return")}
               </legend>
@@ -334,9 +450,9 @@ export function BookingForm({
                 const dateValue = kind === "pickup" ? pickupDate : returnDate;
                 const timeValue = kind === "pickup" ? pickupTime : returnTime;
                 return (
-                  <div key={kind} className="rounded-card border border-line bg-muted/50 p-4">
+                  <div key={kind} className="rounded-card border border-line bg-muted/50 p-4 sm:p-5 w-full max-w-full overflow-hidden min-w-0">
                     <p className="eyebrow mb-3">{t(kind)}</p>
-                    <div className="grid gap-4 sm:grid-cols-[1.3fr_1fr] md:grid-cols-1 xl:grid-cols-[1.3fr_1fr]">
+                    <div className="grid gap-4 grid-cols-1 w-full max-w-full overflow-hidden min-w-0">
                       <DateField
                         id={`booking-${dateKey}`}
                         label={t(dateKey)}
@@ -353,7 +469,9 @@ export function BookingForm({
                           if (kind === "pickup") {
                             setPickupDate(v);
                             if (returnDate && returnDate < v) setReturnDate("");
-                          } else setReturnDate(v);
+                          } else {
+                            handleReturnDateChange(v);
+                          }
                         }}
                       />
                       <div className="flex flex-col gap-1.5">
@@ -366,9 +484,13 @@ export function BookingForm({
                         <select
                           id={`booking-${timeKey}`}
                           value={timeValue}
-                          onChange={(e) =>
-                            (kind === "pickup" ? setPickupTime : setReturnTime)(e.target.value)
-                          }
+                          onChange={(e) => {
+                            if (kind === "pickup") {
+                              setPickupTime(e.target.value);
+                            } else {
+                              handleReturnTimeChange(e.target.value);
+                            }
+                          }}
                           aria-invalid={liveErrors[timeKey] ? true : undefined}
                           aria-describedby={
                             liveErrors[timeKey] ? `booking-${timeKey}-error` : "booking-tz-note"
@@ -397,79 +519,103 @@ export function BookingForm({
               {t("timeZoneNote")}
             </p>
 
-            <div className="grid gap-5 md:grid-cols-2">
-              <div className="flex flex-col gap-1.5">
-                <label htmlFor="booking-name" className="text-sm font-semibold text-ink">
-                  {t("name")} <span className="font-normal text-ink-3">({t("optional")})</span>
-                </label>
-                <input
-                  id="booking-name"
-                  type="text"
-                  autoComplete="name"
-                  maxLength={NAME_MAX_LENGTH}
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  aria-invalid={liveErrors.name ? true : undefined}
-                  aria-describedby={liveErrors.name ? "booking-name-error" : "booking-name-hint"}
-                  className={fieldControlClass(Boolean(liveErrors.name))}
-                />
-                <p id="booking-name-hint" className="text-xs text-ink-3">
-                  {t("nameHint")}
-                </p>
-                <FieldError id="booking-name-error" message={liveErrors.name} />
+            {/* Return time suggestion hint */}
+            {returnTimeManuallyEdited && pickupDate && pickupTime && (
+              <div className="flex items-start gap-2 rounded-lg bg-muted/50 p-3 sm:p-4 text-sm w-full max-w-full">
+                <Info aria-hidden className="mt-0.5 size-4 shrink-0 text-accent-ink" />
+                <div className="flex-1 min-w-0">
+                  <p className="font-medium text-ink">{t("returnTimeManuallyEdited")}</p>
+                  <button
+                    type="button"
+                    onClick={useSuggestedReturn}
+                    className="mt-1 flex items-center gap-1.5 text-sm font-medium text-accent-ink hover:underline"
+                  >
+                    <RefreshCw aria-hidden className="size-3.5" />
+                    {t("useSuggestedReturn")}
+                  </button>
+                </div>
               </div>
-              <div className="flex flex-col gap-1.5">
-                <label htmlFor="booking-note" className="text-sm font-semibold text-ink">
-                  {t("note")} <span className="font-normal text-ink-3">({t("optional")})</span>
-                </label>
-                <textarea
-                  id="booking-note"
-                  rows={2}
-                  maxLength={NOTE_MAX_LENGTH}
-                  value={note}
-                  onChange={(e) => setNote(e.target.value)}
-                  aria-invalid={liveErrors.note ? true : undefined}
-                  aria-describedby={liveErrors.note ? "booking-note-error" : "booking-note-hint"}
-                  className={cn(fieldControlClass(Boolean(liveErrors.note)), "py-3")}
-                />
-                <p id="booking-note-hint" className="flex justify-between text-xs text-ink-3">
-                  <span>{t("noteHint", { max: NOTE_MAX_LENGTH })}</span>
-                  <span className="tabular-nums" aria-hidden>
-                    {t("noteCount", { count: note.length, max: NOTE_MAX_LENGTH })}
-                  </span>
-                </p>
-                <FieldError id="booking-note-error" message={liveErrors.note} />
-              </div>
+            )}
+
+            {/* Live Rental Summary */}
+            <div className="rounded-card border border-line bg-muted/50 p-4 sm:p-5 w-full max-w-full overflow-hidden">
+              <h3 className="font-display text-lg font-bold text-ink">{t("summaryTitle")}</h3>
+              <dl className="mt-4 space-y-3 text-sm">
+                <div className="flex flex-col sm:flex-row sm:justify-between sm:gap-4">
+                  <dt className="text-ink-2 mb-1 sm:mb-0">{t("car")}</dt>
+                  <dd className="font-medium text-ink sm:text-right break-words">{rentalSummary.vehicleName}</dd>
+                </div>
+                <div className="flex flex-col sm:flex-row sm:justify-between sm:gap-4">
+                  <dt className="text-ink-2 mb-1 sm:mb-0">{t("packageLabel")}</dt>
+                  <dd className="font-medium text-ink sm:text-right break-words">{rentalSummary.packageName}</dd>
+                </div>
+                {rentalSummary.pickupLocationName && (
+                  <div className="flex flex-col sm:flex-row sm:justify-between sm:gap-4">
+                    <dt className="text-ink-2 mb-1 sm:mb-0">{t("pickupLocation")}</dt>
+                    <dd className="font-medium text-ink sm:text-right break-words">{rentalSummary.pickupLocationName}</dd>
+                  </div>
+                )}
+                {rentalSummary.branchName && (
+                  <div className="flex flex-col sm:flex-row sm:justify-between sm:gap-4">
+                    <dt className="text-ink-2 mb-1 sm:mb-0">{t("branch")}</dt>
+                    <dd className="font-medium text-ink sm:text-right break-words">{rentalSummary.branchName}</dd>
+                  </div>
+                )}
+                {rentalSummary.pickupDate && (
+                  <div className="flex flex-col sm:flex-row sm:justify-between sm:gap-4">
+                    <dt className="text-ink-2 mb-1 sm:mb-0">{t("pickupDate")}</dt>
+                    <dd className="font-medium text-ink sm:text-right break-words">{rentalSummary.pickupDate}</dd>
+                  </div>
+                )}
+                {rentalSummary.pickupTime && (
+                  <div className="flex flex-col sm:flex-row sm:justify-between sm:gap-4">
+                    <dt className="text-ink-2 mb-1 sm:mb-0">{t("pickupTime")}</dt>
+                    <dd className="font-medium text-ink sm:text-right break-words">{rentalSummary.pickupTime}</dd>
+                  </div>
+                )}
+                {rentalSummary.returnDate && (
+                  <div className="flex flex-col sm:flex-row sm:justify-between sm:gap-4">
+                    <dt className="text-ink-2 mb-1 sm:mb-0">{t("returnDate")}</dt>
+                    <dd className="font-medium text-ink sm:text-right break-words">{rentalSummary.returnDate}</dd>
+                  </div>
+                )}
+                {rentalSummary.returnTime && (
+                  <div className="flex flex-col sm:flex-row sm:justify-between sm:gap-4">
+                    <dt className="text-ink-2 mb-1 sm:mb-0">{t("returnTime")}</dt>
+                    <dd className="font-medium text-ink sm:text-right break-words">{rentalSummary.returnTime}</dd>
+                  </div>
+                )}
+                {rentalSummary.duration && (
+                  <div className="flex flex-col sm:flex-row sm:justify-between sm:gap-4">
+                    <dt className="text-ink-2 mb-1 sm:mb-0">{t("durationLabel")}</dt>
+                    <dd className="font-medium text-ink sm:text-right break-words">{rentalSummary.duration}</dd>
+                  </div>
+                )}
+                {rentalSummary.packagePrice && (
+                  <div className="flex flex-col sm:flex-row sm:justify-between sm:gap-4 border-t border-line pt-3">
+                    <dt className="text-ink-2 mb-1 sm:mb-0">{t("packagePrice")}</dt>
+                    <dd className="font-display text-lg font-bold text-ink sm:text-right break-words">{rentalSummary.packagePrice}</dd>
+                  </div>
+                )}
+                {rentalSummary.freeKm && (
+                  <div className="flex flex-col sm:flex-row sm:justify-between sm:gap-4">
+                    <dt className="text-ink-2 mb-1 sm:mb-0">{t("freeKm")}</dt>
+                    <dd className="font-medium text-ink sm:text-right break-words">{rentalSummary.freeKm}</dd>
+                  </div>
+                )}
+                {!rentalSummary.valid && (
+                  <div className="flex flex-col sm:flex-row sm:justify-between sm:gap-4 border-t border-line pt-3">
+                    <dt className="text-ink-2 mb-1 sm:mb-0">{t("durationLabel")}</dt>
+                    <dd className="text-ink-3 sm:text-right break-words">{t("durationEmpty")}</dd>
+                  </div>
+                )}
+              </dl>
             </div>
 
-            <RequestSummary
-              durationText={
-                validation?.ok ? formatDuration(validation.durationMinutes, tDuration) : null
-              }
-              estimate={estimate}
-              priceLabel={(e) => formatInr(e, locale)}
-              t={{
-                title: t("summaryTitle"),
-                duration: t("durationLabel"),
-                empty: t("durationEmpty"),
-                estimateLabel: tPricing("estimateLabel"),
-                disclaimer: tPricing("disclaimer"),
-                priceOnRequest: tPricing("priceOnRequest"),
-                reason: (r) => tPricing(`reasons.${r}`),
-                lineDaily: (u, rate) => tPricing("lineDaily", { units: u, rate }),
-                lineHourly: (u, interval, rate) =>
-                  tPricing("lineHourly", { units: u, interval, rate }),
-              }}
-            />
-
-            <div className="flex flex-col gap-4 border-t border-line pt-6 md:flex-row md:items-center md:justify-between">
-              <p className="flex max-w-xl items-start gap-2 text-sm leading-relaxed text-ink-2">
-                <ShieldCheck aria-hidden className="mt-0.5 size-4 shrink-0 text-accent-ink" />
-                {t("honesty")}
-              </p>
+            <div className="flex flex-col gap-4 border-t border-line pt-6 sm:flex-row sm:items-center sm:justify-between">
               <button
                 type="submit"
-                className={buttonClass("primary", "lg", "md:shrink-0")}
+                className={buttonClass("primary", "lg", "w-full sm:w-auto sm:shrink-0")}
                 data-testid="booking-submit"
               >
                 {t("submit")}
@@ -480,84 +626,5 @@ export function BookingForm({
         )}
       </LazyMotion>
     </MotionConfig>
-  );
-}
-
-function RequestSummary({
-  durationText,
-  estimate,
-  priceLabel,
-  t,
-}: {
-  durationText: string | null;
-  estimate: EstimateResult | null;
-  priceLabel: (amount: number) => string;
-  t: {
-    title: string;
-    duration: string;
-    empty: string;
-    estimateLabel: string;
-    disclaimer: string;
-    priceOnRequest: string;
-    reason: (r: "no-vehicle-selected" | "pricing-not-approved" | "unknown-vehicle") => string;
-    lineDaily: (units: number, rate: string) => string;
-    lineHourly: (units: number, interval: number, rate: string) => string;
-  };
-}) {
-  return (
-    <section
-      aria-label={t.title}
-      aria-live="polite"
-      className="grid gap-4 rounded-card border border-line bg-canvas p-5 sm:grid-cols-2"
-      data-testid="request-summary"
-    >
-      <div>
-        <p className="eyebrow">{t.duration}</p>
-        {durationText ? (
-          <p
-            className="mt-1.5 font-display text-xl font-bold tabular-nums text-ink"
-            data-testid="duration"
-          >
-            {durationText}
-          </p>
-        ) : (
-          <p className="mt-1.5 text-sm text-ink-3">{t.empty}</p>
-        )}
-      </div>
-      {estimate && estimate.kind !== "invalid" ? (
-        <div data-testid="estimate">
-          {estimate.kind === "estimate" ? (
-            <>
-              <p className="eyebrow">{t.estimateLabel}</p>
-              <p className="mt-1.5 font-display text-2xl font-bold tabular-nums text-ink">
-                {priceLabel(estimate.amountInr)}
-              </p>
-              <ul className="mt-2 space-y-0.5 text-xs text-ink-3 tabular-nums">
-                {estimate.breakdown.map((line, i) => (
-                  <li key={i}>
-                    {line.kind === "daily" && line.units && line.unitAmountInr !== undefined
-                      ? t.lineDaily(line.units, priceLabel(line.unitAmountInr))
-                      : line.kind === "hourly" && line.units && line.unitAmountInr !== undefined
-                        ? t.lineHourly(
-                            line.units,
-                            line.intervalMinutes ?? 60,
-                            priceLabel(line.unitAmountInr),
-                          )
-                        : priceLabel(line.amountInr)}
-                  </li>
-                ))}
-              </ul>
-              <p className="mt-2 text-xs leading-relaxed text-ink-2">{t.disclaimer}</p>
-            </>
-          ) : (
-            <>
-              <p className="eyebrow">{t.estimateLabel}</p>
-              <p className="mt-1.5 font-display text-xl font-bold text-ink">{t.priceOnRequest}</p>
-              <p className="mt-1 text-xs leading-relaxed text-ink-2">{t.reason(estimate.reason)}</p>
-            </>
-          )}
-        </div>
-      ) : null}
-    </section>
   );
 }

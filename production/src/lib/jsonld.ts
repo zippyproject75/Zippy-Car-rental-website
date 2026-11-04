@@ -165,6 +165,33 @@ export function carProductJsonLd(car: {
   };
 }
 
+export function localBusinessJsonLd(
+  branch: { id: string; name: { en: string; hi: string; mr: string } },
+  fullAddress: string
+): JsonLd | null {
+  if (!env.isProduction || !env.siteUrl) return null;
+  const branchUrl = `${env.siteUrl}/locations/${branch.id}`;
+  return {
+    "@context": "https://schema.org",
+    "@type": "AutoRental",
+    name: `${site.name} — ${branch.name.en}`,
+    url: branchUrl,
+    description: `Self-drive car rental pickup location at ${branch.name.en} in Pune, Maharashtra. Part of Zippy Car Rental's fleet of Maruti Suzuki vehicles.`,
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: fullAddress,
+      addressLocality: site.city,
+      addressRegion: site.region,
+      addressCountry: site.country,
+    },
+    areaServed: {
+      "@type": "City",
+      name: site.city,
+    },
+    availableLanguage: ["English", "Hindi", "Marathi"],
+  };
+}
+
 /** Safe JSON serialisation for an inline <script type="application/ld+json">. */
 export function serializeJsonLd(data: JsonLd | JsonLd[]): string {
   return JSON.stringify(data).replace(/</g, "\\u003c");
