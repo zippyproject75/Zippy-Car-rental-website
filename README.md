@@ -20,6 +20,8 @@
 
 Zippy Car Rental is a multilingual web application for browsing and enquiring about self-drive car rentals in Pune. It showcases a fleet of five Maruti Suzuki vehicles with WhatsApp-based booking enquiries.
 
+**Architecture:** Monorepo with root redirect wrapper (Vite + React) that redirects to Next.js production application in `production/` directory.
+
 **Languages:** English (default), Hindi (`/hi`), Marathi (`/mr`)
 
 **Features:** Responsive design, fleet catalogue, vehicle detail pages, interactive enquiry form with date picker, WhatsApp integration, FAQ, legal pages (Privacy Policy, Terms & Conditions, Cancellation & Refund Policy, Cookie Policy, Copyright), SEO metadata, XML sitemap, robots.txt, security headers, dark mode support, structured data (JSON-LD), social media preview images (Open Graph).
@@ -28,6 +30,12 @@ Zippy Car Rental is a multilingual web application for browsing and enquiring ab
 
 ## 🛠 Tech Stack
 
+**Root (Redirect Wrapper):**
+- **Framework:** Vite 8, React 19, TypeScript 5.7
+- **Styling:** Tailwind CSS v4 with @tailwindcss/vite
+- **Package Manager:** pnpm
+
+**Production Application (production/):**
 - **Framework:** Next.js 16.4.2 (App Router)
 - **UI:** React 19.3.1, Tailwind CSS 4.3.3, Motion 14.4.0
 - **i18n:** next-intl 4.14.9
@@ -36,22 +44,29 @@ Zippy Car Rental is a multilingual web application for browsing and enquiring ab
 - **Icons:** lucide-react 1.60.0
 - **Analytics:** Vercel Analytics 2.0.1
 - **Testing:** Vitest 5.0.5, Playwright 1.64.1
-- **Package Manager:** pnpm 10.34.3
 - **Node.js:** ≥22
 
 ---
 
 ## 🚀 Getting Started
 
+**Root (Redirect):**
 ```bash
 git clone https://github.com/zippyproject75/Zippy-Car-rental-website.git
 cd Zippy-Car-rental-website
-npm install && cd production && pnpm install
+pnpm install
+pnpm dev              # http://localhost:8443 (redirects to 3000)
+```
+
+**Production Application:**
+```bash
+cd production
+pnpm install
 pnpm dev              # http://localhost:3000
 pnpm build && pnpm start
 ```
 
-**Additional Scripts:**
+**Additional Scripts (production/):**
 - `pnpm content:report` - Generate content report showing approved/pending status
 - `pnpm launch:check` - Launch readiness content check
 
@@ -59,6 +74,7 @@ pnpm build && pnpm start
 
 ## 🔧 Environment Variables
 
+**Production Application:**
 Copy `production/.env.example` to `production/.env.local`:
 
 | Variable | Required | Description |
@@ -130,6 +146,17 @@ Set environment variables:
 
 ## 📂 Project Structure
 
+**Root (Redirect Wrapper):**
+```
+src/
+├── App.tsx               # Redirects to production
+├── main.tsx              # React entrypoint
+└── index.css             # Tailwind CSS import
+vite.config.ts            # Vite configuration
+package.json              # Root dependencies
+```
+
+**Production Application (production/):**
 ```
 production/src/
 ├── app/[locale]/          # Localized routes
