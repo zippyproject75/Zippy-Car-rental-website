@@ -103,7 +103,7 @@ export function HeroNew() {
                 transition={{ duration: 0.55, delay: prefersReducedMotion ? 0 : 0.1, ease: [0.22, 1, 0.36, 1] }}
               >
                 <span className="text-accent italic font-normal lg:font-medium">in</span>
-                <span className="relative inline-block">
+                <span className="relative inline-block ml-6">
                   <span className="relative z-10 bg-gradient-to-r from-accent via-accent-hover to-accent bg-clip-text text-transparent">
                     Pune
                   </span>
