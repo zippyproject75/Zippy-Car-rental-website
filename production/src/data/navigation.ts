@@ -3,14 +3,14 @@
  * Desktop header order:
  * 1. Our Cars (/cars)
  * 2. How It Works (/how-it-works)
- * 3. Pickup Locations (/#pickup-locations)
+ * 3. Pickup Locations (/locations)
  * 4. FAQ (/faq)
  * 5. Contact (/contact)
  */
 export const headerNavigation = [
   { key: "cars", href: "/cars" },
   { key: "howItWorks", href: "/how-it-works" },
-  { key: "locations", href: "/#pickup-locations" },
+  { key: "locations", href: "/locations" },
   { key: "faq", href: "/faq" },
   { key: "contact", href: "/contact" },
 ] as const;
@@ -23,7 +23,7 @@ export type HeaderNavKey = (typeof headerNavigation)[number]["key"];
 export const mobileNavigation = [
   { key: "cars", href: "/cars" },
   { key: "howItWorks", href: "/how-it-works" },
-  { key: "locations", href: "/#pickup-locations" },
+  { key: "locations", href: "/locations" },
   { key: "faq", href: "/faq" },
   { key: "contact", href: "/contact" },
   { key: "about", href: "/about" },

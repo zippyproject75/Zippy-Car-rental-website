@@ -20,7 +20,7 @@ const approvedBase = {
 
 describe("calculateEstimate", () => {
   it("returns price-on-request for unapproved vehicles", () => {
-    for (const carId of ["ertiga-1", "ertiga-2"] as const) {
+    for (const carId of ["ertiga-1", "xl6"] as const) {
       expect(calculateEstimate({ carId, pickupAt, returnAt: at(600) }, pricingConfig)).toEqual({
         kind: "price-on-request",
         reason: "pricing-not-approved",

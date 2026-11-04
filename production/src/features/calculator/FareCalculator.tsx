@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { getCars } from "@/lib/catalog";
 import { displayRate } from "@/lib/pricing";
-import { pricingConfig } from "@/data/pricing";
+import { pricingConfig, packagePricing } from "@/data/pricing";
 import { formatInr } from "@/lib/formatting";
 import { Link } from "@/i18n/navigation";
 import type { Car, CarId } from "@/types/car";
@@ -13,25 +13,33 @@ import type { Locale } from "@/i18n/routing";
 const GST_RATE = 0.18;
 const DEPOSIT_AMOUNT = 10000;
 
+type PricingMode = "hourly" | "12-hour";
+
 export function FareCalculator() {
   const t = useTranslations();
   const locale = useLocale() as Locale;
   const cars = getCars();
   const [selectedCarId, setSelectedCarId] = useState<CarId | null>(null);
-  const [durationDays, setDurationDays] = useState(1);
+  const [pricingMode, setPricingMode] = useState<PricingMode>("hourly");
+  const [durationHours, setDurationHours] = useState(12);
 
   const selectedCar = cars.find((c) => c.id === selectedCarId);
   const rate = selectedCar ? displayRate(pricingConfig[selectedCar.id]) : null;
+  const packagePrice = selectedCar ? packagePricing["12-hour"][selectedCar.id as keyof typeof packagePricing["12-hour"]] : null;
 
   // Calculate fare
   let baseAmount = 0;
   let taxAmount = 0;
   let totalAmount = 0;
 
-  if (rate && selectedCar) {
-    // Convert hourly rate to daily rate (24 hours)
-    const dailyRate = rate.amountInr * 24;
-    baseAmount = dailyRate * durationDays;
+  if (selectedCar) {
+    if (pricingMode === "12-hour" && packagePrice) {
+      // Use fixed 12-hour package price
+      baseAmount = packagePrice.price;
+    } else if (rate) {
+      // Use hourly rate
+      baseAmount = rate.amountInr * durationHours;
+    }
     taxAmount = baseAmount * GST_RATE;
     totalAmount = baseAmount + taxAmount;
   }
@@ -45,7 +53,7 @@ export function FareCalculator() {
           <div className="grid gap-4 sm:grid-cols-2">
             {cars.map((car) => {
               const carRate = displayRate(pricingConfig[car.id]);
-              const dailyRate = carRate ? carRate.amountInr * 24 : null;
+              const carPackagePrice = packagePricing["12-hour"][car.id as keyof typeof packagePricing["12-hour"]];
               const isSelected = selectedCarId === car.id;
 
               return (
@@ -71,9 +79,9 @@ export function FareCalculator() {
                   </div>
                   <div className="flex-1 text-left">
                     <p className="font-display font-bold text-ink">{car.displayName}</p>
-                    {dailyRate ? (
+                    {carRate ? (
                       <p className="text-sm text-ink-2">
-                        {formatInr(dailyRate, locale)} <span className="text-xs">/day</span>
+                        {formatInr(carRate.amountInr, locale)} <span className="text-xs">/hour</span>
                       </p>
                     ) : (
                       <p className="text-sm text-ink-3">Price on request</p>
@@ -100,26 +108,69 @@ export function FareCalculator() {
           </div>
         </div>
 
-        {/* Duration Input */}
+        {/* Pricing Mode & Duration Input */}
         <div className="rounded-lg border border-line bg-raised p-6">
           <h3 className="eyebrow mb-4">USAGE CONFIGURATION</h3>
-          <div className="flex flex-col gap-2">
-            <label htmlFor="duration" className="text-sm font-semibold text-ink">
-              DURATION (DAYS)
-            </label>
-            <input
-              id="duration"
-              type="number"
-              min="1"
-              max="30"
-              value={durationDays}
-              onChange={(e) => setDurationDays(Math.max(1, parseInt(e.target.value) || 1))}
-              className="w-full rounded-control border border-line bg-canvas px-4 py-3 text-ink focus:border-accent focus:outline-none"
-            />
-            <p className="text-xs text-ink-3">
-              {durationDays} CALENDAR {durationDays === 1 ? "DAY" : "DAYS"}
-            </p>
+          
+          {/* Pricing Mode Toggle */}
+          <div className="flex gap-2 mb-4">
+            <button
+              type="button"
+              onClick={() => setPricingMode("hourly")}
+              className={`flex-1 rounded-md px-4 py-2 text-sm font-semibold transition-all ${
+                pricingMode === "hourly"
+                  ? "bg-accent text-on-accent"
+                  : "bg-muted text-ink-2 hover:text-ink"
+              }`}
+            >
+              Hourly Rate
+            </button>
+            <button
+              type="button"
+              onClick={() => setPricingMode("12-hour")}
+              className={`flex-1 rounded-md px-4 py-2 text-sm font-semibold transition-all ${
+                pricingMode === "12-hour"
+                  ? "bg-accent text-on-accent"
+                  : "bg-muted text-ink-2 hover:text-ink"
+              }`}
+            >
+              12-Hour Package
+            </button>
           </div>
+
+          {pricingMode === "hourly" ? (
+            <div className="flex flex-col gap-2">
+              <label htmlFor="duration" className="text-sm font-semibold text-ink">
+                DURATION (HOURS)
+              </label>
+              <input
+                id="duration"
+                type="number"
+                min="1"
+                max="24"
+                value={durationHours}
+                onChange={(e) => setDurationHours(Math.max(1, parseInt(e.target.value) || 1))}
+                className="w-full rounded-control border border-line bg-canvas px-4 py-3 text-ink focus:border-accent focus:outline-none"
+              />
+              <p className="text-xs text-ink-3">
+                {durationHours} {durationHours === 1 ? "HOUR" : "HOURS"}
+              </p>
+            </div>
+          ) : (
+            <div className="flex flex-col gap-2">
+              <p className="text-sm font-semibold text-ink">12-HOUR PACKAGE</p>
+              <p className="text-xs text-ink-3">
+                Fixed price for 12 hours of rental
+              </p>
+              {selectedCar && packagePrice ? (
+                <p className="text-sm text-ink-2 mt-2">
+                  Package price: {formatInr(packagePrice.price, locale)}
+                </p>
+              ) : (
+                <p className="text-sm text-ink-3 mt-2">Select a vehicle to see package price</p>
+              )}
+            </div>
+          )}
         </div>
       </div>
 
@@ -144,7 +195,13 @@ export function FareCalculator() {
             <div className="flex justify-between text-sm">
               <span className="text-ink-2 dark:text-ink-3">BASE CALCULATION</span>
               <span className="text-ink font-medium dark:text-ink">
-                {selectedCar ? `${durationDays} DAYS × ${formatInr(baseAmount / durationDays, locale)}` : "-"}
+                {selectedCar ? (
+                  pricingMode === "12-hour" && packagePrice ? (
+                    `12-hour package`
+                  ) : (
+                    `${durationHours} HOURS × ${formatInr(rate?.amountInr || 0, locale)}/hour`
+                  )
+                ) : "-"}
               </span>
             </div>
 

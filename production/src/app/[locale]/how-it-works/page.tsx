@@ -44,7 +44,7 @@ export default async function HowItWorksPage({ params }: LocaleParams) {
       icon: CarFront,
       desc: "Browse our hand-picked Maruti Suzuki lineup tailored for Pune city commutes and Maharashtra road trips.",
       points: [
-        "Select from stylish compact SUVs (Fronx, Brezza), premium hatchbacks (Baleno), or spacious 7-seater MPVs (Ertiga).",
+        "Select from stylish compact SUVs (Fronx, Brezza), premium hatchbacks (Baleno), or spacious 7-seater MPVs (Ertiga, XL6).",
         "View detailed seating capacity, manual or automatic transmissions, and fuel options.",
         "Transparent vehicle specifications with authentic photos of our actual fleet.",
       ],

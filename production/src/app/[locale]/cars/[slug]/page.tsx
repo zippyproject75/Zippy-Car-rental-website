@@ -81,11 +81,11 @@ export default async function CarPage({ params }: Params) {
 
   return (
     <>
-      <div className="container-site pt-8 pb-28 lg:pb-20">
+      <div className="container-site pt-8 pb-28 lg:pb-20 w-full max-w-full overflow-hidden">
         <Breadcrumbs items={crumbs} />
-        <div className="mt-6 grid gap-8 lg:grid-cols-[1.45fr_1fr] lg:gap-12">
+        <div className="mt-6 grid gap-8 lg:grid-cols-[1.45fr_1fr] lg:gap-12 w-full max-w-full overflow-hidden min-w-0">
           {/* Left Column: Car Details */}
-          <div className="flex flex-col gap-8">
+          <div className="flex flex-col gap-8 w-full max-w-full overflow-hidden">
             <div className="overflow-hidden rounded-card border border-line bg-raised">
               <CarMedia car={car} variant="detail" priority sizes="(min-width: 1024px) 60vw, 100vw" />
             </div>
@@ -134,8 +134,8 @@ export default async function CarPage({ params }: Params) {
           </div>
 
           {/* Right Column: Booking Form */}
-          <div className="flex flex-col gap-6">
-            <div className="bg-raised border border-line rounded-card p-6 shadow-raised">
+          <div className="flex flex-col gap-6 w-full max-w-full overflow-hidden">
+            <div className="bg-raised border border-line rounded-card p-4 sm:p-6 shadow-raised w-full max-w-full overflow-hidden">
               <h2 className="font-display text-2xl font-bold text-ink mb-6">BOOKING</h2>
 
               {/* Price */}

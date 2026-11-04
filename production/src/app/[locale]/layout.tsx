@@ -9,7 +9,6 @@ import { SiteHeader } from "@/components/layout/SiteHeader";
 import { ThemeProvider } from "@/components/layout/ThemeProvider";
 import { JsonLd } from "@/components/ui/JsonLd";
 import { FloatingContactDock } from "@/components/ui/FloatingContactDock";
-import { AnnouncementBanner } from "@/components/sections/AnnouncementBanner";
 import { PageTransitionProvider } from "@/components/transitions/PageTransitionContext";
 import { PageTransitionOverlay } from "@/components/transitions/PageTransitionOverlay";
 import { PageContentWrapper } from "@/components/transitions/PageContentWrapper";
@@ -43,11 +42,11 @@ const CLIENT_NAMESPACES = [
   "Specs",
   "Reviews",
   "RentalGuidelines",
+  "RentalProcess",
   "HeroNew",
   "CinematicCta",
   "TrustStrip",
   "Home",
-  "AnnouncementBanner",
   "PickupLocations",
   "DoorstepDelivery",
 ];
@@ -56,6 +55,9 @@ export const dynamicParams = false;
 export const generateStaticParams = localeStaticParams;
 
 export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "#f6f3ed" },
     { media: "(prefers-color-scheme: dark)", color: "#0a0a0b" },
@@ -96,7 +98,7 @@ export default async function LocaleLayout({
       suppressHydrationWarning
       className={cn(inter.variable, manrope.variable, devanagari.variable)}
     >
-      <body className="min-h-dvh bg-canvas font-sans text-ink antialiased">
+      <body className="min-h-dvh w-full bg-canvas font-sans text-ink antialiased overflow-x-hidden">
         <ThemeProvider>
           <NextIntlClientProvider messages={clientMessages}>
             <PageTransitionProvider>
@@ -116,8 +118,7 @@ export default async function LocaleLayout({
                 </p>
               ) : null}
               <SiteHeader />
-              <AnnouncementBanner />
-              <main id="main" tabIndex={-1} className="outline-none">
+              <main id="main" tabIndex={-1} className="outline-none w-full max-w-full overflow-hidden">
                 <PageContentWrapper>
                   {children}
                 </PageContentWrapper>
