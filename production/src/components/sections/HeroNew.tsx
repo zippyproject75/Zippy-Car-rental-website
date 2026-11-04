@@ -9,6 +9,7 @@ import {
 } from "motion/react";
 import { useRef } from "react";
 import { buttonClass } from "@/components/ui/button";
+import { RentalJourneyFlowchart } from "./RentalJourneyFlowchart";
 
 const trustBadges = [
   { icon: CheckCircle2, label: "Premium Maruti Suzuki Fleet" },
@@ -30,7 +31,7 @@ export function HeroNew() {
       <section
         ref={sectionRef}
         aria-labelledby="hero-title"
-        className="relative w-full overflow-hidden bg-canvas text-ink pt-6 pb-10 sm:py-12 lg:min-h-[96vh] lg:py-0 lg:flex lg:items-center dark:bg-[#07080a] dark:text-white"
+        className="relative w-full overflow-hidden bg-canvas text-ink pt-6 pb-10 sm:py-12 lg:min-h-[80vh] lg:py-0 lg:flex lg:items-center dark:bg-[#07080a] dark:text-white"
       >
         {/* ── Subtle Background Gradient (Desktop Only) ── */}
         <div className="hidden lg:block absolute inset-0 size-full pointer-events-none select-none overflow-hidden z-0">
@@ -68,17 +69,17 @@ export function HeroNew() {
         </div>
 
         {/* ── 2. CONTENT CONTAINER (Both Mobile and Desktop) ── */}
-        <div className="container-site relative z-20 w-full py-2 sm:py-6 lg:py-36">
-          <div className="max-w-5xl mx-auto text-center">
-            {/* Pill Eyebrow Badge */}
+        <div className="container-site relative z-20 w-full py-4 sm:py-6 lg:py-8">
+          <div className="max-w-4xl mx-auto text-center">
+            {/* Pill Eyebrow Badge - Moved to top for better space utilization */}
             <m.div
               initial={{ opacity: 0, y: -8 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-              className="mb-4 sm:mb-6 lg:mb-8 inline-flex w-fit items-center gap-1.5 sm:gap-2 rounded-full border border-accent/40 bg-ink/10 px-4 py-1.5 sm:px-5 sm:py-2 backdrop-blur-md shadow-sm dark:bg-black/60 mx-auto"
+              className="mb-2 sm:mb-3 lg:mb-4 inline-flex w-fit items-center gap-1 sm:gap-1.5 rounded-full border border-accent/40 bg-ink/10 px-2.5 py-0.5 sm:px-3 sm:py-1 lg:px-4 lg:py-1.5 backdrop-blur-md shadow-sm dark:bg-black/60 mx-auto"
             >
-              <Sparkles aria-hidden className="size-3.5 sm:size-4 text-accent" />
-              <span className="text-[0.75rem] sm:text-xs font-bold tracking-[0.2em] uppercase text-accent">
+              <Sparkles aria-hidden className="size-2.5 sm:size-3 lg:size-3.5 text-accent" />
+              <span className="text-[0.6rem] sm:text-[0.65rem] lg:text-[0.7rem] font-bold tracking-[0.2em] uppercase text-accent">
                 Premium Self-Drive Experience
               </span>
             </m.div>
@@ -86,7 +87,7 @@ export function HeroNew() {
             {/* Main Headline */}
             <h1
               id="hero-title"
-              className="font-display text-4xl sm:text-5xl lg:text-[5.5rem] font-black leading-[1.05] lg:leading-[1.02] tracking-[-0.04em] text-ink dark:text-white mb-4"
+              className="font-display text-3xl sm:text-4xl lg:text-5xl font-black leading-[1.05] lg:leading-[1.02] tracking-[-0.04em] text-ink dark:text-white mb-3 sm:mb-4"
             >
               <m.span
                 className="block bg-gradient-to-r from-ink via-ink-2 to-ink bg-clip-text text-transparent dark:from-white dark:via-white/90 dark:to-white/70"
@@ -114,21 +115,21 @@ export function HeroNew() {
 
             {/* Subtitle with decorative element */}
             <m.div
-              className="flex items-center justify-center gap-4 mb-6 lg:mb-8"
+              className="flex items-center justify-center gap-3 mb-4 lg:mb-5"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.5, delay: prefersReducedMotion ? 0 : 0.2, ease: [0.22, 1, 0.36, 1] }}
             >
-              <div className="h-px w-16 bg-gradient-to-r from-transparent to-accent/50"></div>
-              <p className="text-sm sm:text-base font-semibold tracking-widest uppercase text-accent">
+              <div className="h-px w-12 bg-gradient-to-r from-transparent to-accent/50"></div>
+              <p className="text-xs sm:text-sm font-semibold tracking-widest uppercase text-accent">
                 Your Journey, Your Rules
               </p>
-              <div className="h-px w-16 bg-gradient-to-l from-transparent to-accent/50"></div>
+              <div className="h-px w-12 bg-gradient-to-l from-transparent to-accent/50"></div>
             </m.div>
 
             {/* Supporting Copy (Mobile: minimal single line; Desktop: rich description) */}
             <m.p
-              className="mt-4 text-sm sm:text-base font-medium text-ink-2 lg:hidden dark:text-white/85 text-center leading-relaxed"
+              className="mt-3 text-xs sm:text-sm font-medium text-ink-2 lg:hidden dark:text-white/85 text-center leading-relaxed"
               initial="hidden"
               animate="visible"
               variants={fadeUp}
@@ -138,7 +139,7 @@ export function HeroNew() {
             </m.p>
 
             <m.p
-              className="mt-6 max-w-2xl mx-auto text-base lg:text-lg leading-relaxed text-ink-2 font-normal hidden lg:block dark:text-white/85"
+              className="mt-4 max-w-2xl mx-auto text-sm lg:text-base leading-relaxed text-ink-2 font-normal hidden lg:block dark:text-white/85"
               initial="hidden"
               animate="visible"
               variants={fadeUp}
@@ -150,11 +151,9 @@ export function HeroNew() {
               <span className="font-semibold text-accent"> XL6</span>. No middlemen, no hidden fees — just transparent pricing and direct confirmation from the owner.
             </m.p>
 
-
-
             {/* ── 5. Action Buttons ── */}
             <m.div
-              className="mt-2 lg:mt-10 flex flex-col gap-2.5 sm:flex-row sm:gap-4 justify-center"
+              className="mt-4 lg:mt-6 flex flex-col gap-2 sm:flex-row sm:gap-3 justify-center"
               initial="hidden"
               animate="visible"
               variants={fadeUp}
@@ -165,48 +164,47 @@ export function HeroNew() {
                 className={buttonClass(
                   "primary",
                   "lg",
-                  "w-full justify-center sm:w-auto gap-2.5 bg-accent text-on-accent font-bold text-base px-8 py-3.5 sm:py-4 hover:bg-accent-hover shadow-xl shadow-accent/25 transition-transform duration-200 hover:-translate-y-0.5",
+                  "w-full justify-center sm:w-auto gap-2 bg-accent text-on-accent font-bold text-sm px-6 py-2.5 sm:py-3 hover:bg-accent-hover shadow-xl shadow-accent/25 transition-transform duration-200 hover:-translate-y-0.5",
                 )}
               >
                 <span>Start Your Journey</span>
-                <ArrowRight aria-hidden className="size-5" />
+                <ArrowRight aria-hidden className="size-4" />
               </a>
               <a
                 href="/cars"
-                className="inline-flex min-h-11 sm:min-h-12 w-full items-center justify-center gap-2 rounded-control border border-line bg-muted/50 px-6 py-2.5 sm:py-4 text-sm sm:text-base font-semibold text-ink backdrop-blur-md transition-all duration-200 hover:border-line-strong hover:bg-muted/70 hover:-translate-y-0.5 sm:w-auto text-center dark:border-white/20 dark:bg-white/10 dark:text-white dark:hover:border-white/50 dark:hover:bg-white/20"
+                className="inline-flex min-h-10 sm:min-h-11 w-full items-center justify-center gap-2 rounded-control border border-line bg-muted/50 px-5 py-2 sm:py-3 text-xs sm:text-sm font-semibold text-ink backdrop-blur-md transition-all duration-200 hover:border-line-strong hover:bg-muted/70 hover:-translate-y-0.5 sm:w-auto text-center dark:border-white/20 dark:bg-white/10 dark:text-white dark:hover:border-white/50 dark:hover:bg-white/20"
               >
                 Search Cars
               </a>
             </m.div>
 
-            {/* ── 6. Compact Trust Indicators ── */}
-            {/* Mobile: Horizontal compact inline strip */}
+            {/* ── 6. Compact Trust Indicators (Mobile only) */}
             <m.div
-              className="mt-3.5 flex flex-wrap items-center justify-center gap-x-3.5 gap-y-1.5 text-xs text-ink-2 font-medium lg:hidden dark:text-white/80"
+              className="mt-3 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-xs text-ink-2 font-medium lg:hidden dark:text-white/80"
               initial="hidden"
               animate="visible"
               variants={fadeUp}
               transition={{ duration: 0.5, delay: prefersReducedMotion ? 0 : 0.45, ease: [0.22, 1, 0.36, 1] }}
             >
-              <span className="inline-flex items-center gap-1.5">
-                <CheckCircle2 className="size-3.5 text-accent shrink-0" />
+              <span className="inline-flex items-center gap-1">
+                <CheckCircle2 className="size-3 text-accent shrink-0" />
                 <span>Premium Fleet</span>
               </span>
               <span className="text-ink-3 dark:text-white/30" aria-hidden>•</span>
-              <span className="inline-flex items-center gap-1.5">
-                <Star className="size-3.5 text-accent shrink-0" />
+              <span className="inline-flex items-center gap-1">
+                <Star className="size-3 text-accent shrink-0" />
                 <span>5-Star Rated</span>
               </span>
               <span className="text-ink-3 dark:text-white/30" aria-hidden>•</span>
-              <span className="inline-flex items-center gap-1.5">
-                <MapPin className="size-3.5 text-accent shrink-0" />
+              <span className="inline-flex items-center gap-1">
+                <MapPin className="size-3 text-accent shrink-0" />
                 <span>3 Pickup Points</span>
               </span>
             </m.div>
 
             {/* Desktop: Vertical list */}
             <m.ul
-              className="hidden lg:flex flex-col gap-3 mt-12 items-center"
+              className="hidden lg:flex flex-col gap-2 mt-6 items-center"
               initial="hidden"
               animate="visible"
               variants={fadeUp}
@@ -215,14 +213,19 @@ export function HeroNew() {
               {trustBadges.map(({ icon: Icon, label }) => (
                 <li
                   key={label}
-                  className="flex items-center gap-2.5 text-sm text-ink-2 dark:text-white/85"
+                  className="flex items-center gap-2 text-xs text-ink-2 dark:text-white/85"
                 >
-                  <Icon aria-hidden className="size-4 shrink-0 text-accent" />
+                  <Icon aria-hidden className="size-3.5 shrink-0 text-accent" />
                   <span>{label}</span>
                 </li>
               ))}
             </m.ul>
           </div>
+        </div>
+
+        {/* ── Rental Journey Flowchart (Embedded in Hero) ── */}
+        <div className="container-site relative z-20 w-full pb-12 sm:pb-16 lg:pb-20">
+          <RentalJourneyFlowchart embedded={true} />
         </div>
       </section>
     </LazyMotion>
