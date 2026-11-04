@@ -94,7 +94,7 @@ export function HeroNew() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
               >
-                Drive Your Way
+                Self-Drive Car Rental
               </m.span>
               <m.span
                 className="block mt-1 sm:mt-2 lg:mt-0"
@@ -102,7 +102,7 @@ export function HeroNew() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.55, delay: prefersReducedMotion ? 0 : 0.1, ease: [0.22, 1, 0.36, 1] }}
               >
-                <span className="text-accent italic font-normal lg:font-medium">Through</span>
+                <span className="text-accent italic font-normal lg:font-medium">in</span>
                 <span className="relative inline-block">
                   <span className="relative z-10 bg-gradient-to-r from-accent via-accent-hover to-accent bg-clip-text text-transparent">
                     Pune

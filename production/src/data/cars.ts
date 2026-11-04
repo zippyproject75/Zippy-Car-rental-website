@@ -291,8 +291,7 @@ export const cars: readonly Car[] = [
       ],
     },
     faqTags: ["enquiry", "xl6"],
-    indexable: false,
-    indexingNote: "Awaiting approved distinguishing details and unique copy",
+    indexable: true,
     sortOrder: 5,
   },
 ] as const;
