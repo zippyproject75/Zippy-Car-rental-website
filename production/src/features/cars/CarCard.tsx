@@ -1,16 +1,23 @@
 "use client";
 
-import { ArrowRight } from "lucide-react";
-import { useTranslations } from "next-intl";
-import { useRef, useCallback } from "react";
+import { MessageCircle, Users, Gauge, Fuel } from "lucide-react";
+import { useTranslations, useLocale } from "next-intl";
+import { useRef, useCallback, useState } from "react";
 import { ButtonLink } from "@/components/ui/ButtonLink";
 import { Link } from "@/i18n/navigation";
 import { env } from "@/lib/env";
+import { formatInr } from "@/lib/formatting";
+import { displayRate } from "@/lib/pricing";
+import { pricingConfig, packagePricing } from "@/data/pricing";
+import { site } from "@/data/site";
 import type { Car } from "@/types/car";
+import type { Locale } from "@/i18n/routing";
 import { CarMedia } from "./CarMedia";
-import { PriceLine } from "./PriceBlock";
 import { useSpecValue } from "./SpecList";
 import { getPublicSpecs } from "./specs";
+
+type PackageType = "12-hour" | "24-hour";
+const EXCESS_KM_RATE = 10; // ₹10 per additional km from terms
 
 export function carLabel(car: Car, unitText: (unit: number) => string): string {
   return car.unitNumber ? `${car.displayName} — ${unitText(car.unitNumber)}` : car.displayName;
@@ -18,10 +25,38 @@ export function carLabel(car: Car, unitText: (unit: number) => string): string {
 
 export function CarCard({ car, headingLevel = "h3" }: { car: Car; headingLevel?: "h2" | "h3" }) {
   const t = useTranslations();
+  const locale = useLocale() as Locale;
   const format = useSpecValue();
   const Heading = headingLevel;
   const fullName = carLabel(car, (unit) => t("Common.vehicleUnit", { unit }));
-  const specs = getPublicSpecs(car, env.showPendingContent).slice(0, 3);
+  const specs = getPublicSpecs(car, env.showPendingContent);
+  const rate = displayRate(pricingConfig[car.id]);
+  
+  // Package state
+  const [selectedPackage, setSelectedPackage] = useState<PackageType>("12-hour");
+  const packagePrice = packagePricing[selectedPackage][car.id as keyof typeof packagePricing["12-hour"]];
+  // Check if 24-hour package has pricing configured for this specific car
+  const has24HourPricing = packagePricing["24-hour"][car.id as keyof typeof packagePricing["24-hour"]] !== null;
+
+  // Get transmission, seats, and fuel for display
+  const transmissionSpec = specs.find((s) => s.key === "transmission");
+  const seatsSpec = specs.find((s) => s.key === "seats");
+  const fuelSpec = specs.find((s) => s.key === "fuel");
+
+  // WhatsApp message generation
+  const whatsappNumber = site.contacts.whatsapp.status === "confirmed" && site.contacts.whatsapp.value 
+    ? site.contacts.whatsapp.value.e164 
+    : null;
+  const generateWhatsAppMessage = () => {
+    const price = packagePrice ? formatInr(packagePrice.price, locale) : "Price on request";
+    const kmAllowance = packagePrice ? `${packagePrice.limitKm} km` : "N/A";
+    const message = `Hello, I would like to enquire about renting ${car.displayName}. Package: ${selectedPackage}. Price: ${price}. Included kilometres: ${kmAllowance}. Additional kilometres: ₹${EXCESS_KM_RATE}/km. Please share availability and booking details.`;
+    return encodeURIComponent(message);
+  };
+
+  const whatsappUrl = whatsappNumber 
+    ? `https://wa.me/${whatsappNumber.replace("+", "")}?text=${generateWhatsAppMessage()}`
+    : "#";
 
   /* ── 3D pointer-tracking tilt (mouse/trackpad only) ── */
   const cardRef = useRef<HTMLElement | null>(null);
@@ -52,62 +87,127 @@ export function CarCard({ car, headingLevel = "h3" }: { car: Car; headingLevel?:
       data-testid="car-card"
       onPointerMove={onPointerMove}
       onPointerLeave={onPointerLeave}
-      className="car-card-3d group flex flex-col overflow-hidden rounded-2xl border border-line bg-raised shadow-raised focus-within:border-line-strong w-full transition-[border-color] duration-300 hover:border-accent/40"
+      className="car-card-3d group flex flex-col overflow-hidden rounded-2xl border border-line bg-raised shadow-raised focus-within:border-line-strong w-full max-w-full transition-[border-color] duration-300 hover:border-accent/40"
     >
-      <Link href={`/cars/${car.slug}`} tabIndex={-1} aria-hidden className="block overflow-hidden">
+      <Link href={`/cars/${car.slug}`} tabIndex={-1} aria-hidden className="block overflow-hidden relative aspect-[4/3] w-full max-w-full">
         <CarMedia car={car} />
       </Link>
-      <div className="flex flex-1 flex-col gap-4 p-5 sm:p-6">
+
+      <div className="flex flex-1 flex-col gap-4 p-4 sm:p-6 w-full max-w-full">
+        {/* Vehicle Name and Unit */}
         <div>
-          <p className="text-[0.6875rem] font-bold tracking-[0.16em] text-accent-ink uppercase">
-            {car.make}
-          </p>
-          <Heading className="mt-1 font-display text-xl font-bold tracking-[-0.01em] text-ink">
+          <Heading className="font-display text-lg sm:text-xl font-bold tracking-[-0.01em] text-ink leading-tight">
             {car.model}
-            {car.unitNumber ? (
-              <span className="ml-2 align-middle text-xs font-semibold text-accent-ink bg-accent/15 px-2 py-0.5 rounded-full">
-                {t("Common.vehicleUnit", { unit: car.unitNumber })}
-              </span>
-            ) : null}
           </Heading>
         </div>
 
-        {specs.length ? (
-          <ul className="flex flex-wrap gap-1.5 text-xs">
-            {specs.map((s) => (
-              <li
-                key={s.key}
-                className="inline-flex items-center rounded-md border border-line bg-muted/50 px-2.5 py-1 font-medium text-ink-2"
-              >
-                {format(s)}
-              </li>
-            ))}
-          </ul>
-        ) : null}
-
-        <div className="mt-auto pt-2">
-          <PriceLine carId={car.id} />
+        {/* Vehicle Specifications */}
+        <div className="flex flex-wrap gap-2 sm:gap-3 text-xs text-ink-2 w-full max-w-full">
+          {transmissionSpec && (
+            <div className="flex items-center gap-1.5">
+              <Gauge className="size-3.5" aria-hidden />
+              <span className="truncate">{format(transmissionSpec)}</span>
+            </div>
+          )}
+          {seatsSpec && (
+            <div className="flex items-center gap-1.5">
+              <Users className="size-3.5" aria-hidden />
+              <span className="truncate">{format(seatsSpec)}</span>
+            </div>
+          )}
+          {fuelSpec && (
+            <div className="flex items-center gap-1.5">
+              <Fuel className="size-3.5" aria-hidden />
+              <span className="truncate">{format(fuelSpec)}</span>
+            </div>
+          )}
         </div>
 
-        <div className="grid grid-cols-2 gap-2.5 border-t border-line/70 pt-4">
-          <ButtonLink
-            href={`/cars/${car.slug}`}
-            variant="secondary"
-            size="sm"
-            aria-label={t("Fleet.viewDetailsFor", { car: fullName })}
-            className="w-full justify-center text-xs font-semibold transition-transform duration-150 hover:-translate-y-0.5"
-          >
-            {t("Fleet.viewDetails")}
-          </ButtonLink>
+        {/* Divider */}
+        <div className="h-px bg-line" />
+
+        {/* Price and Package Information */}
+        <div className="space-y-2 w-full max-w-full">
+          {rate && packagePrice ? (
+            <>
+              <div className="flex items-center justify-between gap-2">
+                <div className="min-w-0 flex-1">
+                  <p className="font-display text-xl font-bold text-ink truncate">
+                    {formatInr(packagePrice.price, locale)} / per day
+                  </p>
+                  <p className="text-xs text-ink-2">
+                    {selectedPackage} package
+                  </p>
+                </div>
+                {/* Package Selector */}
+                <div className="flex gap-1.5 flex-shrink-0">
+                  <button
+                    type="button"
+                    onClick={() => setSelectedPackage("12-hour")}
+                    aria-pressed={selectedPackage === "12-hour"}
+                    className={`min-h-[2.75rem] px-3 py-1.5 text-xs sm:text-sm font-medium transition-all rounded-md ${
+                      selectedPackage === "12-hour"
+                        ? "bg-accent text-on-accent"
+                        : "bg-muted text-ink-2 hover:bg-muted/80"
+                    }`}
+                  >
+                    12HR
+                  </button>
+                  {has24HourPricing && (
+                    <button
+                      type="button"
+                      onClick={() => setSelectedPackage("24-hour")}
+                      aria-pressed={selectedPackage === "24-hour"}
+                      className={`min-h-[2.75rem] px-3 py-1.5 text-xs sm:text-sm font-medium transition-all rounded-md ${
+                        selectedPackage === "24-hour"
+                          ? "bg-accent text-on-accent"
+                          : "bg-muted text-ink-2 hover:bg-muted/80"
+                      }`}
+                    >
+                      24h
+                    </button>
+                  )}
+                </div>
+              </div>
+
+              {/* Hourly Rate */}
+              <p className="text-xs text-ink-2">
+                or {formatInr(rate.amountInr, locale)}/hour
+              </p>
+
+              {/* Kilometre Allowance */}
+              <div className="flex items-center gap-2 text-xs text-ink-2 flex-wrap">
+                <span>{packagePrice.limitKm} km included</span>
+                <span className="text-ink-3">•</span>
+                <span>₹{EXCESS_KM_RATE}/km extra</span>
+              </div>
+            </>
+          ) : (
+            <p className="text-sm font-semibold text-ink-2">{t("Common.priceOnRequest")}</p>
+          )}
+        </div>
+
+        {/* Action Buttons */}
+        <div className="mt-auto flex gap-2 w-full max-w-full">
           <ButtonLink
             href={{ pathname: "/book", query: { car: car.slug } }}
             size="sm"
-            aria-label={t("Fleet.enquireFor", { car: fullName })}
-            className="w-full justify-center text-xs font-bold bg-accent text-on-accent hover:bg-accent-hover transition-transform duration-150 hover:-translate-y-0.5"
+            aria-label={`Book ${fullName}`}
+            className="flex-1 justify-center text-xs sm:text-sm font-semibold min-h-[2.75rem]"
           >
-            {t("Fleet.enquire")}
-            <ArrowRight aria-hidden className="size-3.5" />
+            Book Now
           </ButtonLink>
+          {whatsappNumber && (
+            <a
+              href={whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`Enquire on WhatsApp about ${fullName}`}
+              className="inline-flex items-center justify-center min-h-[2.75rem] min-w-[2.75rem] px-3 rounded-control border border-line bg-transparent text-ink hover:border-line-strong hover:bg-muted transition-all flex-shrink-0"
+            >
+              <MessageCircle className="size-4 sm:size-5" aria-hidden />
+            </a>
+          )}
         </div>
       </div>
     </article>

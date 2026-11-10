@@ -49,16 +49,16 @@ export function buildMetadata(options: {
       ]
     : [
         {
-          url: absoluteUrl("/opengraph-image"),
+          url: absoluteUrl("/images/zippy-car-rental-social-preview.jpg"),
           width: 1200,
           height: 630,
-          alt: title,
+          alt: "Zippy Car Rental — self-drive car rental in Pune",
         },
       ];
 
   const twitterImages = image
     ? [image.url.startsWith("http") ? image.url : absoluteUrl(image.url)]
-    : [absoluteUrl("/opengraph-image")];
+    : [absoluteUrl("/images/zippy-car-rental-social-preview.jpg")];
 
   return {
     title: options.absoluteTitle ? { absolute: title } : title,

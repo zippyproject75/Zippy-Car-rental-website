@@ -1,6 +1,6 @@
 import type { Fact, ImageAsset, Localized } from "./content";
 
-export const carIds = ["fronx", "brezza", "baleno", "ertiga-1", "ertiga-2"] as const;
+export const carIds = ["fronx", "brezza", "baleno", "ertiga-1", "xl6"] as const;
 export type CarId = (typeof carIds)[number];
 
 export type BodyType = "hatchback" | "compact-suv" | "mpv";
@@ -21,14 +21,14 @@ export type Car = {
   id: CarId;
   slug: CarId;
   make: "Maruti Suzuki";
-  model: "Fronx" | "Brezza" | "Baleno" | "Ertiga";
+  model: "Fronx" | "Brezza" | "Baleno" | "Ertiga" | "XL6";
   /** Full approved display name, e.g. "Maruti Suzuki Fronx". */
   displayName: string;
-  /** Only set for the two separate Ertiga units. */
+  /** Only set for the two separate MPV units (Ertiga and XL6). */
   unitNumber?: 1 | 2;
   /** Owner-approved vehicle-specific description. Pending until supplied. */
   description: Fact<Localized<string>>;
-  /** Owner-approved facts that distinguish the two Ertiga units (colour, variant …). */
+  /** Owner-approved facts that distinguish the two MPV units (colour, variant …). */
   distinguishingDetails: Fact<Localized<string>>;
   specs: CarSpecs;
   images: { primary: ImageAsset | null; gallery: ImageAsset[] };
