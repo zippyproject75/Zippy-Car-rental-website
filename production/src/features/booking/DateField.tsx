@@ -60,7 +60,7 @@ export function DateField({
   }, [open]);
 
   return (
-    <div className="flex flex-col gap-1.5">
+    <div className="flex flex-col gap-1.5 min-w-0">
       <span className="text-sm font-semibold text-ink" aria-hidden>
         {label}
       </span>
@@ -74,7 +74,7 @@ export function DateField({
           display ? t("changeDate", { label, date: display }) : t("chooseDateFor", { label })
         }
         onClick={() => setOpen(true)}
-        className={cn(fieldControlClass(Boolean(error)), "flex items-center gap-2.5 text-left")}
+        className={cn(fieldControlClass(Boolean(error)), "flex items-center gap-2.5 text-left min-w-0")}
       >
         <CalendarDays aria-hidden className="size-4 shrink-0 text-ink-3" />
         <span className={cn("truncate tabular-nums", !display && "text-ink-3")}>
@@ -92,7 +92,7 @@ export function DateField({
         onClick={(e) => {
           if (e.target === e.currentTarget) setOpen(false);
         }}
-        className="m-auto w-full max-w-[min(26rem,calc(100vw-1.5rem))] rounded-card border border-line bg-raised p-0 text-ink shadow-raised max-sm:mb-0 max-sm:max-w-full max-sm:rounded-b-none"
+        className="m-auto w-full max-w-[min(28rem,calc(100vw-2rem))] rounded-card border border-line bg-raised p-0 text-ink shadow-raised max-sm:mb-0 max-sm:max-w-full max-sm:rounded-b-none max-sm:h-[calc(100dvh-2rem)] max-sm:my-auto max-sm:inset-0 max-sm:fixed"
       >
         <div className="p-5">
           <div className="mb-2 flex items-start justify-between gap-4">

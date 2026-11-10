@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { PageIntro } from "@/components/sections/PageIntro";
 import { ButtonLink } from "@/components/ui/ButtonLink";
+import { JsonLd } from "@/components/ui/JsonLd";
 import { Notice } from "@/components/ui/Notice";
 import { PendingBadge } from "@/components/ui/PendingBadge";
 import { site } from "@/data/site";
@@ -10,8 +11,10 @@ import { BranchCard } from "@/features/maps/BranchCard";
 import { getPublishedBranches } from "@/lib/catalog";
 import { getVisibleContacts } from "@/lib/contacts";
 import { env } from "@/lib/env";
+import { breadcrumbJsonLd } from "@/lib/jsonld";
+import { localizedPath } from "@/lib/routes";
+import { absoluteUrl, buildMetadata } from "@/lib/seo";
 import { resolveLocale, type LocaleParams } from "@/lib/page";
-import { buildMetadata } from "@/lib/seo";
 
 export async function generateMetadata({ params }: LocaleParams): Promise<Metadata> {
   const locale = await resolveLocale(params);
@@ -25,11 +28,15 @@ export async function generateMetadata({ params }: LocaleParams): Promise<Metada
 }
 
 export default async function ContactPage({ params }: LocaleParams) {
-  await resolveLocale(params);
+  const locale = await resolveLocale(params);
   const t = await getTranslations();
   const contacts = getVisibleContacts(env.showPendingContent);
   const branches = getPublishedBranches(env.showPendingContent);
   const whatsapp = site.contacts.whatsapp;
+  const crumbs = [
+    { name: t("Common.home"), url: absoluteUrl(localizedPath(locale, "/")) },
+    { name: t("Nav.contact"), url: absoluteUrl(localizedPath(locale, "/contact")) },
+  ];
 
   const methods = [
     ...contacts.phones.map((p) => ({
@@ -137,6 +144,7 @@ export default async function ContactPage({ params }: LocaleParams) {
           </ButtonLink>
         </section>
       </div>
+      <JsonLd data={breadcrumbJsonLd(crumbs)} />
     </>
   );
 }

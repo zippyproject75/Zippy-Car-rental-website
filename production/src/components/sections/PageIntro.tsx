@@ -13,8 +13,8 @@ export function PageIntro({
   children?: ReactNode;
 }) {
   return (
-    <div className="border-b border-line">
-      <div className="container-site py-10 sm:py-14">
+    <div className="border-b border-line w-full max-w-full overflow-x-hidden">
+      <div className="container-site py-10 sm:py-14 px-4 sm:px-6">
         <Breadcrumbs items={crumbs} />
         <h1 className="mt-6 max-w-3xl font-display text-4xl font-extrabold tracking-[-0.03em] text-ink sm:text-5xl">
           {title}
