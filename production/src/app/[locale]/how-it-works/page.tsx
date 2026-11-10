@@ -15,6 +15,7 @@ import {
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { PageIntro } from "@/components/sections/PageIntro";
+import { RentalJourneyFlowchart } from "@/components/sections/RentalJourneyFlowchart";
 import { ButtonLink } from "@/components/ui/ButtonLink";
 import { ENQUIRY_PATH } from "@/data/navigation";
 import { resolveLocale, type LocaleParams } from "@/lib/page";
@@ -155,6 +156,9 @@ export default async function HowItWorksPage({ params }: LocaleParams) {
         title="Simple, transparent self-drive process."
         intro="From selecting your preferred Maruti Suzuki vehicle to personal WhatsApp owner confirmation, here is our complete 6-step customer journey designed for effortless car rental in Pune."
       />
+
+      {/* ── Rental Journey Flowchart ── */}
+      <RentalJourneyFlowchart id="how-it-works-flowchart" />
 
       {/* ── 6-Step Visual Timeline Section ── */}
       <section

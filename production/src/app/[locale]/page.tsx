@@ -5,7 +5,6 @@ import { HeroNew } from "@/components/sections/HeroNew";
 import { TrustStrip } from "@/components/sections/TrustStrip";
 import { Reviews } from "@/components/sections/Reviews";
 import { CinematicCta } from "@/components/sections/CinematicCta";
-import { SimpleFlowChart } from "@/components/sections/SimpleFlowChart";
 import { Accordion } from "@/components/ui/Accordion";
 import { ButtonLink } from "@/components/ui/ButtonLink";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -71,19 +70,10 @@ export default async function HomePage({ params }: LocaleParams) {
         </div>
       </section>
 
-      {/* ── SECTION 3: SIMPLE FLOW CHART — HOW IT WORKS ── */}
-      <section
-        id="how-it-works"
-        aria-labelledby="how-it-works-title"
-        className="scroll-mt-20 border-b border-line bg-muted/30"
-      >
-        <SimpleFlowChart />
-      </section>
-
-      {/* ── SECTION 4: RENTAL PROCESS — HOW IT WORKS ── */}
+      {/* ── SECTION 3: RENTAL PROCESS — HOW IT WORKS ── */}
       <Reviews />
 
-      {/* ── SECTION 5: FAQ — ANSWER COMMON RENTAL QUESTIONS ── */}
+      {/* ── SECTION 4: FAQ — ANSWER COMMON RENTAL QUESTIONS ── */}
       {faqs.length ? (
         <section
           id="faq"
@@ -110,7 +100,7 @@ export default async function HomePage({ params }: LocaleParams) {
         </section>
       ) : null}
 
-      {/* ── SECTION 6: FINAL CTA — BOOK NOW ── */}
+      {/* ── SECTION 5: FINAL CTA — BOOK NOW ── */}
       <CinematicCta />
 
       {/* Structured data */}
