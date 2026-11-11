@@ -401,7 +401,7 @@ Monitor and answer questions:
 
 Add a Google Maps embed to your Contact page showing your branch locations.
 
-**Implementation:** The Next.js project already has a MapEmbed component (`production/src/features/maps/MapEmbed.tsx`). Ensure it's configured with your Google Maps Embed API key.
+**Implementation:** The Next.js project already has a MapEmbed component (`frontend/src/features/maps/MapEmbed.tsx`). Ensure it's configured with your Google Maps Embed API key.
 
 ### Link from Website to GBP
 

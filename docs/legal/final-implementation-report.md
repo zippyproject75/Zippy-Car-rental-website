@@ -17,7 +17,7 @@ The client has approved the Privacy Policy, Terms & Conditions, copyright requir
 ### Legal Document Status Updates
 
 **Files Modified:**
-1. `production/src/data/legal/privacy-policy.ts`
+1. `frontend/src/data/legal/privacy-policy.ts`
    - Status: `draft` → `approved`
    - Version: `1.0-draft` → `1.0`
    - Effective Date: `null` → `2026-10-29`
@@ -25,7 +25,7 @@ The client has approved the Privacy Policy, Terms & Conditions, copyright requir
    - Translation (Hindi): `unreviewed-draft` → `reviewed`
    - Translation (Marathi): `unreviewed-draft` → `reviewed`
 
-2. `production/src/data/legal/terms-and-conditions.ts`
+2. `frontend/src/data/legal/terms-and-conditions.ts`
    - Status: `draft` → `approved`
    - Version: `1.0-draft` → `1.0`
    - Effective Date: `null` → `2026-10-29`
@@ -36,7 +36,7 @@ The client has approved the Privacy Policy, Terms & Conditions, copyright requir
 ### Test Updates
 
 **File Modified:**
-3. `production/tests/unit/routes.test.ts`
+3. `frontend/tests/unit/routes.test.ts`
    - Updated test expectations for Terms & Conditions and Privacy Policy indexing
    - Changed expected behavior: these pages are now indexable (approved status)
    - Updated sitemap URL count: 24 → 30 URLs (added 2 pages × 3 locales)
@@ -248,12 +248,12 @@ The legal documents include OWNER TODO markers for information that still requir
 
 ## Files Modified
 
-1. `production/src/data/legal/privacy-policy.ts` — Status updated to approved
-2. `production/src/data/legal/terms-and-conditions.ts` — Status updated to approved
-3. `production/src/messages/en.json` — Copyright notice enhanced
-4. `production/src/messages/hi.json` — Copyright notice enhanced
-5. `production/src/messages/mr.json` — Copyright notice enhanced
-6. `production/tests/unit/routes.test.ts` — Test expectations updated
+1. `frontend/src/data/legal/privacy-policy.ts` — Status updated to approved
+2. `frontend/src/data/legal/terms-and-conditions.ts` — Status updated to approved
+3. `frontend/src/messages/en.json` — Copyright notice enhanced
+4. `frontend/src/messages/hi.json` — Copyright notice enhanced
+5. `frontend/src/messages/mr.json` — Copyright notice enhanced
+6. `frontend/tests/unit/routes.test.ts` — Test expectations updated
 
 ---
 
