@@ -34,13 +34,13 @@ All requested legal pages, copyright protection, and security documentation have
 
 ### Code Changes (4 files)
 
-3. **`production/src/data/legal/privacy-policy.ts`** (465 lines)
+3. **`frontend/src/data/legal/privacy-policy.ts`** (465 lines)
    - Comprehensive Privacy Policy in English, Hindi, and Marathi
    - Sections: scope, website information, operational information, third-party services, purposes, sharing, security, retention, rights, contact, changes
    - Clear OWNER TODO markers for information not yet confirmed
    - Accurate description of actual data collection (no backend storage, WhatsApp processing, Google Maps, Vercel hosting)
 
-4. **`production/src/data/legal/terms-and-conditions.ts`** (915 lines)
+4. **`frontend/src/data/legal/terms-and-conditions.ts`** (915 lines)
    - Comprehensive Terms & Conditions in English, Hindi, and Marathi
    - Key rules summary table
    - All client-supplied rental terms preserved
@@ -49,13 +49,13 @@ All requested legal pages, copyright protection, and security documentation have
    - Two-wheeler deposit option documented with clarification requirements
    - Late return charge calculation documented with clarification requirements
 
-5. **`production/src/messages/en.json`** (1 line changed)
+5. **`frontend/src/messages/en.json`** (1 line changed)
    - Copyright notice updated to: "© {year} Zippy Car Rental. All rights reserved."
 
-6. **`production/src/messages/hi.json`** (1 line changed)
+6. **`frontend/src/messages/hi.json`** (1 line changed)
    - Copyright notice updated to: "© {year} Zippy Car Rental. सर्वाधिकार सुरक्षित."
 
-7. **`production/src/messages/mr.json`** (1 line changed)
+7. **`frontend/src/messages/mr.json`** (1 line changed)
    - Copyright notice updated to: "© {year} Zippy Car Rental. सर्व हक्क राखीव."
 
 ---
