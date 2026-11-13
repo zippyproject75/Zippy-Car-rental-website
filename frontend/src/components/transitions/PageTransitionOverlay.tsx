@@ -17,9 +17,9 @@ export function PageTransitionOverlay() {
       role="status"
       className={`fixed inset-0 z-[9999] flex flex-col items-center justify-center transition-opacity duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] ${
         isTransitioning ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
-      } bg-[#040507] text-white dark:bg-[#040507]`}
+      } bg-[#0e0f12] text-white dark:bg-[#0e0f12]`}
       style={{
-        background: "radial-gradient(circle at center, #0e1017 0%, #06070a 60%, #020304 100%)",
+        background: "radial-gradient(circle at center, #181920 0%, #0e0f12 60%, #090a0c 100%)",
       }}
     >
       {/* ── Soft Ambient Gold Backlight Glow ── */}

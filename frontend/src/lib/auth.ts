@@ -15,15 +15,19 @@ export async function getCurrentUser(): Promise<AuthenticatedUser | null> {
   const cookieHeader = await getCookieHeader();
   if (!cookieHeader) return null;
 
-  const response = await fetch(backendApiUrl("/api/auth/session"), {
-    headers: { Cookie: cookieHeader },
-    cache: "no-store",
-  });
-  if (!response.ok) {
-    throw new Error(`Backend session lookup failed with status ${response.status}.`);
+  try {
+    const response = await fetch(backendApiUrl("/api/auth/session"), {
+      headers: { Cookie: cookieHeader },
+      cache: "no-store",
+    });
+    if (!response.ok) {
+      return null;
+    }
+    const result = (await response.json()) as { user: AuthenticatedUser | null };
+    return result.user;
+  } catch {
+    return null;
   }
-  const result = (await response.json()) as { user: AuthenticatedUser | null };
-  return result.user;
 }
 
 export async function getRecentAdminActivity(limit = 50): Promise<AdminActivityEntry[]> {

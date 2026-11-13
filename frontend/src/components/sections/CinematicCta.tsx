@@ -6,7 +6,7 @@ export function CinematicCta() {
   return (
     <section
       aria-labelledby="cinematic-cta-title"
-      className="relative overflow-hidden bg-muted text-ink dark:bg-[#090a0d] dark:text-white"
+      className="relative overflow-hidden bg-muted text-ink dark:bg-[#14151a] dark:text-white"
     >
       <div className="container-site relative z-10 py-20 sm:py-24 lg:py-32">
         <div className="max-w-2xl">

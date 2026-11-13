@@ -22,7 +22,7 @@ export async function SiteFooter() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-line bg-canvas text-ink dark:bg-[#07080a] dark:text-white">
+    <footer className="border-t border-line bg-canvas text-ink dark:bg-[#121316] dark:text-white">
       <div className="container-site grid gap-8 py-12 sm:gap-10 sm:py-14 md:grid-cols-2 lg:grid-cols-[1.2fr_1fr_1fr_1fr_1.2fr]">
         {/* Brand Section */}
         <div className="max-w-xs space-y-4">

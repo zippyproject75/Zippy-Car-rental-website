@@ -131,31 +131,38 @@ function mapPublicVehicle(vehicle: PublicCatalogVehicle, sortOrder: number): Car
 export async function getPublicCars(): Promise<Car[]> {
   if (!process.env.NEXT_PUBLIC_SUPABASE_URL) return [...getCars()];
 
-  const response = await fetch(backendApiUrl("/api/public/catalog"), { cache: "no-store" });
-  if (!response.ok) {
-    throw new Error(`Public vehicle catalog request failed with status ${response.status}.`);
+  try {
+    const response = await fetch(backendApiUrl("/api/public/catalog"), { cache: "no-store" });
+    if (!response.ok) {
+      console.warn(`Public vehicle catalog request returned status ${response.status}. Using fallback catalog.`);
+      return [...getCars()];
+    }
+    const result = (await response.json()) as { vehicles: PublicCatalogVehicle[] };
+    if (!Array.isArray(result.vehicles)) {
+      console.warn("The public vehicle catalog response has an invalid shape. Using fallback catalog.");
+      return [...getCars()];
+    }
+    return result.vehicles
+      .map((vehicle, index) =>
+        mapPublicVehicle(
+          {
+            ...vehicle,
+            pricing: vehicle.pricing.map((price) => ({
+              ...price,
+              amountInr: price.amountInr === null ? null : Number(price.amountInr),
+              includedKm: price.includedKm === null ? null : Number(price.includedKm),
+              extraKmChargeInr:
+                price.extraKmChargeInr === null ? null : Number(price.extraKmChargeInr),
+            })),
+          },
+          index,
+        ),
+      )
+      .sort((a, b) => a.sortOrder - b.sortOrder);
+  } catch (error) {
+    console.warn("Failed to reach backend catalog API. Falling back to local catalog:", error);
+    return [...getCars()];
   }
-  const result = (await response.json()) as { vehicles: PublicCatalogVehicle[] };
-  if (!Array.isArray(result.vehicles)) {
-    throw new Error("The public vehicle catalog response has an invalid shape.");
-  }
-  return result.vehicles
-    .map((vehicle, index) =>
-      mapPublicVehicle(
-        {
-          ...vehicle,
-          pricing: vehicle.pricing.map((price) => ({
-            ...price,
-            amountInr: price.amountInr === null ? null : Number(price.amountInr),
-            includedKm: price.includedKm === null ? null : Number(price.includedKm),
-            extraKmChargeInr:
-              price.extraKmChargeInr === null ? null : Number(price.extraKmChargeInr),
-          })),
-        },
-        index,
-      ),
-    )
-    .sort((a, b) => a.sortOrder - b.sortOrder);
 }
 
 export type PublishedBranch = Branch & {

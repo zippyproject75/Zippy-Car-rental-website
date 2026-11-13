@@ -37,15 +37,15 @@
 html.dark,
 .scheme-dark {
   color-scheme: dark;
-  --canvas: #0a0a0b;
-  --raised: #141416;
-  --muted: #1c1c1f;
-  --sunken: #101012;
+  --canvas: #121316;
+  --raised: #1c1d22;
+  --muted: #24262d;
+  --sunken: #16171b;
   --ink: #f3eee4;
   --ink-2: #c4bdaf;
   --ink-3: #9a9384;
-  --line: #29292d;
-  --line-strong: #3b3b40;
+  --line: #31333b;
+  --line-strong: #424550;
   --accent: #d4b373;
   --accent-hover: #e2c48a;
   --on-accent: #14120d;
@@ -64,15 +64,15 @@ html.dark,
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme]) {
     color-scheme: dark;
-    --canvas: #0a0a0b;
-    --raised: #141416;
-    --muted: #1c1c1f;
-    --sunken: #101012;
+    --canvas: #121316;
+    --raised: #1c1d22;
+    --muted: #24262d;
+    --sunken: #16171b;
     --ink: #f3eee4;
     --ink-2: #c4bdaf;
     --ink-3: #9a9384;
-    --line: #29292d;
-    --line-strong: #3b3b40;
+    --line: #31333b;
+    --line-strong: #424550;
     --accent: #d4b373;
     --accent-hover: #e2c48a;
     --on-accent: #14120d;
@@ -319,7 +319,7 @@ html.dark .eyebrow,
 .scheme-dark .cinema-stage {
   background:
     radial-gradient(120% 80% at 75% 10%, rgb(212 179 115 / 0.16), transparent 60%),
-    linear-gradient(180deg, #121214 0%, #0a0a0b 100%);
+    linear-gradient(180deg, #1a1b20 0%, #121316 100%);
 }
 
 /* ═══════════════════════════════════════════════════════════
