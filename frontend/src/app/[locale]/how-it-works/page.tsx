@@ -154,7 +154,7 @@ export default async function HowItWorksPage({ params }: LocaleParams) {
       <PageIntro
         crumbs={[{ label: tCommon("home"), href: "/" }, { label: tNav("howItWorks") }]}
         title="Simple, transparent self-drive process."
-        intro="From selecting your preferred Maruti Suzuki vehicle to personal WhatsApp owner confirmation, here is our complete 6-step customer journey designed for effortless car rental in Pune."
+        intro="From selecting your preferred Maruti Suzuki vehicle to personal WhatsApp owner confirmation, here is our complete 5-step customer journey designed for effortless car rental in Pune."
       />
 
       {/* ── Rental Journey Flowchart ── */}
