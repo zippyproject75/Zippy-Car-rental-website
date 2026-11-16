@@ -37,7 +37,7 @@ react(),
       watch: {
         ignored: [
           '**/.figma/**',
-          '**/production/**',
+          '**/frontend/**',
         ],
       },
     },

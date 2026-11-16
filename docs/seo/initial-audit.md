@@ -57,7 +57,7 @@ The project has a dual structure:
 
 **SEO-relevant files:**
 ```
-production/src/
+frontend/src/
 ├── app/
 │   ├── robots.ts                 # Dynamic robots.txt
 │   ├── sitemap.ts                # Dynamic sitemap.xml
@@ -93,7 +93,7 @@ production/src/
 
 ### 2.1 Robots.txt
 
-**File:** `production/src/app/robots.ts`
+**File:** `frontend/src/app/robots.ts`
 
 **Configuration:**
 ```typescript
@@ -110,7 +110,7 @@ production/src/
 
 ### 2.2 Sitemap.xml
 
-**File:** `production/src/app/sitemap.ts`
+**File:** `frontend/src/app/sitemap.ts`
 
 **Configuration:**
 - Generated dynamically from route definitions
@@ -139,7 +139,7 @@ production/src/
 
 ### 2.3 Canonical URLs
 
-**Implementation:** `production/src/lib/seo.ts`
+**Implementation:** `frontend/src/lib/seo.ts`
 
 **Strategy:**
 - Absolute canonical URLs from metadata origin
@@ -155,7 +155,7 @@ production/src/
 
 ### 2.4 Redirects
 
-**File:** `production/next.config.ts`
+**File:** `frontend/next.config.ts`
 
 **Legacy redirects:**
 ```typescript
@@ -170,7 +170,7 @@ production/src/
 
 ### 2.5 Robots Meta Tags
 
-**Implementation:** `production/src/lib/seo.ts`
+**Implementation:** `frontend/src/lib/seo.ts`
 
 **Logic:**
 ```typescript
@@ -194,7 +194,7 @@ robots: indexable
 
 ### 3.1 Metadata Builder
 
-**File:** `production/src/lib/seo.ts`
+**File:** `frontend/src/lib/seo.ts`
 
 **Features:**
 - Centralized `buildMetadata()` function
@@ -245,7 +245,7 @@ robots: indexable
 
 ### 3.3 Open Graph Images
 
-**File:** `production/src/app/opengraph-image.tsx`
+**File:** `frontend/src/app/opengraph-image.tsx`
 
 **Implementation:**
 - Dynamic OG image generation via Next.js ImageResponse
@@ -264,7 +264,7 @@ robots: indexable
 
 ### 4.1 Implemented Schema Types
 
-**File:** `production/src/lib/jsonld.ts`
+**File:** `frontend/src/lib/jsonld.ts`
 
 **Organization Schema:**
 ```json
@@ -374,7 +374,7 @@ robots: indexable
 - Hindi: `/hi`, `/hi/cars`, `/hi/cars/fronx`
 - Marathi: `/mr`, `/mr/cars`, `/mr/cars/fronx`
 
-**Implementation:** `production/src/lib/seo.ts`
+**Implementation:** `frontend/src/lib/seo.ts`
 
 ```typescript
 alternates: {
@@ -396,7 +396,7 @@ alternates: {
 
 ### 5.2 Translation Quality
 
-**File:** `production/src/messages/en.json`, `hi.json`, `mr.json`
+**File:** `frontend/src/messages/en.json`, `hi.json`, `mr.json`
 
 **Copy Review Status:** All three languages marked as "approved" in `site.ts`
 
@@ -411,7 +411,7 @@ alternates: {
 
 ### 6.1 Verified Business Information
 
-**File:** `production/src/data/site.ts`
+**File:** `frontend/src/data/site.ts`
 
 **Confirmed Information:**
 - Business name: Zippy Car Rental ✅
@@ -437,7 +437,7 @@ alternates: {
 
 ### 6.2 Fleet Information
 
-**File:** `production/src/data/cars.ts`
+**File:** `frontend/src/data/cars.ts`
 
 **Confirmed Vehicles (5 units):**
 1. Maruti Suzuki Fronx - Compact SUV, 5 seats, manual, petrol ✅
@@ -455,7 +455,7 @@ alternates: {
 
 ### 6.3 FAQ Content
 
-**File:** `production/src/data/faqs.ts`
+**File:** `frontend/src/data/faqs.ts`
 
 **Approved FAQs (5):**
 1. How do I make a rental enquiry? ✅
@@ -531,7 +531,7 @@ alternates: {
 
 ### 7.1 Vehicle Images
 
-**Location:** `production/public/images/cars/`
+**Location:** `frontend/public/images/cars/`
 
 **Current Images:**
 - fronx.jpeg (172 KB)
@@ -541,7 +541,7 @@ alternates: {
 
 **Format:** JPEG only
 
-**Next.js Image Configuration:** `production/next.config.ts`
+**Next.js Image Configuration:** `frontend/next.config.ts`
 ```typescript
 images: {
   formats: ["image/avif", "image/webp"],
@@ -669,7 +669,7 @@ alt: {
 
 ### 11.1 Security Headers
 
-**File:** `production/next.config.ts`
+**File:** `frontend/next.config.ts`
 
 **Headers:**
 - Content-Security-Policy (enforce or report-only) ✅
@@ -683,7 +683,7 @@ alt: {
 
 ### 11.2 Environment Variables
 
-**File:** `production/.env.example`
+**File:** `frontend/.env.example`
 
 **Variables:**
 - NEXT_PUBLIC_SITE_ENV (development | preview | production) ✅
@@ -699,7 +699,7 @@ alt: {
 
 ### 12.1 Analytics Implementation
 
-**File:** `production/src/app/[locale]/layout.tsx`
+**File:** `frontend/src/app/[locale]/layout.tsx`
 
 ```typescript
 import { Analytics } from "@vercel/analytics/next";
@@ -740,7 +740,7 @@ import { Analytics } from "@vercel/analytics/next";
 
 ### 13.2 Viewport Configuration
 
-**File:** `production/src/app/[locale]/layout.tsx`
+**File:** `frontend/src/app/[locale]/layout.tsx`
 
 ```typescript
 export const viewport: Viewport = {

@@ -32,15 +32,15 @@ This implementation plan prioritizes SEO improvements that can be executed **wit
 **Current State:** FAQ page has content but no FAQPage schema markup
 
 **Proposed Change:**
-- Add `faqPageJsonLd()` function to `production/src/lib/jsonld.ts`
-- Implement on FAQ page (`production/src/app/[locale]/faq/page.tsx`)
+- Add `faqPageJsonLd()` function to `frontend/src/lib/jsonld.ts`
+- Implement on FAQ page (`frontend/src/app/[locale]/faq/page.tsx`)
 - Only emit in production with approved FAQs
 
 **Benefit:** Eligible for FAQ rich results in Google search results
 
 **Files to Modify:**
-- `production/src/lib/jsonld.ts`
-- `production/src/app/[locale]/faq/page.tsx`
+- `frontend/src/lib/jsonld.ts`
+- `frontend/src/app/[locale]/faq/page.tsx`
 
 **Risk:** LOW - Schema only helps rich results, no negative impact if not displayed
 
@@ -63,10 +63,10 @@ This implementation plan prioritizes SEO improvements that can be executed **wit
 **Benefit:** Better keyword targeting for "self-drive cars in Pune" and category searches
 
 **Files to Modify:**
-- `production/src/messages/en.json` (Fleet.title)
-- `production/src/messages/hi.json` (Fleet.title)
-- `production/src/messages/mr.json` (Fleet.title)
-- `production/src/messages/en.json` (Fleet.intro)
+- `frontend/src/messages/en.json` (Fleet.title)
+- `frontend/src/messages/hi.json` (Fleet.title)
+- `frontend/src/messages/mr.json` (Fleet.title)
+- `frontend/src/messages/en.json` (Fleet.intro)
 
 **Risk:** LOW - Content improvement, no technical risk
 
@@ -89,7 +89,7 @@ This implementation plan prioritizes SEO improvements that can be executed **wit
 **Benefit:** Better UX, enables category-specific content targeting
 
 **Files to Modify:**
-- `production/src/features/cars/CarGrid.tsx` (if filters are here)
+- `frontend/src/features/cars/CarGrid.tsx` (if filters are here)
 - Or relevant filter component
 
 **Risk:** LOW - UX improvement, no SEO risk
@@ -173,10 +173,10 @@ This implementation plan prioritizes SEO improvements that can be executed **wit
 **Benefit:** Track user behavior and conversion funnel
 
 **Files to Modify:**
-- `production/.env.example` (add NEXT_PUBLIC_GA4_ID)
-- `production/src/app/[locale]/layout.tsx` (add GA4 script)
-- `production/src/components/ui/FloatingWhatsApp.tsx` (add event)
-- `production/src/features/booking/BookingForm.tsx` (add event)
+- `frontend/.env.example` (add NEXT_PUBLIC_GA4_ID)
+- `frontend/src/app/[locale]/layout.tsx` (add GA4 script)
+- `frontend/src/components/ui/FloatingWhatsApp.tsx` (add event)
+- `frontend/src/features/booking/BookingForm.tsx` (add event)
 - Vehicle detail pages (add view events)
 
 **Risk:** LOW - Analytics addition, no functional impact
@@ -204,10 +204,10 @@ This implementation plan prioritizes SEO improvements that can be executed **wit
 **Benefit:** Track conversion funnel and user engagement
 
 **Files to Modify:**
-- `production/src/features/booking/BookingForm.tsx`
-- `production/src/components/ui/FloatingWhatsApp.tsx`
-- `production/src/features/cars/CarCard.tsx`
-- `production/src/app/[locale]\cars\[slug]\page.tsx`
+- `frontend/src/features/booking/BookingForm.tsx`
+- `frontend/src/components/ui/FloatingWhatsApp.tsx`
+- `frontend/src/features/cars/CarCard.tsx`
+- `frontend/src/app/[locale]\cars\[slug]\page.tsx`
 
 **Risk:** LOW - Analytics only
 
@@ -233,13 +233,13 @@ This implementation plan prioritizes SEO improvements that can be executed **wit
 **Owner Action Required:**
 - Provide company story/history
 - Approve for publication
-- Update `production/src/data/site.ts` with confirmed story
+- Update `frontend/src/data/site.ts` with confirmed story
 
 **Benefit:** Enable indexing of about page, improve brand credibility
 
 **Files to Modify:**
-- `production/src/data/site.ts` (update aboutStory.status to "confirmed")
-- `production/src/data/site.ts` (add aboutStory.value with story content)
+- `frontend/src/data/site.ts` (update aboutStory.status to "confirmed")
+- `frontend/src/data/site.ts` (add aboutStory.value with story content)
 
 **Risk:** NONE - Content approval only
 
@@ -263,7 +263,7 @@ This implementation plan prioritizes SEO improvements that can be executed **wit
 **Benefit:** Enable indexing of contact page, improve local SEO
 
 **Files to Modify:**
-- `production/src/data/site.ts` (update contact statuses)
+- `frontend/src/data/site.ts` (update contact statuses)
 
 **Risk:** NONE - Data confirmation only
 
@@ -286,7 +286,7 @@ This implementation plan prioritizes SEO improvements that can be executed **wit
 **Benefit:** Better vehicle page content, improved keyword targeting
 
 **Files to Modify:**
-- `production/src/data/cars.ts` (update description.value for each car)
+- `frontend/src/data/cars.ts` (update description.value for each car)
 
 **Risk:** NONE - Content addition only
 
@@ -309,7 +309,7 @@ This implementation plan prioritizes SEO improvements that can be executed **wit
 **Benefit:** More complete vehicle information, user trust
 
 **Files to Modify:**
-- `production/src/data/cars.ts` (update specs for each car)
+- `frontend/src/data/cars.ts` (update specs for each car)
 
 **Risk:** NONE - Data confirmation only
 
@@ -332,8 +332,8 @@ This implementation plan prioritizes SEO improvements that can be executed **wit
 **Benefit:** Enable indexing of second Ertiga unit
 
 **Files to Modify:**
-- `production/src/data/cars.ts` (update distinguishingDetails)
-- `production/src/data/cars.ts` (set indexable: true for ertiga-2)
+- `frontend/src/data/cars.ts` (update distinguishingDetails)
+- `frontend/src/data/cars.ts` (set indexable: true for ertiga-2)
 
 **Risk:** NONE - Content addition only
 
@@ -361,8 +361,8 @@ This implementation plan prioritizes SEO improvements that can be executed **wit
 **Benefit:** Better FAQ page content, improved user trust
 
 **Files to Modify:**
-- `production/src/data/faqs.ts` (update status to "approved")
-- `production/src/data/faqs.ts` (add answers)
+- `frontend/src/data/faqs.ts` (update status to "approved")
+- `frontend/src/data/faqs.ts` (add answers)
 
 **Risk:** NONE - Content addition only
 
@@ -384,7 +384,7 @@ This implementation plan prioritizes SEO improvements that can be executed **wit
 **Benefit:** Better local SEO, improved user information
 
 **Files to Modify:**
-- `production/src/data/site.ts` (update hours for each branch)
+- `frontend/src/data/site.ts` (update hours for each branch)
 
 **Risk:** NONE - Data confirmation only
 
@@ -413,8 +413,8 @@ This implementation plan prioritizes SEO improvements that can be executed **wit
 **Benefit:** Smaller file sizes, faster page load, better Core Web Vitals
 
 **Files to Modify:**
-- `production/public/images/cars/*.jpeg` → convert to WebP
-- May need to update `production/src/data/cars.ts` references
+- `frontend/public/images/cars/*.jpeg` → convert to WebP
+- May need to update `frontend/src/data/cars.ts` references
 
 **Risk:** LOW - Performance improvement only
 
@@ -437,7 +437,7 @@ This implementation plan prioritizes SEO improvements that can be executed **wit
 **Benefit:** Prevent layout shift, better CLS
 
 **Files to Modify:**
-- `production/src/data/cars.ts` (verify image dimensions)
+- `frontend/src/data/cars.ts` (verify image dimensions)
 
 **Risk:** NONE - Data verification only
 
@@ -466,9 +466,9 @@ This implementation plan prioritizes SEO improvements that can be executed **wit
 **Benefit:** Better targeting for category-specific searches
 
 **Files to Create:**
-- `production/src/app/[locale]/cars/hatchback/page.tsx`
-- `production/src/app/[locale]/cars/suv/page.tsx`
-- `production/src/app/[locale]/cars/mpv/page.tsx`
+- `frontend/src/app/[locale]/cars/hatchback/page.tsx`
+- `frontend/src/app/[locale]/cars/suv/page.tsx`
+- `frontend/src/app/[locale]/cars/mpv/page.tsx`
 
 **Risk:** LOW - Content addition only
 
@@ -488,7 +488,7 @@ This implementation plan prioritizes SEO improvements that can be executed **wit
 **Benefit:** Better targeting for service-specific searches
 
 **Files to Create:**
-- `production/src/app/[locale]/services/*/page.tsx`
+- `frontend/src/app/[locale]/services/*/page.tsx`
 
 **Risk:** MEDIUM - Requires service confirmation
 
@@ -507,7 +507,7 @@ This implementation plan prioritizes SEO improvements that can be executed **wit
 **Benefit:** Better local SEO for branch areas
 
 **Files to Create:**
-- `production/src/app/[locale]/locations/*/page.tsx`
+- `frontend/src/app/[locale]/locations/*/page.tsx`
 
 **Risk:** MEDIUM - Must only create for areas with real operational coverage
 
@@ -530,7 +530,7 @@ This implementation plan prioritizes SEO improvements that can be executed **wit
 **Benefit:** Long-tail keyword targeting, thought leadership
 
 **Files to Create:**
-- `production/src/app/[locale]/blog/[slug]/page.tsx`
+- `frontend/src/app/[locale]/blog/[slug]/page.tsx`
 - Blog listing page
 
 **Risk:** MEDIUM - Requires ongoing content creation

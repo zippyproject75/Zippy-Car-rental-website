@@ -79,7 +79,7 @@ A comprehensive SEO audit and implementation has been completed for the Zippy Ca
 
 ### 1. FAQ Schema Implementation
 
-**File:** `production/src/lib/jsonld.ts`
+**File:** `frontend/src/lib/jsonld.ts`
 
 **Change:** Added `faqPageJsonLd()` function
 
@@ -109,7 +109,7 @@ export function faqPageJsonLd(faqs: { question: string; answer: string }[]): Jso
 
 ### 2. FAQ Page Schema Integration
 
-**File:** `production/src/app/[locale]/faq/page.tsx`
+**File:** `frontend/src/app/[locale]/faq/page.tsx`
 
 **Changes:**
 - Imported `JsonLd` component
@@ -124,7 +124,7 @@ export function faqPageJsonLd(faqs: { question: string; answer: string }[]): Jso
 
 ### 3. Fleet Page Content Optimization
 
-**File:** `production/src/messages/en.json`
+**File:** `frontend/src/messages/en.json`
 
 **Change:** Updated fleet page title and intro
 
@@ -152,7 +152,7 @@ export function faqPageJsonLd(faqs: { question: string; answer: string }[]): Jso
 
 ### 4. Hindi Translation Update
 
-**File:** `production/src/messages/hi.json`
+**File:** `frontend/src/messages/hi.json`
 
 **Change:** Updated fleet page title and intro
 
@@ -178,7 +178,7 @@ export function faqPageJsonLd(faqs: { question: string; answer: string }[]): Jso
 
 ### 5. Marathi Translation Update
 
-**File:** `production/src/messages/mr.json`
+**File:** `frontend/src/messages/mr.json`
 
 **Change:** Updated fleet page title and intro
 

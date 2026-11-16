@@ -69,12 +69,12 @@ For a URL Prefix property, you have several options:
 
 1. Download the HTML verification file from GSC
 2. Upload it to your website's root directory
-3. File path: `production/public/[filename].html`
+3. File path: `frontend/public/[filename].html`
 4. Commit and deploy
 
 **Example:**
 - GSC provides file: `google123456789.html`
-- Place it at: `production/public/google123456789.html`
+- Place it at: `frontend/public/google123456789.html`
 - Deploy the site
 - Click "Verify" in GSC
 
@@ -82,11 +82,11 @@ For a URL Prefix property, you have several options:
 
 1. Copy the meta tag from GSC
 2. Add it to your site's `<head>` section
-3. For Next.js, add to `production/src/app/[locale]/layout.tsx`
+3. For Next.js, add to `frontend/src/app/[locale]/layout.tsx`
 
 **Implementation:**
 ```tsx
-// In production/src/app/[locale]/layout.tsx
+// In frontend/src/app/[locale]/layout.tsx
 // In the <head> section or metadata
 const verificationMeta = {
   name: "google-site-verification",
