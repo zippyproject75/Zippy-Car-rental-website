@@ -10,7 +10,6 @@ import Image from "next/image";
 import { AnimatePresence, LazyMotion, domAnimation, m, useReducedMotion } from "motion/react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Link } from "@/i18n/navigation";
-import { RentalJourneyFlowchart } from "./RentalJourneyFlowchart";
 
 interface HeroSlide {
   id: string;
@@ -537,11 +536,6 @@ export function HeroNew() {
               })}
             </div>
           </div>
-        </div>
-
-        {/* ── 2. RENTAL JOURNEY FLOWCHART (Seamlessly Preserved Beneath Full-Screen Hero) ── */}
-        <div className="container-site relative z-20 w-full pt-10 sm:pt-14 pb-12 sm:pb-16">
-          <RentalJourneyFlowchart embedded={true} />
         </div>
       </section>
     </LazyMotion>

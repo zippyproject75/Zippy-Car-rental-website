@@ -2,7 +2,7 @@
 
 import { MessageCircle, Users, Gauge, Fuel } from "lucide-react";
 import { useTranslations, useLocale } from "next-intl";
-import { useRef, useCallback, useState } from "react";
+import { useState } from "react";
 import { ButtonLink } from "@/components/ui/ButtonLink";
 import { Link } from "@/i18n/navigation";
 import { env } from "@/lib/env";
@@ -90,36 +90,10 @@ export function CarCard({ car, headingLevel = "h3" }: { car: Car; headingLevel?:
     ? `https://wa.me/${whatsappNumber.replace("+", "")}?text=${generateWhatsAppMessage()}`
     : "#";
 
-  /* ── 3D pointer-tracking tilt (mouse/trackpad only) ── */
-  const cardRef = useRef<HTMLElement | null>(null);
-
-  const onPointerMove = useCallback((e: React.PointerEvent<HTMLElement>) => {
-    if (e.pointerType === "touch") return;
-    const el = cardRef.current;
-    if (!el) return;
-    const rect = el.getBoundingClientRect();
-    const cx = rect.left + rect.width / 2;
-    const cy = rect.top + rect.height / 2;
-    const dx = (e.clientX - cx) / (rect.width / 2);
-    const dy = (e.clientY - cy) / (rect.height / 2);
-    const rx = -dy * 6;
-    const ry = dx * 6;
-    el.style.transform = `perspective(900px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-6px) scale(1.015)`;
-  }, []);
-
-  const onPointerLeave = useCallback(() => {
-    const el = cardRef.current;
-    if (!el) return;
-    el.style.transform = "";
-  }, []);
-
   return (
     <article
-      ref={cardRef as React.RefObject<HTMLElement>}
       data-testid="car-card"
-      onPointerMove={onPointerMove}
-      onPointerLeave={onPointerLeave}
-      className="car-card-3d group flex flex-col overflow-hidden rounded-2xl border border-line bg-raised shadow-raised focus-within:border-line-strong w-full max-w-full transition-[border-color] duration-300 hover:border-accent/40"
+      className="car-card-3d group flex flex-col overflow-hidden rounded-2xl border border-line bg-raised shadow-raised focus-within:border-line-strong w-full max-w-full transition-all duration-300 hover:border-accent/40"
     >
       <Link
         href={`/cars/${car.slug}`}
