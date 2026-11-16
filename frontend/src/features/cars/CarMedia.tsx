@@ -69,11 +69,22 @@ export function CarMedia({
         />
 
         {car.isAvailable !== undefined ? (
-          <div className="absolute top-2 right-2 z-10 flex items-center gap-1.5 bg-black/75 backdrop-blur-md px-2 py-0.5 rounded-lg sm:top-3 sm:right-3 sm:px-2.5 sm:py-1">
-            <div
-              className={`w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full ${car.isAvailable ? "bg-green-500" : "bg-amber-400"}`}
+          <div
+            className={cn(
+              "absolute top-3 right-3 sm:top-4 sm:right-4 z-10 pointer-events-none inline-flex items-center gap-1.5 rounded-full bg-white/95 px-2.5 py-1 sm:px-3 sm:py-1 text-[11px] sm:text-xs font-semibold shadow-sm backdrop-blur-sm dark:bg-zinc-900/90",
+              car.isAvailable
+                ? "text-emerald-800 border border-emerald-500/25 dark:text-emerald-300 dark:border-emerald-500/30"
+                : "text-amber-800 border border-amber-500/25 dark:text-amber-300 dark:border-amber-500/30",
+            )}
+          >
+            <span
+              className={cn(
+                "size-1.5 sm:size-2 rounded-full shrink-0",
+                car.isAvailable ? "bg-emerald-500" : "bg-amber-500",
+              )}
+              aria-hidden="true"
             />
-            <span className="text-[0.6rem] sm:text-[0.65rem] font-bold tracking-wider text-white uppercase">
+            <span className="leading-none select-none">
               {car.isAvailable ? t("Common.available") : t("Common.unavailable")}
             </span>
           </div>
@@ -134,6 +145,27 @@ export function CarMedia({
         aria-hidden
         className="pointer-events-none absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/10 to-transparent"
       />
+      {car.isAvailable !== undefined ? (
+        <div
+          className={cn(
+            "absolute top-3 right-3 sm:top-4 sm:right-4 z-10 pointer-events-none inline-flex items-center gap-1.5 rounded-full bg-white/95 px-2.5 py-1 sm:px-3 sm:py-1 text-[11px] sm:text-xs font-semibold shadow-sm backdrop-blur-sm dark:bg-zinc-900/90",
+            car.isAvailable
+              ? "text-emerald-800 border border-emerald-500/25 dark:text-emerald-300 dark:border-emerald-500/30"
+              : "text-amber-800 border border-amber-500/25 dark:text-amber-300 dark:border-amber-500/30",
+          )}
+        >
+          <span
+            className={cn(
+              "size-1.5 sm:size-2 rounded-full shrink-0",
+              car.isAvailable ? "bg-emerald-500" : "bg-amber-500",
+            )}
+            aria-hidden="true"
+          />
+          <span className="leading-none select-none">
+            {car.isAvailable ? t("Common.available") : t("Common.unavailable")}
+          </span>
+        </div>
+      ) : null}
       <p className="font-display text-sm font-semibold tracking-wide text-ink uppercase">
         {car.displayName}
       </p>
