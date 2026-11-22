@@ -98,7 +98,7 @@ export default async function LocaleLayout({
       suppressHydrationWarning
       className={cn(inter.variable, manrope.variable, devanagari.variable)}
     >
-      <body className="min-h-dvh w-full bg-canvas font-sans text-ink antialiased overflow-x-hidden">
+      <body className="min-h-dvh w-full bg-canvas font-sans text-ink antialiased overflow-x-clip">
         <ThemeProvider>
           <NextIntlClientProvider messages={clientMessages}>
             <PageTransitionProvider>
