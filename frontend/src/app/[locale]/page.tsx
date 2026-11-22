@@ -2,7 +2,7 @@ import { ArrowRight } from "lucide-react";
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { HeroNew } from "@/components/sections/HeroNew";
-import { TrustStrip } from "@/components/sections/TrustStrip";
+import { RentalSearchBar } from "@/components/sections/RentalSearchBar";
 import { Reviews } from "@/components/sections/Reviews";
 import { CinematicCta } from "@/components/sections/CinematicCta";
 import { Accordion } from "@/components/ui/Accordion";
@@ -44,8 +44,8 @@ export default async function HomePage({ params }: LocaleParams) {
       {/* ── SECTION 1: HERO — WHAT YOU OFFER AND WHERE ── */}
       <HeroNew />
 
-      {/* ── TRUST STRIP (Concise verified benefits) ── */}
-      <TrustStrip />
+      {/* ── SEARCH BAR (Replace benefits strip) ── */}
+      <RentalSearchBar />
 
       {/* ── SECTION 2: FLEET — AVAILABLE VEHICLES ── */}
       <section
