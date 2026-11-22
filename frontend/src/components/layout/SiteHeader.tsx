@@ -25,9 +25,9 @@ export async function SiteHeader() {
           <span>Pune, Maharashtra</span>
         </span>
         <span aria-hidden className="text-line-strong">
-          •
+
         </span>
-        <span>Self-Drive Car Rental</span>
+
       </div>
       {phone ? (
         <a
