@@ -341,10 +341,13 @@ export function createServer(): FastifyInstance {
   return app;
 }
 
-const port = Number(process.env.PORT ?? 4000);
-const host = process.env.HOST ?? "0.0.0.0";
+const isProductionOrRender =
+  process.env.RENDER === "true" || process.env.NODE_ENV === "production";
+const port = Number(process.env.PORT ?? (process.env.RENDER === "true" ? 10000 : 4000));
+const host = isProductionOrRender ? "0.0.0.0" : (process.env.HOST ?? "0.0.0.0");
 
 if (process.env.NODE_ENV !== "test") {
   const app = createServer();
-  await app.listen({ port, host });
+  const address = await app.listen({ port, host });
+  console.log(`Server started successfully at ${address} (host: ${host}, port: ${port})`);
 }
