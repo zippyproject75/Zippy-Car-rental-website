@@ -70,22 +70,19 @@ export function CarMedia({
 
         {car.isAvailable !== undefined ? (
           <div
-            className={cn(
-              "absolute top-3 right-3 sm:top-4 sm:right-4 z-10 pointer-events-none inline-flex items-center gap-1.5 rounded-full bg-white/95 px-2.5 py-1 sm:px-3 sm:py-1 text-[11px] sm:text-xs font-semibold shadow-sm backdrop-blur-sm dark:bg-zinc-900/90",
-              car.isAvailable
-                ? "text-emerald-800 border border-emerald-500/25 dark:text-emerald-300 dark:border-emerald-500/30"
-                : "text-amber-800 border border-amber-500/25 dark:text-amber-300 dark:border-amber-500/30",
-            )}
+            className="absolute top-3 right-3 sm:top-4 sm:right-4 z-10 pointer-events-none inline-flex items-center gap-1.5 rounded-full bg-black/80 px-2.5 py-1 sm:px-3 sm:py-1 text-[11px] sm:text-xs font-bold text-white shadow-md backdrop-blur-sm border border-white/10"
           >
             <span
               className={cn(
-                "size-1.5 sm:size-2 rounded-full shrink-0",
-                car.isAvailable ? "bg-emerald-500" : "bg-amber-500",
+                "size-2 rounded-full shrink-0 shadow-[0_0_8px]",
+                car.isAvailable
+                  ? "bg-[#00D26A] shadow-[#00D26A]"
+                  : "bg-[#EF4444] shadow-[#EF4444]",
               )}
               aria-hidden="true"
             />
-            <span className="leading-none select-none">
-              {car.isAvailable ? t("Common.available") : t("Common.unavailable")}
+            <span className="leading-none tracking-wider uppercase select-none font-black text-[10px] sm:text-[11px]">
+              {car.isAvailable ? "AVAILABLE" : "NOT AVAILABLE"}
             </span>
           </div>
         ) : null}
@@ -147,22 +144,19 @@ export function CarMedia({
       />
       {car.isAvailable !== undefined ? (
         <div
-          className={cn(
-            "absolute top-3 right-3 sm:top-4 sm:right-4 z-10 pointer-events-none inline-flex items-center gap-1.5 rounded-full bg-white/95 px-2.5 py-1 sm:px-3 sm:py-1 text-[11px] sm:text-xs font-semibold shadow-sm backdrop-blur-sm dark:bg-zinc-900/90",
-            car.isAvailable
-              ? "text-emerald-800 border border-emerald-500/25 dark:text-emerald-300 dark:border-emerald-500/30"
-              : "text-amber-800 border border-amber-500/25 dark:text-amber-300 dark:border-amber-500/30",
-          )}
+          className="absolute top-3 right-3 sm:top-4 sm:right-4 z-10 pointer-events-none inline-flex items-center gap-1.5 rounded-full bg-black/80 px-2.5 py-1 sm:px-3 sm:py-1 text-[11px] sm:text-xs font-bold text-white shadow-md backdrop-blur-sm border border-white/10"
         >
           <span
             className={cn(
-              "size-1.5 sm:size-2 rounded-full shrink-0",
-              car.isAvailable ? "bg-emerald-500" : "bg-amber-500",
+              "size-2 rounded-full shrink-0 shadow-[0_0_8px]",
+              car.isAvailable
+                ? "bg-[#00D26A] shadow-[#00D26A]"
+                : "bg-[#EF4444] shadow-[#EF4444]",
             )}
             aria-hidden="true"
           />
-          <span className="leading-none select-none">
-            {car.isAvailable ? t("Common.available") : t("Common.unavailable")}
+          <span className="leading-none tracking-wider uppercase select-none font-black text-[10px] sm:text-[11px]">
+            {car.isAvailable ? "AVAILABLE" : "NOT AVAILABLE"}
           </span>
         </div>
       ) : null}
