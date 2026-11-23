@@ -1,6 +1,6 @@
 "use client";
 
-import { MessageCircle, Users, Gauge, Fuel } from "lucide-react";
+import { Users, Gauge, Fuel } from "lucide-react";
 import { useTranslations, useLocale } from "next-intl";
 import { useState } from "react";
 import { ButtonLink } from "@/components/ui/ButtonLink";
@@ -15,6 +15,23 @@ import type { Locale } from "@/i18n/routing";
 import { CarMedia } from "./CarMedia";
 import { useSpecValue } from "./SpecList";
 import { getPublicSpecs } from "./specs";
+
+function WhatsAppBrandIcon({ className = "size-5" }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      className={className}
+      aria-hidden="true"
+    >
+      <circle cx="12" cy="12" r="10" fill="#25D366" />
+      <path
+        d="M17.5 14.4c-.2-.1-1.3-.6-1.5-.7-.2-.1-.3-.1-.5.1-.2.2-.6.7-.8.9-.1.1-.3.2-.5.1-.3-.1-1.1-.4-2.1-1.3-.8-.7-1.3-1.5-1.5-1.8-.2-.3 0-.4.1-.6.1-.1.3-.3.4-.5.1-.2.2-.3.3-.5.1-.2 0-.3-.1-.5-.1-.1-.5-1.2-.7-1.7-.2-.5-.4-.4-.5-.4h-.4c-.2 0-.5.1-.7.3-.2.3-.9.9-.9 2.1 0 1.2.9 2.4 1 2.6.1.2 1.7 2.6 4.2 3.7.6.3 1.1.4 1.4.6.6.2 1.2.2 1.6.1.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.2-.2-.5-.3z"
+        fill="#ffffff"
+      />
+    </svg>
+  );
+}
 
 type PackageType = "12-hour" | "24-hour";
 const EXCESS_KM_RATE = 10;
@@ -51,10 +68,10 @@ export function CarCard({ car, headingLevel = "h3" }: { car: Car; headingLevel?:
   const packagePrice = managed
     ? managedPackage?.pricingStatus === "APPROVED" && managedPackage.amountInr !== null
       ? {
-          price: Number(managedPackage.amountInr),
-          limitKm: managedPackage.includedKm,
-          extraKmChargeInr: managedPackage.extraKmChargeInr,
-        }
+        price: Number(managedPackage.amountInr),
+        limitKm: managedPackage.includedKm,
+        extraKmChargeInr: managedPackage.extraKmChargeInr,
+      }
       : null
     : storedPackage
       ? { ...storedPackage, extraKmChargeInr: EXCESS_KM_RATE }
@@ -65,7 +82,7 @@ export function CarCard({ car, headingLevel = "h3" }: { car: Car; headingLevel?:
   const has24HourPricing = managed
     ? managed24Hour?.pricingStatus === "APPROVED" && managed24Hour.amountInr !== null
     : Object.hasOwn(packagePricing["24-hour"], car.id) &&
-      packagePricing["24-hour"][car.id as keyof (typeof packagePricing)["24-hour"]] !== null;
+    packagePricing["24-hour"][car.id as keyof (typeof packagePricing)["24-hour"]] !== null;
 
   // Get transmission, seats, and fuel for display
   const transmissionSpec = specs.find((s) => s.key === "transmission");
@@ -154,34 +171,34 @@ export function CarCard({ car, headingLevel = "h3" }: { car: Car; headingLevel?:
                     type="button"
                     onClick={() => setSelectedPackage("12-hour")}
                     aria-pressed={selectedPackage === "12-hour"}
-                    className={`min-h-[2.75rem] px-3 py-1.5 text-xs sm:text-sm font-medium transition-all rounded-md ${
-                      selectedPackage === "12-hour"
-                        ? "bg-accent text-on-accent"
+                    className={`min-h-[2.5rem] min-w-[3.5rem] px-3 py-1.5 text-xs sm:text-sm font-semibold transition-all rounded-md ${selectedPackage === "12-hour"
+                        ? "bg-accent text-on-accent shadow-sm"
                         : "bg-muted text-ink-2 hover:bg-muted/80"
-                    }`}
+                      }`}
                   >
                     12HR
                   </button>
-                  {has24HourPricing && (
-                    <button
-                      type="button"
-                      onClick={() => setSelectedPackage("24-hour")}
-                      aria-pressed={selectedPackage === "24-hour"}
-                      className={`min-h-[2.75rem] px-3 py-1.5 text-xs sm:text-sm font-medium transition-all rounded-md ${
-                        selectedPackage === "24-hour"
-                          ? "bg-accent text-on-accent"
-                          : "bg-muted text-ink-2 hover:bg-muted/80"
+                  <button
+                    type="button"
+                    onClick={() => {
+                      if (has24HourPricing) {
+                        setSelectedPackage("24-hour");
+                      }
+                    }}
+                    aria-pressed={selectedPackage === "24-hour"}
+                    className={`min-h-[2.5rem] min-w-[3.5rem] px-3 py-1.5 text-xs sm:text-sm font-semibold transition-all rounded-md ${selectedPackage === "24-hour"
+                        ? "bg-accent text-on-accent shadow-sm"
+                        : "bg-muted text-ink-2 hover:bg-muted/80"
                       }`}
-                    >
-                      24h
-                    </button>
-                  )}
+                  >
+                    24HR
+                  </button>
                 </div>
               </div>
 
               {/* Hourly Rate */}
               {rate ? (
-                <p className="text-xs text-ink-2">or {formatInr(rate.amountInr, locale)}/hour</p>
+                <p className="text-xs text-ink-2">{formatInr(rate.amountInr, locale)}/hour</p>
               ) : null}
 
               {/* Kilometre Allowance */}
@@ -218,9 +235,9 @@ export function CarCard({ car, headingLevel = "h3" }: { car: Car; headingLevel?:
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`Enquire on WhatsApp about ${fullName}`}
-              className="inline-flex items-center justify-center min-h-[2.75rem] min-w-[2.75rem] px-3 rounded-control border border-line bg-transparent text-ink hover:border-line-strong hover:bg-muted transition-all flex-shrink-0"
+              className="inline-flex items-center justify-center min-h-[2.75rem] min-w-[2.75rem] px-2.5 rounded-control border border-line bg-transparent hover:border-line-strong hover:bg-muted transition-all flex-shrink-0"
             >
-              <MessageCircle className="size-4 sm:size-5" aria-hidden />
+              <WhatsAppBrandIcon className="size-6 sm:size-7" />
             </a>
           )}
         </div>
