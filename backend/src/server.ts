@@ -113,6 +113,7 @@ export function createServer(): FastifyInstance {
     });
   });
 
+  app.get("/", async (_request, reply) => reply.send({ status: "ok", service: "zippy-backend" }));
   app.get("/healthz", async (_request, reply) => reply.send({ status: "ok" }));
 
   app.get("/api/auth/session", async (request, reply) => {
@@ -341,7 +342,7 @@ export function createServer(): FastifyInstance {
 }
 
 const port = Number(process.env.PORT ?? 4000);
-const host = process.env.HOST ?? "127.0.0.1";
+const host = process.env.HOST ?? "0.0.0.0";
 
 if (process.env.NODE_ENV !== "test") {
   const app = createServer();

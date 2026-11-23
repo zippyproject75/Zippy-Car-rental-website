@@ -9,6 +9,7 @@
  */
 export const headerNavigation = [
   { key: "cars", href: "/cars" },
+  { key: "calculator", href: "/calculator" },
   { key: "howItWorks", href: "/how-it-works" },
   { key: "locations", href: "/locations" },
   { key: "faq", href: "/faq" },
@@ -18,10 +19,11 @@ export const headerNavigation = [
 export type HeaderNavKey = (typeof headerNavigation)[number]["key"];
 
 /**
- * Mobile drawer navigation. Includes the 5 primary destinations plus secondary About link.
+ * Mobile drawer navigation. Includes the 6 primary destinations plus secondary About link.
  */
 export const mobileNavigation = [
   { key: "cars", href: "/cars" },
+  { key: "calculator", href: "/calculator" },
   { key: "howItWorks", href: "/how-it-works" },
   { key: "locations", href: "/locations" },
   { key: "faq", href: "/faq" },
