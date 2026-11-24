@@ -60,6 +60,34 @@ function normalizeEmail(value: string): string {
   return value.trim().toLowerCase();
 }
 
+function getAuthCallbackUrl(nextPath: string): string {
+  const browserOrigin = window.location.origin;
+  const hostname = window.location.hostname;
+  const isLocalHost = hostname === "localhost" || hostname === "127.0.0.1" || hostname === "[::1]";
+
+  let origin = browserOrigin;
+  if (!isLocalHost) {
+    const configured = process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/+$/, "");
+    if (configured) {
+      try {
+        origin = new URL(configured).origin;
+      } catch {
+        // Fall back to the current browser origin if the configured site URL is invalid.
+      }
+    }
+  }
+
+  return `${origin}/auth/callback?next=${encodeURIComponent(nextPath)}`;
+}
+
+function setRecoveryNextCookie(nextPath: string) {
+  document.cookie = `zippy_recovery_next=${encodeURIComponent(nextPath)}; Path=/; Max-Age=3600; SameSite=Lax`;
+}
+
+function clearRecoveryNextCookie() {
+  document.cookie = "zippy_recovery_next=; Path=/; Max-Age=0; SameSite=Lax";
+}
+
 export function AuthForm({ mode }: { mode: AuthFormMode }) {
   const locale = useLocale();
   const router = useRouter();
@@ -87,7 +115,12 @@ export function AuthForm({ mode }: { mode: AuthFormMode }) {
   }, []);
 
   useEffect(() => {
-    if (!isReset) return;
+    if (!isReset) {
+      clearRecoveryNextCookie();
+      return;
+    }
+
+    setRecoveryNextCookie(localizedPath(locale, "/reset-password"));
 
     let active = true;
     let subscription: { unsubscribe: () => void } | undefined;
@@ -99,7 +132,7 @@ export function AuthForm({ mode }: { mode: AuthFormMode }) {
           current || "This password reset link is invalid or has expired. Request a new reset link.",
         );
       }
-    }, 2000);
+    }, 4000);
 
     async function prepareRecoverySession() {
       try {
@@ -149,7 +182,7 @@ export function AuthForm({ mode }: { mode: AuthFormMode }) {
       window.clearTimeout(timeoutId);
       subscription?.unsubscribe();
     };
-  }, [isReset]);
+  }, [isReset, locale]);
 
   function navigatePreservingNext(event: MouseEvent<HTMLAnchorElement>, path: string) {
     const nextPath = getSafeNextPath();
@@ -171,8 +204,6 @@ export function AuthForm({ mode }: { mode: AuthFormMode }) {
       const password = String(formData.get("password") ?? "");
       const defaultNextPath = localizedPath(locale, isAdmin ? "/admin" : "/account");
       const nextPath = isAdmin ? defaultNextPath : (getSafeNextPath() ?? defaultNextPath);
-      const callbackUrl = (path: string) =>
-        `${window.location.origin}/auth/callback?next=${encodeURIComponent(path)}`;
 
       if (isSignup) {
         const response = await fetch("/api/auth/register", {
@@ -208,8 +239,10 @@ export function AuthForm({ mode }: { mode: AuthFormMode }) {
         if (!email) {
           throw new Error("Enter the email address for your account.");
         }
+        const resetNextPath = localizedPath(locale, "/reset-password");
+        setRecoveryNextCookie(resetNextPath);
         const { error: resetError } = await supabase.auth.resetPasswordForEmail(email, {
-          redirectTo: callbackUrl(localizedPath(locale, "/reset-password")),
+          redirectTo: getAuthCallbackUrl(resetNextPath),
         });
         if (resetError) throw resetError;
         setMessage(
@@ -233,6 +266,7 @@ export function AuthForm({ mode }: { mode: AuthFormMode }) {
         if (signOutError) {
           await supabase.auth.signOut({ scope: "local" });
         }
+        clearRecoveryNextCookie();
         setMessage("Your password has been updated. Redirecting you to sign in…");
         router.replace(`${localizedPath(locale, "/login")}?message=password-updated`);
         router.refresh();
@@ -255,7 +289,7 @@ export function AuthForm({ mode }: { mode: AuthFormMode }) {
       const { error: googleError } = await getSupabaseBrowserClient().auth.signInWithOAuth({
         provider: "google",
         options: {
-          redirectTo: `${window.location.origin}/auth/callback?next=${encodeURIComponent(nextPath)}`,
+          redirectTo: getAuthCallbackUrl(nextPath),
         },
       });
       if (googleError) throw googleError;
