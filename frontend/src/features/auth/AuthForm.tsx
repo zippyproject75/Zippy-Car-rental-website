@@ -197,7 +197,8 @@ export function AuthForm({ mode }: { mode: AuthFormMode }) {
     setMessage("");
     setLoading(true);
 
-    const formData = new FormData(event.currentTarget);
+    const form = event.currentTarget;
+    const formData = new FormData(form);
     try {
       const supabase = getSupabaseBrowserClient();
       const email = normalizeEmail(String(formData.get("email") ?? ""));
@@ -248,7 +249,7 @@ export function AuthForm({ mode }: { mode: AuthFormMode }) {
         setMessage(
           "If an account exists for that email, password reset instructions have been sent.",
         );
-        (event.currentTarget as HTMLFormElement).reset();
+        form.reset();
       } else if (isReset) {
         const {
           data: { session },
